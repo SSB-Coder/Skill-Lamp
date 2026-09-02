@@ -7,8 +7,3 @@ __pycache__/
 env/
 dist/
 
-# Do not track plans or prompts
-*Plan*.md
-*Prompt*.md
-*prompts*.md
-*plan*.md
