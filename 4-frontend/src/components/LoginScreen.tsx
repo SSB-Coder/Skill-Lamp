@@ -37,29 +37,29 @@ export const LoginScreen: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0B0F19] flex flex-col items-center justify-center p-4">
+    <div className="min-h-screen bg-app-bg flex flex-col items-center justify-center p-4">
       {/* Centered Login Card */}
-      <div className="w-full max-w-md bg-[#151D2C] border border-[#1E293B] rounded-xl p-6 shadow-2xl">
+      <div className="w-full max-w-md bg-app-surface border border-app-border rounded-lg p-6">
         {/* Header / Logo */}
-        <div className="flex items-center space-x-3 mb-6 pb-4 border-b border-[#1E293B]">
-          <div className="p-2 bg-[#0B0F19] border border-[#1E293B] rounded-lg flex items-center justify-center shadow-inner">
-            <LampIcon size={22} color="#0284C7" />
+        <div className="flex items-center space-x-3 mb-6 pb-4 border-b border-app-border">
+          <div className="p-2 bg-app-bg border border-app-border rounded-md flex items-center justify-center">
+            <LampIcon size={22} color="#22C3B6" />
           </div>
           <div>
-            <h1 className="text-base font-semibold text-white tracking-tight">Skill Lamp</h1>
-            <p className="text-xs text-[#94A3B8]">Institutional Placement Intelligence Platform</p>
+            <h1 className="text-base font-semibold text-app-text tracking-tight">Skill Lamp</h1>
+            <p className="text-xs text-app-muted">Institutional Placement Intelligence Platform</p>
           </div>
         </div>
 
         {/* Switch-Like Role Toggle Tabs (Inside small rectangle) */}
-        <div className="mb-5 p-1 bg-[#0B0F19] border border-[#1E293B] rounded-lg grid grid-cols-2 gap-1 select-none">
+        <div className="mb-5 p-1 bg-app-bg border border-app-border rounded-md grid grid-cols-2 gap-1 select-none">
           <button
             type="button"
             onClick={() => handleRoleChange('TPO')}
-            className={`flex items-center justify-center space-x-2 py-2 px-3 rounded-md text-xs font-semibold transition-all duration-200 ${
+            className={`flex items-center justify-center space-x-2 py-2 px-3 rounded-md text-xs font-semibold transition-colors duration-150 ${
               selectedRole === 'TPO'
-                ? 'bg-[#0284C7] text-white shadow-md'
-                : 'text-[#94A3B8] hover:text-white hover:bg-[#151D2C]'
+                ? 'bg-app-accent text-app-bg'
+                : 'text-app-muted hover:text-app-text hover:bg-app-surface'
             }`}
           >
             <Shield className="w-3.5 h-3.5" />
@@ -68,10 +68,10 @@ export const LoginScreen: React.FC = () => {
           <button
             type="button"
             onClick={() => handleRoleChange('STUDENT')}
-            className={`flex items-center justify-center space-x-2 py-2 px-3 rounded-md text-xs font-semibold transition-all duration-200 ${
+            className={`flex items-center justify-center space-x-2 py-2 px-3 rounded-md text-xs font-semibold transition-colors duration-150 ${
               selectedRole === 'STUDENT'
-                ? 'bg-[#0284C7] text-white shadow-md'
-                : 'text-[#94A3B8] hover:text-white hover:bg-[#151D2C]'
+                ? 'bg-app-accent text-app-bg'
+                : 'text-app-muted hover:text-app-text hover:bg-app-surface'
             }`}
           >
             <GraduationCap className="w-3.5 h-3.5" />
@@ -82,7 +82,7 @@ export const LoginScreen: React.FC = () => {
         {/* Login Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-xs font-medium text-[#94A3B8] mb-1.5">
+            <label className="block text-xs font-medium text-app-muted mb-1.5">
               {selectedRole === 'TPO' ? 'Officer Institutional Email' : 'Student Institutional Email'}
             </label>
             <div className="relative">
@@ -91,14 +91,14 @@ export const LoginScreen: React.FC = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder={selectedRole === 'TPO' ? 'tpo@rvce.edu.in' : 'e.g. priya.ise21@rvce.edu.in'}
-                className="w-full bg-[#0B0F19] border border-[#334155] rounded-lg px-3.5 py-2.5 text-xs text-white placeholder-[#64748B] focus:outline-none focus:border-[#0284C7] font-mono transition-colors"
+                className="w-full bg-app-bg border border-app-border rounded-lg px-3.5 py-2.5 text-xs text-app-text placeholder-app-subtle focus:outline-none focus:border-app-accent font-mono transition-colors"
                 required
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-medium text-[#94A3B8] mb-1.5">
+            <label className="block text-xs font-medium text-app-muted mb-1.5">
               Secure Password
             </label>
             <div className="relative">
@@ -107,14 +107,14 @@ export const LoginScreen: React.FC = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••••••"
-                className="w-full bg-[#0B0F19] border border-[#334155] rounded-lg px-3.5 py-2.5 text-xs text-white placeholder-[#64748B] focus:outline-none focus:border-[#0284C7] font-mono transition-colors"
+                className="w-full bg-app-bg border border-app-border rounded-lg px-3.5 py-2.5 text-xs text-app-text placeholder-app-subtle focus:outline-none focus:border-app-accent font-mono transition-colors"
                 required
               />
             </div>
           </div>
 
           {error && (
-            <div className="p-2.5 rounded-lg bg-[#0B0F19] border border-[#EF4444]/60 text-[#EF4444] text-xs font-mono">
+            <div className="p-2.5 rounded-md bg-app-bg border border-app-danger/60 text-app-danger text-xs font-mono">
               {error}
             </div>
           )}
@@ -122,7 +122,7 @@ export const LoginScreen: React.FC = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full flex items-center justify-center space-x-2 py-2.5 px-4 rounded-lg bg-[#0284C7] hover:bg-[#0369A1] text-white text-xs font-semibold transition-all duration-150 shadow-md disabled:opacity-50 mt-2"
+            className="w-full flex items-center justify-center space-x-2 py-2.5 px-4 rounded-md bg-app-accent hover:bg-app-accentHover text-app-bg text-xs font-semibold transition-colors duration-150 disabled:opacity-50 mt-2"
           >
             {isLoading ? (
               <>

@@ -68,7 +68,7 @@ export const GenieMarkdown: React.FC<{ text: string }> = ({ text }) => {
         return (
           <code
             key={idx}
-            className="px-1 py-0.5 rounded bg-app-bg border border-app-border font-mono text-[10.5px] text-app-action"
+            className="px-1 py-0.5 rounded-md bg-app-bg border border-app-border font-mono text-[10.5px] text-app-accent"
           >
             {part.slice(1, -1)}
           </code>
@@ -78,7 +78,7 @@ export const GenieMarkdown: React.FC<{ text: string }> = ({ text }) => {
         return (
           <span
             key={idx}
-            className="inline-flex items-center justify-center px-1 py-0.2 mx-0.5 rounded bg-app-action/20 text-app-action font-mono text-[9px] font-semibold border border-app-action/30"
+            className="inline-flex items-center justify-center px-1 py-0.2 mx-0.5 rounded-md bg-app-accentWash text-app-accent font-mono text-[9px] font-semibold border border-app-accent/30"
             title="Unity Catalog Verified Data Lineage Reference"
           >
             {part.slice(1, -1)}
@@ -118,9 +118,9 @@ export const GenieMarkdown: React.FC<{ text: string }> = ({ text }) => {
         );
 
         elements.push(
-          <div key={`table-${i}`} className="my-2.5 overflow-x-auto border border-app-border rounded">
+          <div key={`table-${i}`} className="my-2.5 overflow-x-auto border border-app-border rounded-lg">
             <table className="w-full text-left border-collapse text-[11px]">
-              <thead className="bg-app-bg text-app-muted font-medium border-b border-app-border">
+              <thead className="bg-app-surfaceRaised text-app-muted font-medium border-b border-app-border">
                 <tr>
                   {headerRow.map((h, hIdx) => (
                     <th key={hIdx} className="py-1.5 px-2.5 font-medium whitespace-nowrap">
@@ -129,9 +129,9 @@ export const GenieMarkdown: React.FC<{ text: string }> = ({ text }) => {
                   ))}
                 </tr>
               </thead>
-              <tbody className="divide-y divide-app-border/60 bg-app-panel/40">
+              <tbody className="divide-y divide-app-borderSubtle">
                 {dataRows.map((row, rIdx) => (
-                  <tr key={rIdx} className="hover:bg-app-bg/60">
+                  <tr key={rIdx} className="hover:bg-app-surfaceRaised/40">
                     {row.map((cell, cIdx) => (
                       <td key={cIdx} className="py-1.5 px-2.5 whitespace-nowrap text-app-text">
                         {formatInline(cell)}
@@ -185,7 +185,7 @@ export const GenieMarkdown: React.FC<{ text: string }> = ({ text }) => {
     if (numberedMatch) {
       elements.push(
         <div key={`num-${i}`} className="flex items-start space-x-1.5 my-1 text-[11.5px] leading-relaxed text-app-text pl-1">
-          <span className="text-app-action font-mono text-[10.5px] font-semibold select-none leading-normal">
+          <span className="text-app-accent font-mono text-[10.5px] font-semibold select-none leading-normal">
             {numberedMatch[1]}.
           </span>
           <span className="flex-1">{formatInline(numberedMatch[2])}</span>
@@ -410,9 +410,9 @@ Requirements:
   const activeChips = role === 'TPO' ? tpoChips : studentChips;
 
   return (
-    <aside className="w-[380px] shrink-0 h-[calc(100vh-3.5rem)] bg-app-panel border-r border-app-border flex flex-col select-none overflow-hidden">
+    <aside className="w-[380px] shrink-0 h-[calc(100vh-3.5rem)] bg-app-surface border-r border-app-border flex flex-col select-none overflow-hidden">
       {/* Quick Prompt Chips */}
-      <div className="p-2.5 bg-app-bg/60 border-b border-app-border overflow-x-auto">
+      <div className="p-2.5 bg-app-bg border-b border-app-border overflow-x-auto">
         <div className="text-[10px] font-medium uppercase tracking-wider text-app-muted mb-1.5 flex items-center justify-between">
           <span>Quick Prompts</span>
           <span className="text-[9px] text-app-muted">1-Click Query</span>
@@ -423,7 +423,7 @@ Requirements:
               key={idx}
               onClick={() => handleSendMessage(chip)}
               disabled={isThinking}
-              className="text-[11px] px-2 py-1 rounded bg-app-panel border border-app-border hover:border-app-action hover:text-app-action transition-colors duration-150 text-app-muted text-left"
+              className="text-[11px] px-2 py-1 rounded-md bg-app-surface border border-app-border hover:border-app-borderSubtle hover:text-app-text transition-colors duration-150 text-app-muted text-left"
             >
               {chip}
             </button>
@@ -442,18 +442,18 @@ Requirements:
           >
             {/* Message Bubble */}
             <div
-              className={`max-w-[96%] p-3 rounded text-xs leading-relaxed ${
+              className={`max-w-[96%] p-3 rounded-lg text-xs leading-relaxed ${
                 msg.sender === 'user'
-                  ? 'bg-app-action/20 border border-app-action/40 text-app-text'
+                  ? 'bg-app-surfaceRaised border border-app-border text-app-text'
                   : 'bg-app-bg border border-app-border text-app-text'
               }`}
             >
               {msg.sender === 'genie' && (
-                <div className="flex items-center space-x-1.5 mb-2 pb-1.5 border-b border-app-border/40 text-[10px] font-medium text-app-muted">
-                  <LampIcon size={12} color="#0284C7" />
+                <div className="flex items-center space-x-1.5 mb-2 pb-1.5 border-b border-app-borderSubtle text-[10px] font-medium text-app-muted">
+                  <LampIcon size={12} color="#22C3B6" />
                   <span className="font-semibold text-app-text">Genie Space</span>
                   {msg.matchedStudentIds && msg.matchedStudentIds.length > 0 && (
-                    <span className="ml-auto text-[10px] text-app-action font-mono">
+                    <span className="ml-auto text-[10px] text-app-accent font-mono">
                       {msg.matchedStudentIds.length} candidate(s) synced
                     </span>
                   )}
@@ -462,13 +462,13 @@ Requirements:
 
               {/* Databricks Genie Thinking Tree / Process */}
               {msg.thinkingSteps && msg.thinkingSteps.length > 0 && (
-                <div className="mb-2.5 rounded bg-app-panel/70 border border-app-border p-2">
+                <div className="mb-2.5 rounded-lg bg-app-surface border border-app-border p-2">
                   <button
                     onClick={() => toggleThinking(msg.id)}
                     className="w-full flex items-center justify-between text-[10.5px] font-mono text-app-muted hover:text-app-text transition-colors"
                   >
                     <div className="flex items-center space-x-1.5">
-                      <Database className="w-3 h-3 text-app-action" />
+                      <Database className="w-3 h-3 text-app-muted" />
                       <span>Thinking Process ({msg.thinkingSteps.length} steps)</span>
                     </div>
                     {expandedThinking[msg.id] ? (
@@ -479,7 +479,7 @@ Requirements:
                   </button>
 
                   {expandedThinking[msg.id] && (
-                    <div className="mt-2 space-y-1 pl-1 border-l-2 border-app-borderLight text-[10.5px] font-mono text-app-muted">
+                    <div className="mt-2 space-y-1 pl-1 border-l-2 border-app-borderSubtle text-[10.5px] font-mono text-app-muted">
                       {msg.thinkingSteps.map((step, sIdx) => (
                         <div key={sIdx} className="flex items-center space-x-1.5 py-0.5">
                           <Check className="w-3 h-3 text-app-success shrink-0" />
@@ -507,25 +507,23 @@ Requirements:
                 </div>
               )}
             </div>
-            <span className="text-[9px] text-app-muted/60 mt-1 px-1">{msg.timestamp}</span>
+            <span className="text-[9px] text-app-muted mt-1 px-1">{msg.timestamp}</span>
           </div>
         ))}
 
         {/* Live Thinking / Polling State */}
         {isThinking && (
           <div className="flex flex-col items-start space-y-1.5">
-            <div className="p-2.5 rounded bg-app-bg border border-app-border flex items-center space-x-2">
-              <LampIcon size={14} color="#0284C7" />
+            <div className="p-2.5 rounded-lg bg-app-surface border border-app-border flex items-center space-x-2">
+              <LampIcon size={14} color="#22C3B6" />
               <span className="font-mono text-[11px] text-app-muted">
                 Genie querying Unity Catalog...
               </span>
               <div className="flex items-center space-x-1 pl-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-app-action animate-pulse" />
-                <span className="w-1.5 h-1.5 rounded-full bg-app-action animate-pulse [animation-delay:200ms]" />
-                <span className="w-1.5 h-1.5 rounded-full bg-app-action animate-pulse [animation-delay:400ms]" />
+                <span className="w-2 h-2 rounded-full bg-app-muted animate-pulse" />
               </div>
             </div>
-            <div className="pl-6 text-[10px] font-mono text-app-muted/70">
+            <div className="pl-6 text-[10px] font-mono text-app-subtle">
               • Evaluating governed SQL trace on Serverless Photon Engine...
             </div>
           </div>
@@ -535,7 +533,7 @@ Requirements:
       </div>
 
       {/* Input Console */}
-      <div className="p-3 bg-app-panel border-t border-app-border">
+      <div className="p-3 bg-app-bg border-t border-app-border">
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -553,12 +551,12 @@ Requirements:
                 : 'Ask Genie (e.g. Why am I blocked from Google?)...'
             }
             disabled={isThinking}
-            className="flex-1 bg-app-bg border border-app-border rounded px-3 py-2 text-xs text-app-text placeholder-app-muted/60 focus:outline-none focus:border-app-action"
+            className="flex-1 bg-app-surface border border-app-border rounded-lg px-3 py-2 text-xs text-app-text placeholder-app-subtle focus:outline-none focus:border-app-accent"
           />
           <button
             type="submit"
             disabled={!inputValue.trim() || isThinking}
-            className="p-2 rounded bg-app-action hover:bg-app-actionHover disabled:opacity-40 text-white transition-colors duration-150"
+            className="p-2 rounded-md bg-app-accent hover:bg-app-accentHover disabled:opacity-40 text-app-bg transition-colors duration-150"
             title="Send Query to Genie Space"
           >
             <Send className="w-3.5 h-3.5" />
@@ -569,15 +567,15 @@ Requirements:
       {/* Recruiter JD Quick-Matcher Modal */}
       {isJDModalOpen && (
         <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4">
-          <div className="w-full max-w-lg bg-app-panel border border-app-border rounded-lg p-5 shadow-none space-y-4">
+          <div className="w-full max-w-lg bg-app-surface border border-app-border rounded-lg p-5 space-y-4">
             <div className="flex items-center justify-between pb-3 border-b border-app-border">
               <div className="flex items-center space-x-2">
-                <FileText className="w-4 h-4 text-app-action" />
+                <FileText className="w-4 h-4 text-app-accent" />
                 <h3 className="text-sm font-semibold text-app-text">Recruiter JD Quick-Matcher</h3>
               </div>
               <button
                 onClick={() => setIsJDModalOpen(false)}
-                className="p-1 rounded text-app-muted hover:text-app-text hover:bg-app-bg transition-colors"
+                className="p-1 rounded-md text-app-muted hover:text-app-text hover:bg-app-surfaceRaised transition-colors"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -592,14 +590,14 @@ Requirements:
               value={jdText}
               onChange={(e) => setJdText(e.target.value)}
               placeholder="Paste raw recruiter JD here (e.g. Looking for 2025 grads with CGPA > 7.5, Python, SQL for Cloud Data role at 18 LPA)..."
-              className="w-full bg-app-bg border border-app-border rounded p-3 text-xs text-app-text font-mono focus:outline-none focus:border-app-action"
+              className="w-full bg-app-bg border border-app-border rounded-lg p-3 text-xs text-app-text font-mono focus:outline-none focus:border-app-accent"
             />
 
             <div className="flex items-center justify-between pt-2">
               <button
                 type="button"
                 onClick={() => setJdText(sampleJD)}
-                className="text-xs text-app-action hover:underline"
+                className="text-xs text-app-accent hover:underline"
               >
                 Load Sample Recruiter JD
               </button>
@@ -608,7 +606,7 @@ Requirements:
                 <button
                   type="button"
                   onClick={() => setIsJDModalOpen(false)}
-                  className="px-3 py-1.5 rounded bg-app-bg border border-app-border text-xs text-app-muted hover:text-app-text"
+                  className="px-3 py-1.5 rounded-md bg-app-bg border border-app-border text-xs text-app-muted hover:text-app-text"
                 >
                   Cancel
                 </button>
@@ -616,7 +614,7 @@ Requirements:
                   type="button"
                   onClick={handleJDSubmit}
                   disabled={!jdText.trim() || isMatchingJD}
-                  className="px-3 py-1.5 rounded bg-app-action hover:bg-app-actionHover text-white text-xs font-medium disabled:opacity-50 flex items-center space-x-1.5"
+                  className="px-3 py-1.5 rounded-md bg-app-accent hover:bg-app-accentHover text-app-bg text-xs font-semibold disabled:opacity-50 flex items-center space-x-1.5"
                 >
                   <span>{isMatchingJD ? 'Extracting Constraints...' : 'Extract & Match Cohort'}</span>
                 </button>

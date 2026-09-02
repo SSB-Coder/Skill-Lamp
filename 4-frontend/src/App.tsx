@@ -12,10 +12,10 @@ export const AppContent: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-[#0B0F19] flex items-center justify-center font-mono text-xs text-[#94A3B8]">
-        <div className="flex items-center space-x-3 p-4 rounded-xl bg-[#151D2C] border border-[#1E293B]">
-          <span className="w-2.5 h-2.5 rounded-full bg-[#0284C7] animate-ping" />
-          <span className="text-white font-medium">Validating Institutional Session...</span>
+      <div className="min-h-screen bg-app-bg flex items-center justify-center font-mono text-xs text-app-muted">
+        <div className="flex items-center space-x-3 p-4 rounded-lg bg-app-surface border border-app-border">
+          <span className="w-2 h-2 rounded-full bg-app-muted animate-pulse" />
+          <span className="text-app-text font-medium">Validating Institutional Session...</span>
         </div>
       </div>
     );
@@ -27,7 +27,7 @@ export const AppContent: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#0B0F19] text-[#F8FAFC] font-sans antialiased">
+    <div className="min-h-screen flex flex-col bg-app-bg text-app-text font-sans antialiased">
       {/* Universal Header with Logo & Role Module Indicator */}
       <Header />
 

@@ -92,9 +92,9 @@ export const StudentDashboard: React.FC = () => {
 
   if (isLoadingProfile || !profile || !calculationResult) {
     return (
-      <div className="flex-1 h-[calc(100vh-4rem)] flex items-center justify-center bg-[#0B0F19] text-[#94A3B8] font-mono">
+      <div className="flex-1 h-[calc(100vh-4rem)] flex items-center justify-center bg-app-bg text-app-muted font-mono">
         <div className="flex items-center space-x-2">
-          <span className="w-2 h-2 rounded-full bg-[#0284C7] animate-ping" />
+          <span className="w-2 h-2 rounded-full bg-app-muted animate-pulse" />
           <span>Loading placement intelligence...</span>
         </div>
       </div>
@@ -102,30 +102,28 @@ export const StudentDashboard: React.FC = () => {
   }
 
   return (
-    <div className="flex-1 flex flex-row h-[calc(100vh-4rem)] bg-[#0B0F19] overflow-hidden">
+    <div className="flex-1 flex flex-row h-[calc(100vh-4rem)] bg-app-bg overflow-hidden">
       {/* Left/Main: Student Career Analytics & Real-Time Return Calculator */}
       <div className="flex-1 flex flex-col h-full overflow-y-auto p-4 space-y-4">
         {/* 1. Student Profile Header Card */}
-        <div className="bg-[#151D2C] border border-[#1E293B] rounded-lg p-4 flex flex-wrap items-center justify-between gap-4 shadow-sm">
+        <div className="bg-app-surface border border-app-border rounded-lg p-4 flex flex-wrap items-center justify-between gap-4">
           {/* Student Info */}
           <div className="flex items-center space-x-3.5">
-            <div className="p-2.5 rounded bg-[#0B0F19] border border-[#1E293B]">
-              <GraduationCap className="w-5 h-5 text-[#38BDF8]" />
-            </div>
+            <GraduationCap className="w-6 h-6 text-app-muted shrink-0" />
             <div>
               <div className="flex items-center space-x-2">
-                <h2 className="text-base font-bold text-white tracking-tight">{profile.name}</h2>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#0B0F19] border border-[#1E293B] text-[#94A3B8] flex items-center space-x-1">
-                  <Lock className="w-3 h-3 text-[#38BDF8]" />
+                <h2 className="text-base font-bold text-app-text tracking-tight">{profile.name}</h2>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-app-bg border border-app-border text-app-muted flex items-center space-x-1">
+                  <Lock className="w-3 h-3 text-app-subtle" />
                   <span>Student Profile: {profile.usn}</span>
                 </span>
               </div>
-              <div className="flex items-center space-x-3 text-xs text-[#94A3B8] font-mono mt-0.5">
-                <span>Branch: <strong className="text-white">{profile.branch}</strong></span>
+              <div className="flex items-center space-x-3 text-xs text-app-muted font-mono mt-0.5">
+                <span>Branch: <strong className="text-app-text">{profile.branch}</strong></span>
                 <span>•</span>
-                <span>CGPA: <strong className="text-white">{profile.cgpa.toFixed(2)}</strong></span>
+                <span>CGPA: <strong className="text-app-text">{profile.cgpa.toFixed(2)}</strong></span>
                 <span>•</span>
-                <span>Backlogs: <strong className="text-[#16A34A]">{profile.active_backlogs}</strong></span>
+                <span>Backlogs: <strong className="text-app-success">{profile.active_backlogs}</strong></span>
               </div>
             </div>
           </div>
@@ -133,8 +131,8 @@ export const StudentDashboard: React.FC = () => {
           {/* Placement Readiness Badge */}
           <div className="flex items-center space-x-4">
             <div className="text-right">
-              <div className="text-[10px] uppercase font-mono text-[#64748B]">Placement Readiness Index</div>
-              <div className="text-lg font-mono font-bold text-[#38BDF8]">
+              <div className="text-[10px] uppercase font-mono text-app-subtle">Placement Readiness Index</div>
+              <div className="text-lg font-mono font-bold text-app-accent">
                 {profile.readiness_score.toFixed(1)}%
               </div>
             </div>
@@ -189,7 +187,7 @@ export const StudentDashboard: React.FC = () => {
       </div>
 
       {/* Right: Dedicated Genie Career Advisor Copilot */}
-      <div className="w-[360px] lg:w-[410px] shrink-0 h-full border-l border-[#1E293B] bg-[#151D2C] flex flex-col">
+      <div className="w-[360px] lg:w-[410px] shrink-0 h-full border-l border-app-border bg-app-surface flex flex-col">
         <SidebarCopilot
           onFilterSync={() => {}}
           activeStudentId={profile.usn}
