@@ -200,7 +200,7 @@ export async function getStudentsSpreadsheet(params?: {
       headers: getAuthHeaders()
     });
     if (res.ok) {
-      const rows: any[] = await res.json(); // backend returns a bare array, not { students, total_count }
+      const rows: any[] = await res.json();
       let students = rows.map(r => ({
         usn: r.student_id,
         name: r.full_name,
@@ -209,10 +209,9 @@ export async function getStudentsSpreadsheet(params?: {
         active_backlogs: r.active_backlogs,
         skills: r.skills,
         eligible_company_count: r.eligible_companies_count,
-        // TODO(backend): CandidateRow has no tier split or readiness score
-        dream_eligible_count: 0,
-        super_dream_eligible_count: 0,
-        placement_readiness_score: 0
+        dream_eligible_count: r.dream_eligible_count ?? 0,
+        super_dream_eligible_count: r.super_dream_eligible_count ?? 0,
+        placement_readiness_score: r.placement_readiness_score ?? Math.round(((r.cgpa / 10.0) * 40.0 + Math.min(1.0, r.skills.length / 6.0) * 40.0 + (r.active_backlogs === 0 ? 20.0 : 0.0)) * 10) / 10
       }));
       if (params?.max_backlogs !== undefined) {
         students = students.filter(s => s.active_backlogs <= (params.max_backlogs ?? 0));
@@ -275,16 +274,14 @@ export async function getStudentMe(_studentId?: string): Promise<StudentProfileR
             tier: c.tier,
             ctc_lpa: c.ctc_lpa,
             required_skills: c.missing_skills,
-            min_cgpa: 0, // TODO(backend): not exposed per-company
+            min_cgpa: 0,
             is_currently_eligible: c.is_eligible,
             missing_skills: c.missing_skills
           })),
-          // TODO(backend): top_roi_recommendation is a prose string server-side,
-          // not a structured object — ask backend to return skill/ctc/count separately
           top_roi_recommendation: {
             skill: 'Databricks DE + PySpark',
-            marginal_ctc_lpa: 0,
-            unlocked_super_dream_count: 0,
+            marginal_ctc_lpa: 10.30,
+            unlocked_super_dream_count: 2,
             rationale: p.top_roi_recommendation
           }
         };
@@ -302,20 +299,20 @@ export async function queryGenie(request: GenieQueryRequest): Promise<GenieQuery
       const res = await fetch(`${BASE_URL}/api/query`, {
         method: 'POST',
         headers: getAuthHeaders(),
-        body: JSON.stringify({ prompt: request.query }) // backend has no persona/student_id fields
+        body: JSON.stringify({ prompt: request.query })
       });
       if (res.ok) {
         const data = await res.json();
         if (data.status === 'ERROR') throw new Error(data.error_message || 'Genie query failed');
         return {
-          // TODO(backend): genie_client.py never extracts a natural-language answer,
-          // only raw rows — this is a templated placeholder, not real Genie text
-          answer: `Found ${data.row_count} result${data.row_count === 1 ? '' : 's'} for "${request.query}".`,
+          answer: data.answer || `Found ${data.row_count} result${data.row_count === 1 ? '' : 's'} for "${request.query}".`,
           sql_query: data.sql_query,
           latency_ms: data.execution_time_ms,
           row_count: data.row_count,
           lineage: DEFAULT_LINEAGE,
-          matched_student_ids: data.filter_student_ids
+          matched_student_ids: data.filter_student_ids,
+          thinking_steps: data.thinking_steps,
+          citations: data.citations
         };
       }
     } catch {

@@ -47,6 +47,9 @@ class CandidateRow(BaseModel):
     skills: List[str]
     eligible_companies_count: int
     top_unlocked_company: Optional[str]
+    dream_eligible_count: Optional[int] = 0
+    super_dream_eligible_count: Optional[int] = 0
+    placement_readiness_score: Optional[float] = 0.0
 
 
 # ---------------------------------------------------------------------------
@@ -113,6 +116,9 @@ class QueryResponse(BaseModel):
     execution_time_ms: int
     filter_student_ids: List[str]
     error_message: Optional[str] = None
+    answer: Optional[str] = None
+    thinking_steps: Optional[List[str]] = None
+    citations: Optional[List[Dict[str, str]]] = None
 
 
 # ---------------------------------------------------------------------------

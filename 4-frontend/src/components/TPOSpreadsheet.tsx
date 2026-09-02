@@ -144,7 +144,7 @@ export const TPOSpreadsheet: React.FC<TPOSpreadsheetProps> = ({
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search candidate, USN, skill..."
-              className="w-full bg-app-bg border border-app-border rounded pl-8 pr-3 py-1.5 text-xs text-app-text placeholder-app-muted focus:outline-none focus:border-app-action font-mono text-[11px]"
+              className="w-full bg-app-bg border border-app-border rounded pl-8 pr-3 py-1.5 text-xs text-app-text placeholder-app-muted focus:outline-none focus:border-app-action"
             />
           </form>
 
@@ -232,7 +232,7 @@ export const TPOSpreadsheet: React.FC<TPOSpreadsheetProps> = ({
       </div>
 
       {/* Grid Stats Bar */}
-      <div className="px-4 py-2 bg-app-bg border-b border-app-border/60 flex items-center justify-between text-xs text-app-muted font-mono">
+      <div className="px-4 py-2 bg-app-bg border-b border-app-border/60 flex items-center justify-between text-xs text-app-muted">
         <div>
           Showing <span className="text-app-text font-semibold">{displayedStudents.length}</span>{' '}
           candidate records (Unity Catalog Verified)

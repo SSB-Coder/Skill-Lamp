@@ -106,6 +106,8 @@ export interface GenieQueryResponse {
   row_count: number;
   lineage: LineageInfo;
   matched_student_ids?: string[];
+  thinking_steps?: string[];
+  citations?: Array<{ id: string; source: string }>;
 }
 
 export interface WhatIfRequest {

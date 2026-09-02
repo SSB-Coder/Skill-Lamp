@@ -3,7 +3,8 @@ import {
   StudentProfileResponse,
   JDMatchResponse,
   GenieQueryResponse,
-  WhatIfResponse
+  WhatIfResponse,
+  LineageInfo
 } from './types';
 
 // Priya Nair's fixed student identity
@@ -1022,129 +1023,344 @@ LIMIT 50;`;
   };
 }
 
-// Mock Genie natural language queries
+// Mock Genie natural language queries (Databricks AI/BI Genie Emulation)
 export function mockGenieQuery(query: string, persona: 'TPO' | 'STUDENT', studentId?: string): GenieQueryResponse {
   const q = query.toLowerCase();
 
-  if (persona === 'TPO') {
-    if (q.includes('ise') || q.includes('databricks') || q.includes('8.0')) {
-      const matched = MOCK_STUDENTS.filter(s => s.branch === 'ISE' && s.cgpa >= 8.0 && s.skills.includes('DATABRICKS_DE'));
-      const fallbackMatched = matched.length > 0 ? matched : MOCK_STUDENTS.filter(s => s.branch === 'ISE' && s.cgpa >= 8.0);
-      return {
-        answer: `Identified **${fallbackMatched.length} ISE candidates** with CGPA >= 8.0 eligible for Databricks / Cloud Lakehouse cohorts. All ${fallbackMatched.length} profiles have zero active backlogs and verified SQL/Python competencies. High-match candidate: Ananya Iyer (9.12 CGPA), Shruti Kamath (8.88 CGPA).`,
-        sql_query: `SELECT usn, full_name, branch, cgpa, verified_skills 
-FROM campus_intelligence.gold.dim_students 
-WHERE branch = 'ISE' AND cgpa >= 8.0 AND ARRAY_CONTAINS(verified_skills, 'DATABRICKS_DE')
-ORDER BY cgpa DESC;`,
-        latency_ms: 1240,
-        row_count: fallbackMatched.length,
-        lineage: {
-          catalog: 'campus_intelligence.gold',
-          pii_masked: true,
-          engine: 'Serverless Photon'
-        },
-        matched_student_ids: fallbackMatched.map(s => s.usn)
-      };
-    }
+  const defaultLineage: LineageInfo = {
+    catalog: 'workspace.campus_intelligence_gold',
+    pii_masked: true,
+    engine: 'Serverless Photon'
+  };
 
-    if (q.includes('unplaced') || q.includes('ai/ds') || q.includes('aids')) {
-      const aidsStudents = MOCK_STUDENTS.filter(s => s.branch === 'AI/DS');
-      return {
-        answer: `Filtered **${aidsStudents.length} AI/DS candidates**. 82% of these students have active MLOps/PySpark skills. Top candidate: Deepika Murthy (9.15 CGPA), Ishita Bansal (9.02 CGPA).`,
-        sql_query: `SELECT usn, full_name, branch, cgpa, verified_skills 
-FROM campus_intelligence.gold.dim_students 
-WHERE branch = 'AI/DS' AND placement_status = 'UNPLACED'
-ORDER BY cgpa DESC;`,
-        latency_ms: 1110,
-        row_count: aidsStudents.length,
-        lineage: {
-          catalog: 'campus_intelligence.gold',
-          pii_masked: true,
-          engine: 'Serverless Photon'
-        },
-        matched_student_ids: aidsStudents.map(s => s.usn)
-      };
-    }
+  const citations = [
+    { id: '1', source: 'workspace.campus_intelligence_gold.gold_dim_students' },
+    { id: '2', source: 'workspace.campus_intelligence_gold.gold_fact_placement_history' },
+    { id: '3', source: 'workspace.campus_intelligence_gold.v_student_company_eligibility' },
+  ];
 
-    // Default TPO response
+  // 1. Query 15: Out-of-range CGPA > 10.0
+  if (q.includes('10.0') || q.includes('> 10') || q.includes('cgpa > 10') || q.includes('non-existent')) {
     return {
-      answer: `Executed natural-language placement filter across Unity Catalog gold tables. Showing top matching records based on your prompt criteria.`,
-      sql_query: `SELECT s.usn, s.full_name, s.branch, s.cgpa, s.verified_skills 
-FROM campus_intelligence.gold.dim_students s
-JOIN campus_intelligence.gold.fct_eligibility e ON s.usn = e.student_usn
-WHERE s.active_backlogs = 0
-GROUP BY s.usn, s.full_name, s.branch, s.cgpa, s.verified_skills
-ORDER BY s.cgpa DESC LIMIT 50;`,
-      latency_ms: 1350,
-      row_count: 50,
-      lineage: {
-        catalog: 'campus_intelligence.gold',
-        pii_masked: true,
-        engine: 'Serverless Photon'
-      },
-      matched_student_ids: MOCK_STUDENTS.slice(0, 15).map(s => s.usn)
+      thinking_steps: [
+        'Students with CGPA > 10.0',
+        'Overall CGPA distribution in student population',
+        'Validating grade scale bounds against academic system parameters (0.0 - 10.0)'
+      ],
+      answer: `### Cohort Analysis: CGPA > 10.0
+
+No students exist with **CGPA > 10.0** in the dataset. This CGPA band is impossible because the institution uses a 10.0 scale, where 10.0 is the maximum achievable grade point average. [1]
+
+### Actual CGPA Distribution
+The student population (500 students) has the following CGPA characteristics: [2]
+• **Minimum CGPA:** 5.52
+• **Maximum CGPA:** 9.85
+• **Average CGPA:** 7.67
+
+### Why This Query Returns Zero Results
+CGPA in this campus placement system is measured on a **0.0 to 10.0 scale**, which is the standard grading system used by most Indian engineering colleges. A CGPA greater than 10.0 is structurally impossible — it would be equivalent to asking for students who scored above 100% in a percentage-based system.
+
+### Recommendation
+If you're looking to analyze high-performing students, consider these valid CGPA bands instead:
+• **Top Tier (Super Dream Threshold):** CGPA ≥ 8.50 (92 candidates)
+• **First Class with Distinction:** CGPA ≥ 7.75 (248 candidates)
+• **First Class:** CGPA ≥ 6.75 (412 candidates)`,
+      sql_query: `SELECT 
+  COUNT(CASE WHEN had_ai_data_skill = TRUE AND offer_status = 'Placed' THEN 1 END) AS placed_with_skill,
+  COUNT(CASE WHEN had_ai_data_skill = TRUE THEN 1 END) AS total_with_skill,
+  COUNT(CASE WHEN had_ai_data_skill = FALSE AND offer_status = 'Placed' THEN 1 END) AS placed_without_skill,
+  COUNT(CASE WHEN had_ai_data_skill = FALSE THEN 1 END) AS total_without_skill,
+  COALESCE(ROUND(AVG(CASE WHEN had_ai_data_skill = TRUE AND offer_status = 'Placed' THEN offered_ctc_lpa END), 2), 0.0) AS avg_ctc_with_skill,
+  COALESCE(ROUND(AVG(CASE WHEN had_ai_data_skill = FALSE AND offer_status = 'Placed' THEN offered_ctc_lpa END), 2), 0.0) AS avg_ctc_without_skill
+FROM workspace.campus_intelligence_gold.gold_fact_placement_history ph
+JOIN workspace.campus_intelligence_gold.gold_dim_students s ON ph.student_id = s.student_id
+WHERE s.cgpa > 10.0;`,
+      latency_ms: 210,
+      row_count: 0,
+      lineage: defaultLineage,
+      matched_student_ids: [],
+      citations
     };
-  } else {
-    // Student Persona queries
+  }
+
+  // 2. Query 6: Branch-Wise Placement Statistics 2024 Batch
+  if ((q.includes('branch') && (q.includes('placement percentage') || q.includes('average ctc') || q.includes('statistics') || q.includes('2024'))) || q.includes('branch-wise')) {
+    return {
+      thinking_steps: [
+        'Filtering graduating batch: 2024',
+        'Grouping by student branch across gold_dim_students and gold_fact_placement_history',
+        'Aggregating placed count, total count, placement percentage, and mean offered CTC',
+        'Sorting by average placed CTC in descending order'
+      ],
+      answer: `### 2024 Graduating Batch: Branch-Wise Placement & Compensation Analysis
+
+Governed aggregation across **500 students** for the 2024 batch from \`workspace.campus_intelligence_gold.gold_dim_students\` [1] and \`gold_fact_placement_history\` [2]:
+
+| Branch | Total Students | Placed Students | Placement Rate | Avg Placed CTC | Top Offer |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **AI/DS** | 80 | 72 | **90.0%** | **20.40 LPA** | 48.0 LPA (Databricks) |
+| **CSE** | 180 | 158 | **87.8%** | **19.80 LPA** | 44.0 LPA (Microsoft) |
+| **ISE** | 120 | 102 | **85.0%** | **17.50 LPA** | 32.0 LPA (Adobe) |
+| **ECE** | 120 | 84 | **70.0%** | **12.20 LPA** | 24.0 LPA (Qualcomm) |
+
+### Key Observations
+• **Highest Average Package:** AI/DS branch leads with **20.40 LPA**, driven by strong recruiter competition for GenAI/LLM and Lakehouse competencies.
+• **Highest Offer Volume:** CSE generated **158 offers** (43.6% of campus total).
+• **Lakehouse Skill Premium:** Candidates possessing \`DATABRICKS_DE\` achieved a **+5.63 LPA premium** over the general batch average.
+
+### TPO Strategic Recommendations
+1. **ECE Skill Gap Intervention:** ECE placement rate (70.0%) lags computing branches; providing Python/SQL cross-skilling bridges is projected to lift ECE placement by **+8.4%**.
+2. **Super Dream Drive Prioritization:** 82% of eligible Super Dream candidates are concentrated in CSE/ISE/AI/DS.`,
+      sql_query: `SELECT 
+  s.branch,
+  COUNT(s.student_id) AS total_students,
+  COUNT(CASE WHEN ph.offer_status = 'Placed' THEN 1 END) AS placed_students,
+  ROUND(COUNT(CASE WHEN ph.offer_status = 'Placed' THEN 1 END) * 100.0 / COUNT(s.student_id), 1) AS placement_pct,
+  ROUND(AVG(CASE WHEN ph.offer_status = 'Placed' THEN ph.offered_ctc_lpa END), 2) AS avg_placed_ctc_lpa
+FROM workspace.campus_intelligence_gold.gold_dim_students s
+LEFT JOIN workspace.campus_intelligence_gold.gold_fact_placement_history ph ON s.student_id = ph.student_id
+WHERE s.graduating_year = 2024
+GROUP BY s.branch
+ORDER BY avg_placed_ctc_lpa DESC;`,
+      latency_ms: 240,
+      row_count: 4,
+      lineage: defaultLineage,
+      matched_student_ids: [],
+      citations
+    };
+  }
+
+  // 3. Query 1 / TPO Shortlist: Databricks eligible with CGPA >= 8.0
+  if (q.includes('databricks') && (q.includes('eligible') || q.includes('8.0') || q.includes('ise') || q.includes('shortlist') || q.includes('cgpa'))) {
+    const matched = MOCK_STUDENTS.filter(s => (s.branch === 'ISE' || s.branch === 'CSE' || s.branch === 'AI/DS') && s.cgpa >= 8.0 && s.skills.includes('DATABRICKS_DE'));
+    const fallbackMatched = matched.length > 0 ? matched : MOCK_STUDENTS.filter(s => s.cgpa >= 8.0);
+    return {
+      thinking_steps: [
+        'Filtering company criteria: company_name = "Databricks"',
+        'Joining gold_dim_students with gold_fact_student_skills on student_id',
+        'Verifying mandatory skills: ["Databricks DE", "PySpark", "SQL"]',
+        'Applying criteria: CGPA >= 8.0, 0 Backlogs, Branch IN ("CSE", "ISE", "AI/DS")',
+        'Querying trusted view workspace.campus_intelligence_gold.v_student_company_eligibility'
+      ],
+      answer: `### Databricks (48.0 LPA Super Dream) Candidate Shortlist
+
+Identified **${fallbackMatched.length} fully eligible candidates** meeting all criteria (CGPA ≥ 8.0, 0 Backlogs, verified \`Databricks DE\` + \`PySpark\` + \`SQL\` competencies) from \`workspace.campus_intelligence_gold.v_student_company_eligibility\` [3]:
+
+| USN | Candidate Name | Branch | CGPA | Verified Lakehouse Stack | Status |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+${fallbackMatched.slice(0, 6).map(s => `| \`${s.usn}\` | **${s.name}** | ${s.branch} | \`${s.cgpa.toFixed(2)}\` | ${s.skills.slice(0, 3).join(', ')} | \`ELIGIBLE\` |`).join('\n')}
+
+**Candidate Grid Synchronized:** The main candidate spreadsheet has been filtered to highlight all ${fallbackMatched.length} matching students.`,
+      sql_query: `SELECT 
+  student_id, full_name, branch, cgpa, company_name, ctc_lpa, is_fully_eligible, blocker_reason
+FROM workspace.campus_intelligence_gold.v_student_company_eligibility
+WHERE company_name = 'Databricks'
+  AND branch IN ('ISE', 'CSE', 'AI/DS')
+  AND cgpa >= 8.0
+  AND is_fully_eligible = TRUE
+ORDER BY cgpa DESC, student_id ASC;`,
+      latency_ms: 180,
+      row_count: fallbackMatched.length,
+      lineage: defaultLineage,
+      matched_student_ids: fallbackMatched.map(s => s.usn),
+      citations
+    };
+  }
+
+  // 4. Query 9: High-Potential Unplaced Candidates in AI/DS
+  if (q.includes('unplaced') || (q.includes('ai/ds') && q.includes('missing'))) {
+    const aidsStudents = MOCK_STUDENTS.filter(s => s.branch === 'AI/DS');
+    return {
+      thinking_steps: [
+        'Filtering gold_dim_students for branch = "AI/DS" and cgpa > 7.5',
+        'Joining gold_fact_placement_history where offer_status != "Placed" OR NULL',
+        'Collecting student acquired skills from gold_fact_student_skills',
+        'Ordering by CGPA descending'
+      ],
+      answer: `### High-Potential Unplaced Candidates in AI/DS (CGPA > 7.5)
+
+Identified **${aidsStudents.length} high-potential AI/DS candidates** eligible for placement recovery from \`workspace.campus_intelligence_gold.gold_dim_students\` [1]:
+
+${aidsStudents.slice(0, 5).map(s => `• **${s.name}** (\`${s.usn}\`): CGPA \`${s.cgpa}\`, Backlogs: \`${s.active_backlogs}\` | Skills: \`${s.skills.slice(0, 4).join(', ')}\``).join('\n')}
+
+### Primary Placement Blocker
+82% of these unplaced students have strong Python/ML foundations but lack **production Lakehouse skills (\`Databricks DE\` or \`PySpark\`)**, which is the primary filter in current Super Dream drives.`,
+      sql_query: `SELECT 
+  s.student_id, s.full_name, s.cgpa, s.active_backlogs,
+  ARRAY_JOIN(COLLECT_SET(sk.skill_name), ', ') AS acquired_skills
+FROM workspace.campus_intelligence_gold.gold_dim_students s
+LEFT JOIN workspace.campus_intelligence_gold.gold_fact_placement_history ph ON s.student_id = ph.student_id
+LEFT JOIN workspace.campus_intelligence_gold.gold_fact_student_skills sk ON s.student_id = sk.student_id
+WHERE s.branch = 'AI/DS'
+  AND s.cgpa > 7.5
+  AND (ph.offer_status IS NULL OR ph.offer_status != 'Placed')
+GROUP BY s.student_id, s.full_name, s.cgpa, s.active_backlogs
+ORDER BY s.cgpa DESC;`,
+      latency_ms: 195,
+      row_count: aidsStudents.length,
+      lineage: defaultLineage,
+      matched_student_ids: aidsStudents.map(s => s.usn),
+      citations
+    };
+  }
+
+  // 5. Query 7: Top Hiring Partners by Offer Volume
+  if (q.includes('top 5 companies') || q.includes('hiring partners') || q.includes('offer volume')) {
+    return {
+      thinking_steps: [
+        'Querying workspace.campus_intelligence_gold.gold_fact_placement_history',
+        'Filtering offer_status = "Placed"',
+        'Aggregating offer count, average CTC, and maximum package by company_name',
+        'Ordering by total_offers_extended DESC, LIMIT 5'
+      ],
+      answer: `### Top 5 Campus Hiring Partners by Offer Volume (3-Year History)
+
+Analysis of historical placement records in \`workspace.campus_intelligence_gold.gold_fact_placement_history\` [2]:
+
+| Company Name | Tier | Total Offers Extended | Avg Offered CTC | Maximum CTC |
+| :--- | :--- | :--- | :--- | :--- |
+| **Infosys** | Core Tech / DSE | **68** | 6.80 LPA | 9.50 LPA |
+| **TCS Digital** | Dream | **54** | 7.50 LPA | 11.00 LPA |
+| **Accenture** | Dream | **48** | 8.20 LPA | 12.00 LPA |
+| **Amazon** | Super Dream | **32** | 28.50 LPA | 32.00 LPA |
+| **Databricks** | Super Dream | **18** | 48.00 LPA | 48.00 LPA |
+
+### Key Insight
+While volume recruitment is anchored by Core Tech partners, **Databricks and Amazon** provide the highest institutional CTC impact, accounting for 38% of total compensation value.`,
+      sql_query: `SELECT 
+  company_name,
+  COUNT(placement_id) AS total_offers_extended,
+  ROUND(AVG(offered_ctc_lpa), 2) AS avg_offered_ctc_lpa,
+  MAX(offered_ctc_lpa) AS max_offered_ctc_lpa
+FROM workspace.campus_intelligence_gold.gold_fact_placement_history
+WHERE offer_status = 'Placed'
+GROUP BY company_name
+ORDER BY total_offers_extended DESC, avg_offered_ctc_lpa DESC
+LIMIT 5;`,
+      latency_ms: 195,
+      row_count: 5,
+      lineage: defaultLineage,
+      matched_student_ids: [],
+      citations
+    };
+  }
+
+  // 6. Student Persona Queries (Google blocker, Top ROI, Readiness)
+  if (persona === 'STUDENT' || q.includes('google') || q.includes('why am i blocked') || q.includes('readiness') || q.includes('roi')) {
     if (q.includes('google') || q.includes('why am i blocked')) {
       return {
-        answer: `**Eligibility Diagnostic for Google (45.0 LPA):**\n\n• **CGPA Requirement:** 8.50 required (Your CGPA: 8.12 — Locked Block)\n• **Missing Prerequisite Skills:** \`DATA_STRUCTURES\`, \`SYSTEM_DESIGN\`\n\n*Recommendation:* To unlock Google, you require a CGPA exemption or Super Dream bypass via Databricks DE / PySpark which has a lower 8.0 CGPA threshold.`,
-        sql_query: `SELECT c.company_name, c.min_cgpa, c.required_skills, e.is_eligible, e.block_reason
-FROM campus_intelligence.gold.v_student_company_eligibility e
-JOIN campus_intelligence.gold.companies c ON e.company_id = c.id
-WHERE e.student_usn = '${studentId || 'USN_2025_042'}' AND c.company_name = 'Google';`,
-        latency_ms: 980,
-        row_count: 1,
-        lineage: {
-          catalog: 'campus_intelligence.gold',
-          pii_masked: true,
-          engine: 'Serverless Photon'
-        }
+        thinking_steps: [
+          `Resolving student session identity: ${studentId || 'USN_2025_042'} (Priya Nair)`,
+          'Querying trusted view workspace.campus_intelligence_gold.v_student_company_eligibility',
+          'Evaluating blocker criteria: CGPA, Backlogs, Branch, Mandatory Skills',
+          'Sorting by company CTC descending'
+        ],
+        answer: `### Personal Placement Diagnostic for Priya Nair (${studentId || 'USN_2025_042'})
+
+Diagnostic analysis for your profile (Branch: **ISE**, CGPA: **8.12**, Backlogs: **0**) from \`v_student_company_eligibility\` [3]:
+
+| Company | Tier | Package | Eligibility | Primary Blocker | Missing Requirements |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Databricks** | Super Dream | **48.0 LPA** | Blocked | \`MISSING_MANDATORY_SKILLS\` | \`Databricks DE\`, \`PySpark\` |
+| **Google** | Super Dream | **45.0 LPA** | Blocked | \`CGPA_BELOW_CUTOFF\` | Required CGPA: 8.50 (Your CGPA: 8.12) |
+| **Adobe** | Super Dream | **32.0 LPA** | Blocked | \`MISSING_MANDATORY_SKILLS\` | \`Databricks DE\` |
+
+### Actionable Recommendation
+• **Google** has a hard 8.50 CGPA cutoff. However, **Databricks (48.0 LPA)** has an 8.00 CGPA cutoff where you are academically eligible.
+• **Fastest Unlock Path:** Adding **\`DATABRICKS_DE\` + \`PYSPARK\`** unlocks Databricks & Adobe immediately with a **+10.30 LPA CTC lift**.`,
+        sql_query: `SELECT 
+  company_name, tier, ctc_lpa, is_fully_eligible, blocker_reason,
+  missing_mandatory_skills, missing_preferred_skills
+FROM workspace.campus_intelligence_gold.v_student_company_eligibility
+WHERE student_id = '${studentId || 'USN_2025_042'}'
+  AND tier IN ('Super Dream', 'Dream')
+ORDER BY ctc_lpa DESC, company_name ASC;`,
+        latency_ms: 160,
+        row_count: 4,
+        lineage: defaultLineage,
+        citations
       };
     }
 
-    if (q.includes('roi') || q.includes('top skill') || q.includes('databricks')) {
+    if (q.includes('roi') || q.includes('top skill')) {
       return {
-        answer: `**Top ROI Analysis for ISE Branch (Cohort 2021-2025):**\n\n1. **DATABRICKS_DE:** +10.30 LPA Expected CTC lift, unlocks Databricks (48.0 LPA) & Adobe (26.0 LPA).\n2. **PYSPARK:** Adds +12.0% placement probability multiplier when paired with SQL.\n3. **DELTA_LAKE:** Increases Super Dream shortlisting rate by 2.4x.`,
+        thinking_steps: [
+          'Querying historical cohort placement returns for branch = "ISE"',
+          'Calculating expected marginal CTC delta per skill addition',
+          'Evaluating Super Dream unlock potential'
+        ],
+        answer: `### Top ROI Skill Analysis for ISE Branch (2021-2025 Cohorts)
+
+Governed Bayesian analysis across 6 years of placement records:
+
+1. **\`DATABRICKS_DE\`:** **+10.30 LPA Expected CTC lift**, unlocks Databricks (48.0 LPA) & Adobe (26.0 LPA).
+2. **\`PYSPARK\`:** Adds **+12.0% placement probability multiplier** when paired with SQL.
+3. **\`DELTA_LAKE\`:** Increases Super Dream shortlisting rate by **2.4x**.
+
+### Recommended Action
+Use the **Time Machine Laboratory** on the right to simulate adding \`DATABRICKS_DE\` to your profile.`,
         sql_query: `SELECT skill_name, avg_marginal_ctc_lift, super_dream_unlock_count
-FROM campus_intelligence.gold.mv_skill_roi_analytics
+FROM workspace.campus_intelligence_gold.gold_fact_placement_history
 WHERE branch = 'ISE'
 ORDER BY avg_marginal_ctc_lift DESC LIMIT 3;`,
-        latency_ms: 1150,
+        latency_ms: 180,
         row_count: 3,
-        lineage: {
-          catalog: 'campus_intelligence.gold',
-          pii_masked: true,
-          engine: 'Serverless Photon'
-        }
+        lineage: defaultLineage,
+        citations
       };
     }
 
     if (q.includes('readiness') || q.includes('score')) {
       return {
-        answer: `**Readiness Score Breakdown (74.5%):**\n\n• **Academic Index (CGPA 8.12, 0 Backlogs):** 38.5 / 40.0 pts\n• **Core Data Stack (Python, SQL, Power BI):** 24.0 / 30.0 pts\n• **Advanced Lakehouse / Systems Gap:** 12.0 / 30.0 pts\n\n*Next Milestone:* Adding \`DATABRICKS_DE\` elevates readiness to **86.8%**.`,
-        sql_query: `SELECT * FROM campus_intelligence.gold.fn_readiness_score_breakdown('${studentId || 'USN_2025_042'}');`,
-        latency_ms: 890,
-        row_count: 1,
-        lineage: {
-          catalog: 'campus_intelligence.gold',
-          pii_masked: true,
-          engine: 'Serverless Photon'
-        }
+        thinking_steps: [
+          'Executing trusted SQL function fn_readiness_score',
+          'Evaluating weighted factors: Academic (40 pts), Core Data Stack (40 pts), Backlogs (20 pts)',
+          'Computing next milestone trajectory'
+        ],
+        answer: `### Placement Readiness Score Breakdown (74.5%)
+
+Governed evaluation of your profile from \`fn_readiness_score\` in Unity Catalog:
+
+• **Academic Standing (CGPA 8.12, 0 Backlogs):** 38.5 / 40.0 pts (Excellent)
+• **Core Data Stack (Python, SQL, Power BI):** 24.0 / 30.0 pts
+• **Advanced Lakehouse / Systems Gap:** 12.0 / 30.0 pts
+
+### Next Milestone
+Adding **\`DATABRICKS_DE\`** elevates your overall readiness score to **86.8%** (+12.3 pts) and qualifies you for Super Dream placement drives.`,
+        sql_query: `SELECT * FROM workspace.campus_intelligence_gold.fn_readiness_score('${studentId || 'USN_2025_042'}');`,
+        latency_ms: 150,
+        row_count: 3,
+        lineage: defaultLineage,
+        citations
       };
     }
-
-    // Default student response
-    return {
-      answer: `Analyzing your verified student profile (USN: ${studentId || 'USN_2025_042'}, ISE, 8.12 CGPA). You are currently eligible for 6 campus recruitment drives. Use the What-If Simulator on the right to test marginal skill returns.`,
-      sql_query: `SELECT * FROM campus_intelligence.gold.v_student_company_eligibility WHERE student_usn = '${studentId || 'USN_2025_042'}';`,
-      latency_ms: 920,
-      row_count: 6,
-      lineage: {
-        catalog: 'campus_intelligence.gold',
-        pii_masked: true,
-        engine: 'Serverless Photon'
-      }
-    };
   }
+
+  // Default fallback response
+  const matched = MOCK_STUDENTS.slice(0, 10);
+  return {
+    thinking_steps: [
+      'Analyzing natural language criteria in prompt',
+      'Executing governed search across gold_dim_students & gold_dim_company_criteria',
+      'Returning matching candidate cohort and analytical insights'
+    ],
+    answer: `### Query Analysis: "${query}"
+
+Retrieved **${matched.length} candidate records** matching your criteria from \`workspace.campus_intelligence_gold.gold_dim_students\` [1]:
+
+${matched.slice(0, 5).map(s => `• **${s.name}** (\`${s.usn}\`): ${s.branch} | CGPA \`${s.cgpa.toFixed(2)}\` | Skills: \`${s.skills.slice(0, 3).join(', ')}\``).join('\n')}
+
+**Grid Synchronized:** Candidate spreadsheet synchronized with matching cohort.`,
+    sql_query: `SELECT student_id, full_name, branch, cgpa, array_join(skills, ', ') AS verified_skills
+FROM workspace.campus_intelligence_gold.gold_dim_students
+WHERE active_backlogs = 0 AND cgpa >= 7.5
+ORDER BY cgpa DESC
+LIMIT 10;`,
+    latency_ms: 210,
+    row_count: matched.length,
+    lineage: defaultLineage,
+    matched_student_ids: matched.map(s => s.usn),
+    citations
+  };
 }
+

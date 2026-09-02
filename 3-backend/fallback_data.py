@@ -670,7 +670,7 @@ STUDENTS_DB: List[Dict[str, Any]] = [
 
 def get_candidate_rows() -> List[CandidateRow]:
     """
-    Computes eligible company counts and top unlocked companies for the 50 students.
+    Computes eligible company counts, tier breakdowns, readiness scores, and top unlocked companies for the 50 students.
     """
     rows: List[CandidateRow] = []
     for s in STUDENTS_DB:
@@ -683,9 +683,19 @@ def get_candidate_rows() -> List[CandidateRow]:
                 eligible_companies.append(c)
         
         top_company = None
+        dream_cnt = 0
+        super_dream_cnt = 0
         if eligible_companies:
             sorted_companies = sorted(eligible_companies, key=lambda x: x["ctc_lpa"], reverse=True)
             top_company = f"{sorted_companies[0]['company_name']} ({sorted_companies[0]['ctc_lpa']} LPA)"
+            dream_cnt = len([c for c in eligible_companies if c["tier"] == "Dream"])
+            super_dream_cnt = len([c for c in eligible_companies if c["tier"] == "Super Dream"])
+
+        # Deterministic placement readiness score (0-100)
+        skill_factor = min(1.0, len(s["skills"]) / 6.0) * 40.0
+        cgpa_factor = min(1.0, s["cgpa"] / 10.0) * 40.0
+        backlog_factor = 20.0 if s["active_backlogs"] == 0 else 0.0
+        readiness = round(skill_factor + cgpa_factor + backlog_factor, 1)
 
         rows.append(
             CandidateRow(
@@ -697,6 +707,9 @@ def get_candidate_rows() -> List[CandidateRow]:
                 skills=s["skills"],
                 eligible_companies_count=len(eligible_companies),
                 top_unlocked_company=top_company,
+                dream_eligible_count=dream_cnt,
+                super_dream_eligible_count=super_dream_cnt,
+                placement_readiness_score=readiness,
             )
         )
     return rows
@@ -897,66 +910,473 @@ def parse_jd_and_match(raw_jd_text: str) -> MatchJDResponse:
 # Genie Natural Language Mock Query Engine
 # ---------------------------------------------------------------------------
 
+# ---------------------------------------------------------------------------
+# Genie Natural Language Mock Query Engine (Databricks AI/BI Genie Emulation)
+# ---------------------------------------------------------------------------
+
 def mock_genie_query(prompt: str, conversation_id: Optional[str] = None) -> QueryResponse:
     """
-    Deterministic response generator for TPO natural language queries.
+    High-fidelity Databricks AI/BI Genie query engine.
+    Generates inline step-by-step thinking traces, structured Markdown analytical
+    responses, formatted data tables, citations, and governed SQL traces matching
+    the Unity Catalog schema `workspace.campus_intelligence_gold`.
     """
-    conv_id = conversation_id or "conv_databricks_genie_demo_01"
-    p_lower = prompt.lower()
+    conv_id = conversation_id or "conv_databricks_genie_gold_01"
+    p = prompt.lower().strip()
 
-    if "databricks" in p_lower:
-        columns = ["student_id", "full_name", "branch", "cgpa", "skills", "status"]
-        rows = [
-            ["USN_2024_002", "Ananya Rao", "ISE", 9.1, "Python, Databricks DE, PySpark, SQL, AWS", "Eligible"],
-            ["USN_2024_010", "Divya Deshmukh", "CSE", 9.0, "Databricks DE, PySpark, SQL, Python, Data Structures", "Eligible"],
-            ["USN_2024_017", "Siddharth Das", "AI/DS", 9.2, "Databricks DE, PySpark, Python, SQL, GenAI/LLM", "Eligible"],
-            ["USN_2024_023", "Gaurav Soni", "CSE", 9.5, "Databricks DE, PySpark, Java, System Design, AWS", "Eligible"],
-            ["USN_2024_028", "Shreya Pillai", "ISE", 9.3, "Databricks DE, PySpark, SQL, AWS, FastAPI", "Eligible"],
-            ["USN_2024_038", "Gayatri Nair", "AI/DS", 9.6, "Databricks DE, PySpark, Python, SQL, GenAI/LLM, AWS", "Eligible"],
-            ["USN_2024_045", "Karan Malhotra", "ISE", 9.0, "Databricks DE, PySpark, SQL, Data Structures", "Eligible"],
-            ["USN_2024_050", "Tanmay Bakshi", "AI/DS", 9.3, "Databricks DE, PySpark, Machine Learning, GenAI/LLM, SQL", "Eligible"],
+    # Default thinking steps
+    thinking_steps = [
+        "Inspecting Unity Catalog semantic schema workspace.campus_intelligence_gold",
+        f"Parsing query intent: '{prompt}'",
+        "Generating governed SQL trace over Gold Dimension & Fact tables",
+        "Executing query on Serverless Photon Engine"
+    ]
+
+    # Citations
+    citations = [
+        {"id": "1", "source": "workspace.campus_intelligence_gold.gold_dim_students"},
+        {"id": "2", "source": "workspace.campus_intelligence_gold.gold_fact_placement_history"},
+        {"id": "3", "source": "workspace.campus_intelligence_gold.v_student_company_eligibility"},
+    ]
+
+    # -------------------------------------------------------------------------
+    # Query 15 / User Screenshot: Out-of-Range Non-Existent Demographic Band (CGPA > 10.0)
+    # -------------------------------------------------------------------------
+    if "10.0" in p or "> 10" in p or "cgpa > 10" in p or "non-existent" in p:
+        thinking_steps = [
+            "Students with CGPA > 10.0",
+            "Overall CGPA distribution in student population",
+            "Validating grade scale bounds against academic system parameters (0.0 - 10.0)"
         ]
         sql = (
-            "SELECT s.student_id, s.full_name, s.branch, s.cgpa, array_join(s.skills, ', ') AS skills, 'Eligible' AS status\n"
-            "FROM skill_lamp.gold.dim_student s\n"
-            "WHERE s.cgpa >= 8.0\n"
-            "  AND array_contains(s.skills, 'Databricks DE')\n"
-            "  AND array_contains(s.skills, 'PySpark')\n"
+            "SELECT \n"
+            "  COUNT(CASE WHEN had_ai_data_skill = TRUE AND offer_status = 'Placed' THEN 1 END) AS placed_with_skill,\n"
+            "  COUNT(CASE WHEN had_ai_data_skill = TRUE THEN 1 END) AS total_with_skill,\n"
+            "  COUNT(CASE WHEN had_ai_data_skill = FALSE AND offer_status = 'Placed' THEN 1 END) AS placed_without_skill,\n"
+            "  COUNT(CASE WHEN had_ai_data_skill = FALSE THEN 1 END) AS total_without_skill,\n"
+            "  COALESCE(ROUND(AVG(CASE WHEN had_ai_data_skill = TRUE AND offer_status = 'Placed' THEN offered_ctc_lpa END), 2), 0.0) AS avg_ctc_with_skill,\n"
+            "  COALESCE(ROUND(AVG(CASE WHEN had_ai_data_skill = FALSE AND offer_status = 'Placed' THEN offered_ctc_lpa END), 2), 0.0) AS avg_ctc_without_skill\n"
+            "FROM workspace.campus_intelligence_gold.gold_fact_placement_history ph\n"
+            "JOIN workspace.campus_intelligence_gold.gold_dim_students s ON ph.student_id = s.student_id\n"
+            "WHERE s.cgpa > 10.0;"
+        )
+        answer = (
+            "### Cohort Analysis: CGPA > 10.0\n\n"
+            "No students exist with **CGPA > 10.0** in the dataset. This CGPA band is impossible because the institution uses a 10.0 scale, where 10.0 is the maximum achievable grade point average. [1]\n\n"
+            "### Actual CGPA Distribution\n"
+            "The student population (500 students) has the following CGPA characteristics: [2]\n"
+            "• **Minimum CGPA:** 5.52\n"
+            "• **Maximum CGPA:** 9.85\n"
+            "• **Average CGPA:** 7.67\n\n"
+            "### Why This Query Returns Zero Results\n"
+            "CGPA in this campus placement system is measured on a **0.0 to 10.0 scale**, which is the standard grading system used by most Indian engineering colleges. A CGPA greater than 10.0 is structurally impossible — it would be equivalent to asking for students who scored above 100% in a percentage-based system.\n\n"
+            "### Recommendation\n"
+            "If you're looking to analyze high-performing students, consider these valid CGPA bands instead:\n"
+            "• **Top Tier (Super Dream Threshold):** CGPA ≥ 8.50 (92 candidates)\n"
+            "• **First Class with Distinction:** CGPA ≥ 7.75 (248 candidates)\n"
+            "• **First Class:** CGPA ≥ 6.75 (412 candidates)"
+        )
+        return QueryResponse(
+            conversation_id=conv_id,
+            status="SUCCESS",
+            sql_query=sql,
+            columns=["placed_with_skill", "total_with_skill", "placed_without_skill", "total_without_skill", "avg_ctc_with_skill", "avg_ctc_without_skill"],
+            rows=[[0, 0, 0, 0, 0.0, 0.0]],
+            row_count=0,
+            execution_time_ms=190,
+            filter_student_ids=[],
+            answer=answer,
+            thinking_steps=thinking_steps,
+            citations=citations
+        )
+
+    # -------------------------------------------------------------------------
+    # Query 6 / Screenshot 1: Branch-Wise Placement Statistics for 2024 Batch
+    # -------------------------------------------------------------------------
+    if ("branch" in p and ("placement percentage" in p or "average ctc" in p or "statistics" in p or "2024" in p)) or "branch-wise" in p:
+        thinking_steps = [
+            "Filtering graduating batch: 2024",
+            "Grouping by student branch across gold_dim_students and gold_fact_placement_history",
+            "Aggregating placed count, total count, placement percentage, and mean offered CTC",
+            "Sorting by average placed CTC in descending order"
+        ]
+        sql = (
+            "SELECT \n"
+            "  s.branch,\n"
+            "  COUNT(s.student_id) AS total_students,\n"
+            "  COUNT(CASE WHEN ph.offer_status = 'Placed' THEN 1 END) AS placed_students,\n"
+            "  ROUND(COUNT(CASE WHEN ph.offer_status = 'Placed' THEN 1 END) * 100.0 / COUNT(s.student_id), 1) AS placement_pct,\n"
+            "  ROUND(AVG(CASE WHEN ph.offer_status = 'Placed' THEN ph.offered_ctc_lpa END), 2) AS avg_placed_ctc_lpa\n"
+            "FROM workspace.campus_intelligence_gold.gold_dim_students s\n"
+            "LEFT JOIN workspace.campus_intelligence_gold.gold_fact_placement_history ph ON s.student_id = ph.student_id\n"
+            "WHERE s.graduating_year = 2024\n"
+            "GROUP BY s.branch\n"
+            "ORDER BY avg_placed_ctc_lpa DESC;"
+        )
+        columns = ["branch", "total_students", "placed_students", "placement_pct", "avg_placed_ctc_lpa"]
+        rows = [
+            ["AI/DS", 80, 72, 90.0, 20.40],
+            ["CSE", 180, 158, 87.8, 19.80],
+            ["ISE", 120, 102, 85.0, 17.50],
+            ["ECE", 120, 84, 70.0, 12.20],
+        ]
+        answer = (
+            "### 2024 Graduating Batch: Branch-Wise Placement & Compensation Analysis\n\n"
+            "Governed aggregation across **500 students** for the 2024 batch from `workspace.campus_intelligence_gold.gold_dim_students` [1] and `gold_fact_placement_history` [2]:\n\n"
+            "| Branch | Total Students | Placed Students | Placement Rate | Avg Placed CTC | Top Offer |\n"
+            "| :--- | :--- | :--- | :--- | :--- | :--- |\n"
+            "| **AI/DS** | 80 | 72 | **90.0%** | **20.40 LPA** | 48.0 LPA (Databricks) |\n"
+            "| **CSE** | 180 | 158 | **87.8%** | **19.80 LPA** | 44.0 LPA (Microsoft) |\n"
+            "| **ISE** | 120 | 102 | **85.0%** | **17.50 LPA** | 32.0 LPA (Adobe) |\n"
+            "| **ECE** | 120 | 84 | **70.0%** | **12.20 LPA** | 24.0 LPA (Qualcomm) |\n\n"
+            "### Key Observations\n"
+            "• **Highest Average Package:** AI/DS branch leads with **20.40 LPA**, driven by strong recruiter competition for GenAI/LLM and Lakehouse competencies.\n"
+            "• **Highest Offer Volume:** CSE generated **158 offers** (43.6% of campus total).\n"
+            "• **Lakehouse Skill Premium:** Candidates possessing `DATABRICKS_DE` achieved a **+5.63 LPA premium** over the general batch average.\n\n"
+            "### TPO Strategic Recommendations\n"
+            "1. **ECE Skill Gap Intervention:** ECE placement rate (70.0%) lags computing branches; providing Python/SQL cross-skilling bridges is projected to lift ECE placement by **+8.4%**.\n"
+            "2. **Super Dream Drive Prioritization:** 82% of eligible Super Dream candidates are concentrated in CSE/ISE/AI/DS."
+        )
+        return QueryResponse(
+            conversation_id=conv_id,
+            status="SUCCESS",
+            sql_query=sql,
+            columns=columns,
+            rows=rows,
+            row_count=len(rows),
+            execution_time_ms=215,
+            filter_student_ids=[],
+            answer=answer,
+            thinking_steps=thinking_steps,
+            citations=citations
+        )
+
+    # -------------------------------------------------------------------------
+    # Query 1 / TPO Shortlist: Databricks eligible with CGPA >= 8.0
+    # -------------------------------------------------------------------------
+    if "databricks" in p and ("eligible" in p or "cgpa" in p or "8.0" in p or "shortlist" in p):
+        thinking_steps = [
+            "Filtering company criteria: company_name = 'Databricks'",
+            "Joining gold_dim_students with gold_fact_student_skills on student_id",
+            "Verifying mandatory skills: ['Databricks DE', 'PySpark', 'SQL']",
+            "Applying criteria: CGPA >= 8.0, 0 Backlogs, Branch IN ('CSE', 'ISE', 'AI/DS')",
+            "Querying trusted view workspace.campus_intelligence_gold.v_student_company_eligibility"
+        ]
+        sql = (
+            "SELECT \n"
+            "  student_id, full_name, branch, cgpa, company_name, ctc_lpa, is_fully_eligible, blocker_reason\n"
+            "FROM workspace.campus_intelligence_gold.v_student_company_eligibility\n"
+            "WHERE company_name = 'Databricks'\n"
+            "  AND branch IN ('ISE', 'CSE', 'AI/DS')\n"
+            "  AND cgpa >= 8.0\n"
+            "  AND is_fully_eligible = TRUE\n"
+            "ORDER BY cgpa DESC, student_id ASC;"
+        )
+        columns = ["student_id", "full_name", "branch", "cgpa", "company_name", "ctc_lpa", "is_fully_eligible", "blocker_reason"]
+        matched_students = [s for s in STUDENTS_DB if s["cgpa"] >= 8.0 and any("DATABRICKS" in sk.upper() for sk in s["skills"])]
+        if not matched_students:
+            matched_students = [s for s in STUDENTS_DB if s["cgpa"] >= 8.5][:8]
+        
+        rows = [
+            [s["student_id"], s["full_name"], s["branch"], s["cgpa"], "Databricks", 48.0, True, "ELIGIBLE"]
+            for s in matched_students[:8]
+        ]
+        filter_ids = [s["student_id"] for s in matched_students]
+
+        answer = (
+            f"### Databricks (48.0 LPA Super Dream) Candidate Shortlist\n\n"
+            f"Identified **{len(matched_students)} fully eligible candidates** meeting all criteria (CGPA ≥ 8.0, 0 Backlogs, verified `Databricks DE` + `PySpark` + `SQL` competencies) from `workspace.campus_intelligence_gold.v_student_company_eligibility` [3]:\n\n"
+            "| USN | Candidate Name | Branch | CGPA | Verified Lakehouse Stack | Status |\n"
+            "| :--- | :--- | :--- | :--- | :--- | :--- |\n"
+            + "\n".join([f"| `{s['student_id']}` | **{s['full_name']}** | {s['branch']} | `{s['cgpa']}` | {', '.join(s['skills'][:4])} | `ELIGIBLE` |" for s in matched_students[:6]])
+            + f"\n\n**Candidate Grid Synchronized:** The main candidate spreadsheet has been filtered to highlight all {len(matched_students)} matching students."
+        )
+        return QueryResponse(
+            conversation_id=conv_id,
+            status="SUCCESS",
+            sql_query=sql,
+            columns=columns,
+            rows=rows,
+            row_count=len(rows),
+            execution_time_ms=180,
+            filter_student_ids=filter_ids,
+            answer=answer,
+            thinking_steps=thinking_steps,
+            citations=citations
+        )
+
+    # -------------------------------------------------------------------------
+    # Query 7: Top Hiring Partners by Offer Volume Over Last 3 Years
+    # -------------------------------------------------------------------------
+    if "top 5 companies" in p or "hiring partners" in p or "offer volume" in p or "top hiring" in p:
+        thinking_steps = [
+            "Querying workspace.campus_intelligence_gold.gold_fact_placement_history",
+            "Filtering offer_status = 'Placed'",
+            "Aggregating offer count, average CTC, and maximum package by company_name",
+            "Ordering by total_offers_extended DESC, LIMIT 5"
+        ]
+        sql = (
+            "SELECT \n"
+            "  company_name,\n"
+            "  COUNT(placement_id) AS total_offers_extended,\n"
+            "  ROUND(AVG(offered_ctc_lpa), 2) AS avg_offered_ctc_lpa,\n"
+            "  MAX(offered_ctc_lpa) AS max_offered_ctc_lpa\n"
+            "FROM workspace.campus_intelligence_gold.gold_fact_placement_history\n"
+            "WHERE offer_status = 'Placed'\n"
+            "GROUP BY company_name\n"
+            "ORDER BY total_offers_extended DESC, avg_offered_ctc_lpa DESC\n"
+            "LIMIT 5;"
+        )
+        columns = ["company_name", "total_offers_extended", "avg_offered_ctc_lpa", "max_offered_ctc_lpa"]
+        rows = [
+            ["Infosys", 68, 6.80, 9.50],
+            ["TCS Digital", 54, 7.50, 11.00],
+            ["Accenture", 48, 8.20, 12.00],
+            ["Amazon", 32, 28.50, 32.00],
+            ["Databricks", 18, 48.00, 48.00],
+        ]
+        answer = (
+            "### Top 5 Campus Hiring Partners by Offer Volume (3-Year History)\n\n"
+            "Analysis of historical placement records in `workspace.campus_intelligence_gold.gold_fact_placement_history` [2]:\n\n"
+            "| Company Name | Tier | Total Offers Extended | Avg Offered CTC | Maximum CTC |\n"
+            "| :--- | :--- | :--- | :--- | :--- |\n"
+            "| **Infosys** | Core Tech / DSE | **68** | 6.80 LPA | 9.50 LPA |\n"
+            "| **TCS Digital** | Dream | **54** | 7.50 LPA | 11.00 LPA |\n"
+            "| **Accenture** | Dream | **48** | 8.20 LPA | 12.00 LPA |\n"
+            "| **Amazon** | Super Dream | **32** | 28.50 LPA | 32.00 LPA |\n"
+            "| **Databricks** | Super Dream | **18** | 48.00 LPA | 48.00 LPA |\n\n"
+            "### Key Insight\n"
+            "While volume recruitment is anchored by Core Tech partners, **Databricks and Amazon** provide the highest institutional CTC impact, accounting for 38% of total compensation value."
+        )
+        return QueryResponse(
+            conversation_id=conv_id,
+            status="SUCCESS",
+            sql_query=sql,
+            columns=columns,
+            rows=rows,
+            row_count=len(rows),
+            execution_time_ms=195,
+            filter_student_ids=[],
+            answer=answer,
+            thinking_steps=thinking_steps,
+            citations=citations
+        )
+
+    # -------------------------------------------------------------------------
+    # Query 8: High-Demand Skillset in Super Dream Drives
+    # -------------------------------------------------------------------------
+    if "high-demand" in p or "highest demand" in p or "super dream" in p and "skill" in p:
+        thinking_steps = [
+            "Querying gold_dim_company_criteria for tier = 'Super Dream'",
+            "Exploding mandatory skills array",
+            "Counting company hiring demand frequency per skill",
+            "Sorting by demand count descending, LIMIT 3"
+        ]
+        sql = (
+            "WITH exploded_skills AS (\n"
+            "  SELECT TRIM(skill) AS skill_name\n"
+            "  FROM workspace.campus_intelligence_gold.gold_dim_company_criteria\n"
+            "  LATERAL VIEW EXPLODE(COALESCE(mandatory_skills, ARRAY())) t AS skill\n"
+            "  WHERE tier = 'Super Dream' AND TRIM(skill) != ''\n"
+            ")\n"
+            "SELECT skill_name, COUNT(*) AS company_demand_count\n"
+            "FROM exploded_skills\n"
+            "GROUP BY skill_name\n"
+            "ORDER BY company_demand_count DESC\n"
+            "LIMIT 3;"
+        )
+        columns = ["skill_name", "company_demand_count"]
+        rows = [
+            ["Databricks DE", 8],
+            ["PySpark", 7],
+            ["SQL", 7],
+        ]
+        answer = (
+            "### Top 3 In-Demand Skills Across Super Dream Drives (CTC ≥ 20 LPA)\n\n"
+            "Governed analysis across all Super Dream criteria in `gold_dim_company_criteria`:\n\n"
+            "1. **`DATABRICKS_DE`** — Required by **8 Super Dream companies** (Databricks, Adobe, Snowflake Partner Network, Walmart Labs).\n"
+            "2. **`PYSPARK`** — Required by **7 Super Dream companies** (adds +12.0% placement probability multiplier when paired with SQL).\n"
+            "3. **`SQL`** — Baseline mandatory requirement across **7 Super Dream companies**.\n\n"
+            "### Curriculum Synergy Multiplier\n"
+            "Students possessing the **Lakehouse Triad (`Databricks DE` + `PySpark` + `SQL`)** have an **80.0% placement probability** and an expected package of **18.50 LPA**."
+        )
+        return QueryResponse(
+            conversation_id=conv_id,
+            status="SUCCESS",
+            sql_query=sql,
+            columns=columns,
+            rows=rows,
+            row_count=len(rows),
+            execution_time_ms=175,
+            filter_student_ids=[],
+            answer=answer,
+            thinking_steps=thinking_steps,
+            citations=citations
+        )
+
+    # -------------------------------------------------------------------------
+    # Query 9: High-Potential Unplaced Candidates in AI/DS Branch
+    # -------------------------------------------------------------------------
+    if "unplaced" in p or ("ai/ds" in p and "missing" in p):
+        thinking_steps = [
+            "Filtering gold_dim_students for branch = 'AI/DS' and cgpa > 7.5",
+            "Joining gold_fact_placement_history where offer_status != 'Placed' OR NULL",
+            "Collecting student acquired skills from gold_fact_student_skills",
+            "Ordering by CGPA descending"
+        ]
+        sql = (
+            "SELECT \n"
+            "  s.student_id, s.full_name, s.cgpa, s.active_backlogs,\n"
+            "  ARRAY_JOIN(COLLECT_SET(sk.skill_name), ', ') AS acquired_skills\n"
+            "FROM workspace.campus_intelligence_gold.gold_dim_students s\n"
+            "LEFT JOIN workspace.campus_intelligence_gold.gold_fact_placement_history ph ON s.student_id = ph.student_id\n"
+            "LEFT JOIN workspace.campus_intelligence_gold.gold_fact_student_skills sk ON s.student_id = sk.student_id\n"
+            "WHERE s.branch = 'AI/DS'\n"
+            "  AND s.cgpa > 7.5\n"
+            "  AND (ph.offer_status IS NULL OR ph.offer_status != 'Placed')\n"
+            "GROUP BY s.student_id, s.full_name, s.cgpa, s.active_backlogs\n"
             "ORDER BY s.cgpa DESC;"
         )
-        filter_ids = [r[0] for r in rows]
-    elif "branch" in p_lower or "count" in p_lower:
-        columns = ["branch", "total_candidates", "placed_count", "avg_ctc_lpa"]
+        columns = ["student_id", "full_name", "cgpa", "active_backlogs", "acquired_skills"]
+        aids_unplaced = [s for s in STUDENTS_DB if s["branch"] == "AI/DS" and s["cgpa"] >= 7.5]
         rows = [
-            ["CSE", 24, 21, 19.8],
-            ["ISE", 14, 12, 17.5],
-            ["AI/DS", 12, 11, 20.4],
-            ["ECE", 10, 7, 12.2],
+            [s["student_id"], s["full_name"], s["cgpa"], s["active_backlogs"], ", ".join(s["skills"])]
+            for s in aids_unplaced[:6]
+        ]
+        filter_ids = [s["student_id"] for s in aids_unplaced]
+
+        answer = (
+            f"### High-Potential Unplaced Candidates in AI/DS (CGPA > 7.5)\n\n"
+            f"Identified **{len(aids_unplaced)} high-potential AI/DS students** eligible for immediate intervention from `gold_dim_students` [1]:\n\n"
+            + "\n".join([f"• **{s['full_name']}** (`{s['student_id']}`): CGPA `{s['cgpa']}`, Backlogs: `{s['active_backlogs']}` | Skills: `{', '.join(s['skills'][:4])}`" for s in aids_unplaced[:5]])
+            + "\n\n### Primary Placement Blocker\n"
+            "75% of these unplaced students have strong Python/ML foundations but lack **production Lakehouse skills (`Databricks DE` or `PySpark`)**, which is the primary filter in current Super Dream drives."
+        )
+        return QueryResponse(
+            conversation_id=conv_id,
+            status="SUCCESS",
+            sql_query=sql,
+            columns=columns,
+            rows=rows,
+            row_count=len(rows),
+            execution_time_ms=190,
+            filter_student_ids=filter_ids,
+            answer=answer,
+            thinking_steps=thinking_steps,
+            citations=citations
+        )
+
+    # -------------------------------------------------------------------------
+    # Query 3 / Student Blocker Diagnostic: Why blocked / Google / USN_2025_042
+    # -------------------------------------------------------------------------
+    if "google" in p or "why am i blocked" in p or "usn_2025_042" in p or "blocker" in p:
+        thinking_steps = [
+            "Resolving student session identity: USN_2025_042 (Priya Nair)",
+            "Querying trusted view workspace.campus_intelligence_gold.v_student_company_eligibility",
+            "Evaluating blocker criteria: CGPA, Backlogs, Branch, Mandatory Skills",
+            "Sorting by company CTC descending"
         ]
         sql = (
-            "SELECT branch, COUNT(*) AS total_candidates, "
-            "SUM(CASE WHEN is_placed THEN 1 ELSE 0 END) AS placed_count, "
-            "ROUND(AVG(offered_ctc), 2) AS avg_ctc_lpa\n"
-            "FROM skill_lamp.gold.fact_placement_history\n"
-            "GROUP BY branch\n"
-            "ORDER BY avg_ctc_lpa DESC;"
+            "SELECT \n"
+            "  company_name, tier, ctc_lpa, is_fully_eligible, blocker_reason,\n"
+            "  missing_mandatory_skills, missing_preferred_skills\n"
+            "FROM workspace.campus_intelligence_gold.v_student_company_eligibility\n"
+            "WHERE student_id = 'USN_2025_042'\n"
+            "  AND tier IN ('Super Dream', 'Dream')\n"
+            "ORDER BY ctc_lpa DESC, company_name ASC;"
         )
-        filter_ids = []
-    else:
-        columns = ["student_id", "full_name", "branch", "cgpa", "skills"]
-        filtered = [s for s in STUDENTS_DB if s["cgpa"] >= 8.0]
+        columns = ["company_name", "tier", "ctc_lpa", "is_fully_eligible", "blocker_reason", "missing_mandatory_skills"]
         rows = [
-            [s["student_id"], s["full_name"], s["branch"], s["cgpa"], ", ".join(s["skills"])]
-            for s in filtered[:10]
+            ["Databricks", "Super Dream", 48.0, False, "MISSING_MANDATORY_SKILLS", "Databricks DE, PySpark"],
+            ["Google", "Super Dream", 45.0, False, "CGPA_BELOW_CUTOFF", "Data Structures, System Design"],
+            ["Microsoft", "Super Dream", 44.0, False, "CGPA_BELOW_CUTOFF", "System Design"],
+            ["Adobe", "Super Dream", 32.0, False, "MISSING_MANDATORY_SKILLS", "Databricks DE"],
         ]
-        sql = (
-            "SELECT student_id, full_name, branch, cgpa, array_join(skills, ', ') AS skills\n"
-            "FROM skill_lamp.gold.dim_student\n"
-            "WHERE cgpa >= 8.0\n"
-            "ORDER BY cgpa DESC\n"
-            "LIMIT 10;"
+        answer = (
+            "### Personal Placement Diagnostic for Priya Nair (USN_2025_042)\n\n"
+            "Diagnostic analysis for your profile (Branch: **ISE**, CGPA: **8.12**, Backlogs: **0**) from `v_student_company_eligibility` [3]:\n\n"
+            "| Company | Tier | Package | Eligibility | Primary Blocker | Missing Requirements |\n"
+            "| :--- | :--- | :--- | :--- | :--- | :--- |\n"
+            "| **Databricks** | Super Dream | **48.0 LPA** | Blocked | `MISSING_MANDATORY_SKILLS` | `Databricks DE`, `PySpark` |\n"
+            "| **Google** | Super Dream | **45.0 LPA** | Blocked | `CGPA_BELOW_CUTOFF` | Required CGPA: 8.50 (Your CGPA: 8.12) |\n"
+            "| **Adobe** | Super Dream | **32.0 LPA** | Blocked | `MISSING_MANDATORY_SKILLS` | `Databricks DE` |\n\n"
+            "### Actionable Recommendation\n"
+            "• **Google** has a hard 8.50 CGPA cutoff. However, **Databricks (48.0 LPA)** has an 8.00 CGPA cutoff where you are academically eligible.\n"
+            "• **Fastest Unlock Path:** Adding **`DATABRICKS_DE` + `PYSPARK`** unlocks Databricks & Adobe immediately with a **+10.30 LPA CTC lift**."
         )
-        filter_ids = [r[0] for r in rows]
+        return QueryResponse(
+            conversation_id=conv_id,
+            status="SUCCESS",
+            sql_query=sql,
+            columns=columns,
+            rows=rows,
+            row_count=len(rows),
+            execution_time_ms=160,
+            filter_student_ids=[],
+            answer=answer,
+            thinking_steps=thinking_steps,
+            citations=citations
+        )
+
+    # -------------------------------------------------------------------------
+    # Student ROI & Readiness Score Breakdowns
+    # -------------------------------------------------------------------------
+    if "readiness" in p or "score breakdown" in p:
+        thinking_steps = [
+            "Executing trusted SQL function fn_readiness_score",
+            "Evaluating weighted factors: Academic (40 pts), Core Data Stack (40 pts), Backlogs (20 pts)",
+            "Computing next milestone trajectory"
+        ]
+        sql = "SELECT * FROM workspace.campus_intelligence_gold.fn_readiness_score('USN_2025_042');"
+        answer = (
+            "### Placement Readiness Score Breakdown (74.5%)\n\n"
+            "Governed evaluation of your profile from `fn_readiness_score` in Unity Catalog:\n\n"
+            "• **Academic Standing (CGPA 8.12, 0 Backlogs):** 38.5 / 40.0 pts (Excellent)\n"
+            "• **Core Data Stack (Python, SQL, Power BI):** 24.0 / 30.0 pts\n"
+            "• **Advanced Lakehouse / Systems Gap:** 12.0 / 30.0 pts\n\n"
+            "### Next Milestone\n"
+            "Adding **`DATABRICKS_DE`** elevates your overall readiness score to **86.8%** (+12.3 pts) and qualifies you for Super Dream placement drives."
+        )
+        return QueryResponse(
+            conversation_id=conv_id,
+            status="SUCCESS",
+            sql_query=sql,
+            columns=["factor", "score", "max_points"],
+            rows=[["Academic Index", 38.5, 40.0], ["Core Skills", 24.0, 30.0], ["Advanced Gap", 12.0, 30.0]],
+            row_count=3,
+            execution_time_ms=145,
+            filter_student_ids=[],
+            answer=answer,
+            thinking_steps=thinking_steps,
+            citations=citations
+        )
+
+    # -------------------------------------------------------------------------
+    # Default Intelligent Response for any freeform queries
+    # -------------------------------------------------------------------------
+    thinking_steps = [
+        "Analyzing natural language criteria in prompt",
+        "Executing governed search across gold_dim_students & gold_dim_company_criteria",
+        "Returning matching candidate cohort and analytical insights"
+    ]
+    sql = (
+        "SELECT student_id, full_name, branch, cgpa, array_join(skills, ', ') AS verified_skills\n"
+        "FROM workspace.campus_intelligence_gold.gold_dim_students\n"
+        "WHERE active_backlogs = 0 AND cgpa >= 7.5\n"
+        "ORDER BY cgpa DESC\n"
+        "LIMIT 10;"
+    )
+    filtered = [s for s in STUDENTS_DB if s["cgpa"] >= 7.5][:8]
+    columns = ["student_id", "full_name", "branch", "cgpa", "skills"]
+    rows = [[s["student_id"], s["full_name"], s["branch"], s["cgpa"], ", ".join(s["skills"])] for s in filtered]
+    filter_ids = [s["student_id"] for s in filtered]
+
+    answer = (
+        f"### Query Analysis: \"{prompt}\"\n\n"
+        f"Retrieved **{len(filtered)} candidate records** matching your criteria from `workspace.campus_intelligence_gold.gold_dim_students` [1]:\n\n"
+        + "\n".join([f"• **{s['full_name']}** (`{s['student_id']}`): {s['branch']} | CGPA `{s['cgpa']}` | Skills: `{', '.join(s['skills'][:3])}`" for s in filtered[:5]])
+        + f"\n\n**Grid Synchronized:** Candidate spreadsheet synchronized with matching cohort."
+    )
 
     return QueryResponse(
         conversation_id=conv_id,
@@ -968,4 +1388,8 @@ def mock_genie_query(prompt: str, conversation_id: Optional[str] = None) -> Quer
         execution_time_ms=210,
         filter_student_ids=filter_ids,
         error_message=None,
+        answer=answer,
+        thinking_steps=thinking_steps,
+        citations=citations
     )
+
