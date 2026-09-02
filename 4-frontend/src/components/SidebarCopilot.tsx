@@ -1,7 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { queryGenie, matchJD } from '../api/client';
-import { GenieQueryResponse, JDMatchResponse } from '../api/types';
+import {
+  StudentProfileResponse,
+  JDMatchResponse,
+  GenieQueryResponse
+} from '../api/types';
 import { LampIcon } from './Header';
 import { SQLTraceDrawer } from './SQLTraceDrawer';
 import {
@@ -39,6 +43,7 @@ interface ChatMessage {
 interface SidebarCopilotProps {
   onFilterSync?: (matchedIds: string[] | null) => void;
   activeStudentId?: string;
+  activeStudentProfile?: StudentProfileResponse | null;
 }
 
 // ---------------------------------------------------------------------------

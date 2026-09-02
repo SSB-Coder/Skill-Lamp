@@ -11,12 +11,12 @@ import { SkillToggleLab } from './SkillToggleLab';
 import { HeroDeltaCards } from './HeroDeltaCards';
 import { TierShiftBar } from './TierShiftBar';
 import { SQLTraceDrawer } from './SQLTraceDrawer';
+import { SidebarCopilot } from './SidebarCopilot';
 import {
-  UserCheck,
-  Zap,
   Lock,
   GraduationCap,
-  Sparkles
+  Sparkles,
+  Zap
 } from 'lucide-react';
 
 export const StudentDashboard: React.FC = () => {
@@ -24,7 +24,7 @@ export const StudentDashboard: React.FC = () => {
   const [profile, setProfile] = useState<StudentProfileResponse | null>(null);
   const [selectedTargetCompany, setSelectedTargetCompany] = useState<TargetCompany | null>(null);
   const [addedSkills, setAddedSkills] = useState<string[]>([]);
-  const [simulationResult, setSimulationResult] = useState<WhatIfResponse | null>(null);
+  const [calculationResult, setCalculationResult] = useState<WhatIfResponse | null>(null);
   const [isLoadingProfile, setIsLoadingProfile] = useState(true);
 
   // Load student profile strictly isolated to authenticated user
@@ -40,8 +40,8 @@ export const StudentDashboard: React.FC = () => {
       if (p.target_companies_available && p.target_companies_available.length > 0) {
         setSelectedTargetCompany(p.target_companies_available[0]);
       }
-      // Run initial baseline simulation
-      runSimulation(p.usn, []);
+      // Run initial baseline calculation
+      runCalculation(p.usn, []);
     } catch {
       // Fallback handled in client
     } finally {
@@ -49,7 +49,7 @@ export const StudentDashboard: React.FC = () => {
     }
   };
 
-  const runSimulation = async (
+  const runCalculation = async (
     studentId: string,
     skills: string[],
     targetComp?: string
@@ -60,9 +60,9 @@ export const StudentDashboard: React.FC = () => {
         added_skills: skills,
         target_company: targetComp
       });
-      setSimulationResult(res);
+      setCalculationResult(res);
     } finally {
-      // Completed simulation
+      // Completed calculation
     }
   };
 
@@ -71,25 +71,25 @@ export const StudentDashboard: React.FC = () => {
     const isCurrentlyAdded = addedSkills.includes(skillId);
     let nextAdded: string[];
     if (isCurrentlyAdded) {
-      nextAdded = addedSkills.filter(s => s !== skillId);
+      nextAdded = addedSkills.filter((s) => s !== skillId);
     } else {
       nextAdded = [...addedSkills, skillId];
     }
     setAddedSkills(nextAdded);
-    runSimulation(profile.usn, nextAdded, selectedTargetCompany?.name);
+    runCalculation(profile.usn, nextAdded, selectedTargetCompany?.name);
   };
 
   const handleApplySkillBridge = (missingSkills: string[]) => {
     if (!profile) return;
     const combined = Array.from(new Set([...addedSkills, ...missingSkills]));
     setAddedSkills(combined);
-    runSimulation(profile.usn, combined, selectedTargetCompany?.name);
+    runCalculation(profile.usn, combined, selectedTargetCompany?.name);
   };
 
   const handleReset = () => {
     if (!profile) return;
     setAddedSkills([]);
-    runSimulation(profile.usn, [], selectedTargetCompany?.name);
+    runCalculation(profile.usn, [], selectedTargetCompany?.name);
   };
 
   const handleQuickAddTopROI = () => {
@@ -98,142 +98,154 @@ export const StudentDashboard: React.FC = () => {
     if (!addedSkills.includes(topSkill)) {
       const nextAdded = [...addedSkills, topSkill];
       setAddedSkills(nextAdded);
-      runSimulation(profile.usn, nextAdded, selectedTargetCompany?.name);
+      runCalculation(profile.usn, nextAdded, selectedTargetCompany?.name);
     }
   };
 
-  if (isLoadingProfile || !profile || !simulationResult) {
+  if (isLoadingProfile || !profile || !calculationResult) {
     return (
-      <div className="flex-1 h-[calc(100vh-3.5rem)] flex items-center justify-center bg-app-bg text-app-muted font-mono">
+      <div className="flex-1 h-[calc(100vh-4rem)] flex items-center justify-center bg-[#0B0F19] text-[#94A3B8] font-mono">
         <div className="flex items-center space-x-2">
-          <span className="w-2 h-2 rounded-full bg-app-action animate-ping" />
-          <span>Loading Isolated Student Sandbox Profile...</span>
+          <span className="w-2 h-2 rounded-full bg-[#A855F7] animate-ping" />
+          <span>Connecting to Databricks Placement Intelligence...</span>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="flex-1 h-[calc(100vh-3.5rem)] flex flex-col bg-app-bg overflow-y-auto select-none p-4 space-y-4">
-      {/* 1. Locked Student Profile Header Card */}
-      <div className="bg-app-panel border border-app-border rounded-lg p-4 flex flex-wrap items-center justify-between gap-4">
-        {/* Student Info */}
-        <div className="flex items-center space-x-3.5">
-          <div className="p-2.5 rounded bg-app-bg border border-app-border">
-            <GraduationCap className="w-5 h-5 text-app-action" />
-          </div>
-          <div>
-            <div className="flex items-center space-x-2">
-              <h2 className="text-base font-bold text-app-text tracking-tight">{profile.name}</h2>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-app-bg border border-app-border text-app-muted flex items-center space-x-1">
-                <Lock className="w-3 h-3 text-app-action" />
-                <span>Locked Sandbox: {profile.usn}</span>
-              </span>
+    <div className="flex-1 flex flex-row h-[calc(100vh-4rem)] bg-[#0B0F19] overflow-hidden">
+      {/* Left/Main: Student Career Analytics & Real-Time Return Calculator */}
+      <div className="flex-1 flex flex-col h-full overflow-y-auto p-4 space-y-4">
+        {/* 1. Student Profile Header Card */}
+        <div className="bg-[#151D2C] border border-[#1E293B] rounded-lg p-4 flex flex-wrap items-center justify-between gap-4 shadow-sm">
+          {/* Student Info */}
+          <div className="flex items-center space-x-3.5">
+            <div className="p-2.5 rounded bg-[#0B0F19] border border-[#1E293B]">
+              <GraduationCap className="w-5 h-5 text-[#38BDF8]" />
             </div>
-            <div className="flex items-center space-x-3 text-xs text-app-muted font-mono mt-0.5">
-              <span>Branch: <strong className="text-app-text">{profile.branch}</strong></span>
-              <span>•</span>
-              <span>CGPA: <strong className="text-app-text">{profile.cgpa.toFixed(2)}</strong></span>
-              <span>•</span>
-              <span>Backlogs: <strong className="text-app-success">{profile.active_backlogs}</strong></span>
+            <div>
+              <div className="flex items-center space-x-2">
+                <h2 className="text-base font-bold text-white tracking-tight">{profile.name}</h2>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#0B0F19] border border-[#1E293B] text-[#94A3B8] flex items-center space-x-1">
+                  <Lock className="w-3 h-3 text-[#38BDF8]" />
+                  <span>Student Profile: {profile.usn}</span>
+                </span>
+              </div>
+              <div className="flex items-center space-x-3 text-xs text-[#94A3B8] font-mono mt-0.5">
+                <span>Branch: <strong className="text-white">{profile.branch}</strong></span>
+                <span>•</span>
+                <span>CGPA: <strong className="text-white">{profile.cgpa.toFixed(2)}</strong></span>
+                <span>•</span>
+                <span>Backlogs: <strong className="text-[#16A34A]">{profile.active_backlogs}</strong></span>
+              </div>
+            </div>
+          </div>
+
+          {/* Placement Readiness Badge */}
+          <div className="flex items-center space-x-4">
+            <div className="text-right">
+              <div className="text-[10px] uppercase font-mono text-[#64748B]">Placement Readiness Index</div>
+              <div className="text-lg font-mono font-bold text-[#38BDF8]">
+                {profile.readiness_score.toFixed(1)}%
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Readiness Score Pill */}
-        <div className="flex items-center space-x-3 bg-app-bg px-3.5 py-2 rounded border border-app-border">
-          <div>
-            <div className="text-[10px] uppercase font-mono text-app-muted">
-              Placement Readiness Index
+        {/* 2. Top ROI Hero Recommendation Banner */}
+        <div className="p-3.5 rounded-lg bg-[#151D2C] border border-[#38BDF8]/30 flex flex-wrap items-center justify-between gap-3 shadow-sm">
+          <div className="flex items-center space-x-3">
+            <div className="p-2 rounded bg-[#0B0F19] border border-[#38BDF8]/40 text-[#38BDF8]">
+              <Zap className="w-4 h-4" />
             </div>
-            <div className="text-lg font-mono font-bold text-app-action">
-              {profile.readiness_score.toFixed(1)}%
+            <div>
+              <div className="flex items-center space-x-2">
+                <span className="text-xs font-bold text-[#38BDF8] tracking-wide uppercase font-mono">
+                  Top ROI Recommendation
+                </span>
+                <span className="text-xs font-mono font-bold text-[#FBBF24]">
+                  +{profile.top_roi_recommendation.marginal_ctc_lpa.toFixed(2)} LPA Expected Gain
+                </span>
+              </div>
+              <p className="text-xs text-[#CBD5E1] mt-0.5">
+                {profile.top_roi_recommendation.rationale}
+              </p>
             </div>
           </div>
-          <UserCheck className="w-4 h-4 text-app-action" />
+
+          <button
+            type="button"
+            onClick={handleQuickAddTopROI}
+            disabled={addedSkills.includes(profile.top_roi_recommendation.skill)}
+            className={`flex items-center space-x-1.5 px-3.5 py-1.5 rounded text-xs font-semibold transition-colors shadow-sm ${
+              addedSkills.includes(profile.top_roi_recommendation.skill)
+                ? 'bg-[#0B0F19] border border-[#1E293B] text-[#64748B] cursor-not-allowed'
+                : 'bg-[#0284C7] hover:bg-[#0369A1] text-white'
+            }`}
+          >
+            <Sparkles className="w-3.5 h-3.5 text-[#FDE047]" />
+            <span>
+              {addedSkills.includes(profile.top_roi_recommendation.skill)
+                ? `Calculated (${profile.top_roi_recommendation.skill})`
+                : `Calculate ${profile.top_roi_recommendation.skill} Gain`}
+            </span>
+          </button>
         </div>
+
+        {/* 3. Hero Placement & Compensation Calculation Cards */}
+        <HeroDeltaCards
+          baseProb={calculationResult.base_prob}
+          simulatedProb={calculationResult.simulated_prob}
+          deltaProb={calculationResult.delta_prob}
+          baseCtc={calculationResult.base_ctc}
+          simulatedCtc={calculationResult.simulated_ctc}
+          deltaCtc={calculationResult.delta_ctc}
+          unlockedCompanies={calculationResult.newly_unlocked_companies}
+        />
+
+        {/* 4. Target Company Reverse Roadmap */}
+        <ReverseRoadmap
+          companies={profile.target_companies_available}
+          selectedCompany={selectedTargetCompany}
+          onSelectCompany={(c) => {
+            setSelectedTargetCompany(c);
+            runCalculation(profile.usn, addedSkills, c.name);
+          }}
+          onApplySkillBridge={handleApplySkillBridge}
+          studentCgpa={profile.cgpa}
+        />
+
+        {/* 5. Verified Skills & Real-Time Return Calculator Grid */}
+        <SkillToggleLab
+          selectedSkills={addedSkills}
+          currentStudentSkills={profile.current_skills}
+          synergyAlert={calculationResult.synergy_alert}
+          onToggleSkill={handleToggleSkill}
+          onReset={handleReset}
+        />
+
+        {/* 6. Tier Shift Distribution Bar */}
+        <TierShiftBar
+          baseDistribution={calculationResult.base_tier_distribution}
+          simulatedDistribution={calculationResult.tier_distribution}
+        />
+
+        {/* 7. Historical SQL Trace & Unity Catalog Lineage */}
+        <SQLTraceDrawer
+          sqlQuery={calculationResult.sql_query}
+          rowCount={calculationResult.cohort_size_analyzed}
+        />
       </div>
 
-      {/* 2. Top-ROI Intelligence Callout Banner */}
-      <div className="bg-app-panel border border-app-action/40 rounded-lg p-3.5 flex flex-wrap items-center justify-between gap-3">
-        <div className="flex items-center space-x-3">
-          <div className="p-2 rounded bg-app-action/20 border border-app-action/40 text-app-action">
-            <Zap className="w-4 h-4" />
-          </div>
-          <div>
-            <div className="text-xs font-semibold text-app-text flex items-center space-x-1.5">
-              <span className="text-app-action font-mono">TOP ROI RECOMMENDATION</span>
-              <span>•</span>
-              <span className="font-mono text-[11px] text-app-amber">
-                +{profile.top_roi_recommendation.marginal_ctc_lpa.toFixed(2)} LPA Expected Gain
-              </span>
-            </div>
-            <p className="text-xs text-app-muted mt-0.5">
-              {profile.top_roi_recommendation.rationale}
-            </p>
-          </div>
-        </div>
-
-        <button
-          onClick={handleQuickAddTopROI}
-          disabled={addedSkills.includes(profile.top_roi_recommendation.skill)}
-          className="flex items-center space-x-1.5 px-3 py-1.5 rounded bg-app-action hover:bg-app-actionHover disabled:opacity-50 text-white text-xs font-medium transition-colors duration-150"
-        >
-          <Sparkles className="w-3.5 h-3.5" />
-          <span>
-            {addedSkills.includes(profile.top_roi_recommendation.skill)
-              ? 'Skill Active in Simulator'
-              : `Simulate Adding ${profile.top_roi_recommendation.skill}`}
-          </span>
-        </button>
+      {/* Right: Dedicated Genie Career Advisor Chatbot */}
+      <div className="w-[360px] lg:w-[410px] shrink-0 h-full border-l border-[#1E293B] bg-[#151D2C] flex flex-col">
+        <SidebarCopilot
+          onFilterSync={() => {}}
+          activeStudentId={profile.usn}
+          activeStudentProfile={profile}
+        />
       </div>
-
-      {/* 3. Hero Delta Metric Cards */}
-      <HeroDeltaCards
-        baseProb={simulationResult.base_prob}
-        simulatedProb={simulationResult.simulated_prob}
-        deltaProb={simulationResult.delta_prob}
-        baseCtc={simulationResult.base_ctc}
-        simulatedCtc={simulationResult.simulated_ctc}
-        deltaCtc={simulationResult.delta_ctc}
-        unlockedCompanies={simulationResult.newly_unlocked_companies}
-      />
-
-      {/* 4. Target Company Reverse Roadmap */}
-      <ReverseRoadmap
-        companies={profile.target_companies_available}
-        selectedCompany={selectedTargetCompany}
-        onSelectCompany={(company) => {
-          setSelectedTargetCompany(company);
-          runSimulation(profile.usn, addedSkills, company.name);
-        }}
-        onApplySkillBridge={handleApplySkillBridge}
-        studentCgpa={profile.cgpa}
-      />
-
-      {/* 5. Interactive 16-Skill Toggle Laboratory */}
-      <SkillToggleLab
-        selectedSkills={addedSkills}
-        currentStudentSkills={profile.current_skills}
-        synergyAlert={simulationResult.synergy_alert}
-        onToggleSkill={handleToggleSkill}
-        onReset={handleReset}
-      />
-
-      {/* 6. Recruitment Tier Distribution Migration Visualizer */}
-      <TierShiftBar
-        baseDistribution={simulationResult.base_tier_distribution}
-        simulatedDistribution={simulationResult.tier_distribution}
-      />
-
-      {/* 7. Underlying SQL Cohort Trace Drawer */}
-      <SQLTraceDrawer
-        sqlQuery={simulationResult.sql_query}
-        latencyMs={890}
-        rowCount={simulationResult.cohort_size_analyzed}
-        title="Underlying SQL Cohort Query (Databricks Serverless Photon)"
-        defaultExpanded={false}
-      />
     </div>
   );
 };
