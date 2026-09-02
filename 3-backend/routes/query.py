@@ -17,7 +17,11 @@ async def query_genie(req: QueryRequest, request: Request, current_user: UserSes
     to the dedicated Student/Calc Genie Space (GENIE_CALC_SPACE_ID).
     """
     prompt = req.prompt.strip()
-    target_space_id = settings.GENIE_SPACE_ID
+    # Route Student persona to Student/Calc Genie Space, TPO to Main Institutional Space
+    if current_user.role == "STUDENT":
+        target_space_id = settings.GENIE_CALC_SPACE_ID or settings.GENIE_SPACE_ID
+    else:
+        target_space_id = settings.GENIE_SPACE_ID
     
     # Detect if the query specifically asks for percentage increase, probability, or skill ROI calculation
     p_lower = prompt.lower()
@@ -38,10 +42,11 @@ async def query_genie(req: QueryRequest, request: Request, current_user: UserSes
             )
             prompt = prompt_context
 
+    use_fallback = fallback_data.is_mock_fallback(request)
     response = await genie_client.ask_genie(
         prompt=prompt,
         conversation_id=req.conversation_id,
-        force_fallback=False,
+        force_fallback=use_fallback,
         space_id_override=target_space_id
     )
 
