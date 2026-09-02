@@ -82,16 +82,15 @@ async def login(req: LoginRequest):
             student_id=None
         )
     
-    # Check if Student account (or default student USN_2024_001)
+    # Check if Student account (defaults to Priya Nair USN_2025_042)
     matched_student = None
     for s in fallback_data.STUDENTS_DB:
-        if s["student_id"].lower() in email or s["full_name"].lower().replace(" ", "") in email:
+        if s["student_id"].lower() in email or s["full_name"].lower().replace(" ", "") in email or "priya" in email:
             matched_student = s
             break
             
     if not matched_student:
-        # Default to first student for demo simplicity if no specific USN in email
-        matched_student = fallback_data.STUDENTS_DB[0]
+        matched_student = next((s for s in fallback_data.STUDENTS_DB if s["student_id"] == "USN_2025_042"), fallback_data.STUDENTS_DB[0])
 
     session_data = {
         "role": "STUDENT",
