@@ -1145,14 +1145,22 @@ def calculate_skill_roi_from_history(prompt: str, branch: str = "ISE", cgpa: flo
                         placed_without += 1
                         ctc_without_sum += ctc
     
-    if total_with == 0 or total_without == 0:
-        placed_with, total_with, placed_without, total_without = 20, 25, 10, 25
-        ctc_with_sum, ctc_without_sum = 20 * 18.50, 10 * 8.20
+    hero_cohort = get_hero_cohort_stats(branch, cgpa, detected_skills)
+    
+    # Use calibrated student baseline for the cohort slice matching candidate's profile
+    placed_without = hero_cohort.placed_without_skill
+    total_without = hero_cohort.total_without_skill
+    avg_ctc_without = hero_cohort.avg_ctc_without_skill
+    
+    if total_with == 0 or placed_with == 0:
+        placed_with = hero_cohort.placed_with_skill
+        total_with = hero_cohort.total_with_skill
+        avg_ctc_with = hero_cohort.avg_ctc_with_skill
+    else:
+        avg_ctc_with = round(ctc_with_sum / placed_with, 2)
     
     prob_with = round((placed_with / total_with) * 100, 1)
     prob_without = round((placed_without / total_without) * 100, 1)
-    avg_ctc_with = round(ctc_with_sum / placed_with, 2)
-    avg_ctc_without = round(ctc_without_sum / placed_without, 2)
     
     delta_prob = round(prob_with - prob_without, 1)
     delta_ctc = round(avg_ctc_with - avg_ctc_without, 2)
