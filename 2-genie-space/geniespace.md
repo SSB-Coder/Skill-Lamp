@@ -9,8 +9,8 @@ The **Semantic / Genie Layer** (`2-genie-space/`) bridges natural language inter
 
 | File | Purpose | Target Databricks Component |
 | :--- | :--- | :--- |
-| `trusted_view.sql` | Pre-computes student-company cartesian eligibility and canonical blocker reasons. | Unity Catalog View (`campus_intelligence.gold.v_student_company_eligibility`) |
-| `trusted_function.sql` | Implements deterministic 0-100 placement readiness scoring formula. | Unity Catalog UDF (`campus_intelligence.gold.fn_readiness_score`) |
+| `trusted_view.sql` | Pre-computes student-company cartesian eligibility and canonical blocker reasons. | Unity Catalog View (`workspace.campus_intelligence_gold.v_student_company_eligibility`) |
+| `trusted_function.sql` | Implements deterministic 0-100 placement readiness scoring formula. | Unity Catalog UDF (`workspace.campus_intelligence_gold.fn_readiness_score`) |
 | `instructions.md` | Domain instructions and SQL generation governance rules. | Databricks Genie Space Domain Instructions field |
 | `benchmark_questions.md` | 15-question benchmark test suite across 4 operational tiers with exact SQL traces. | Databricks Genie Space Benchmark Queries & Quality Testing |
 | `geniespace.md` | Semantic layer architecture, deployment manual, and teammate handoff contract. | Documentation / Repository Master Index |
@@ -42,7 +42,7 @@ The **Semantic / Genie Layer** (`2-genie-space/`) bridges natural language inter
                                      | (Executes governed queries)
                                      v
 +-------------------------------------------------------------------------+
-|              UNITY CATALOG / DELTA LAKE (campus_intelligence.gold)       |
+|              UNITY CATALOG / DELTA LAKE (workspace.campus_intelligence_gold)       |
 |                                                                         |
 |   Gold Dimension & Fact Tables:                                         |
 |     1. gold_dim_students                                                |
@@ -63,26 +63,26 @@ The **Semantic / Genie Layer** (`2-genie-space/`) bridges natural language inter
 ### Step 1: SQL Warehouse & Schema Verification
 1. Log in to your Databricks workspace.
 2. Ensure your target SQL Warehouse (Serverless or Pro) is active and running.
-3. Verify that the catalog `campus_intelligence` and schema `gold` exist and that Person 1 has populated the 4 Gold tables:
+3. Verify that the catalog `workspace` and schema `campus_intelligence_gold` exist and that Person 1 has populated the 4 Gold tables:
    ```sql
-   USE CATALOG campus_intelligence;
-   USE SCHEMA gold;
+   USE CATALOG workspace;
+   USE SCHEMA campus_intelligence_gold;
    SHOW TABLES;
    ```
 
 ### Step 2: Deploy Trusted SQL Assets
 1. Open the Databricks **SQL Editor**.
 2. Open and execute [`trusted_view.sql`](./trusted_view.sql):
-   - Creates `campus_intelligence.gold.v_student_company_eligibility`.
+   - Creates `workspace.campus_intelligence_gold.v_student_company_eligibility`.
    - Verify creation with:
      ```sql
-     SELECT COUNT(*) FROM campus_intelligence.gold.v_student_company_eligibility;
+     SELECT COUNT(*) FROM workspace.campus_intelligence_gold.v_student_company_eligibility;
      ```
 3. Open and execute [`trusted_function.sql`](./trusted_function.sql):
-   - Creates `campus_intelligence.gold.fn_readiness_score`.
+   - Creates `workspace.campus_intelligence_gold.fn_readiness_score`.
    - Verify function execution with:
      ```sql
-     SELECT campus_intelligence.gold.fn_readiness_score(8.5, 100.0, 50.0, 2, 0) AS test_score;
+     SELECT workspace.campus_intelligence_gold.fn_readiness_score(8.5, 100.0, 50.0, 2, 0) AS test_score;
      ```
 
 ### Step 3: Create and Configure the Databricks Genie Space
@@ -94,7 +94,7 @@ The **Semantic / Genie Layer** (`2-genie-space/`) bridges natural language inter
 
 ### Step 4: Attach Tables & Views to Genie Space
 1. In the Genie Space configuration sidebar under **Data**, click **Add tables**.
-2. Select the following 5 assets from `campus_intelligence.gold`:
+2. Select the following 5 assets from `workspace.campus_intelligence_gold`:
    - `gold_dim_students`
    - `gold_dim_company_criteria`
    - `gold_fact_student_skills`
@@ -125,7 +125,7 @@ The **Semantic / Genie Layer** (`2-genie-space/`) bridges natural language inter
 ## Teammate Handoff & Interface Contracts
 
 ### Person 1 (Data Engineer):
-- Ensure catalog and schema names match `campus_intelligence.gold`.
+- Ensure catalog and schema names match `workspace.campus_intelligence_gold`.
 - Table column names must match the joins and array parsing in `trusted_view.sql`.
 
 ### Person 3 (Backend Engineer):

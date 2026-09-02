@@ -1,7 +1,7 @@
 -- ============================================================================
 -- Skill Lamp — Placement Intelligence Assistant
 -- Unity Catalog Trusted SQL View: v_student_company_eligibility
--- Catalog: campus_intelligence | Schema: gold
+-- Catalog: workspace | Schema: campus_intelligence_gold
 -- ============================================================================
 -- Description:
 -- Pre-computes the cartesian match between every registered student and every
@@ -16,21 +16,21 @@
 --   5. 'ACTIVE_BACKLOGS'          - Student backlogs > company max_backlogs_allowed
 -- ============================================================================
 
-CREATE OR REPLACE VIEW campus_intelligence.gold.v_student_company_eligibility AS
+CREATE OR REPLACE VIEW workspace.campus_intelligence_gold.v_student_company_eligibility AS
 WITH student_skills_agg AS (
   SELECT 
     student_id,
     collect_set(lower(trim(skill_name))) AS student_skills_lower,
     collect_set(trim(skill_name))        AS student_skills_raw
-  FROM campus_intelligence.gold.gold_fact_student_skills
+  FROM workspace.campus_intelligence_gold.gold_fact_student_skills
   GROUP BY student_id
 ),
 
 student_certifications_agg AS (
   SELECT
     student_id,
-    COUNT(CASE WHEN is_certified = TRUE THEN 1 END) AS cert_count
-  FROM campus_intelligence.gold.gold_fact_student_skills
+    COUNT(CASE WHEN certified_flag = TRUE THEN 1 END) AS cert_count
+  FROM workspace.campus_intelligence_gold.gold_fact_student_skills
   GROUP BY student_id
 ),
 
@@ -47,26 +47,20 @@ parsed_criteria AS (
     c.preferred_skills,
     -- Normalized lower-case arrays for robust matching
     TRANSFORM(
-      FILTER(SPLIT(COALESCE(c.eligible_branches, ''), ','), x -> TRIM(x) != ''),
+      COALESCE(c.eligible_branches, ARRAY()),
       x -> LOWER(TRIM(x))
     ) AS eligible_branches_array,
     TRANSFORM(
-      FILTER(SPLIT(COALESCE(c.mandatory_skills, ''), ','), x -> TRIM(x) != ''),
+      COALESCE(c.mandatory_skills, ARRAY()),
       x -> LOWER(TRIM(x))
     ) AS mandatory_skills_lower_array,
+    COALESCE(c.mandatory_skills, ARRAY()) AS mandatory_skills_raw_array,
     TRANSFORM(
-      FILTER(SPLIT(COALESCE(c.mandatory_skills, ''), ','), x -> TRIM(x) != ''),
-      x -> TRIM(x)
-    ) AS mandatory_skills_raw_array,
-    TRANSFORM(
-      FILTER(SPLIT(COALESCE(c.preferred_skills, ''), ','), x -> TRIM(x) != ''),
+      COALESCE(c.preferred_skills, ARRAY()),
       x -> LOWER(TRIM(x))
     ) AS preferred_skills_lower_array,
-    TRANSFORM(
-      FILTER(SPLIT(COALESCE(c.preferred_skills, ''), ','), x -> TRIM(x) != ''),
-      x -> TRIM(x)
-    ) AS preferred_skills_raw_array
-  FROM campus_intelligence.gold.gold_dim_company_criteria c
+    COALESCE(c.preferred_skills, ARRAY()) AS preferred_skills_raw_array
+  FROM workspace.campus_intelligence_gold.gold_dim_company_criteria c
 ),
 
 cross_evaluated AS (
@@ -115,7 +109,7 @@ cross_evaluated AS (
       ARRAY_EXCEPT(c.preferred_skills_lower_array, COALESCE(sk.student_skills_lower, ARRAY()))
     ) AS missing_preferred_lower_array
 
-  FROM campus_intelligence.gold.gold_dim_students s
+  FROM workspace.campus_intelligence_gold.gold_dim_students s
   CROSS JOIN parsed_criteria c
   LEFT JOIN student_skills_agg sk ON s.student_id = sk.student_id
   LEFT JOIN student_certifications_agg sc ON s.student_id = sc.student_id
@@ -187,17 +181,17 @@ FROM final_flags;
 -- Verification / Test Queries:
 -- ============================================================================
 -- 1. Check schema:
---    DESCRIBE TABLE campus_intelligence.gold.v_student_company_eligibility;
+--    DESCRIBE TABLE workspace.campus_intelligence_gold.v_student_company_eligibility;
 --
 -- 2. Fully eligible students for Databricks:
 --    SELECT student_id, full_name, branch, cgpa, ctc_lpa
---    FROM campus_intelligence.gold.v_student_company_eligibility
+--    FROM workspace.campus_intelligence_gold.v_student_company_eligibility
 --    WHERE company_name = 'Databricks' AND is_fully_eligible = TRUE
 --    ORDER BY cgpa DESC;
 --
 -- 3. Blocker breakdown for a specific student:
 --    SELECT company_name, tier, ctc_lpa, is_fully_eligible, blocker_reason, missing_mandatory_skills
---    FROM campus_intelligence.gold.v_student_company_eligibility
+--    FROM workspace.campus_intelligence_gold.v_student_company_eligibility
 --    WHERE student_id = 'USN_2025_042'
 --    ORDER BY ctc_lpa DESC;
 -- ============================================================================
