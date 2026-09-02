@@ -40,12 +40,13 @@ class DatabricksGenieClient:
         self,
         prompt: str,
         conversation_id: Optional[str] = None,
-        force_fallback: bool = False
+        force_fallback: bool = False,
+        space_id_override: Optional[str] = None,
     ) -> QueryResponse:
-        if force_fallback or not self.workspace_client or not settings.GENIE_SPACE_ID:
+        space_id = space_id_override or settings.GENIE_SPACE_ID
+        if force_fallback or not self.workspace_client or not space_id:
             return fallback_data.mock_genie_query(prompt, conversation_id)
 
-        space_id = settings.GENIE_SPACE_ID
         start_time = time.time()
 
         def _run_genie_call():
@@ -149,29 +150,95 @@ class DatabricksGenieClient:
     ) -> Tuple[CohortStatistics, str, Dict[str, Any]]:
         """
         Fetches historical cohort placement returns for What-If simulation.
+        Tries the dedicated calc Genie space for the primary added skill; falls back
+        to the deterministic hero-cohort engine if the space isn't configured, times
+        out, or returns an unparseable result.
         """
-        stats = fallback_data.get_hero_cohort_stats(student_branch, student_cgpa, added_skills)
-        sql = (
-            "SELECT \n"
-            "  COUNT(CASE WHEN had_ai_data_skill = TRUE AND offer_status = 'Placed' THEN 1 END) AS placed_with_skill,\n"
-            "  COUNT(CASE WHEN had_ai_data_skill = TRUE THEN 1 END) AS total_with_skill,\n"
-            "  COUNT(CASE WHEN had_ai_data_skill = FALSE AND offer_status = 'Placed' THEN 1 END) AS placed_without_skill,\n"
-            "  COUNT(CASE WHEN had_ai_data_skill = FALSE THEN 1 END) AS total_without_skill,\n"
-            "  AVG(CASE WHEN had_ai_data_skill = TRUE AND offer_status = 'Placed' THEN offered_ctc_lpa END) AS avg_ctc_with_skill,\n"
-            "  AVG(CASE WHEN had_ai_data_skill = FALSE AND offer_status = 'Placed' THEN offered_ctc_lpa END) AS avg_ctc_without_skill\n"
+        primary_skill = added_skills[0] if added_skills else None
+
+        sql_preview = (
+            "WITH skill_cohort AS (\n"
+            "  SELECT DISTINCT sk.student_id\n"
+            "  FROM workspace.campus_intelligence_gold.gold_fact_student_skills sk\n"
+            "  JOIN workspace.campus_intelligence_gold.gold_dim_students s ON sk.student_id = s.student_id\n"
+            f"  WHERE s.branch = '{student_branch}' AND UPPER(TRIM(sk.skill_name)) = UPPER(TRIM('{primary_skill}'))\n"
+            ")\n"
+            "SELECT\n"
+            "  COUNT(CASE WHEN ph.student_id IN (SELECT student_id FROM skill_cohort) AND ph.offer_status = 'Placed' THEN 1 END) AS placed_with_skill,\n"
+            "  COUNT(CASE WHEN ph.student_id IN (SELECT student_id FROM skill_cohort) THEN 1 END) AS total_with_skill,\n"
+            "  COUNT(CASE WHEN ph.student_id NOT IN (SELECT student_id FROM skill_cohort) AND ph.offer_status = 'Placed' THEN 1 END) AS placed_without_skill,\n"
+            "  COUNT(CASE WHEN ph.student_id NOT IN (SELECT student_id FROM skill_cohort) THEN 1 END) AS total_without_skill,\n"
+            "  ROUND(AVG(CASE WHEN ph.student_id IN (SELECT student_id FROM skill_cohort) AND ph.offer_status = 'Placed' THEN ph.offered_ctc_lpa END), 2) AS avg_ctc_with_skill,\n"
+            "  ROUND(AVG(CASE WHEN ph.student_id NOT IN (SELECT student_id FROM skill_cohort) AND ph.offer_status = 'Placed' THEN ph.offered_ctc_lpa END), 2) AS avg_ctc_without_skill\n"
             "FROM workspace.campus_intelligence_gold.gold_fact_placement_history ph\n"
             "JOIN workspace.campus_intelligence_gold.gold_dim_students s ON ph.student_id = s.student_id\n"
             f"WHERE s.branch = '{student_branch}';"
         )
+
+        use_live = (
+            not force_fallback
+            and self.workspace_client
+            and settings.GENIE_CALC_SPACE_ID
+            and primary_skill
+        )
+
+        if use_live:
+            try:
+                prompt = (
+                    f"For branch {student_branch}, compare historical placement outcomes "
+                    f"for students who have the skill '{primary_skill}' versus students "
+                    f"who do not. Return the six raw governed counts exactly as your "
+                    f"instructions specify."
+                )
+                response = await self.ask_genie(
+                    prompt=prompt,
+                    space_id_override=settings.GENIE_CALC_SPACE_ID,
+                )
+                stats = self._parse_cohort_row(response.columns, response.rows)
+                if stats is not None:
+                    metadata = {
+                        "catalog": "workspace.campus_intelligence_gold",
+                        "pii_masked": True,
+                        "engine": "Databricks Genie (Calc Space)",
+                        "records_analyzed": stats.total_with_skill + stats.total_without_skill,
+                    }
+                    return stats, response.sql_query or sql_preview, metadata
+                logger.warning("Calc Genie space returned an unparseable result; falling back.")
+            except Exception as e:
+                logger.warning(f"Calc Genie space call failed ({e}); falling back to deterministic engine.")
+
+        stats = fallback_data.get_hero_cohort_stats(student_branch, student_cgpa, added_skills)
         metadata = {
-            "catalog": "skill_lamp",
+            "catalog": "workspace.campus_intelligence_gold",
             "pii_masked": True,
-            "engine": "Serverless Photon",
-            "records_analyzed": stats.total_with_skill + stats.total_without_skill
+            "engine": "Deterministic Fallback Engine",
+            "records_analyzed": stats.total_with_skill + stats.total_without_skill,
         }
-        return stats, sql, metadata
+        return stats, sql_preview, metadata
+
+    def _parse_cohort_row(self, columns: List[str], rows: List[List[Any]]) -> Optional[CohortStatistics]:
+        """Maps a Genie result row onto CohortStatistics by column name, case-insensitively."""
+        if not columns or not rows:
+            return None
+        col_idx = {c.strip().lower(): i for i, c in enumerate(columns)}
+        required = [
+            "placed_with_skill", "total_with_skill", "placed_without_skill",
+            "total_without_skill", "avg_ctc_with_skill", "avg_ctc_without_skill",
+        ]
+        if not all(name in col_idx for name in required):
+            return None
+        row = rows[0]
+        try:
+            return CohortStatistics(
+                placed_with_skill=int(row[col_idx["placed_with_skill"]] or 0),
+                total_with_skill=int(row[col_idx["total_with_skill"]] or 0),
+                placed_without_skill=int(row[col_idx["placed_without_skill"]] or 0),
+                total_without_skill=int(row[col_idx["total_without_skill"]] or 0),
+                avg_ctc_with_skill=float(row[col_idx["avg_ctc_with_skill"]] or 0.0),
+                avg_ctc_without_skill=float(row[col_idx["avg_ctc_without_skill"]] or 0.0),
+            )
+        except (TypeError, ValueError):
+            return None
 
 
 genie_client = DatabricksGenieClient()
-
-

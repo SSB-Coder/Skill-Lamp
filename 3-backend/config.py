@@ -6,6 +6,7 @@ class Settings(BaseSettings):
     DATABRICKS_HOST: Optional[str] = None
     DATABRICKS_TOKEN: Optional[str] = None
     GENIE_SPACE_ID: Optional[str] = None
+    GENIE_CALC_SPACE_ID: Optional[str] = None
     USE_MOCK_FALLBACK: bool = False
     
     JWT_SECRET: str
