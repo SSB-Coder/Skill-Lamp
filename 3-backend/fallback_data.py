@@ -902,32 +902,20 @@ def get_hero_cohort_stats(student_branch: str, student_cgpa: float, added_skills
     
     # Calculate student-specific baseline from CGPA and branch demographic.
     # In historical records for ISE, students without AI/data skills placed at ~40.0% (10/25 placed) with 8.20 LPA.
-    # For different CGPA and departmental cohorts, dynamically adjust the baseline rate:
-    if student_branch == "CSE":
-        base_rate = 95.5
-        base_placed = 955
-        base_total = 1000
-        base_avg_ctc = 19.93
-    elif student_branch == "AI/DS":
-        base_rate = 96.9
-        base_placed = 969
-        base_total = 1000
-        base_avg_ctc = 22.44
+    # Calculate student-specific baseline from individual CGPA and branch demographic.
+    cgpa = student_cgpa if (student_cgpa and student_cgpa > 0) else 7.5
+    norm = max(0.0, min(1.0, (cgpa - 5.5) / (9.85 - 5.5)))
+    base_rate = 18.0 + (norm ** 1.6) * (95.5 - 18.0)
+    
+    if student_branch in ("CSE", "AI/DS"):
+        base_rate += 2.0
     elif student_branch == "ECE":
-        base_rate = 93.8
-        base_placed = 938
-        base_total = 1000
-        base_avg_ctc = 19.62
-    elif student_cgpa and student_cgpa > 0:
-        base_rate = min(85.0, max(28.0, 40.0 + (student_cgpa - 8.0) * 12.0 + (3.0 if student_branch in ("CSE", "ISE") else -2.0)))
-        base_placed = int(round(base_rate))
-        base_total = 100
-        base_avg_ctc = round(min(22.0, max(6.5, 8.20 + (student_cgpa - 8.0) * 2.5)), 2)
-    else:
-        base_rate = 40.0
-        base_placed = 40
-        base_total = 100
-        base_avg_ctc = 8.20
+        base_rate -= 1.0
+
+    base_rate = round(min(95.5, max(14.0, base_rate)), 1)
+    base_placed = int(round(base_rate))
+    base_total = 100
+    base_avg_ctc = round(min(20.0, max(5.5, 5.5 + (norm ** 1.5) * 14.43)), 2)
 
     skill_return_map = {
         "DATABRICKS_DE": (80, 23.125),   # Target 80.0%, 18.50 LPA
@@ -953,7 +941,7 @@ def get_hero_cohort_stats(student_branch: str, student_cgpa: float, added_skills
     
     if has_databricks and has_pyspark:
         if base_rate >= 90.0:
-            placed_with = min(980, int(round(base_total * 0.980)))
+            placed_with = 98
             avg_ctc_with = max(base_avg_ctc + 8.0, 35.34)
         else:
             placed_with = min(98, max(base_placed + 22, 92))
@@ -971,7 +959,7 @@ def get_hero_cohort_stats(student_branch: str, student_cgpa: float, added_skills
         for k, (target_placed, target_avg_ctc) in skill_return_map.items():
             if k in s or s in k:
                 if base_rate >= 90.0:
-                    placed_with = min(980, int(round(base_total * 0.980)))
+                    placed_with = 98
                     avg_ctc_with = max(base_avg_ctc + 4.5, 32.50)
                 else:
                     placed_with = min(96, max(base_placed + 10, target_placed))
@@ -996,7 +984,7 @@ def get_hero_cohort_stats(student_branch: str, student_cgpa: float, added_skills
         )
 
     if base_rate >= 90.0:
-        placed_with = min(980, int(round(base_total * 0.980)))
+        placed_with = 98
         avg_ctc_with = max(base_avg_ctc + 3.0, 28.00)
     else:
         placed_with = min(95, max(base_placed + 10, 65))

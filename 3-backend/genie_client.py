@@ -184,8 +184,10 @@ class DatabricksGenieClient:
 
         if use_live:
             try:
+                min_cgpa = max(5.0, round(student_cgpa - 0.45, 2))
+                max_cgpa = min(10.0, round(student_cgpa + 0.45, 2))
                 prompt = (
-                    f"For branch {student_branch}, compare historical placement outcomes "
+                    f"For branch {student_branch} and CGPA between {min_cgpa} and {max_cgpa}, compare historical placement outcomes "
                     f"for students who have the skill '{primary_skill}' versus students "
                     f"who do not. Return the six raw governed counts exactly as your "
                     f"instructions specify."
