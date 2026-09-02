@@ -1,0 +1,17 @@
+skill_name,category,is_ai_data,demand_tier
+GENAI_LLMS,AI / GenAI,1,High
+MACHINE_LEARNING,AI / GenAI,1,High
+DEEP_LEARNING,AI / GenAI,1,High
+LANGCHAIN,AI / GenAI,1,High
+PROMPT_ENGINEERING,AI / GenAI,1,Medium
+COMPUTER_VISION,AI / GenAI,1,High
+NLP,AI / GenAI,1,High
+VECTOR_DATABASES,AI / GenAI,1,High
+DATABRICKS_DE,Data Engineering & Cloud,1,High
+PYSPARK,Data Engineering & Cloud,1,High
+SQL,Data Engineering & Cloud,1,Core
+AWS_CLOUD,Data Engineering & Cloud,1,High
+PYTHON,Core Engineering,0,Core
+CPP,Core Engineering,0,Core
+JAVA_BACKEND,Core Engineering,0,Core
+REACT,Core Engineering,0,Core
