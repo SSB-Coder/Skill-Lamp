@@ -53,14 +53,21 @@ async def query_genie(req: QueryRequest, request: Request, current_user: UserSes
     # If the user asked for a calculation and Genie returned a canned refusal
     # ("cannot calculate", "unable to calculate", "raw counts only", etc.) or an empty result,
     # resolve the exact percentage gain and CTC gain from the 6-year historical placement cohort engine
-    refusal_cues = [
+    refusal_or_clarification_cues = [
         "cannot calculate", "can't calculate", "unable to calculate",
-        "do not compute", "raw counts only", "not my job", "performed by the platform"
+        "do not compute", "raw counts only", "not my job", "performed by the platform",
+        "would you prefer", "do you want", "instead of requiring", "or instead of",
+        "individually, instead", "could you clarify", "should i", "or would you",
+        "prefer to see", "which one", "please clarify"
     ]
     if is_calc_query or current_user.role == "STUDENT":
-        ans_lower = (response.answer or "").lower()
+        ans_lower = (response.answer or "").lower().strip()
+        is_clarifying_question = ans_lower.endswith("?") and any(
+            q in ans_lower for q in ["prefer", "would you", "instead", "or", "which", "clarify", "choose", "individual"]
+        )
         if (
-            any(cue in ans_lower for cue in refusal_cues)
+            any(cue in ans_lower for cue in refusal_or_clarification_cues)
+            or is_clarifying_question
             or response.row_count == 0
             or ("candidate shortlist" in ans_lower)
             or ("meeting all criteria" in ans_lower)

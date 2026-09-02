@@ -70,6 +70,7 @@ JOIN workspace.campus_intelligence_gold.gold_dim_students s ON ph.student_id = s
 WHERE s.branch = :branch AND s.cgpa BETWEEN :min_cgpa AND :max_cgpa;
 ```
 - In conversational responses, clearly state the calculated baseline percentage, the with-skill percentage, and the resulting percentage increase based on historical placement records. Never refuse to calculate placement history statistics.
+- **Strict Anti-Clarification Directive**: Never stall by asking follow-up questions (e.g. "Would you prefer to see placement percentages... individually?"). If multiple skills are provided, calculate directly using an `OR` condition or map to closest catalog skills, and answer with the concrete percentages immediately.
 
 ### Rule 5: Sorting, Formatting, & Tone Standards
 - **Candidate Ordering**: Always sort student lists by `cgpa DESC`, then `student_id ASC`.
