@@ -972,14 +972,43 @@ def parse_jd_and_match(raw_jd_text: str) -> MatchJDResponse:
 # ---------------------------------------------------------------------------
 
 def calculate_skill_roi_from_history(prompt: str, branch: str = "ISE", cgpa: float = 8.12) -> QueryResponse:
-    import csv, os
+    import csv, os, re
+    p_up = prompt.upper()
     detected_skills = []
-    p_upper = prompt.upper()
-    for sk in ["DATABRICKS_DE", "PYSPARK", "SQL", "PYTHON", "REACT", "FASTAPI", "AWS_CLOUD", "JAVA_BACKEND", "MACHINE_LEARNING", "GENAI_LLMS", "DEEP_LEARNING", "LANGCHAIN", "DOCKER", "CPP"]:
-        if sk in p_upper or sk.replace("_", " ") in p_upper or sk.replace("_", "") in p_upper:
-            detected_skills.append(sk)
+    
+    alias_map = [
+        ('AIML', ['MACHINE_LEARNING', 'GENAI_LLMS']),
+        ('AI/ML', ['MACHINE_LEARNING', 'GENAI_LLMS']),
+        ('AI', ['GENAI_LLMS', 'MACHINE_LEARNING']),
+        ('ML', ['MACHINE_LEARNING']),
+        ('MACHINE LEARNING', ['MACHINE_LEARNING']),
+        ('GENAI', ['GENAI_LLMS']),
+        ('LLM', ['GENAI_LLMS']),
+        ('DEEP LEARNING', ['DEEP_LEARNING']),
+        ('COMPUTER VISION', ['COMPUTER_VISION']),
+        ('NLP', ['NLP']),
+        ('LANGCHAIN', ['LANGCHAIN']),
+        ('VECTOR', ['VECTOR_DATABASES']),
+        ('DATABRICKS', ['DATABRICKS_DE']),
+        ('PYSPARK', ['PYSPARK']),
+        ('SPARK', ['PYSPARK']),
+        ('SQL', ['SQL']),
+        ('AWS', ['AWS_CLOUD']),
+        ('CLOUD', ['AWS_CLOUD']),
+        ('PYTHON', ['PYTHON']),
+        ('C++', ['CPP']),
+        ('CPP', ['CPP']),
+        ('JAVA', ['JAVA_BACKEND']),
+        ('REACT', ['REACT']),
+    ]
+    for key, sks in alias_map:
+        if re.search(r'\b' + re.escape(key) + r'\b', p_up) or key in p_up:
+            for s in sks:
+                if s not in detected_skills:
+                    detected_skills.append(s)
+                    
     if not detected_skills:
-        detected_skills = ["PYSPARK", "DATABRICKS_DE"]
+        detected_skills = ["MACHINE_LEARNING", "GENAI_LLMS"]
     
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     ph_path = os.path.join(base_dir, "1-data-schema", "placement_history.csv")
@@ -1039,6 +1068,35 @@ def calculate_skill_roi_from_history(prompt: str, branch: str = "ISE", cgpa: flo
     delta_ctc = round(avg_ctc_with - avg_ctc_without, 2)
     skills_label = " + ".join(detected_skills)
     
+    # Specific company unlocks based on skills
+    unlocked_companies = []
+    if "DATABRICKS_DE" in detected_skills or "PYSPARK" in detected_skills:
+        unlocked_companies.append("1. **Databricks** (48.0 LPA • Super Dream) — *Prerequisites: PySpark, SQL, Python*")
+        unlocked_companies.append("2. **Adobe** (26.0 LPA • Dream) — *Prerequisites: Python, React, C++*")
+        unlocked_companies.append("3. **Infosys DSE** (7.0 LPA • Core Tech) — *Prerequisites: Python, SQL*")
+    elif "MACHINE_LEARNING" in detected_skills or "GENAI_LLMS" in detected_skills:
+        unlocked_companies.append("1. **Microsoft** (42.0 LPA • Super Dream) — *Prerequisites: C++, Python, SQL, GenAI/LLMs*")
+        unlocked_companies.append("2. **Goldman Sachs** (28.0 LPA • Dream) — *Prerequisites: Python, SQL, Machine Learning*")
+        unlocked_companies.append("3. **Adobe** (26.0 LPA • Dream) — *Prerequisites: Python, React, GenAI/LLMs*")
+        unlocked_companies.append("4. **TCS Digital** (9.0 LPA • Core Tech) — *Prerequisites: Python, SQL, Machine Learning*")
+    elif "JAVA_BACKEND" in detected_skills:
+        unlocked_companies.append("1. **Amazon** (32.0 LPA • Dream) — *Prerequisites: Java Backend, SQL, AWS Cloud*")
+        unlocked_companies.append("2. **Atlassian** (24.0 LPA • Dream) — *Prerequisites: Java Backend, React*")
+        unlocked_companies.append("3. **Morgan Stanley** (20.0 LPA • Dream) — *Prerequisites: Java Backend, SQL*")
+    elif "AWS_CLOUD" in detected_skills:
+        unlocked_companies.append("1. **Cisco** (18.0 LPA • Dream) — *Prerequisites: Python, AWS Cloud*")
+        unlocked_companies.append("2. **Amazon** (32.0 LPA • Dream) — *Prerequisites: Java Backend, SQL, AWS Cloud*")
+        unlocked_companies.append("3. **Microsoft** (42.0 LPA • Super Dream) — *Prerequisites: C++, Python, AWS Cloud*")
+    elif "CPP" in detected_skills:
+        unlocked_companies.append("1. **Google** (45.0 LPA • Super Dream) — *Prerequisites: Python, C++*")
+        unlocked_companies.append("2. **NVIDIA** (38.0 LPA • Super Dream) — *Prerequisites: C++, Python*")
+        unlocked_companies.append("3. **Microsoft** (42.0 LPA • Super Dream) — *Prerequisites: C++, Python, SQL*")
+    else:
+        unlocked_companies.append("1. **Adobe** (26.0 LPA • Dream) — *Prerequisites: Python, React, C++*")
+        unlocked_companies.append("2. **Atlassian** (24.0 LPA • Dream) — *Prerequisites: Java Backend, React*")
+        
+    companies_text = "\n".join(unlocked_companies)
+    
     sql = (
         "SELECT \n"
         "  COUNT(CASE WHEN had_ai_data_skill = TRUE AND offer_status = 'Placed' THEN 1 END) AS placed_with_skill,\n"
@@ -1062,9 +1120,7 @@ def calculate_skill_roi_from_history(prompt: str, branch: str = "ISE", cgpa: flo
         f"• **Placement Probability Gain:** **+{delta_prob} percentage points** (from {prob_without}% to {prob_with}%)\n"
         f"• **Expected Compensation Gain:** **+{delta_ctc} LPA** (from {avg_ctc_without} LPA to {avg_ctc_with} LPA)\n\n"
         f"### Newly Unlocked Companies & Drives\n"
-        f"1. **Databricks** (48.0 LPA • Super Dream) — *Prerequisites: PySpark, SQL, Python*\n"
-        f"2. **Adobe** (26.0 LPA • Dream) — *Prerequisites: Python, React, C++*\n"
-        f"3. **Infosys DSE** (7.0 LPA • Core Tech) — *Prerequisites: Python, SQL*"
+        f"{companies_text}"
     )
     
     return QueryResponse(
@@ -1101,6 +1157,12 @@ def mock_genie_query(prompt: str, conversation_id: Optional[str] = None) -> Quer
     p = prompt.lower().strip()
 
     if (
+        'aiml' in p or
+        'ai/ml' in p or
+        'ai' in p or
+        'ml' in p or
+        'machine learning' in p or
+        'genai' in p or
         'probability' in p or
         'pyspark' in p or
         'databricks' in p or
@@ -1110,8 +1172,13 @@ def mock_genie_query(prompt: str, conversation_id: Optional[str] = None) -> Quer
         'ctc' in p or
         'what if' in p or
         'learn' in p or
-        'skill' in p
-    ) and not ('branch' in p and '2024' in p) and not ('cgpa > 10' in p or '10.0' in p) and not ('blocked' in p or 'google' in p):
+        'skill' in p or
+        'python' in p or
+        'java' in p or
+        'aws' in p or
+        'react' in p or
+        'cpp' in p
+    ) and not ('2024 graduating batch' in p or 'batch-wise' in p or 'overall placement rate' in p) and not ('cgpa > 10' in p or '10.0' in p) and not ('why am i blocked' in p or 'blocked from' in p):
         return calculate_skill_roi_from_history(prompt)
 
     # Default thinking steps

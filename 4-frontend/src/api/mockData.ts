@@ -9882,12 +9882,50 @@ export function mockMatchJD(_rawJd: string) {
 
 export function mockGenieQuery(prompt: string, _persona: string = 'TPO') {
   const pLower = prompt.toLowerCase();
+  const pUpper = prompt.toUpperCase();
   
-  // Student skill ROI / probability / PySpark calculation query
+  // Detect skills
+  const detectedSkills: string[] = [];
+  const aliasMap: [string, string[]][] = [
+    ['AIML', ['MACHINE_LEARNING', 'GENAI_LLMS']],
+    ['AI/ML', ['MACHINE_LEARNING', 'GENAI_LLMS']],
+    ['AI', ['GENAI_LLMS', 'MACHINE_LEARNING']],
+    ['ML', ['MACHINE_LEARNING']],
+    ['MACHINE LEARNING', ['MACHINE_LEARNING']],
+    ['GENAI', ['GENAI_LLMS']],
+    ['LLM', ['GENAI_LLMS']],
+    ['DEEP LEARNING', ['DEEP_LEARNING']],
+    ['COMPUTER VISION', ['COMPUTER_VISION']],
+    ['NLP', ['NLP']],
+    ['LANGCHAIN', ['LANGCHAIN']],
+    ['VECTOR', ['VECTOR_DATABASES']],
+    ['DATABRICKS', ['DATABRICKS_DE']],
+    ['PYSPARK', ['PYSPARK']],
+    ['SPARK', ['PYSPARK']],
+    ['SQL', ['SQL']],
+    ['AWS', ['AWS_CLOUD']],
+    ['CLOUD', ['AWS_CLOUD']],
+    ['PYTHON', ['PYTHON']],
+    ['C++', ['CPP']],
+    ['CPP', ['CPP']],
+    ['JAVA', ['JAVA_BACKEND']],
+    ['REACT', ['REACT']]
+  ];
+
+  for (const [key, sks] of aliasMap) {
+    if (pUpper.includes(key)) {
+      for (const s of sks) {
+        if (!detectedSkills.includes(s)) {
+          detectedSkills.push(s);
+        }
+      }
+    }
+  }
+
+  // Student skill ROI / probability calculation query or any skill query
   if (
+    detectedSkills.length > 0 ||
     pLower.includes('probability') ||
-    pLower.includes('pyspark') ||
-    pLower.includes('databricks') ||
     pLower.includes('chance') ||
     pLower.includes('increase') ||
     pLower.includes('roi') ||
@@ -9895,18 +9933,88 @@ export function mockGenieQuery(prompt: string, _persona: string = 'TPO') {
     pLower.includes('what if') ||
     pLower.includes('learn')
   ) {
+    const finalSkills = detectedSkills.length > 0 ? detectedSkills : ['MACHINE_LEARNING', 'GENAI_LLMS'];
+    const skillsLabel = finalSkills.join(' + ');
+
+    let probWith = 78.5;
+    let probWithout = 40.0;
+    let ctcWith = 18.20;
+    let ctcWithout = 8.20;
+    let unlockedCompanies: string[] = [];
+
+    if (finalSkills.includes('DATABRICKS_DE') && finalSkills.includes('PYSPARK')) {
+      probWith = 92.0;
+      ctcWith = 22.80;
+      unlockedCompanies = [
+        '1. **Databricks** (48.0 LPA • Super Dream) — *Prerequisites: PySpark, SQL, Python*',
+        '2. **Adobe** (26.0 LPA • Dream) — *Prerequisites: Python, React, C++*',
+        '3. **Infosys DSE** (7.0 LPA • Core Tech) — *Prerequisites: Python, SQL*'
+      ];
+    } else if (finalSkills.includes('DATABRICKS_DE') || finalSkills.includes('PYSPARK')) {
+      probWith = 80.0;
+      ctcWith = 18.50;
+      unlockedCompanies = [
+        '1. **Databricks** (48.0 LPA • Super Dream) — *Prerequisites: PySpark, SQL, Python*',
+        '2. **Adobe** (26.0 LPA • Dream) — *Prerequisites: Python, React, C++*',
+        '3. **Infosys DSE** (7.0 LPA • Core Tech) — *Prerequisites: Python, SQL*'
+      ];
+    } else if (finalSkills.includes('MACHINE_LEARNING') || finalSkills.includes('GENAI_LLMS')) {
+      probWith = 78.5;
+      ctcWith = 18.20;
+      unlockedCompanies = [
+        '1. **Microsoft** (42.0 LPA • Super Dream) — *Prerequisites: C++, Python, SQL, GenAI/LLMs*',
+        '2. **Goldman Sachs** (28.0 LPA • Dream) — *Prerequisites: Python, SQL, Machine Learning*',
+        '3. **Adobe** (26.0 LPA • Dream) — *Prerequisites: Python, React, GenAI/LLMs*',
+        '4. **TCS Digital** (9.0 LPA • Core Tech) — *Prerequisites: Python, SQL, Machine Learning*'
+      ];
+    } else if (finalSkills.includes('JAVA_BACKEND')) {
+      probWith = 75.0;
+      ctcWith = 16.80;
+      unlockedCompanies = [
+        '1. **Amazon** (32.0 LPA • Dream) — *Prerequisites: Java Backend, SQL, AWS Cloud*',
+        '2. **Atlassian** (24.0 LPA • Dream) — *Prerequisites: Java Backend, React*',
+        '3. **Morgan Stanley** (20.0 LPA • Dream) — *Prerequisites: Java Backend, SQL*'
+      ];
+    } else if (finalSkills.includes('AWS_CLOUD')) {
+      probWith = 72.0;
+      ctcWith = 15.40;
+      unlockedCompanies = [
+        '1. **Cisco** (18.0 LPA • Dream) — *Prerequisites: Python, AWS Cloud*',
+        '2. **Amazon** (32.0 LPA • Dream) — *Prerequisites: Java Backend, SQL, AWS Cloud*',
+        '3. **Microsoft** (42.0 LPA • Super Dream) — *Prerequisites: C++, Python, AWS Cloud*'
+      ];
+    } else if (finalSkills.includes('CPP')) {
+      probWith = 82.0;
+      ctcWith = 21.00;
+      unlockedCompanies = [
+        '1. **Google** (45.0 LPA • Super Dream) — *Prerequisites: Python, C++*',
+        '2. **NVIDIA** (38.0 LPA • Super Dream) — *Prerequisites: C++, Python*',
+        '3. **Microsoft** (42.0 LPA • Super Dream) — *Prerequisites: C++, Python, SQL*'
+      ];
+    } else {
+      probWith = 68.0;
+      ctcWith = 14.20;
+      unlockedCompanies = [
+        '1. **Adobe** (26.0 LPA • Dream) — *Prerequisites: Python, React, C++*',
+        '2. **Atlassian** (24.0 LPA • Dream) — *Prerequisites: Java Backend, React*'
+      ];
+    }
+
+    const deltaProb = Number((probWith - probWithout).toFixed(1));
+    const deltaCtc = Number((ctcWith - ctcWithout).toFixed(2));
+
     return {
-      answer: "### 6-Year Historical Placement Cohort Analysis (2020–2025)\n\nBased on **2,400 historical placement records** in `workspace.campus_intelligence_gold.gold_fact_placement_history` for your cohort demographic (**ISE Branch, CGPA ~8.12**): [1]\n\n### Historical Cohort Return Metrics\n• **Baseline (Without Skill):** **40.0%** placement rate (10/25 placed) with **8.20 LPA** average CTC.\n• **With Target Skill (e.g. PySpark / Databricks DE):** **80.0%** placement rate (20/25 placed) with **18.50 LPA** average CTC. [2]\n• **Synergy Uplift (PySpark + Databricks DE):** **92.0%** placement rate (23/25 placed) with **22.80 LPA** average CTC.\n\n### Net Calculated Gains\n• **Placement Probability Gain:** **+40.0 percentage points** (from 40.0% to 80.0%)\n• **Expected Compensation Gain:** **+10.30 LPA** (from 8.20 LPA to 18.50 LPA)\n\n### Unlocked Dream & Super Dream Companies\n1. **Databricks** (48.0 LPA • Super Dream) — *Prerequisites: PySpark, SQL, Python*\n2. **Adobe** (26.0 LPA • Dream) — *Prerequisites: Python, React, C++*\n3. **Infosys DSE** (7.0 LPA • Core Tech) — *Prerequisites: Python, SQL*",
-      sql_query: "SELECT \n  COUNT(CASE WHEN had_ai_data_skill = TRUE AND offer_status = 'Placed' THEN 1 END) AS placed_with_skill,\n  COUNT(CASE WHEN had_ai_data_skill = TRUE THEN 1 END) AS total_with_skill,\n  COUNT(CASE WHEN had_ai_data_skill = FALSE AND offer_status = 'Placed' THEN 1 END) AS placed_without_skill,\n  COUNT(CASE WHEN had_ai_data_skill = FALSE THEN 1 END) AS total_without_skill,\n  ROUND(AVG(CASE WHEN had_ai_data_skill = TRUE AND offer_status = 'Placed' THEN offered_ctc_lpa END), 2) AS avg_ctc_with_skill,\n  ROUND(AVG(CASE WHEN had_ai_data_skill = FALSE AND offer_status = 'Placed' THEN offered_ctc_lpa END), 2) AS avg_ctc_without_skill\nFROM workspace.campus_intelligence_gold.gold_fact_placement_history ph\nJOIN workspace.campus_intelligence_gold.gold_dim_students s ON ph.student_id = s.student_id\nWHERE s.branch = 'ISE' AND s.cgpa BETWEEN 7.77 AND 8.47;",
+      answer: `### 6-Year Historical Placement Cohort Analysis (2020–2025)\n\nBased on **2,400 historical placement records** in \`workspace.campus_intelligence_gold.gold_fact_placement_history\` for your cohort demographic (**ISE Branch, CGPA ~8.12**): [1]\n\n### Historical Cohort Return Metrics\n• **Baseline (Without ${skillsLabel}):** **${probWithout.toFixed(1)}%** placement rate (10/25 placed) with **${ctcWithout.toFixed(2)} LPA** average CTC.\n• **With Target Skill (${skillsLabel}):** **${probWith.toFixed(1)}%** placement rate (20/25 placed) with **${ctcWith.toFixed(2)} LPA** average CTC. [2]\n\n### Net Calculated Gains\n• **Placement Probability Gain:** **+${deltaProb} percentage points** (from ${probWithout.toFixed(1)}% to ${probWith.toFixed(1)}%)\n• **Expected Compensation Gain:** **+${deltaCtc} LPA** (from ${ctcWithout.toFixed(2)} LPA to ${ctcWith.toFixed(2)} LPA)\n\n### Newly Unlocked Companies & Drives\n${unlockedCompanies.join('\n')}`,
+      sql_query: `SELECT \n  COUNT(CASE WHEN had_ai_data_skill = TRUE AND offer_status = 'Placed' THEN 1 END) AS placed_with_skill,\n  COUNT(CASE WHEN had_ai_data_skill = TRUE THEN 1 END) AS total_with_skill,\n  COUNT(CASE WHEN had_ai_data_skill = FALSE AND offer_status = 'Placed' THEN 1 END) AS placed_without_skill,\n  COUNT(CASE WHEN had_ai_data_skill = FALSE THEN 1 END) AS total_without_skill,\n  ROUND(AVG(CASE WHEN had_ai_data_skill = TRUE AND offer_status = 'Placed' THEN offered_ctc_lpa END), 2) AS avg_ctc_with_skill,\n  ROUND(AVG(CASE WHEN had_ai_data_skill = FALSE AND offer_status = 'Placed' THEN offered_ctc_lpa END), 2) AS avg_ctc_without_skill\nFROM workspace.campus_intelligence_gold.gold_fact_placement_history ph\nJOIN workspace.campus_intelligence_gold.gold_dim_students s ON ph.student_id = s.student_id\nWHERE s.branch = 'ISE' AND s.cgpa BETWEEN 7.77 AND 8.47;`,
       latency_ms: 185,
       row_count: 1,
       columns: ['placed_with_skill', 'total_with_skill', 'placed_without_skill', 'total_without_skill', 'avg_ctc_with_skill', 'avg_ctc_without_skill'],
-      rows: [[20, 25, 10, 25, 18.50, 8.20]],
-      table_title: '6-Year Historical Cohort Placement Returns (ISE • CGPA 7.77-8.47)',
+      rows: [[20, 25, 10, 25, ctcWith, ctcWithout]],
+      table_title: `6-Year Historical Cohort Placement Returns (${skillsLabel})`,
       thinking_steps: [
         'Querying 6-year placement history (2020-2025) from gold_fact_placement_history',
         'Filtering cohort demographic: branch = ISE, CGPA range [7.77, 8.47]',
-        'Calculating historical placement probability and average CTC with vs without skill'
+        `Calculating historical placement probability and average CTC with vs without ${skillsLabel}`
       ],
       citations: [
         { id: '1', source: 'workspace.campus_intelligence_gold.gold_fact_placement_history' },
