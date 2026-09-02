@@ -1181,28 +1181,110 @@ def mock_genie_query(prompt: str, conversation_id: Optional[str] = None) -> Quer
     conv_id = conversation_id or "conv_databricks_genie_gold_01"
     p = prompt.lower().strip()
 
+    # -------------------------------------------------------------------------
+    # Priority 1: TPO Candidate Search, Eligibility, Shortlisting, and Batch Analytics
+    # -------------------------------------------------------------------------
+    if "databricks" in p and ("eligible" in p or "cgpa" in p or "8.0" in p or "gpa" in p or "shortlist" in p or "student" in p or "who" in p or "list" in p):
+        thinking_steps = [
+            "Filtering company criteria: company_name = 'Databricks'",
+            "Joining gold_dim_students with gold_fact_student_skills on student_id",
+            "Verifying mandatory skills: ['Databricks DE', 'PySpark', 'SQL']",
+            "Applying criteria: CGPA >= 8.0, 0 Backlogs, Branch IN ('CSE', 'ISE', 'AI/DS')",
+            "Querying trusted view workspace.campus_intelligence_gold.v_student_company_eligibility"
+        ]
+        sql = (
+            "SELECT \n"
+            "  student_id, full_name, branch, cgpa, company_name, ctc_lpa, is_fully_eligible, blocker_reason\n"
+            "FROM workspace.campus_intelligence_gold.v_student_company_eligibility\n"
+            "WHERE company_name = 'Databricks'\n"
+            "  AND branch IN ('ISE', 'CSE', 'AI/DS')\n"
+            "  AND cgpa >= 8.0\n"
+            "  AND is_fully_eligible = TRUE\n"
+            "ORDER BY cgpa DESC, student_id ASC;"
+        )
+        columns = ["student_id", "full_name", "branch", "cgpa", "company_name", "ctc_lpa", "is_fully_eligible", "blocker_reason"]
+        matched_students = [s for s in STUDENTS_DB if s["cgpa"] >= 8.0 and any("DATABRICKS" in sk.upper() or "PYSPARK" in sk.upper() for sk in s["skills"])]
+        if not matched_students:
+            matched_students = [s for s in STUDENTS_DB if s["cgpa"] >= 8.0][:12]
+        
+        rows = [
+            [s["student_id"], s["full_name"], s["branch"], s["cgpa"], "Databricks", 48.0, True, "ELIGIBLE"]
+            for s in matched_students[:12]
+        ]
+        filter_ids = [s["student_id"] for s in matched_students]
+
+        answer = (
+            f"### Databricks (48.0 LPA Super Dream) Candidate Shortlist\n\n"
+            f"Identified **{len(matched_students)} fully eligible candidates** meeting all criteria (CGPA ≥ 8.0, 0 Backlogs, verified `Databricks DE` / `PySpark` / `SQL` competencies) from `workspace.campus_intelligence_gold.v_student_company_eligibility` [3]:\n\n"
+            "| USN | Candidate Name | Branch | CGPA | Verified Lakehouse Stack | Status |\n"
+            "| :--- | :--- | :--- | :--- | :--- | :--- |\n"
+            + "\n".join([f"| `{s['student_id']}` | **{s['full_name']}** | {s['branch']} | `{s['cgpa']}` | {', '.join(s['skills'][:4])} | `ELIGIBLE` |" for s in matched_students[:8]])
+            + f"\n\n**Candidate Grid Synchronized:** The main candidate spreadsheet has been filtered to display all {len(matched_students)} matching students."
+        )
+        return QueryResponse(
+            conversation_id=conv_id,
+            status="SUCCESS",
+            sql_query=sql,
+            columns=columns,
+            rows=rows,
+            row_count=len(rows),
+            execution_time_ms=180,
+            filter_student_ids=filter_ids,
+            answer=answer,
+            thinking_steps=thinking_steps,
+            citations=citations,
+            table_title="Databricks Eligible Students (CGPA >= 8.0)"
+        )
+
+    # Top unplaced AI/DS students
+    if "unplaced" in p and ("ai" in p or "ds" in p or "ai/ds" in p or "aids" in p):
+        thinking_steps = [
+            "Filtering gold_dim_students for branch = 'AI/DS'",
+            "Checking gold_fact_placement_history for placed records",
+            "Ranking unplaced candidates by placement readiness index"
+        ]
+        sql = (
+            "SELECT student_id, full_name, branch, cgpa, readiness_score\n"
+            "FROM workspace.campus_intelligence_gold.gold_dim_students s\n"
+            "WHERE branch = 'AI/DS' AND placement_status = 'Unplaced'\n"
+            "ORDER BY readiness_score DESC, cgpa DESC;"
+        )
+        matched_students = [s for s in STUDENTS_DB if s["branch"] in ("AI/DS", "AI/ML", "ISE") and s["cgpa"] >= 7.5][:8]
+        rows = [[s["student_id"], s["full_name"], s["branch"], s["cgpa"], f"{s.get('readiness_score', 82.5)}%"] for s in matched_students]
+        filter_ids = [s["student_id"] for s in matched_students]
+        answer = (
+            f"### Top Unplaced AI/DS Candidates by Readiness Score\n\n"
+            f"Retrieved **{len(matched_students)} high-readiness candidates** ready for upcoming recruitment drives:\n\n"
+            + "\n".join([f"• **{s['full_name']}** (`{s['student_id']}`): CGPA `{s['cgpa']}` | Readiness: `{s.get('readiness_score', 82.5)}%`" for s in matched_students[:5]])
+        )
+        return QueryResponse(
+            conversation_id=conv_id,
+            status="SUCCESS",
+            sql_query=sql,
+            columns=["student_id", "full_name", "branch", "cgpa", "readiness_score"],
+            rows=rows,
+            row_count=len(rows),
+            execution_time_ms=150,
+            filter_student_ids=filter_ids,
+            answer=answer,
+            thinking_steps=thinking_steps,
+            citations=citations,
+            table_title="Top Unplaced AI/DS Students"
+        )
+
+    # -------------------------------------------------------------------------
+    # Priority 2: Student Skill What-If & Historical ROI Engine
+    # -------------------------------------------------------------------------
     if (
-        'aiml' in p or
-        'ai/ml' in p or
-        'ai' in p or
-        'ml' in p or
-        'machine learning' in p or
-        'genai' in p or
-        'probability' in p or
-        'pyspark' in p or
-        'databricks' in p or
-        'chance' in p or
-        'increase' in p or
-        'roi' in p or
-        'ctc' in p or
         'what if' in p or
         'learn' in p or
-        'skill' in p or
-        'python' in p or
-        'java' in p or
-        'aws' in p or
-        'react' in p or
-        'cpp' in p
+        'chance' in p or
+        'probability' in p or
+        'increase' in p or
+        'roi' in p or
+        'aiml' in p or
+        'ai/ml' in p or
+        'genai' in p
     ) and not ('2024 graduating batch' in p or 'batch-wise' in p or 'overall placement rate' in p) and not ('cgpa > 10' in p or '10.0' in p) and not ('why am i blocked' in p or 'blocked from' in p):
         return calculate_skill_roi_from_history(prompt)
 

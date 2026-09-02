@@ -279,33 +279,31 @@ export async function getStudentMe(_studentId?: string): Promise<StudentProfileR
 }
 // 6. POST /api/query (Genie Copilot query)
 export async function queryGenie(request: GenieQueryRequest): Promise<GenieQueryResponse> {
-  if (!failsafeMode) {
-    try {
-      const res = await fetch(`${BASE_URL}/api/query`, {
-        method: 'POST',
-        headers: getAuthHeaders(),
-        body: JSON.stringify({ prompt: request.query })
-      });
-      if (res.ok) {
-        const data = await res.json();
-        if (data.status === 'ERROR') throw new Error(data.error_message || 'Genie query failed');
-        return {
-          answer: data.answer || `Found ${data.row_count} result${data.row_count === 1 ? '' : 's'} for "${request.query}".`,
-          sql_query: data.sql_query,
-          latency_ms: data.execution_time_ms,
-          row_count: data.row_count,
-          lineage: DEFAULT_LINEAGE,
-          matched_student_ids: data.filter_student_ids,
-          thinking_steps: data.thinking_steps,
-          citations: data.citations,
-          columns: data.columns,
-          rows: data.rows,
-          table_title: data.table_title
-        };
-      }
-    } catch {
-      // Ignore
+  try {
+    const res = await fetch(`${BASE_URL}/api/query`, {
+      method: 'POST',
+      headers: getAuthHeaders(),
+      body: JSON.stringify({ prompt: request.query })
+    });
+    if (res.ok) {
+      const data = await res.json();
+      if (data.status === 'ERROR') throw new Error(data.error_message || 'Genie query failed');
+      return {
+        answer: data.answer || `Found ${data.row_count} result${data.row_count === 1 ? '' : 's'} for "${request.query}".`,
+        sql_query: data.sql_query,
+        latency_ms: data.execution_time_ms,
+        row_count: data.row_count,
+        lineage: DEFAULT_LINEAGE,
+        matched_student_ids: data.filter_student_ids,
+        thinking_steps: data.thinking_steps,
+        citations: data.citations,
+        columns: data.columns,
+        rows: data.rows,
+        table_title: data.table_title
+      };
     }
+  } catch (e) {
+    console.warn('Live Genie API call failed or timed out:', e);
   }
   return mockGenieQuery(request.query, request.persona);
 }

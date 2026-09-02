@@ -9884,7 +9884,99 @@ export function mockGenieQuery(prompt: string, _persona: string = 'TPO') {
   const pLower = prompt.toLowerCase();
   const pUpper = prompt.toUpperCase();
   
-  // Detect skills
+  // 1. TPO Databricks Eligible Candidates (CGPA > 8.0)
+  if (pLower.includes('databricks') && (pLower.includes('eligible') || pLower.includes('cgpa') || pLower.includes('8.0') || pLower.includes('gpa') || pLower.includes('student') || pLower.includes('who') || pLower.includes('list'))) {
+    const matched = MOCK_STUDENTS.filter(s => s.cgpa >= 8.0 && (s.skills.some(sk => sk.toUpperCase().includes('DATABRICKS') || sk.toUpperCase().includes('PYSPARK'))));
+    const finalMatched = matched.length > 0 ? matched : MOCK_STUDENTS.filter(s => s.cgpa >= 8.0).slice(0, 12);
+    const filterIds = finalMatched.map(s => s.usn);
+
+    return {
+      answer: `### Databricks (48.0 LPA Super Dream) Candidate Shortlist\n\nIdentified **${finalMatched.length} fully eligible candidates** meeting all criteria (CGPA ≥ 8.0, 0 Backlogs, verified \`Databricks DE\` / \`PySpark\` / \`SQL\` competencies) from \`workspace.campus_intelligence_gold.v_student_company_eligibility\` [1]:\n\n| USN | Candidate Name | Branch | CGPA | Verified Lakehouse Stack | Status |\n| :--- | :--- | :--- | :--- | :--- | :--- |\n` + finalMatched.slice(0, 8).map(s => `| \`${s.usn}\` | **${s.name}** | ${s.branch} | \`${s.cgpa.toFixed(2)}\` | ${s.skills.slice(0, 4).join(', ')} | \`ELIGIBLE\` |`).join('\n') + `\n\n**Candidate Grid Synchronized:** The main candidate spreadsheet has been filtered to display all ${finalMatched.length} matching students.`,
+      sql_query: "SELECT \n  student_id, full_name, branch, cgpa, company_name, ctc_lpa, is_fully_eligible, blocker_reason\nFROM workspace.campus_intelligence_gold.v_student_company_eligibility\nWHERE company_name = 'Databricks'\n  AND branch IN ('ISE', 'CSE', 'AI/DS')\n  AND cgpa >= 8.0\n  AND is_fully_eligible = TRUE\nORDER BY cgpa DESC, student_id ASC;",
+      latency_ms: 180,
+      row_count: finalMatched.length,
+      columns: ['student_id', 'full_name', 'branch', 'cgpa', 'company_name', 'ctc_lpa', 'is_fully_eligible', 'blocker_reason'],
+      rows: finalMatched.slice(0, 12).map(s => [s.usn, s.name, s.branch, s.cgpa, 'Databricks', 48.0, true, 'ELIGIBLE']),
+      matched_students: finalMatched,
+      matched_student_ids: filterIds,
+      table_title: 'Databricks Eligible Candidates (CGPA >= 8.0)',
+      thinking_steps: [
+        "Filtering company criteria: company_name = 'Databricks'",
+        'Joining gold_dim_students with gold_fact_student_skills on student_id',
+        "Verifying mandatory skills: ['Databricks DE', 'PySpark', 'SQL']",
+        "Applying criteria: CGPA >= 8.0, 0 Backlogs, Branch IN ('CSE', 'ISE', 'AI/DS')",
+        'Querying trusted view workspace.campus_intelligence_gold.v_student_company_eligibility'
+      ],
+      citations: [
+        { id: '1', source: 'workspace.campus_intelligence_gold.v_student_company_eligibility' }
+      ],
+      lineage: {
+        catalog: 'workspace.campus_intelligence_gold',
+        pii_masked: true,
+        engine: 'Serverless Photon'
+      }
+    };
+  }
+
+  // 2. TPO Top Unplaced AI/DS Students
+  if (pLower.includes('unplaced') && (pLower.includes('ai') || pLower.includes('ds') || pLower.includes('aids'))) {
+    const matched = MOCK_STUDENTS.filter(s => (s.branch === 'AI/DS' || s.branch === 'ISE') && s.cgpa >= 7.5).slice(0, 8);
+    const filterIds = matched.map(s => s.usn);
+
+    return {
+      answer: `### Top Unplaced AI/DS Candidates by Readiness Score\n\nRetrieved **${matched.length} high-readiness candidates** ready for upcoming recruitment drives:\n\n` + matched.map(s => `• **${s.name}** (\`${s.usn}\`): CGPA \`${s.cgpa.toFixed(2)}\` | Readiness: \`${s.placement_readiness_score}%\``).join('\n'),
+      sql_query: "SELECT student_id, full_name, branch, cgpa, readiness_score\nFROM workspace.campus_intelligence_gold.gold_dim_students s\nWHERE branch = 'AI/DS' AND placement_status = 'Unplaced'\nORDER BY readiness_score DESC, cgpa DESC;",
+      latency_ms: 150,
+      row_count: matched.length,
+      columns: ['student_id', 'full_name', 'branch', 'cgpa', 'readiness_score'],
+      rows: matched.map(s => [s.usn, s.name, s.branch, s.cgpa, `${s.placement_readiness_score}%`]),
+      matched_students: matched,
+      matched_student_ids: filterIds,
+      table_title: 'Top Unplaced AI/DS Candidates',
+      thinking_steps: [
+        "Filtering gold_dim_students for branch = 'AI/DS'",
+        'Checking gold_fact_placement_history for placed records',
+        'Ranking unplaced candidates by placement readiness index'
+      ],
+      citations: [
+        { id: '1', source: 'workspace.campus_intelligence_gold.gold_dim_students' }
+      ],
+      lineage: {
+        catalog: 'workspace.campus_intelligence_gold',
+        pii_masked: true,
+        engine: 'Serverless Photon'
+      }
+    };
+  }
+
+  // 3. TPO Branch-Wise Placement Statistics
+  if (pLower.includes('branch') || pLower.includes('2024') || pLower.includes('statistics') || pLower.includes('overview')) {
+    return {
+      answer: "### 2024 Graduating Batch Placement Performance\n\nThe 2024 graduating batch achieved a **94.80% overall placement rate** with an **average CTC of 19.19 LPA** across 269 students. [1]\n\n### Overall Statistics\n• **Total Students:** 269\n• **Placed Students:** 255\n• **Placement Rate:** 94.80%\n• **Average CTC:** 19.19 LPA\n\n---\n\n### Branch-wise Performance [2]\n\n| Branch | Total Students | Placed | Placement % | Avg CTC (LPA) |\n| :--- | :--- | :--- | :--- | :--- |\n| **AI/DS** | 38 | 37 | **97.37%** | **18.28** |\n| **ISE** | 72 | 69 | **95.83%** | **18.78** |\n| **ECE** | 48 | 45 | **93.75%** | **18.42** |\n| **CSE** | 111 | 104 | **93.69%** | **20.24** |\n\n### Key Insights\n• **Highest Placement Rate:** AI/DS leads with 97.37% placement, placing 37 out of 38 students.\n• **Highest Average CTC:** CSE graduates commanded the highest average compensation at 20.24 LPA, despite having a slightly lower placement percentage (93.69%) than AI/DS and ISE.\n• **Most Consistent Performance:** All four branches maintained placement rates above 93%, demonstrating strong overall campus recruitment outcomes for the 2024 cohort.",
+      sql_query: "SELECT\n  s.`branch`,\n  COUNT(DISTINCT s.`student_id`) AS total_students,\n  COUNT(DISTINCT CASE WHEN ph.`offer_status` = 'Placed' THEN s.`student_id` END) AS placed_students,\n  ROUND(\n    COUNT(DISTINCT CASE WHEN ph.`offer_status` = 'Placed' THEN s.`student_id` END) * 100.0\n    / COUNT(DISTINCT s.`student_id`),\n    2\n  ) AS placement_pct,\n  ROUND(\n    AVG(CASE WHEN ph.`offer_status` = 'Placed' THEN ph.`offered_ctc_lpa` END),\n    2\n  ) AS avg_placed_ctc_lpa\nFROM workspace.campus_intelligence_gold.gold_dim_students s\nLEFT JOIN workspace.campus_intelligence_gold.gold_fact_placement_history ph ON s.student_id = ph.student_id\nWHERE s.graduating_year = 2024\nGROUP BY s.branch\nORDER BY avg_placed_ctc_lpa DESC;",
+      latency_ms: 215,
+      row_count: 4,
+      columns: ['branch', 'total_students', 'placed_students', 'placement_pct', 'avg_ctc_lpa'],
+      rows: [['AI/DS', 38, 37, '97.37%', 18.28], ['ISE', 72, 69, '95.83%', 18.78], ['ECE', 48, 45, '93.75%', 18.42], ['CSE', 111, 104, '93.69%', 20.24]],
+      table_title: '2024 Graduating Batch Placement Performance by Branch',
+      thinking_steps: [
+        "I'll analyze the placement outcomes for the 2024 graduating batch across all branches.",
+        '2024 batch placement percentage and average CTC by branch',
+        '2024 batch overall placement statistics'
+      ],
+      citations: [
+        { id: '1', source: 'workspace.campus_intelligence_gold.gold_dim_students' },
+        { id: '2', source: 'workspace.campus_intelligence_gold.gold_fact_placement_history' }
+      ],
+      lineage: {
+        catalog: 'workspace.campus_intelligence_gold',
+        pii_masked: true,
+        engine: 'Serverless Photon'
+      }
+    };
+  }
+
+  // 4. Detect Skills for What-If Student ROI Calculation
   const detectedSkills: string[] = [];
   const aliasMap: [string, string[]][] = [
     ['AIML', ['MACHINE_LEARNING', 'GENAI_LLMS']],
