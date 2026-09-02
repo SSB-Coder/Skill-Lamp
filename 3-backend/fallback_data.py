@@ -667,6 +667,63 @@ STUDENTS_DB: List[Dict[str, Any]] = [
     },
 ]
 
+import csv
+import os
+
+def _load_500_students() -> Optional[List[Dict[str, Any]]]:
+    try:
+        base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        students_path = os.path.join(base_dir, "1-data-schema", "students.csv")
+        skills_path = os.path.join(base_dir, "1-data-schema", "skills.csv")
+        if os.path.exists(students_path) and os.path.exists(skills_path):
+            student_skills: Dict[str, List[str]] = {}
+            with open(skills_path, "r", encoding="utf-8") as f:
+                reader = csv.DictReader(f)
+                for row in reader:
+                    sid = row.get("student_id")
+                    sk = row.get("skill_name", "").strip()
+                    if sid and sk:
+                        student_skills.setdefault(sid, []).append(sk)
+            
+            students_list: List[Dict[str, Any]] = []
+            with open(students_path, "r", encoding="utf-8") as f:
+                reader = csv.DictReader(f)
+                for row in reader:
+                    sid = row.get("student_id")
+                    if sid:
+                        students_list.append({
+                            "student_id": sid,
+                            "full_name": row.get("full_name", ""),
+                            "email": row.get("email", ""),
+                            "branch": row.get("branch", "CSE"),
+                            "cgpa": float(row.get("cgpa", 7.5)),
+                            "graduation_year": int(row.get("graduation_year", 2025)),
+                            "active_backlogs": int(row.get("active_backlogs", 0)),
+                            "skills": student_skills.get(sid, ["PYTHON", "SQL"])
+                        })
+            if len(students_list) >= 100:
+                return students_list
+    except Exception:
+        pass
+    return None
+
+CSV_STUDENTS = _load_500_students()
+if CSV_STUDENTS:
+    aarav = {
+        "student_id": "USN_2024_001",
+        "full_name": "Aarav Sharma",
+        "email": "student@rvce.edu.in",
+        "branch": "CSE",
+        "cgpa": 8.4,
+        "graduation_year": 2024,
+        "active_backlogs": 0,
+        "skills": ["Python", "SQL", "Data Structures", "FastAPI"]
+    }
+    if not any(s["student_id"] == "USN_2024_001" for s in CSV_STUDENTS):
+        STUDENTS_DB = [aarav] + CSV_STUDENTS
+    else:
+        STUDENTS_DB = CSV_STUDENTS
+
 
 def get_candidate_rows() -> List[CandidateRow]:
     """
@@ -991,51 +1048,61 @@ def mock_genie_query(prompt: str, conversation_id: Optional[str] = None) -> Quer
         )
 
     # -------------------------------------------------------------------------
-    # Query 6 / Screenshot 1: Branch-Wise Placement Statistics for 2024 Batch
+    # Query 6 / Databricks Web Screenshot 1 & 2: Branch-Wise Statistics 2024 Batch
     # -------------------------------------------------------------------------
     if ("branch" in p and ("placement percentage" in p or "average ctc" in p or "statistics" in p or "2024" in p)) or "branch-wise" in p:
         thinking_steps = [
-            "Filtering graduating batch: 2024",
-            "Grouping by student branch across gold_dim_students and gold_fact_placement_history",
-            "Aggregating placed count, total count, placement percentage, and mean offered CTC",
-            "Sorting by average placed CTC in descending order"
+            "I'll analyze the placement outcomes for the 2024 graduating batch across all branches.",
+            "2024 batch placement percentage and average CTC by branch",
+            "2024 batch overall placement statistics"
         ]
         sql = (
-            "SELECT \n"
-            "  s.branch,\n"
-            "  COUNT(s.student_id) AS total_students,\n"
-            "  COUNT(CASE WHEN ph.offer_status = 'Placed' THEN 1 END) AS placed_students,\n"
-            "  ROUND(COUNT(CASE WHEN ph.offer_status = 'Placed' THEN 1 END) * 100.0 / COUNT(s.student_id), 1) AS placement_pct,\n"
-            "  ROUND(AVG(CASE WHEN ph.offer_status = 'Placed' THEN ph.offered_ctc_lpa END), 2) AS avg_placed_ctc_lpa\n"
+            "SELECT\n"
+            "  s.`branch`,\n"
+            "  COUNT(DISTINCT s.`student_id`) AS total_students,\n"
+            "  COUNT(DISTINCT CASE WHEN ph.`offer_status` = 'Placed' THEN s.`student_id` END) AS placed_students,\n"
+            "  ROUND(\n"
+            "    COUNT(DISTINCT CASE WHEN ph.`offer_status` = 'Placed' THEN s.`student_id` END) * 100.0\n"
+            "    / COUNT(DISTINCT s.`student_id`),\n"
+            "    2\n"
+            "  ) AS placement_pct,\n"
+            "  ROUND(\n"
+            "    AVG(CASE WHEN ph.`offer_status` = 'Placed' THEN ph.`offered_ctc_lpa` END),\n"
+            "    2\n"
+            "  ) AS avg_placed_ctc_lpa\n"
             "FROM workspace.campus_intelligence_gold.gold_dim_students s\n"
             "LEFT JOIN workspace.campus_intelligence_gold.gold_fact_placement_history ph ON s.student_id = ph.student_id\n"
             "WHERE s.graduating_year = 2024\n"
             "GROUP BY s.branch\n"
             "ORDER BY avg_placed_ctc_lpa DESC;"
         )
-        columns = ["branch", "total_students", "placed_students", "placement_pct", "avg_placed_ctc_lpa"]
+        columns = ["branch", "total_students", "placed_students", "placement_pct", "avg_ctc_lpa"]
         rows = [
-            ["AI/DS", 80, 72, 90.0, 20.40],
-            ["CSE", 180, 158, 87.8, 19.80],
-            ["ISE", 120, 102, 85.0, 17.50],
-            ["ECE", 120, 84, 70.0, 12.20],
+            ["AI/DS", 38, 37, "97.37%", 18.28],
+            ["ISE", 72, 69, "95.83%", 18.78],
+            ["ECE", 48, 45, "93.75%", 18.42],
+            ["CSE", 111, 104, "93.69%", 20.24],
         ]
         answer = (
-            "### 2024 Graduating Batch: Branch-Wise Placement & Compensation Analysis\n\n"
-            "Governed aggregation across **500 students** for the 2024 batch from `workspace.campus_intelligence_gold.gold_dim_students` [1] and `gold_fact_placement_history` [2]:\n\n"
-            "| Branch | Total Students | Placed Students | Placement Rate | Avg Placed CTC | Top Offer |\n"
-            "| :--- | :--- | :--- | :--- | :--- | :--- |\n"
-            "| **AI/DS** | 80 | 72 | **90.0%** | **20.40 LPA** | 48.0 LPA (Databricks) |\n"
-            "| **CSE** | 180 | 158 | **87.8%** | **19.80 LPA** | 44.0 LPA (Microsoft) |\n"
-            "| **ISE** | 120 | 102 | **85.0%** | **17.50 LPA** | 32.0 LPA (Adobe) |\n"
-            "| **ECE** | 120 | 84 | **70.0%** | **12.20 LPA** | 24.0 LPA (Qualcomm) |\n\n"
-            "### Key Observations\n"
-            "• **Highest Average Package:** AI/DS branch leads with **20.40 LPA**, driven by strong recruiter competition for GenAI/LLM and Lakehouse competencies.\n"
-            "• **Highest Offer Volume:** CSE generated **158 offers** (43.6% of campus total).\n"
-            "• **Lakehouse Skill Premium:** Candidates possessing `DATABRICKS_DE` achieved a **+5.63 LPA premium** over the general batch average.\n\n"
-            "### TPO Strategic Recommendations\n"
-            "1. **ECE Skill Gap Intervention:** ECE placement rate (70.0%) lags computing branches; providing Python/SQL cross-skilling bridges is projected to lift ECE placement by **+8.4%**.\n"
-            "2. **Super Dream Drive Prioritization:** 82% of eligible Super Dream candidates are concentrated in CSE/ISE/AI/DS."
+            "### 2024 Graduating Batch Placement Performance\n\n"
+            "The 2024 graduating batch achieved a **94.80% overall placement rate** with an **average CTC of 19.19 LPA** across 269 students. [1]\n\n"
+            "### Overall Statistics\n"
+            "• **Total Students:** 269\n"
+            "• **Placed Students:** 255\n"
+            "• **Placement Rate:** 94.80%\n"
+            "• **Average CTC:** 19.19 LPA\n\n"
+            "---\n\n"
+            "### Branch-wise Performance [2]\n\n"
+            "| Branch | Total Students | Placed | Placement % | Avg CTC (LPA) |\n"
+            "| :--- | :--- | :--- | :--- | :--- |\n"
+            "| **AI/DS** | 38 | 37 | **97.37%** | **18.28** |\n"
+            "| **ISE** | 72 | 69 | **95.83%** | **18.78** |\n"
+            "| **ECE** | 48 | 45 | **93.75%** | **18.42** |\n"
+            "| **CSE** | 111 | 104 | **93.69%** | **20.24** |\n\n"
+            "### Key Insights\n"
+            "• **Highest Placement Rate:** AI/DS leads with 97.37% placement, placing 37 out of 38 students.\n"
+            "• **Highest Average CTC:** CSE graduates commanded the highest average compensation at 20.24 LPA, despite having a slightly lower placement percentage (93.69%) than AI/DS and ISE.\n"
+            "• **Most Consistent Performance:** All four branches maintained placement rates above 93%, demonstrating strong overall campus recruitment outcomes for the 2024 cohort."
         )
         return QueryResponse(
             conversation_id=conv_id,
@@ -1048,7 +1115,8 @@ def mock_genie_query(prompt: str, conversation_id: Optional[str] = None) -> Quer
             filter_student_ids=[],
             answer=answer,
             thinking_steps=thinking_steps,
-            citations=citations
+            citations=citations,
+            table_title="2024 batch placement percentage and average CTC by branch"
         )
 
     # -------------------------------------------------------------------------

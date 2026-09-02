@@ -108,6 +108,9 @@ export interface GenieQueryResponse {
   matched_student_ids?: string[];
   thinking_steps?: string[];
   citations?: Array<{ id: string; source: string }>;
+  columns?: string[];
+  rows?: Array<Array<string | number | boolean | null>>;
+  table_title?: string;
 }
 
 export interface WhatIfRequest {

@@ -312,7 +312,10 @@ export async function queryGenie(request: GenieQueryRequest): Promise<GenieQuery
           lineage: DEFAULT_LINEAGE,
           matched_student_ids: data.filter_student_ids,
           thinking_steps: data.thinking_steps,
-          citations: data.citations
+          citations: data.citations,
+          columns: data.columns,
+          rows: data.rows,
+          table_title: data.table_title
         };
       }
     } catch {

@@ -1087,36 +1087,48 @@ WHERE s.cgpa > 10.0;`,
   if ((q.includes('branch') && (q.includes('placement percentage') || q.includes('average ctc') || q.includes('statistics') || q.includes('2024'))) || q.includes('branch-wise')) {
     return {
       thinking_steps: [
-        'Filtering graduating batch: 2024',
-        'Grouping by student branch across gold_dim_students and gold_fact_placement_history',
-        'Aggregating placed count, total count, placement percentage, and mean offered CTC',
-        'Sorting by average placed CTC in descending order'
+        "I'll analyze the placement outcomes for the 2024 graduating batch across all branches.",
+        '2024 batch placement percentage and average CTC by branch',
+        '2024 batch overall placement statistics'
       ],
-      answer: `### 2024 Graduating Batch: Branch-Wise Placement & Compensation Analysis
+      answer: `### 2024 Graduating Batch Placement Performance
 
-Governed aggregation across **500 students** for the 2024 batch from \`workspace.campus_intelligence_gold.gold_dim_students\` [1] and \`gold_fact_placement_history\` [2]:
+The 2024 graduating batch achieved a **94.80% overall placement rate** with an **average CTC of 19.19 LPA** across 269 students. [1]
 
-| Branch | Total Students | Placed Students | Placement Rate | Avg Placed CTC | Top Offer |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **AI/DS** | 80 | 72 | **90.0%** | **20.40 LPA** | 48.0 LPA (Databricks) |
-| **CSE** | 180 | 158 | **87.8%** | **19.80 LPA** | 44.0 LPA (Microsoft) |
-| **ISE** | 120 | 102 | **85.0%** | **17.50 LPA** | 32.0 LPA (Adobe) |
-| **ECE** | 120 | 84 | **70.0%** | **12.20 LPA** | 24.0 LPA (Qualcomm) |
+### Overall Statistics
+• **Total Students:** 269
+• **Placed Students:** 255
+• **Placement Rate:** 94.80%
+• **Average CTC:** 19.19 LPA
 
-### Key Observations
-• **Highest Average Package:** AI/DS branch leads with **20.40 LPA**, driven by strong recruiter competition for GenAI/LLM and Lakehouse competencies.
-• **Highest Offer Volume:** CSE generated **158 offers** (43.6% of campus total).
-• **Lakehouse Skill Premium:** Candidates possessing \`DATABRICKS_DE\` achieved a **+5.63 LPA premium** over the general batch average.
+---
 
-### TPO Strategic Recommendations
-1. **ECE Skill Gap Intervention:** ECE placement rate (70.0%) lags computing branches; providing Python/SQL cross-skilling bridges is projected to lift ECE placement by **+8.4%**.
-2. **Super Dream Drive Prioritization:** 82% of eligible Super Dream candidates are concentrated in CSE/ISE/AI/DS.`,
-      sql_query: `SELECT 
-  s.branch,
-  COUNT(s.student_id) AS total_students,
-  COUNT(CASE WHEN ph.offer_status = 'Placed' THEN 1 END) AS placed_students,
-  ROUND(COUNT(CASE WHEN ph.offer_status = 'Placed' THEN 1 END) * 100.0 / COUNT(s.student_id), 1) AS placement_pct,
-  ROUND(AVG(CASE WHEN ph.offer_status = 'Placed' THEN ph.offered_ctc_lpa END), 2) AS avg_placed_ctc_lpa
+### Branch-wise Performance [2]
+
+| Branch | Total Students | Placed | Placement % | Avg CTC (LPA) |
+| :--- | :--- | :--- | :--- | :--- |
+| **AI/DS** | 38 | 37 | **97.37%** | **18.28** |
+| **ISE** | 72 | 69 | **95.83%** | **18.78** |
+| **ECE** | 48 | 45 | **93.75%** | **18.42** |
+| **CSE** | 111 | 104 | **93.69%** | **20.24** |
+
+### Key Insights
+• **Highest Placement Rate:** AI/DS leads with 97.37% placement, placing 37 out of 38 students.
+• **Highest Average CTC:** CSE graduates commanded the highest average compensation at 20.24 LPA, despite having a slightly lower placement percentage (93.69%) than AI/DS and ISE.
+• **Most Consistent Performance:** All four branches maintained placement rates above 93%, demonstrating strong overall campus recruitment outcomes for the 2024 cohort.`,
+      sql_query: `SELECT
+  s.\`branch\`,
+  COUNT(DISTINCT s.\`student_id\`) AS total_students,
+  COUNT(DISTINCT CASE WHEN ph.\`offer_status\` = 'Placed' THEN s.\`student_id\` END) AS placed_students,
+  ROUND(
+    COUNT(DISTINCT CASE WHEN ph.\`offer_status\` = 'Placed' THEN s.\`student_id\` END) * 100.0
+    / COUNT(DISTINCT s.\`student_id\`),
+    2
+  ) AS placement_pct,
+  ROUND(
+    AVG(CASE WHEN ph.\`offer_status\` = 'Placed' THEN ph.\`offered_ctc_lpa\` END),
+    2
+  ) AS avg_placed_ctc_lpa
 FROM workspace.campus_intelligence_gold.gold_dim_students s
 LEFT JOIN workspace.campus_intelligence_gold.gold_fact_placement_history ph ON s.student_id = ph.student_id
 WHERE s.graduating_year = 2024
@@ -1126,7 +1138,15 @@ ORDER BY avg_placed_ctc_lpa DESC;`,
       row_count: 4,
       lineage: defaultLineage,
       matched_student_ids: [],
-      citations
+      citations,
+      columns: ['branch', 'total_students', 'placed_students', 'placement_pct', 'avg_ctc_lpa'],
+      rows: [
+        ['AI/DS', 38, 37, '97.37%', 18.28],
+        ['ISE', 72, 69, '95.83%', 18.78],
+        ['ECE', 48, 45, '93.75%', 18.42],
+        ['CSE', 111, 104, '93.69%', 20.24]
+      ],
+      table_title: '2024 batch placement percentage and average CTC by branch'
     };
   }
 

@@ -119,6 +119,7 @@ class QueryResponse(BaseModel):
     answer: Optional[str] = None
     thinking_steps: Optional[List[str]] = None
     citations: Optional[List[Dict[str, str]]] = None
+    table_title: Optional[str] = None
 
 
 # ---------------------------------------------------------------------------
