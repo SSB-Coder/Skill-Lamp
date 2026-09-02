@@ -1247,9 +1247,38 @@ def mock_genie_query(prompt: str, conversation_id: Optional[str] = None) -> Quer
     ]
 
     # -------------------------------------------------------------------------
+    # Priority 0: Skill ROI & Placement Probability / Percentage Uplift Calculations
+    # (Matches any student career calculation or % uplift inquiry before candidate searches)
+    # -------------------------------------------------------------------------
+    is_skill_roi = any(k in p for k in [
+        "probability", "percent", "%", "increase", "roi", "uplift", "boost", "chance", "what if", "learn", "returns"
+    ]) and not any(k in p for k in ["cgpa > 10", "10.0", "batch-wise", "overall placement rate"])
+    
+    is_student_context = "student question:" in p or "context: student id" in p
+    
+    if is_skill_roi or (is_student_context and not any(k in p for k in ["shortlist", "all students", "batch-wise", "who is eligible", "list of candidates"])):
+        cohort_branch = "ISE"
+        cohort_cgpa = 8.12
+        if "branch cse" in p:
+            cohort_branch = "CSE"
+        elif "branch ece" in p:
+            cohort_branch = "ECE"
+        elif "branch ai/ds" in p:
+            cohort_branch = "AI/DS"
+            
+        cgpa_match = re.search(r"cgpa\s*[:=]?\s*(\d+\.?\d*)", p)
+        if cgpa_match:
+            try:
+                cohort_cgpa = float(cgpa_match.group(1))
+            except ValueError:
+                pass
+                
+        return calculate_skill_roi_from_history(prompt, branch=cohort_branch, cgpa=cohort_cgpa)
+
+    # -------------------------------------------------------------------------
     # Priority 1: TPO Candidate Search, Eligibility, Shortlisting, and Batch Analytics
     # -------------------------------------------------------------------------
-    if "databricks" in p and ("eligible" in p or "cgpa" in p or "8.0" in p or "gpa" in p or "shortlist" in p or "student" in p or "who" in p or "list" in p):
+    if "databricks" in p and ("shortlist" in p or "candidates" in p or "who is eligible" in p or ("eligible" in p and "students" in p)):
         thinking_steps = [
             "Filtering company criteria: company_name = 'Databricks'",
             "Joining gold_dim_students with gold_fact_student_skills on student_id",
@@ -1494,7 +1523,7 @@ def mock_genie_query(prompt: str, conversation_id: Optional[str] = None) -> Quer
     # -------------------------------------------------------------------------
     # Query 1 / TPO Shortlist: Databricks eligible with CGPA >= 8.0
     # -------------------------------------------------------------------------
-    if "databricks" in p and ("eligible" in p or "cgpa" in p or "8.0" in p or "shortlist" in p):
+    if "databricks" in p and ("shortlist" in p or "candidates" in p or "who is eligible" in p or ("eligible" in p and "students" in p)):
         thinking_steps = [
             "Filtering company criteria: company_name = 'Databricks'",
             "Joining gold_dim_students with gold_fact_student_skills on student_id",

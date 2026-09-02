@@ -106,7 +106,9 @@ export const HeroDeltaCards: React.FC<HeroDeltaCardsProps> = ({
         <div className="flex items-center justify-between pb-2 border-b border-app-border">
           <div className="flex items-center space-x-2">
             <Building2 className="w-3.5 h-3.5 text-app-muted" />
-            <span className="text-xs font-semibold text-app-text">Unlocked Drive Cohorts</span>
+            <span className="text-xs font-semibold text-app-text">
+              {unlockedCompanies.some((c) => c.is_new) ? 'Newly Unlocked Drives' : 'Eligible Drive Cohorts'}
+            </span>
           </div>
           <span className="text-xs font-mono px-2 py-0.5 rounded-md bg-app-bg border border-app-border text-app-muted">
             {unlockedCompanies.length} Drives
@@ -116,7 +118,7 @@ export const HeroDeltaCards: React.FC<HeroDeltaCardsProps> = ({
         <div className="mt-2.5 flex flex-wrap gap-1.5 max-h-16 overflow-y-auto">
           {unlockedCompanies.length === 0 ? (
             <div className="text-xs text-app-subtle font-mono py-1">
-              No new drives unlocked. Select skills below to qualify for more companies.
+              No active drives. Select skills below to qualify for campus recruitment.
             </div>
           ) : (
             unlockedCompanies.map((c, idx) => (
@@ -128,9 +130,13 @@ export const HeroDeltaCards: React.FC<HeroDeltaCardsProps> = ({
                     : 'bg-app-bg border-app-border text-app-muted'
                 }`}
               >
-                {c.is_new && (
+                {c.is_new ? (
                   <span className="text-[9px] font-bold px-1 py-0.2 rounded-md bg-app-success text-app-bg">
                     NEW
+                  </span>
+                ) : (
+                  <span className="text-[9px] font-bold px-1 py-0.2 rounded-md bg-app-border text-app-subtle">
+                    ACTIVE
                   </span>
                 )}
                 <span className="font-medium text-app-text">{c.name}</span>
@@ -141,7 +147,9 @@ export const HeroDeltaCards: React.FC<HeroDeltaCardsProps> = ({
         </div>
 
         <div className="mt-2 text-[10px] text-app-subtle font-mono">
-          Direct campus recruitment shortlisting
+          {unlockedCompanies.some((c) => c.is_new)
+            ? 'Unlocked via simulated skill acquisitions'
+            : 'Direct campus recruitment shortlisting'}
         </div>
       </div>
     </div>

@@ -149,7 +149,18 @@ export const StudentDashboard: React.FC = () => {
           baseCtc={calculationResult.base_ctc}
           simulatedCtc={calculationResult.simulated_ctc}
           deltaCtc={calculationResult.delta_ctc}
-          unlockedCompanies={calculationResult.newly_unlocked_companies}
+          unlockedCompanies={
+            calculationResult.newly_unlocked_companies && calculationResult.newly_unlocked_companies.length > 0
+              ? calculationResult.newly_unlocked_companies
+              : (profile.target_companies_available || [])
+                  .filter((c) => c.is_currently_eligible)
+                  .map((c) => ({
+                    name: c.name,
+                    ctc_lpa: c.ctc_lpa,
+                    tier: c.tier,
+                    is_new: false
+                  }))
+          }
         />
 
         {/* 4. Target Company Reverse Roadmap */}

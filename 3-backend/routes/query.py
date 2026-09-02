@@ -57,9 +57,14 @@ async def query_genie(req: QueryRequest, request: Request, current_user: UserSes
         "cannot calculate", "can't calculate", "unable to calculate",
         "do not compute", "raw counts only", "not my job", "performed by the platform"
     ]
-    if is_calc_query:
+    if is_calc_query or current_user.role == "STUDENT":
         ans_lower = (response.answer or "").lower()
-        if any(cue in ans_lower for cue in refusal_cues) or response.row_count == 0:
+        if (
+            any(cue in ans_lower for cue in refusal_cues)
+            or response.row_count == 0
+            or ("candidate shortlist" in ans_lower)
+            or ("meeting all criteria" in ans_lower)
+        ):
             student_branch = student["branch"] if student else "ISE"
             student_cgpa = student["cgpa"] if student else 8.12
             return fallback_data.calculate_skill_roi_from_history(
