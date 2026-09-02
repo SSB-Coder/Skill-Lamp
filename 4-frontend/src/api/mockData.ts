@@ -10055,40 +10055,188 @@ export function mockGenieQuery(prompt: string, _persona: string = 'TPO') {
 }
 
 export function simulateWhatIf(req: { student_id: string; added_skills: string[]; target_company?: string }) {
+  const baseProb = 40.0;
+  const baseCtc = 8.20;
+
+  if (!req.added_skills || req.added_skills.length === 0) {
+    return {
+      student_id: req.student_id,
+      added_skills: [],
+      base_prob: baseProb,
+      simulated_prob: baseProb,
+      delta_prob: 0.0,
+      base_ctc: baseCtc,
+      simulated_ctc: baseCtc,
+      delta_ctc: 0.0,
+      base_tier_distribution: { core_tech: 3, dream: 0, super_dream: 0 },
+      tier_distribution: { core_tech: 3, dream: 0, super_dream: 0 },
+      synergy_alert: null,
+      newly_unlocked_companies: [],
+      sql_query: "SELECT \n  COUNT(CASE WHEN had_ai_data_skill = TRUE AND offer_status = 'Placed' THEN 1 END) AS placed_with_skill,\n  COUNT(CASE WHEN had_ai_data_skill = TRUE THEN 1 END) AS total_with_skill,\n  COUNT(CASE WHEN had_ai_data_skill = FALSE AND offer_status = 'Placed' THEN 1 END) AS placed_without_skill,\n  COUNT(CASE WHEN had_ai_data_skill = FALSE THEN 1 END) AS total_without_skill,\n  ROUND(AVG(CASE WHEN had_ai_data_skill = TRUE AND offer_status = 'Placed' THEN offered_ctc_lpa END), 2) AS avg_ctc_with_skill,\n  ROUND(AVG(CASE WHEN had_ai_data_skill = FALSE AND offer_status = 'Placed' THEN offered_ctc_lpa END), 2) AS avg_ctc_without_skill\nFROM workspace.campus_intelligence_gold.gold_fact_placement_history ph\nJOIN workspace.campus_intelligence_gold.gold_dim_students s ON ph.student_id = s.student_id\nWHERE s.branch = 'ISE';",
+      cohort_size_analyzed: 50
+    };
+  }
+
+  const skillMetrics: Record<string, { pts: number; ctc: number; unlocks: { name: string; ctc_lpa: number; tier: string }[] }> = {
+    DATABRICKS_DE: {
+      pts: 40.0,
+      ctc: 10.30,
+      unlocks: [
+        { name: 'Databricks', ctc_lpa: 48.0, tier: 'Super Dream' },
+        { name: 'Adobe', ctc_lpa: 26.0, tier: 'Dream' }
+      ]
+    },
+    PYSPARK: {
+      pts: 38.5,
+      ctc: 8.20,
+      unlocks: [
+        { name: 'Databricks', ctc_lpa: 48.0, tier: 'Super Dream' },
+        { name: 'Infosys DSE', ctc_lpa: 7.0, tier: 'Core Tech' }
+      ]
+    },
+    CPP: {
+      pts: 42.0,
+      ctc: 12.80,
+      unlocks: [
+        { name: 'Google', ctc_lpa: 45.0, tier: 'Super Dream' },
+        { name: 'NVIDIA', ctc_lpa: 38.0, tier: 'Super Dream' },
+        { name: 'Microsoft', ctc_lpa: 42.0, tier: 'Super Dream' }
+      ]
+    },
+    GENAI_LLMS: {
+      pts: 36.5,
+      ctc: 9.60,
+      unlocks: [
+        { name: 'Microsoft', ctc_lpa: 42.0, tier: 'Super Dream' },
+        { name: 'Adobe', ctc_lpa: 26.0, tier: 'Dream' }
+      ]
+    },
+    MACHINE_LEARNING: {
+      pts: 34.2,
+      ctc: 8.90,
+      unlocks: [
+        { name: 'Goldman Sachs', ctc_lpa: 28.0, tier: 'Dream' },
+        { name: 'TCS Digital', ctc_lpa: 9.0, tier: 'Core Tech' }
+      ]
+    },
+    DEEP_LEARNING: {
+      pts: 31.8,
+      ctc: 8.10,
+      unlocks: [
+        { name: 'NVIDIA', ctc_lpa: 38.0, tier: 'Super Dream' },
+        { name: 'Google', ctc_lpa: 45.0, tier: 'Super Dream' }
+      ]
+    },
+    JAVA_BACKEND: {
+      pts: 35.0,
+      ctc: 8.60,
+      unlocks: [
+        { name: 'Amazon', ctc_lpa: 32.0, tier: 'Dream' },
+        { name: 'Atlassian', ctc_lpa: 24.0, tier: 'Dream' },
+        { name: 'Morgan Stanley', ctc_lpa: 20.0, tier: 'Dream' }
+      ]
+    },
+    AWS_CLOUD: {
+      pts: 32.4,
+      ctc: 7.20,
+      unlocks: [
+        { name: 'Cisco', ctc_lpa: 18.0, tier: 'Dream' },
+        { name: 'Amazon', ctc_lpa: 32.0, tier: 'Dream' }
+      ]
+    },
+    REACT: {
+      pts: 27.6,
+      ctc: 5.80,
+      unlocks: [
+        { name: 'Adobe', ctc_lpa: 26.0, tier: 'Dream' },
+        { name: 'Atlassian', ctc_lpa: 24.0, tier: 'Dream' }
+      ]
+    },
+    LANGCHAIN: {
+      pts: 25.3,
+      ctc: 5.20,
+      unlocks: [
+        { name: 'Adobe', ctc_lpa: 26.0, tier: 'Dream' }
+      ]
+    },
+    VECTOR_DATABASES: {
+      pts: 23.7,
+      ctc: 4.80,
+      unlocks: [
+        { name: 'Databricks', ctc_lpa: 48.0, tier: 'Super Dream' }
+      ]
+    },
+    COMPUTER_VISION: {
+      pts: 21.9,
+      ctc: 4.50,
+      unlocks: [
+        { name: 'NVIDIA', ctc_lpa: 38.0, tier: 'Super Dream' }
+      ]
+    },
+    NLP: {
+      pts: 19.4,
+      ctc: 3.90,
+      unlocks: [
+        { name: 'Microsoft', ctc_lpa: 42.0, tier: 'Super Dream' }
+      ]
+    },
+    PROMPT_ENGINEERING: {
+      pts: 16.8,
+      ctc: 3.20,
+      unlocks: [
+        { name: 'TCS Digital', ctc_lpa: 9.0, tier: 'Core Tech' }
+      ]
+    },
+    PYTHON: {
+      pts: 14.5,
+      ctc: 2.80,
+      unlocks: [
+        { name: 'Cisco', ctc_lpa: 18.0, tier: 'Dream' }
+      ]
+    },
+    SQL: {
+      pts: 13.2,
+      ctc: 2.50,
+      unlocks: [
+        { name: 'Infosys DSE', ctc_lpa: 7.0, tier: 'Core Tech' }
+      ]
+    }
+  };
+
   const hasDatabricks = req.added_skills.includes('DATABRICKS_DE');
   const hasPySpark = req.added_skills.includes('PYSPARK');
 
-  let baseProb = 40.0;
-  let baseCtc = 8.20;
-  let simProb = baseProb;
-  let simCtc = baseCtc;
-  let newlyUnlocked: any[] = [];
-  let synergyAlert: string | null = null;
+  let addedPts = 0;
+  let addedCtc = 0;
+  const unlockedMap = new Map<string, { name: string; ctc_lpa: number; tier: string; is_new: boolean }>();
 
-  if (hasDatabricks && hasPySpark) {
-    simProb = 92.0;
-    simCtc = 22.80;
-    synergyAlert = 'Synergy Alert: Pairing DATABRICKS_DE with PYSPARK boosts Super Dream probability to 92.0% (+52.0 pts) and expected CTC to 22.80 LPA (+14.60 LPA).';
-    newlyUnlocked = [
-      { name: 'Databricks', ctc_lpa: 48.0, tier: 'Super Dream', is_new: true },
-      { name: 'Adobe', ctc_lpa: 26.0, tier: 'Dream', is_new: true },
-      { name: 'Infosys DSE', ctc_lpa: 7.0, tier: 'Core Tech', is_new: true }
-    ];
-  } else if (hasDatabricks) {
-    simProb = 80.0;
-    simCtc = 18.50;
-    synergyAlert = 'Top ROI Recommendation: Adding DATABRICKS_DE yields the highest marginal CTC gain (+10.30 LPA) and unlocks 2 Super Dream companies.';
-    newlyUnlocked = [
-      { name: 'Databricks', ctc_lpa: 48.0, tier: 'Super Dream', is_new: true },
-      { name: 'Adobe', ctc_lpa: 26.0, tier: 'Dream', is_new: true }
-    ];
-  } else if (req.added_skills.length > 0) {
-    simProb = Math.min(85.0, baseProb + req.added_skills.length * 10.0);
-    simCtc = Number((baseCtc + req.added_skills.length * 2.2).toFixed(2));
-    newlyUnlocked = [
-      { name: 'Cisco', ctc_lpa: 18.0, tier: 'Dream', is_new: true }
-    ];
+  for (let i = 0; i < req.added_skills.length; i++) {
+    const s = req.added_skills[i];
+    const m = skillMetrics[s] || { pts: 15.0, ctc: 3.0, unlocks: [] };
+    const decay = i === 0 ? 1.0 : (i === 1 ? 0.45 : 0.25);
+    addedPts += m.pts * decay;
+    addedCtc += m.ctc * decay;
+    for (const u of m.unlocks) {
+      unlockedMap.set(u.name, { ...u, is_new: true });
+    }
   }
+
+  let synergyAlert: string | null = null;
+  if (hasDatabricks && hasPySpark) {
+    addedPts = 52.0;
+    addedCtc = 14.60;
+    synergyAlert = 'Synergy Alert: Pairing DATABRICKS_DE with PYSPARK boosts Super Dream probability to 92.0% (+52.0 pts) and expected CTC to 22.80 LPA (+14.60 LPA).';
+    unlockedMap.set('Databricks', { name: 'Databricks', ctc_lpa: 48.0, tier: 'Super Dream', is_new: true });
+    unlockedMap.set('Adobe', { name: 'Adobe', ctc_lpa: 26.0, tier: 'Dream', is_new: true });
+    unlockedMap.set('Infosys DSE', { name: 'Infosys DSE', ctc_lpa: 7.0, tier: 'Core Tech', is_new: true });
+  }
+
+  const simProb = Math.min(96.0, Number((baseProb + addedPts).toFixed(1)));
+  const simCtc = Number((baseCtc + addedCtc).toFixed(2));
+  const newlyUnlocked = Array.from(unlockedMap.values());
+
+  const superDreamCount = newlyUnlocked.filter(c => c.tier === 'Super Dream').length;
+  const dreamCount = newlyUnlocked.filter(c => c.tier === 'Dream').length;
 
   return {
     student_id: req.student_id,
@@ -10100,7 +10248,7 @@ export function simulateWhatIf(req: { student_id: string; added_skills: string[]
     simulated_ctc: simCtc,
     delta_ctc: Number((simCtc - baseCtc).toFixed(2)),
     base_tier_distribution: { core_tech: 3, dream: 0, super_dream: 0 },
-    tier_distribution: { core_tech: 3, dream: newlyUnlocked.length >= 2 ? 1 : 0, super_dream: hasDatabricks ? 1 : 0 },
+    tier_distribution: { core_tech: 3, dream: dreamCount, super_dream: superDreamCount },
     synergy_alert: synergyAlert,
     newly_unlocked_companies: newlyUnlocked,
     sql_query: "SELECT \n  COUNT(CASE WHEN had_ai_data_skill = TRUE AND offer_status = 'Placed' THEN 1 END) AS placed_with_skill,\n  COUNT(CASE WHEN had_ai_data_skill = TRUE THEN 1 END) AS total_with_skill,\n  COUNT(CASE WHEN had_ai_data_skill = FALSE AND offer_status = 'Placed' THEN 1 END) AS placed_without_skill,\n  COUNT(CASE WHEN had_ai_data_skill = FALSE THEN 1 END) AS total_without_skill,\n  ROUND(AVG(CASE WHEN had_ai_data_skill = TRUE AND offer_status = 'Placed' THEN offered_ctc_lpa END), 2) AS avg_ctc_with_skill,\n  ROUND(AVG(CASE WHEN had_ai_data_skill = FALSE AND offer_status = 'Placed' THEN offered_ctc_lpa END), 2) AS avg_ctc_without_skill\nFROM workspace.campus_intelligence_gold.gold_fact_placement_history ph\nJOIN workspace.campus_intelligence_gold.gold_dim_students s ON ph.student_id = s.student_id\nWHERE s.branch = 'ISE';",
