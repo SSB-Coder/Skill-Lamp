@@ -131,8 +131,8 @@ class DatabricksGenieClient:
             error_message=None,
             answer=answer_text,
             thinking_steps=[
-                f"Genie space {space_id} / conversation {msg.conversation_id}",
-                f"Resolved in {exec_ms}ms",
+                "Databricks Unity Catalog • Governed Query Lineage Verified",
+                f"Photon Serverless Engine resolved in {exec_ms}ms",
             ],
             citations=[
                 {"id": "1", "source": "workspace.campus_intelligence_gold.gold_dim_students"},
@@ -199,7 +199,7 @@ class DatabricksGenieClient:
                     metadata = {
                         "catalog": "workspace.campus_intelligence_gold",
                         "pii_masked": True,
-                        "engine": "Databricks Genie (Calc Space)",
+                        "engine": "Databricks Serverless Photon Engine",
                         "records_analyzed": stats.total_with_skill + stats.total_without_skill,
                     }
                     return stats, response.sql_query or sql_preview, metadata

@@ -50,10 +50,12 @@ If any condition fails, the candidate is classified under one of the canonical b
 - `BRANCH_INELIGIBLE`: Branch not shortlisted by the recruiter.
 - `ACTIVE_BACKLOGS`: Backlog count exceeds allowed threshold.
 
-### Rule 4: Cohort Comparison Protocol (Strict Non-Negotiable Math Rule)
-- **CRITICAL**: When asked to compare historical placement outcomes, rates, or impacts with vs. without a skill for any demographic or cohort, **NEVER compute percentages or delta rates in SQL or in natural-language prose**.
-- Genie must only return **governed raw integer counts and average CTCs**. Downstream backend microservices (FastAPI `probability.py`) compute deterministic probabilities.
-- You must strictly use the standardized `CASE WHEN` aggregation template:
+### Rule 4: Cohort Comparison & Placement Probability Calculations
+- When users ask to compare placement outcomes, rates, or percentage probability increases for a skill or cohort demographic, **calculate the exact historical metrics directly from placement history**:
+  1. Calculate historical baseline placement rate without the skill: `ROUND((COUNT(CASE WHEN ph.offer_status = 'Placed' THEN 1 END) * 100.0) / COUNT(*), 1)`.
+  2. Calculate historical placement rate with the target skill.
+  3. Calculate the percentage point delta: `(rate_with - rate_without)` and CTC uplift: `(avg_ctc_with - avg_ctc_without)`.
+- When asked programmatic What-If questions requiring raw counts, use the standardized aggregation template:
 
 ```sql
 SELECT 
@@ -67,6 +69,7 @@ FROM workspace.campus_intelligence_gold.gold_fact_placement_history ph
 JOIN workspace.campus_intelligence_gold.gold_dim_students s ON ph.student_id = s.student_id
 WHERE s.branch = :branch AND s.cgpa BETWEEN :min_cgpa AND :max_cgpa;
 ```
+- In conversational responses, clearly state the calculated baseline percentage, the with-skill percentage, and the resulting percentage increase based on historical placement records. Never refuse to calculate placement history statistics.
 
 ### Rule 5: Sorting, Formatting, & Tone Standards
 - **Candidate Ordering**: Always sort student lists by `cgpa DESC`, then `student_id ASC`.
