@@ -1,0 +1,14 @@
+company_id,company_name,tier,ctc_lpa,min_cgpa,max_backlogs_allowed,eligible_branches,mandatory_skills,preferred_skills
+COMP_001,Databricks,Super Dream,48.00,8.50,0,"[CSE, ISE, AI/DS]","[PYSPARK, SQL, PYTHON]","[DATABRICKS_DE, VECTOR_DATABASES]"
+COMP_002,Google,Super Dream,45.00,8.50,0,"[CSE, ISE, ECE, AI/DS]","[PYTHON, CPP]","[MACHINE_LEARNING, DEEP_LEARNING]"
+COMP_003,Microsoft,Super Dream,42.00,8.00,0,"[CSE, ISE, ECE, AI/DS]","[CPP, PYTHON, SQL]","[GENAI_LLMS, AWS_CLOUD]"
+COMP_004,NVIDIA,Super Dream,38.00,8.00,0,"[CSE, ISE, ECE, AI/DS]","[CPP, PYTHON]","[DEEP_LEARNING, COMPUTER_VISION]"
+COMP_005,Amazon,Dream,32.00,7.50,0,"[CSE, ISE, ECE, AI/DS]","[JAVA_BACKEND, SQL]",[AWS_CLOUD]
+COMP_006,Goldman Sachs,Dream,28.00,7.75,0,"[CSE, ISE, AI/DS]","[PYTHON, SQL, CPP]",[MACHINE_LEARNING]
+COMP_007,Adobe,Dream,26.00,7.50,0,"[CSE, ISE, AI/DS]","[PYTHON, REACT, CPP]","[COMPUTER_VISION, GENAI_LLMS]"
+COMP_008,Atlassian,Dream,24.00,7.50,0,"[CSE, ISE]","[JAVA_BACKEND, REACT]",[AWS_CLOUD]
+COMP_009,Morgan Stanley,Dream,20.00,7.25,0,"[CSE, ISE, ECE, AI/DS]","[JAVA_BACKEND, SQL]",[PYTHON]
+COMP_010,Cisco,Dream,18.00,7.00,1,"[CSE, ISE, ECE]",[PYTHON],[AWS_CLOUD]
+COMP_011,TCS Digital,Core Tech,9.00,6.50,1,"[CSE, ISE, ECE, AI/DS]","[PYTHON, SQL]","[MACHINE_LEARNING, REACT]"
+COMP_012,Accenture Adv,Core Tech,8.50,6.25,1,"[CSE, ISE, ECE, AI/DS]","[JAVA_BACKEND, SQL]",[AWS_CLOUD]
+COMP_013,Infosys DSE,Core Tech,7.00,6.00,2,"[CSE, ISE, ECE, AI/DS]","[PYTHON, SQL]",[PYSPARK]

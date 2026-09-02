@@ -1,0 +1,2223 @@
+skill_id,student_id,skill_name,skill_category,proficiency_level,certified_flag
+SSK_00001,USN_2025_001,SQL,Data Engineering & Cloud,Advanced,false
+SSK_00002,USN_2025_001,PYTHON,Core Engineering,Advanced,true
+SSK_00003,USN_2025_001,DATABRICKS_DE,Data Engineering & Cloud,Advanced,false
+SSK_00004,USN_2025_001,AWS_CLOUD,Data Engineering & Cloud,Advanced,true
+SSK_00005,USN_2025_002,REACT,Core Engineering,Intermediate,false
+SSK_00006,USN_2025_002,CPP,Core Engineering,Advanced,true
+SSK_00007,USN_2025_002,MACHINE_LEARNING,AI / GenAI,Advanced,true
+SSK_00008,USN_2025_002,LANGCHAIN,AI / GenAI,Intermediate,false
+SSK_00009,USN_2025_002,AWS_CLOUD,Data Engineering & Cloud,Intermediate,false
+SSK_00010,USN_2025_003,JAVA_BACKEND,Core Engineering,Advanced,false
+SSK_00011,USN_2025_003,CPP,Core Engineering,Intermediate,true
+SSK_00012,USN_2025_003,PYSPARK,Data Engineering & Cloud,Advanced,false
+SSK_00013,USN_2025_003,VECTOR_DATABASES,AI / GenAI,Advanced,true
+SSK_00014,USN_2025_004,CPP,Core Engineering,Intermediate,false
+SSK_00015,USN_2025_004,PYTHON,Core Engineering,Beginner,false
+SSK_00016,USN_2025_004,LANGCHAIN,AI / GenAI,Beginner,false
+SSK_00017,USN_2025_004,AWS_CLOUD,Data Engineering & Cloud,Intermediate,false
+SSK_00018,USN_2025_004,MACHINE_LEARNING,AI / GenAI,Intermediate,false
+SSK_00019,USN_2025_005,CPP,Core Engineering,Beginner,false
+SSK_00020,USN_2025_005,SQL,Data Engineering & Cloud,Intermediate,false
+SSK_00021,USN_2025_005,PYSPARK,Data Engineering & Cloud,Advanced,false
+SSK_00022,USN_2025_005,AWS_CLOUD,Data Engineering & Cloud,Beginner,false
+SSK_00023,USN_2025_005,LANGCHAIN,AI / GenAI,Advanced,false
+SSK_00024,USN_2025_005,DATABRICKS_DE,Data Engineering & Cloud,Intermediate,false
+SSK_00025,USN_2025_006,CPP,Core Engineering,Advanced,false
+SSK_00026,USN_2025_006,JAVA_BACKEND,Core Engineering,Beginner,false
+SSK_00027,USN_2025_006,AWS_CLOUD,Data Engineering & Cloud,Advanced,true
+SSK_00028,USN_2025_006,VECTOR_DATABASES,AI / GenAI,Intermediate,true
+SSK_00029,USN_2025_006,LANGCHAIN,AI / GenAI,Advanced,false
+SSK_00030,USN_2025_006,PYSPARK,Data Engineering & Cloud,Intermediate,false
+SSK_00031,USN_2025_007,JAVA_BACKEND,Core Engineering,Beginner,false
+SSK_00032,USN_2025_007,CPP,Core Engineering,Advanced,false
+SSK_00033,USN_2025_007,DATABRICKS_DE,Data Engineering & Cloud,Advanced,true
+SSK_00034,USN_2025_008,SQL,Data Engineering & Cloud,Intermediate,false
+SSK_00035,USN_2025_008,JAVA_BACKEND,Core Engineering,Advanced,true
+SSK_00036,USN_2025_008,AWS_CLOUD,Data Engineering & Cloud,Advanced,true
+SSK_00037,USN_2025_008,MACHINE_LEARNING,AI / GenAI,Advanced,true
+SSK_00038,USN_2025_008,LANGCHAIN,AI / GenAI,Beginner,false
+SSK_00039,USN_2025_008,VECTOR_DATABASES,AI / GenAI,Advanced,false
+SSK_00040,USN_2025_009,SQL,Data Engineering & Cloud,Intermediate,true
+SSK_00041,USN_2025_009,REACT,Core Engineering,Advanced,false
+SSK_00042,USN_2025_009,VECTOR_DATABASES,AI / GenAI,Advanced,false
+SSK_00043,USN_2025_009,GENAI_LLMS,AI / GenAI,Advanced,false
+SSK_00044,USN_2025_009,DATABRICKS_DE,Data Engineering & Cloud,Intermediate,false
+SSK_00045,USN_2025_009,LANGCHAIN,AI / GenAI,Advanced,false
+SSK_00046,USN_2025_010,REACT,Core Engineering,Advanced,false
+SSK_00047,USN_2025_010,CPP,Core Engineering,Advanced,false
+SSK_00048,USN_2025_010,VECTOR_DATABASES,AI / GenAI,Beginner,true
+SSK_00049,USN_2025_010,DATABRICKS_DE,Data Engineering & Cloud,Advanced,false
+SSK_00050,USN_2025_011,JAVA_BACKEND,Core Engineering,Intermediate,false
+SSK_00051,USN_2025_011,PYTHON,Core Engineering,Intermediate,false
+SSK_00052,USN_2025_011,GENAI_LLMS,AI / GenAI,Advanced,false
+SSK_00053,USN_2025_011,DATABRICKS_DE,Data Engineering & Cloud,Beginner,false
+SSK_00054,USN_2025_011,AWS_CLOUD,Data Engineering & Cloud,Advanced,false
+SSK_00055,USN_2025_011,LANGCHAIN,AI / GenAI,Intermediate,false
+SSK_00056,USN_2025_012,SQL,Data Engineering & Cloud,Beginner,false
+SSK_00057,USN_2025_012,JAVA_BACKEND,Core Engineering,Intermediate,false
+SSK_00058,USN_2025_012,PYSPARK,Data Engineering & Cloud,Beginner,true
+SSK_00059,USN_2025_012,GENAI_LLMS,AI / GenAI,Advanced,false
+SSK_00060,USN_2025_012,AWS_CLOUD,Data Engineering & Cloud,Intermediate,false
+SSK_00061,USN_2025_013,JAVA_BACKEND,Core Engineering,Beginner,false
+SSK_00062,USN_2025_013,PYTHON,Core Engineering,Beginner,false
+SSK_00063,USN_2025_013,MACHINE_LEARNING,AI / GenAI,Advanced,false
+SSK_00064,USN_2025_013,GENAI_LLMS,AI / GenAI,Beginner,false
+SSK_00065,USN_2025_014,JAVA_BACKEND,Core Engineering,Advanced,false
+SSK_00066,USN_2025_014,SQL,Data Engineering & Cloud,Advanced,false
+SSK_00067,USN_2025_014,GENAI_LLMS,AI / GenAI,Intermediate,true
+SSK_00068,USN_2025_015,REACT,Core Engineering,Intermediate,true
+SSK_00069,USN_2025_015,CPP,Core Engineering,Intermediate,false
+SSK_00070,USN_2025_015,DATABRICKS_DE,Data Engineering & Cloud,Beginner,true
+SSK_00071,USN_2025_015,VECTOR_DATABASES,AI / GenAI,Advanced,false
+SSK_00072,USN_2025_015,MACHINE_LEARNING,AI / GenAI,Intermediate,true
+SSK_00073,USN_2025_016,PYTHON,Core Engineering,Advanced,false
+SSK_00074,USN_2025_016,SQL,Data Engineering & Cloud,Beginner,false
+SSK_00075,USN_2025_016,PYSPARK,Data Engineering & Cloud,Advanced,false
+SSK_00076,USN_2025_016,MACHINE_LEARNING,AI / GenAI,Advanced,false
+SSK_00077,USN_2025_016,DATABRICKS_DE,Data Engineering & Cloud,Intermediate,false
+SSK_00078,USN_2025_017,PYTHON,Core Engineering,Advanced,true
+SSK_00079,USN_2025_017,JAVA_BACKEND,Core Engineering,Intermediate,true
+SSK_00080,USN_2025_017,DATABRICKS_DE,Data Engineering & Cloud,Beginner,false
+SSK_00081,USN_2025_017,AWS_CLOUD,Data Engineering & Cloud,Advanced,true
+SSK_00082,USN_2025_018,JAVA_BACKEND,Core Engineering,Advanced,false
+SSK_00083,USN_2025_018,PYTHON,Core Engineering,Advanced,false
+SSK_00084,USN_2025_018,PYSPARK,Data Engineering & Cloud,Beginner,true
+SSK_00085,USN_2025_018,GENAI_LLMS,AI / GenAI,Beginner,true
+SSK_00086,USN_2025_019,JAVA_BACKEND,Core Engineering,Beginner,false
+SSK_00087,USN_2025_019,SQL,Data Engineering & Cloud,Beginner,false
+SSK_00088,USN_2025_019,PYSPARK,Data Engineering & Cloud,Intermediate,false
+SSK_00089,USN_2025_020,SQL,Data Engineering & Cloud,Beginner,true
+SSK_00090,USN_2025_020,CPP,Core Engineering,Advanced,false
+SSK_00091,USN_2025_020,LANGCHAIN,AI / GenAI,Beginner,false
+SSK_00092,USN_2025_020,MACHINE_LEARNING,AI / GenAI,Beginner,false
+SSK_00093,USN_2025_020,AWS_CLOUD,Data Engineering & Cloud,Beginner,true
+SSK_00094,USN_2025_020,DATABRICKS_DE,Data Engineering & Cloud,Advanced,false
+SSK_00095,USN_2025_021,REACT,Core Engineering,Advanced,false
+SSK_00096,USN_2025_021,JAVA_BACKEND,Core Engineering,Intermediate,true
+SSK_00097,USN_2025_021,GENAI_LLMS,AI / GenAI,Beginner,false
+SSK_00098,USN_2025_021,PYSPARK,Data Engineering & Cloud,Beginner,false
+SSK_00099,USN_2025_021,VECTOR_DATABASES,AI / GenAI,Advanced,false
+SSK_00100,USN_2025_021,AWS_CLOUD,Data Engineering & Cloud,Intermediate,false
+SSK_00101,USN_2025_022,SQL,Data Engineering & Cloud,Beginner,true
+SSK_00102,USN_2025_022,CPP,Core Engineering,Beginner,true
+SSK_00103,USN_2025_022,VECTOR_DATABASES,AI / GenAI,Beginner,true
+SSK_00104,USN_2025_023,SQL,Data Engineering & Cloud,Intermediate,true
+SSK_00105,USN_2025_023,PYTHON,Core Engineering,Intermediate,true
+SSK_00106,USN_2025_023,VECTOR_DATABASES,AI / GenAI,Beginner,false
+SSK_00107,USN_2025_023,AWS_CLOUD,Data Engineering & Cloud,Intermediate,false
+SSK_00108,USN_2025_023,MACHINE_LEARNING,AI / GenAI,Advanced,false
+SSK_00109,USN_2025_023,PYSPARK,Data Engineering & Cloud,Advanced,false
+SSK_00110,USN_2025_024,REACT,Core Engineering,Intermediate,false
+SSK_00111,USN_2025_024,SQL,Data Engineering & Cloud,Advanced,true
+SSK_00112,USN_2025_024,AWS_CLOUD,Data Engineering & Cloud,Beginner,false
+SSK_00113,USN_2025_024,LANGCHAIN,AI / GenAI,Advanced,false
+SSK_00114,USN_2025_024,DATABRICKS_DE,Data Engineering & Cloud,Intermediate,true
+SSK_00115,USN_2025_024,GENAI_LLMS,AI / GenAI,Intermediate,false
+SSK_00116,USN_2025_025,REACT,Core Engineering,Intermediate,false
+SSK_00117,USN_2025_025,CPP,Core Engineering,Intermediate,true
+SSK_00118,USN_2025_025,PYSPARK,Data Engineering & Cloud,Beginner,false
+SSK_00119,USN_2025_026,PYTHON,Core Engineering,Advanced,false
+SSK_00120,USN_2025_026,REACT,Core Engineering,Advanced,true
+SSK_00121,USN_2025_026,MACHINE_LEARNING,AI / GenAI,Beginner,false
+SSK_00122,USN_2025_027,CPP,Core Engineering,Advanced,true
+SSK_00123,USN_2025_027,PYTHON,Core Engineering,Beginner,false
+SSK_00124,USN_2025_027,VECTOR_DATABASES,AI / GenAI,Intermediate,true
+SSK_00125,USN_2025_028,PYTHON,Core Engineering,Advanced,false
+SSK_00126,USN_2025_028,SQL,Data Engineering & Cloud,Intermediate,true
+SSK_00127,USN_2025_028,MACHINE_LEARNING,AI / GenAI,Intermediate,false
+SSK_00128,USN_2025_029,SQL,Data Engineering & Cloud,Advanced,false
+SSK_00129,USN_2025_029,JAVA_BACKEND,Core Engineering,Beginner,true
+SSK_00130,USN_2025_029,VECTOR_DATABASES,AI / GenAI,Intermediate,false
+SSK_00131,USN_2025_029,MACHINE_LEARNING,AI / GenAI,Intermediate,false
+SSK_00132,USN_2025_030,CPP,Core Engineering,Beginner,false
+SSK_00133,USN_2025_030,PYTHON,Core Engineering,Beginner,false
+SSK_00134,USN_2025_030,PYSPARK,Data Engineering & Cloud,Beginner,true
+SSK_00135,USN_2025_031,PYTHON,Core Engineering,Beginner,true
+SSK_00136,USN_2025_031,SQL,Data Engineering & Cloud,Advanced,true
+SSK_00137,USN_2025_031,PYSPARK,Data Engineering & Cloud,Advanced,false
+SSK_00138,USN_2025_031,GENAI_LLMS,AI / GenAI,Intermediate,true
+SSK_00139,USN_2025_031,VECTOR_DATABASES,AI / GenAI,Intermediate,true
+SSK_00140,USN_2025_032,PYTHON,Core Engineering,Intermediate,false
+SSK_00141,USN_2025_032,REACT,Core Engineering,Beginner,false
+SSK_00142,USN_2025_032,VECTOR_DATABASES,AI / GenAI,Beginner,false
+SSK_00143,USN_2025_032,DATABRICKS_DE,Data Engineering & Cloud,Beginner,false
+SSK_00144,USN_2025_032,LANGCHAIN,AI / GenAI,Intermediate,false
+SSK_00145,USN_2025_032,AWS_CLOUD,Data Engineering & Cloud,Beginner,true
+SSK_00146,USN_2025_033,JAVA_BACKEND,Core Engineering,Advanced,false
+SSK_00147,USN_2025_033,PYTHON,Core Engineering,Advanced,true
+SSK_00148,USN_2025_033,PYSPARK,Data Engineering & Cloud,Advanced,false
+SSK_00149,USN_2025_033,MACHINE_LEARNING,AI / GenAI,Beginner,true
+SSK_00150,USN_2025_034,REACT,Core Engineering,Intermediate,false
+SSK_00151,USN_2025_034,SQL,Data Engineering & Cloud,Intermediate,false
+SSK_00152,USN_2025_034,GENAI_LLMS,AI / GenAI,Intermediate,false
+SSK_00153,USN_2025_035,JAVA_BACKEND,Core Engineering,Advanced,true
+SSK_00154,USN_2025_035,CPP,Core Engineering,Advanced,false
+SSK_00155,USN_2025_035,GENAI_LLMS,AI / GenAI,Intermediate,false
+SSK_00156,USN_2025_035,DATABRICKS_DE,Data Engineering & Cloud,Intermediate,false
+SSK_00157,USN_2025_036,REACT,Core Engineering,Beginner,false
+SSK_00158,USN_2025_036,PYTHON,Core Engineering,Intermediate,false
+SSK_00159,USN_2025_036,PYSPARK,Data Engineering & Cloud,Intermediate,false
+SSK_00160,USN_2025_036,DATABRICKS_DE,Data Engineering & Cloud,Advanced,false
+SSK_00161,USN_2025_036,LANGCHAIN,AI / GenAI,Advanced,true
+SSK_00162,USN_2025_037,CPP,Core Engineering,Advanced,false
+SSK_00163,USN_2025_037,JAVA_BACKEND,Core Engineering,Advanced,false
+SSK_00164,USN_2025_037,LANGCHAIN,AI / GenAI,Beginner,false
+SSK_00165,USN_2025_037,GENAI_LLMS,AI / GenAI,Beginner,false
+SSK_00166,USN_2025_037,VECTOR_DATABASES,AI / GenAI,Intermediate,true
+SSK_00167,USN_2025_038,REACT,Core Engineering,Advanced,true
+SSK_00168,USN_2025_038,SQL,Data Engineering & Cloud,Intermediate,true
+SSK_00169,USN_2025_038,PYSPARK,Data Engineering & Cloud,Advanced,true
+SSK_00170,USN_2025_038,AWS_CLOUD,Data Engineering & Cloud,Advanced,false
+SSK_00171,USN_2025_038,MACHINE_LEARNING,AI / GenAI,Advanced,true
+SSK_00172,USN_2025_038,VECTOR_DATABASES,AI / GenAI,Advanced,false
+SSK_00173,USN_2025_039,SQL,Data Engineering & Cloud,Advanced,true
+SSK_00174,USN_2025_039,JAVA_BACKEND,Core Engineering,Beginner,false
+SSK_00175,USN_2025_039,LANGCHAIN,AI / GenAI,Beginner,false
+SSK_00176,USN_2025_039,MACHINE_LEARNING,AI / GenAI,Intermediate,false
+SSK_00177,USN_2025_039,AWS_CLOUD,Data Engineering & Cloud,Beginner,true
+SSK_00178,USN_2025_039,DATABRICKS_DE,Data Engineering & Cloud,Intermediate,false
+SSK_00179,USN_2025_040,REACT,Core Engineering,Beginner,true
+SSK_00180,USN_2025_040,PYTHON,Core Engineering,Beginner,false
+SSK_00181,USN_2025_040,MACHINE_LEARNING,AI / GenAI,Advanced,false
+SSK_00182,USN_2025_040,LANGCHAIN,AI / GenAI,Intermediate,true
+SSK_00183,USN_2025_040,VECTOR_DATABASES,AI / GenAI,Beginner,false
+SSK_00184,USN_2025_041,REACT,Core Engineering,Advanced,true
+SSK_00185,USN_2025_041,CPP,Core Engineering,Advanced,false
+SSK_00186,USN_2025_041,MACHINE_LEARNING,AI / GenAI,Beginner,true
+SSK_00187,USN_2025_041,AWS_CLOUD,Data Engineering & Cloud,Advanced,false
+SSK_00188,USN_2025_041,DATABRICKS_DE,Data Engineering & Cloud,Beginner,false
+SSK_00189,USN_2025_041,LANGCHAIN,AI / GenAI,Intermediate,false
+SSK_00190,USN_2025_042,PYTHON,Core Engineering,Advanced,true
+SSK_00191,USN_2025_042,SQL,Data Engineering & Cloud,Advanced,true
+SSK_00192,USN_2025_042,JAVA_BACKEND,Core Engineering,Intermediate,false
+SSK_00193,USN_2025_042,AWS_CLOUD,Data Engineering & Cloud,Intermediate,true
+SSK_00194,USN_2025_042,REACT,Core Engineering,Intermediate,false
+SSK_00195,USN_2025_043,JAVA_BACKEND,Core Engineering,Intermediate,false
+SSK_00196,USN_2025_043,PYTHON,Core Engineering,Advanced,false
+SSK_00197,USN_2025_043,DATABRICKS_DE,Data Engineering & Cloud,Intermediate,false
+SSK_00198,USN_2025_043,GENAI_LLMS,AI / GenAI,Intermediate,false
+SSK_00199,USN_2025_044,REACT,Core Engineering,Beginner,true
+SSK_00200,USN_2025_044,SQL,Data Engineering & Cloud,Advanced,true
+SSK_00201,USN_2025_044,PYSPARK,Data Engineering & Cloud,Beginner,false
+SSK_00202,USN_2025_045,REACT,Core Engineering,Advanced,true
+SSK_00203,USN_2025_045,PYTHON,Core Engineering,Advanced,false
+SSK_00204,USN_2025_045,LANGCHAIN,AI / GenAI,Beginner,false
+SSK_00205,USN_2025_046,REACT,Core Engineering,Advanced,true
+SSK_00206,USN_2025_046,PYTHON,Core Engineering,Intermediate,false
+SSK_00207,USN_2025_046,MACHINE_LEARNING,AI / GenAI,Beginner,false
+SSK_00208,USN_2025_046,GENAI_LLMS,AI / GenAI,Advanced,false
+SSK_00209,USN_2025_046,VECTOR_DATABASES,AI / GenAI,Beginner,false
+SSK_00210,USN_2025_046,AWS_CLOUD,Data Engineering & Cloud,Beginner,true
+SSK_00211,USN_2025_047,JAVA_BACKEND,Core Engineering,Beginner,true
+SSK_00212,USN_2025_047,CPP,Core Engineering,Intermediate,false
+SSK_00213,USN_2025_047,AWS_CLOUD,Data Engineering & Cloud,Beginner,false
+SSK_00214,USN_2025_047,MACHINE_LEARNING,AI / GenAI,Intermediate,false
+SSK_00215,USN_2025_047,DATABRICKS_DE,Data Engineering & Cloud,Intermediate,false
+SSK_00216,USN_2025_048,PYTHON,Core Engineering,Advanced,false
+SSK_00217,USN_2025_048,CPP,Core Engineering,Advanced,false
+SSK_00218,USN_2025_048,GENAI_LLMS,AI / GenAI,Intermediate,false
+SSK_00219,USN_2025_049,JAVA_BACKEND,Core Engineering,Beginner,false
+SSK_00220,USN_2025_049,REACT,Core Engineering,Intermediate,false
+SSK_00221,USN_2025_049,MACHINE_LEARNING,AI / GenAI,Advanced,true
+SSK_00222,USN_2025_049,GENAI_LLMS,AI / GenAI,Advanced,false
+SSK_00223,USN_2025_049,DATABRICKS_DE,Data Engineering & Cloud,Beginner,false
+SSK_00224,USN_2025_050,PYTHON,Core Engineering,Intermediate,false
+SSK_00225,USN_2025_050,REACT,Core Engineering,Intermediate,false
+SSK_00226,USN_2025_050,VECTOR_DATABASES,AI / GenAI,Advanced,false
+SSK_00227,USN_2025_050,AWS_CLOUD,Data Engineering & Cloud,Beginner,false
+SSK_00228,USN_2025_050,MACHINE_LEARNING,AI / GenAI,Advanced,false
+SSK_00229,USN_2025_051,PYTHON,Core Engineering,Intermediate,true
+SSK_00230,USN_2025_051,REACT,Core Engineering,Intermediate,false
+SSK_00231,USN_2025_051,PYSPARK,Data Engineering & Cloud,Advanced,false
+SSK_00232,USN_2025_051,LANGCHAIN,AI / GenAI,Beginner,false
+SSK_00233,USN_2025_052,JAVA_BACKEND,Core Engineering,Beginner,true
+SSK_00234,USN_2025_052,CPP,Core Engineering,Advanced,true
+SSK_00235,USN_2025_052,LANGCHAIN,AI / GenAI,Advanced,false
+SSK_00236,USN_2025_052,PYSPARK,Data Engineering & Cloud,Advanced,false
+SSK_00237,USN_2025_053,REACT,Core Engineering,Intermediate,false
+SSK_00238,USN_2025_053,CPP,Core Engineering,Intermediate,true
+SSK_00239,USN_2025_053,AWS_CLOUD,Data Engineering & Cloud,Intermediate,false
+SSK_00240,USN_2025_053,DATABRICKS_DE,Data Engineering & Cloud,Intermediate,false
+SSK_00241,USN_2025_054,CPP,Core Engineering,Intermediate,false
+SSK_00242,USN_2025_054,JAVA_BACKEND,Core Engineering,Beginner,false
+SSK_00243,USN_2025_054,MACHINE_LEARNING,AI / GenAI,Intermediate,false
+SSK_00244,USN_2025_054,PYSPARK,Data Engineering & Cloud,Advanced,false
+SSK_00245,USN_2025_054,GENAI_LLMS,AI / GenAI,Intermediate,false
+SSK_00246,USN_2025_055,REACT,Core Engineering,Advanced,false
+SSK_00247,USN_2025_055,SQL,Data Engineering & Cloud,Advanced,false
+SSK_00248,USN_2025_055,MACHINE_LEARNING,AI / GenAI,Beginner,true
+SSK_00249,USN_2025_055,GENAI_LLMS,AI / GenAI,Intermediate,false
+SSK_00250,USN_2025_055,DATABRICKS_DE,Data Engineering & Cloud,Intermediate,true
+SSK_00251,USN_2025_055,LANGCHAIN,AI / GenAI,Advanced,true
+SSK_00252,USN_2025_056,JAVA_BACKEND,Core Engineering,Intermediate,true
+SSK_00253,USN_2025_056,REACT,Core Engineering,Beginner,false
+SSK_00254,USN_2025_056,PYSPARK,Data Engineering & Cloud,Intermediate,true
+SSK_00255,USN_2025_057,CPP,Core Engineering,Intermediate,false
+SSK_00256,USN_2025_057,JAVA_BACKEND,Core Engineering,Advanced,false
+SSK_00257,USN_2025_057,DATABRICKS_DE,Data Engineering & Cloud,Beginner,true
+SSK_00258,USN_2025_058,REACT,Core Engineering,Beginner,false
+SSK_00259,USN_2025_058,PYTHON,Core Engineering,Intermediate,false
+SSK_00260,USN_2025_058,MACHINE_LEARNING,AI / GenAI,Advanced,false
+SSK_00261,USN_2025_059,SQL,Data Engineering & Cloud,Intermediate,true
+SSK_00262,USN_2025_059,PYTHON,Core Engineering,Advanced,true
+SSK_00263,USN_2025_059,MACHINE_LEARNING,AI / GenAI,Advanced,false
+SSK_00264,USN_2025_060,PYTHON,Core Engineering,Intermediate,true
+SSK_00265,USN_2025_060,REACT,Core Engineering,Advanced,true
+SSK_00266,USN_2025_060,LANGCHAIN,AI / GenAI,Intermediate,false
+SSK_00267,USN_2025_060,VECTOR_DATABASES,AI / GenAI,Intermediate,false
+SSK_00268,USN_2025_061,REACT,Core Engineering,Intermediate,false
+SSK_00269,USN_2025_061,JAVA_BACKEND,Core Engineering,Intermediate,true
+SSK_00270,USN_2025_061,VECTOR_DATABASES,AI / GenAI,Beginner,false
+SSK_00271,USN_2025_062,REACT,Core Engineering,Intermediate,false
+SSK_00272,USN_2025_062,SQL,Data Engineering & Cloud,Beginner,false
+SSK_00273,USN_2025_062,AWS_CLOUD,Data Engineering & Cloud,Intermediate,false
+SSK_00274,USN_2025_063,SQL,Data Engineering & Cloud,Intermediate,false
+SSK_00275,USN_2025_063,PYTHON,Core Engineering,Intermediate,false
+SSK_00276,USN_2025_063,LANGCHAIN,AI / GenAI,Intermediate,false
+SSK_00277,USN_2025_063,VECTOR_DATABASES,AI / GenAI,Advanced,false
+SSK_00278,USN_2025_063,DATABRICKS_DE,Data Engineering & Cloud,Advanced,true
+SSK_00279,USN_2025_064,SQL,Data Engineering & Cloud,Advanced,true
+SSK_00280,USN_2025_064,REACT,Core Engineering,Advanced,false
+SSK_00281,USN_2025_064,VECTOR_DATABASES,AI / GenAI,Advanced,false
+SSK_00282,USN_2025_064,LANGCHAIN,AI / GenAI,Intermediate,false
+SSK_00283,USN_2025_065,JAVA_BACKEND,Core Engineering,Advanced,false
+SSK_00284,USN_2025_065,PYTHON,Core Engineering,Advanced,false
+SSK_00285,USN_2025_065,PYSPARK,Data Engineering & Cloud,Intermediate,false
+SSK_00286,USN_2025_066,PYTHON,Core Engineering,Intermediate,false
+SSK_00287,USN_2025_066,SQL,Data Engineering & Cloud,Advanced,false
+SSK_00288,USN_2025_066,DATABRICKS_DE,Data Engineering & Cloud,Intermediate,false
+SSK_00289,USN_2025_066,MACHINE_LEARNING,AI / GenAI,Advanced,false
+SSK_00290,USN_2025_066,GENAI_LLMS,AI / GenAI,Intermediate,false
+SSK_00291,USN_2025_066,PYSPARK,Data Engineering & Cloud,Intermediate,false
+SSK_00292,USN_2025_067,SQL,Data Engineering & Cloud,Advanced,false
+SSK_00293,USN_2025_067,CPP,Core Engineering,Beginner,false
+SSK_00294,USN_2025_067,DATABRICKS_DE,Data Engineering & Cloud,Beginner,false
+SSK_00295,USN_2025_067,PYSPARK,Data Engineering & Cloud,Beginner,false
+SSK_00296,USN_2025_068,PYTHON,Core Engineering,Advanced,false
+SSK_00297,USN_2025_068,JAVA_BACKEND,Core Engineering,Advanced,false
+SSK_00298,USN_2025_068,VECTOR_DATABASES,AI / GenAI,Beginner,false
+SSK_00299,USN_2025_069,PYTHON,Core Engineering,Advanced,false
+SSK_00300,USN_2025_069,SQL,Data Engineering & Cloud,Advanced,false
+SSK_00301,USN_2025_069,VECTOR_DATABASES,AI / GenAI,Intermediate,false
+SSK_00302,USN_2025_069,MACHINE_LEARNING,AI / GenAI,Intermediate,true
+SSK_00303,USN_2025_070,JAVA_BACKEND,Core Engineering,Advanced,false
+SSK_00304,USN_2025_070,SQL,Data Engineering & Cloud,Beginner,false
+SSK_00305,USN_2025_070,DATABRICKS_DE,Data Engineering & Cloud,Beginner,false
+SSK_00306,USN_2025_070,PYSPARK,Data Engineering & Cloud,Beginner,false
+SSK_00307,USN_2025_071,SQL,Data Engineering & Cloud,Intermediate,true
+SSK_00308,USN_2025_071,JAVA_BACKEND,Core Engineering,Beginner,true
+SSK_00309,USN_2025_071,PYSPARK,Data Engineering & Cloud,Beginner,false
+SSK_00310,USN_2025_072,REACT,Core Engineering,Advanced,true
+SSK_00311,USN_2025_072,SQL,Data Engineering & Cloud,Beginner,true
+SSK_00312,USN_2025_072,GENAI_LLMS,AI / GenAI,Intermediate,false
+SSK_00313,USN_2025_072,MACHINE_LEARNING,AI / GenAI,Beginner,false
+SSK_00314,USN_2025_072,LANGCHAIN,AI / GenAI,Advanced,true
+SSK_00315,USN_2025_072,DATABRICKS_DE,Data Engineering & Cloud,Advanced,true
+SSK_00316,USN_2025_073,SQL,Data Engineering & Cloud,Advanced,true
+SSK_00317,USN_2025_073,REACT,Core Engineering,Beginner,false
+SSK_00318,USN_2025_073,PYSPARK,Data Engineering & Cloud,Advanced,true
+SSK_00319,USN_2025_073,VECTOR_DATABASES,AI / GenAI,Intermediate,true
+SSK_00320,USN_2025_073,DATABRICKS_DE,Data Engineering & Cloud,Beginner,false
+SSK_00321,USN_2025_073,GENAI_LLMS,AI / GenAI,Advanced,true
+SSK_00322,USN_2025_074,SQL,Data Engineering & Cloud,Advanced,false
+SSK_00323,USN_2025_074,REACT,Core Engineering,Beginner,false
+SSK_00324,USN_2025_074,GENAI_LLMS,AI / GenAI,Advanced,false
+SSK_00325,USN_2025_074,MACHINE_LEARNING,AI / GenAI,Advanced,false
+SSK_00326,USN_2025_074,VECTOR_DATABASES,AI / GenAI,Beginner,false
+SSK_00327,USN_2025_074,DATABRICKS_DE,Data Engineering & Cloud,Intermediate,false
+SSK_00328,USN_2025_075,SQL,Data Engineering & Cloud,Advanced,false
+SSK_00329,USN_2025_075,PYTHON,Core Engineering,Beginner,false
+SSK_00330,USN_2025_075,GENAI_LLMS,AI / GenAI,Beginner,true
+SSK_00331,USN_2025_076,CPP,Core Engineering,Beginner,true
+SSK_00332,USN_2025_076,SQL,Data Engineering & Cloud,Beginner,true
+SSK_00333,USN_2025_076,GENAI_LLMS,AI / GenAI,Advanced,false
+SSK_00334,USN_2025_076,LANGCHAIN,AI / GenAI,Intermediate,false
+SSK_00335,USN_2025_076,VECTOR_DATABASES,AI / GenAI,Beginner,false
+SSK_00336,USN_2025_077,JAVA_BACKEND,Core Engineering,Beginner,true
+SSK_00337,USN_2025_077,REACT,Core Engineering,Intermediate,false
+SSK_00338,USN_2025_077,VECTOR_DATABASES,AI / GenAI,Advanced,false
+SSK_00339,USN_2025_077,AWS_CLOUD,Data Engineering & Cloud,Beginner,false
+SSK_00340,USN_2025_078,SQL,Data Engineering & Cloud,Beginner,true
+SSK_00341,USN_2025_078,REACT,Core Engineering,Beginner,false
+SSK_00342,USN_2025_078,PYSPARK,Data Engineering & Cloud,Beginner,false
+SSK_00343,USN_2025_078,DATABRICKS_DE,Data Engineering & Cloud,Beginner,true
+SSK_00344,USN_2025_078,MACHINE_LEARNING,AI / GenAI,Intermediate,true
+SSK_00345,USN_2025_079,JAVA_BACKEND,Core Engineering,Beginner,false
+SSK_00346,USN_2025_079,SQL,Data Engineering & Cloud,Advanced,false
+SSK_00347,USN_2025_079,MACHINE_LEARNING,AI / GenAI,Advanced,false
+SSK_00348,USN_2025_079,DATABRICKS_DE,Data Engineering & Cloud,Advanced,false
+SSK_00349,USN_2025_079,VECTOR_DATABASES,AI / GenAI,Intermediate,false
+SSK_00350,USN_2025_080,PYTHON,Core Engineering,Advanced,true
+SSK_00351,USN_2025_080,SQL,Data Engineering & Cloud,Advanced,false
+SSK_00352,USN_2025_080,VECTOR_DATABASES,AI / GenAI,Advanced,false
+SSK_00353,USN_2025_081,CPP,Core Engineering,Intermediate,true
+SSK_00354,USN_2025_081,PYTHON,Core Engineering,Intermediate,true
+SSK_00355,USN_2025_081,DATABRICKS_DE,Data Engineering & Cloud,Advanced,true
+SSK_00356,USN_2025_081,AWS_CLOUD,Data Engineering & Cloud,Advanced,true
+SSK_00357,USN_2025_082,JAVA_BACKEND,Core Engineering,Beginner,false
+SSK_00358,USN_2025_082,REACT,Core Engineering,Advanced,true
+SSK_00359,USN_2025_082,AWS_CLOUD,Data Engineering & Cloud,Advanced,false
+SSK_00360,USN_2025_083,JAVA_BACKEND,Core Engineering,Intermediate,false
+SSK_00361,USN_2025_083,CPP,Core Engineering,Beginner,true
+SSK_00362,USN_2025_083,LANGCHAIN,AI / GenAI,Beginner,true
+SSK_00363,USN_2025_083,AWS_CLOUD,Data Engineering & Cloud,Beginner,false
+SSK_00364,USN_2025_083,DATABRICKS_DE,Data Engineering & Cloud,Intermediate,false
+SSK_00365,USN_2025_083,MACHINE_LEARNING,AI / GenAI,Beginner,false
+SSK_00366,USN_2025_084,CPP,Core Engineering,Intermediate,false
+SSK_00367,USN_2025_084,SQL,Data Engineering & Cloud,Advanced,false
+SSK_00368,USN_2025_084,DATABRICKS_DE,Data Engineering & Cloud,Advanced,true
+SSK_00369,USN_2025_084,VECTOR_DATABASES,AI / GenAI,Advanced,true
+SSK_00370,USN_2025_085,PYTHON,Core Engineering,Advanced,false
+SSK_00371,USN_2025_085,REACT,Core Engineering,Beginner,false
+SSK_00372,USN_2025_085,VECTOR_DATABASES,AI / GenAI,Advanced,false
+SSK_00373,USN_2025_085,MACHINE_LEARNING,AI / GenAI,Advanced,false
+SSK_00374,USN_2025_086,PYTHON,Core Engineering,Advanced,false
+SSK_00375,USN_2025_086,SQL,Data Engineering & Cloud,Advanced,false
+SSK_00376,USN_2025_086,DATABRICKS_DE,Data Engineering & Cloud,Intermediate,true
+SSK_00377,USN_2025_086,VECTOR_DATABASES,AI / GenAI,Intermediate,false
+SSK_00378,USN_2025_087,PYTHON,Core Engineering,Intermediate,false
+SSK_00379,USN_2025_087,REACT,Core Engineering,Advanced,false
+SSK_00380,USN_2025_087,LANGCHAIN,AI / GenAI,Intermediate,false
+SSK_00381,USN_2025_087,MACHINE_LEARNING,AI / GenAI,Beginner,false
+SSK_00382,USN_2025_087,GENAI_LLMS,AI / GenAI,Intermediate,false
+SSK_00383,USN_2025_088,CPP,Core Engineering,Advanced,false
+SSK_00384,USN_2025_088,REACT,Core Engineering,Advanced,false
+SSK_00385,USN_2025_088,PYSPARK,Data Engineering & Cloud,Advanced,false
+SSK_00386,USN_2025_089,SQL,Data Engineering & Cloud,Beginner,true
+SSK_00387,USN_2025_089,CPP,Core Engineering,Beginner,false
+SSK_00388,USN_2025_089,AWS_CLOUD,Data Engineering & Cloud,Beginner,true
+SSK_00389,USN_2025_090,SQL,Data Engineering & Cloud,Intermediate,false
+SSK_00390,USN_2025_090,PYTHON,Core Engineering,Advanced,true
+SSK_00391,USN_2025_090,GENAI_LLMS,AI / GenAI,Intermediate,false
+SSK_00392,USN_2025_090,AWS_CLOUD,Data Engineering & Cloud,Advanced,true
+SSK_00393,USN_2025_090,MACHINE_LEARNING,AI / GenAI,Advanced,true
+SSK_00394,USN_2025_091,PYTHON,Core Engineering,Advanced,true
+SSK_00395,USN_2025_091,REACT,Core Engineering,Beginner,false
+SSK_00396,USN_2025_091,GENAI_LLMS,AI / GenAI,Intermediate,true
+SSK_00397,USN_2025_092,CPP,Core Engineering,Beginner,true
+SSK_00398,USN_2025_092,PYTHON,Core Engineering,Advanced,true
+SSK_00399,USN_2025_092,VECTOR_DATABASES,AI / GenAI,Advanced,true
+SSK_00400,USN_2025_093,CPP,Core Engineering,Beginner,false
+SSK_00401,USN_2025_093,REACT,Core Engineering,Intermediate,false
+SSK_00402,USN_2025_093,VECTOR_DATABASES,AI / GenAI,Beginner,true
+SSK_00403,USN_2025_093,PYSPARK,Data Engineering & Cloud,Advanced,true
+SSK_00404,USN_2025_094,JAVA_BACKEND,Core Engineering,Intermediate,false
+SSK_00405,USN_2025_094,PYTHON,Core Engineering,Beginner,true
+SSK_00406,USN_2025_094,DATABRICKS_DE,Data Engineering & Cloud,Intermediate,false
+SSK_00407,USN_2025_095,PYTHON,Core Engineering,Advanced,false
+SSK_00408,USN_2025_095,SQL,Data Engineering & Cloud,Intermediate,true
+SSK_00409,USN_2025_095,AWS_CLOUD,Data Engineering & Cloud,Intermediate,false
+SSK_00410,USN_2025_095,GENAI_LLMS,AI / GenAI,Advanced,false
+SSK_00411,USN_2025_096,CPP,Core Engineering,Advanced,false
+SSK_00412,USN_2025_096,PYTHON,Core Engineering,Advanced,false
+SSK_00413,USN_2025_096,AWS_CLOUD,Data Engineering & Cloud,Advanced,false
+SSK_00414,USN_2025_096,MACHINE_LEARNING,AI / GenAI,Intermediate,false
+SSK_00415,USN_2025_097,JAVA_BACKEND,Core Engineering,Intermediate,false
+SSK_00416,USN_2025_097,REACT,Core Engineering,Advanced,false
+SSK_00417,USN_2025_097,LANGCHAIN,AI / GenAI,Advanced,true
+SSK_00418,USN_2025_097,PYSPARK,Data Engineering & Cloud,Intermediate,false
+SSK_00419,USN_2025_097,VECTOR_DATABASES,AI / GenAI,Advanced,false
+SSK_00420,USN_2025_097,MACHINE_LEARNING,AI / GenAI,Intermediate,true
+SSK_00421,USN_2025_098,PYTHON,Core Engineering,Advanced,false
+SSK_00422,USN_2025_098,SQL,Data Engineering & Cloud,Advanced,true
+SSK_00423,USN_2025_098,AWS_CLOUD,Data Engineering & Cloud,Advanced,true
+SSK_00424,USN_2025_098,DATABRICKS_DE,Data Engineering & Cloud,Intermediate,true
+SSK_00425,USN_2025_099,SQL,Data Engineering & Cloud,Advanced,false
+SSK_00426,USN_2025_099,JAVA_BACKEND,Core Engineering,Intermediate,true
+SSK_00427,USN_2025_099,GENAI_LLMS,AI / GenAI,Advanced,false
+SSK_00428,USN_2025_100,JAVA_BACKEND,Core Engineering,Advanced,false
+SSK_00429,USN_2025_100,REACT,Core Engineering,Beginner,false
+SSK_00430,USN_2025_100,VECTOR_DATABASES,AI / GenAI,Intermediate,false
+SSK_00431,USN_2025_101,JAVA_BACKEND,Core Engineering,Intermediate,false
+SSK_00432,USN_2025_101,PYTHON,Core Engineering,Beginner,false
+SSK_00433,USN_2025_101,MACHINE_LEARNING,AI / GenAI,Intermediate,false
+SSK_00434,USN_2025_101,LANGCHAIN,AI / GenAI,Beginner,false
+SSK_00435,USN_2025_101,AWS_CLOUD,Data Engineering & Cloud,Advanced,false
+SSK_00436,USN_2025_101,GENAI_LLMS,AI / GenAI,Beginner,true
+SSK_00437,USN_2025_102,CPP,Core Engineering,Intermediate,true
+SSK_00438,USN_2025_102,SQL,Data Engineering & Cloud,Advanced,true
+SSK_00439,USN_2025_102,GENAI_LLMS,AI / GenAI,Intermediate,false
+SSK_00440,USN_2025_102,LANGCHAIN,AI / GenAI,Beginner,true
+SSK_00441,USN_2025_102,DATABRICKS_DE,Data Engineering & Cloud,Intermediate,true
+SSK_00442,USN_2025_103,PYTHON,Core Engineering,Intermediate,true
+SSK_00443,USN_2025_103,JAVA_BACKEND,Core Engineering,Intermediate,false
+SSK_00444,USN_2025_103,AWS_CLOUD,Data Engineering & Cloud,Beginner,true
+SSK_00445,USN_2025_103,LANGCHAIN,AI / GenAI,Beginner,false
+SSK_00446,USN_2025_103,DATABRICKS_DE,Data Engineering & Cloud,Beginner,false
+SSK_00447,USN_2025_104,PYTHON,Core Engineering,Beginner,false
+SSK_00448,USN_2025_104,CPP,Core Engineering,Advanced,false
+SSK_00449,USN_2025_104,LANGCHAIN,AI / GenAI,Intermediate,false
+SSK_00450,USN_2025_105,SQL,Data Engineering & Cloud,Intermediate,false
+SSK_00451,USN_2025_105,JAVA_BACKEND,Core Engineering,Advanced,false
+SSK_00452,USN_2025_105,DATABRICKS_DE,Data Engineering & Cloud,Intermediate,false
+SSK_00453,USN_2025_105,MACHINE_LEARNING,AI / GenAI,Beginner,false
+SSK_00454,USN_2025_106,SQL,Data Engineering & Cloud,Advanced,false
+SSK_00455,USN_2025_106,JAVA_BACKEND,Core Engineering,Advanced,false
+SSK_00456,USN_2025_106,VECTOR_DATABASES,AI / GenAI,Beginner,true
+SSK_00457,USN_2025_106,MACHINE_LEARNING,AI / GenAI,Advanced,false
+SSK_00458,USN_2025_106,DATABRICKS_DE,Data Engineering & Cloud,Advanced,true
+SSK_00459,USN_2025_107,SQL,Data Engineering & Cloud,Intermediate,false
+SSK_00460,USN_2025_107,REACT,Core Engineering,Beginner,false
+SSK_00461,USN_2025_107,AWS_CLOUD,Data Engineering & Cloud,Beginner,false
+SSK_00462,USN_2025_107,GENAI_LLMS,AI / GenAI,Beginner,true
+SSK_00463,USN_2025_108,PYTHON,Core Engineering,Intermediate,true
+SSK_00464,USN_2025_108,SQL,Data Engineering & Cloud,Intermediate,false
+SSK_00465,USN_2025_108,CPP,Core Engineering,Advanced,false
+SSK_00466,USN_2025_108,MACHINE_LEARNING,AI / GenAI,Beginner,false
+SSK_00467,USN_2025_109,PYTHON,Core Engineering,Beginner,true
+SSK_00468,USN_2025_109,JAVA_BACKEND,Core Engineering,Advanced,false
+SSK_00469,USN_2025_109,GENAI_LLMS,AI / GenAI,Beginner,false
+SSK_00470,USN_2025_109,PYSPARK,Data Engineering & Cloud,Advanced,true
+SSK_00471,USN_2025_109,MACHINE_LEARNING,AI / GenAI,Intermediate,true
+SSK_00472,USN_2025_110,CPP,Core Engineering,Beginner,false
+SSK_00473,USN_2025_110,PYTHON,Core Engineering,Intermediate,false
+SSK_00474,USN_2025_110,LANGCHAIN,AI / GenAI,Intermediate,false
+SSK_00475,USN_2025_111,JAVA_BACKEND,Core Engineering,Beginner,true
+SSK_00476,USN_2025_111,SQL,Data Engineering & Cloud,Intermediate,false
+SSK_00477,USN_2025_111,VECTOR_DATABASES,AI / GenAI,Beginner,true
+SSK_00478,USN_2025_111,PYSPARK,Data Engineering & Cloud,Advanced,false
+SSK_00479,USN_2025_111,MACHINE_LEARNING,AI / GenAI,Advanced,false
+SSK_00480,USN_2025_112,PYTHON,Core Engineering,Advanced,false
+SSK_00481,USN_2025_112,SQL,Data Engineering & Cloud,Beginner,false
+SSK_00482,USN_2025_112,GENAI_LLMS,AI / GenAI,Beginner,false
+SSK_00483,USN_2025_113,REACT,Core Engineering,Advanced,false
+SSK_00484,USN_2025_113,JAVA_BACKEND,Core Engineering,Intermediate,true
+SSK_00485,USN_2025_113,MACHINE_LEARNING,AI / GenAI,Intermediate,true
+SSK_00486,USN_2025_113,DATABRICKS_DE,Data Engineering & Cloud,Advanced,false
+SSK_00487,USN_2025_114,JAVA_BACKEND,Core Engineering,Intermediate,true
+SSK_00488,USN_2025_114,SQL,Data Engineering & Cloud,Advanced,false
+SSK_00489,USN_2025_114,VECTOR_DATABASES,AI / GenAI,Advanced,false
+SSK_00490,USN_2025_114,GENAI_LLMS,AI / GenAI,Intermediate,true
+SSK_00491,USN_2025_114,AWS_CLOUD,Data Engineering & Cloud,Advanced,false
+SSK_00492,USN_2025_114,DATABRICKS_DE,Data Engineering & Cloud,Beginner,false
+SSK_00493,USN_2025_115,REACT,Core Engineering,Advanced,false
+SSK_00494,USN_2025_115,SQL,Data Engineering & Cloud,Beginner,true
+SSK_00495,USN_2025_115,DATABRICKS_DE,Data Engineering & Cloud,Beginner,false
+SSK_00496,USN_2025_115,LANGCHAIN,AI / GenAI,Intermediate,false
+SSK_00497,USN_2025_115,GENAI_LLMS,AI / GenAI,Intermediate,true
+SSK_00498,USN_2025_116,SQL,Data Engineering & Cloud,Beginner,false
+SSK_00499,USN_2025_116,CPP,Core Engineering,Intermediate,true
+SSK_00500,USN_2025_116,LANGCHAIN,AI / GenAI,Intermediate,true
+SSK_00501,USN_2025_116,PYSPARK,Data Engineering & Cloud,Beginner,true
+SSK_00502,USN_2025_117,REACT,Core Engineering,Intermediate,true
+SSK_00503,USN_2025_117,CPP,Core Engineering,Advanced,false
+SSK_00504,USN_2025_117,LANGCHAIN,AI / GenAI,Beginner,false
+SSK_00505,USN_2025_117,AWS_CLOUD,Data Engineering & Cloud,Beginner,false
+SSK_00506,USN_2025_117,GENAI_LLMS,AI / GenAI,Intermediate,false
+SSK_00507,USN_2025_118,JAVA_BACKEND,Core Engineering,Beginner,true
+SSK_00508,USN_2025_118,CPP,Core Engineering,Advanced,true
+SSK_00509,USN_2025_118,VECTOR_DATABASES,AI / GenAI,Advanced,true
+SSK_00510,USN_2025_119,CPP,Core Engineering,Beginner,true
+SSK_00511,USN_2025_119,JAVA_BACKEND,Core Engineering,Beginner,false
+SSK_00512,USN_2025_119,LANGCHAIN,AI / GenAI,Intermediate,false
+SSK_00513,USN_2025_119,DATABRICKS_DE,Data Engineering & Cloud,Advanced,true
+SSK_00514,USN_2025_119,GENAI_LLMS,AI / GenAI,Intermediate,true
+SSK_00515,USN_2025_119,PYSPARK,Data Engineering & Cloud,Beginner,false
+SSK_00516,USN_2025_120,CPP,Core Engineering,Beginner,false
+SSK_00517,USN_2025_120,JAVA_BACKEND,Core Engineering,Beginner,false
+SSK_00518,USN_2025_120,AWS_CLOUD,Data Engineering & Cloud,Advanced,false
+SSK_00519,USN_2025_120,PYSPARK,Data Engineering & Cloud,Advanced,false
+SSK_00520,USN_2025_120,DATABRICKS_DE,Data Engineering & Cloud,Beginner,false
+SSK_00521,USN_2025_120,LANGCHAIN,AI / GenAI,Advanced,false
+SSK_00522,USN_2025_121,REACT,Core Engineering,Beginner,false
+SSK_00523,USN_2025_121,SQL,Data Engineering & Cloud,Advanced,false
+SSK_00524,USN_2025_121,AWS_CLOUD,Data Engineering & Cloud,Intermediate,false
+SSK_00525,USN_2025_121,PYSPARK,Data Engineering & Cloud,Advanced,true
+SSK_00526,USN_2025_121,VECTOR_DATABASES,AI / GenAI,Intermediate,true
+SSK_00527,USN_2025_121,DATABRICKS_DE,Data Engineering & Cloud,Advanced,true
+SSK_00528,USN_2025_122,SQL,Data Engineering & Cloud,Beginner,false
+SSK_00529,USN_2025_122,PYTHON,Core Engineering,Advanced,true
+SSK_00530,USN_2025_122,LANGCHAIN,AI / GenAI,Intermediate,true
+SSK_00531,USN_2025_122,MACHINE_LEARNING,AI / GenAI,Advanced,false
+SSK_00532,USN_2025_122,PYSPARK,Data Engineering & Cloud,Intermediate,false
+SSK_00533,USN_2025_123,CPP,Core Engineering,Intermediate,false
+SSK_00534,USN_2025_123,PYTHON,Core Engineering,Intermediate,false
+SSK_00535,USN_2025_123,LANGCHAIN,AI / GenAI,Intermediate,false
+SSK_00536,USN_2025_123,MACHINE_LEARNING,AI / GenAI,Beginner,true
+SSK_00537,USN_2025_124,SQL,Data Engineering & Cloud,Beginner,false
+SSK_00538,USN_2025_124,JAVA_BACKEND,Core Engineering,Beginner,true
+SSK_00539,USN_2025_124,VECTOR_DATABASES,AI / GenAI,Intermediate,false
+SSK_00540,USN_2025_124,DATABRICKS_DE,Data Engineering & Cloud,Advanced,true
+SSK_00541,USN_2025_124,GENAI_LLMS,AI / GenAI,Intermediate,false
+SSK_00542,USN_2025_124,PYSPARK,Data Engineering & Cloud,Intermediate,true
+SSK_00543,USN_2025_125,CPP,Core Engineering,Advanced,false
+SSK_00544,USN_2025_125,SQL,Data Engineering & Cloud,Beginner,true
+SSK_00545,USN_2025_125,PYSPARK,Data Engineering & Cloud,Intermediate,false
+SSK_00546,USN_2025_126,JAVA_BACKEND,Core Engineering,Beginner,true
+SSK_00547,USN_2025_126,CPP,Core Engineering,Beginner,false
+SSK_00548,USN_2025_126,LANGCHAIN,AI / GenAI,Advanced,false
+SSK_00549,USN_2025_126,PYSPARK,Data Engineering & Cloud,Intermediate,true
+SSK_00550,USN_2025_127,JAVA_BACKEND,Core Engineering,Advanced,false
+SSK_00551,USN_2025_127,REACT,Core Engineering,Advanced,false
+SSK_00552,USN_2025_127,MACHINE_LEARNING,AI / GenAI,Advanced,false
+SSK_00553,USN_2025_128,SQL,Data Engineering & Cloud,Beginner,false
+SSK_00554,USN_2025_128,REACT,Core Engineering,Advanced,true
+SSK_00555,USN_2025_128,LANGCHAIN,AI / GenAI,Advanced,false
+SSK_00556,USN_2025_128,VECTOR_DATABASES,AI / GenAI,Advanced,true
+SSK_00557,USN_2025_129,REACT,Core Engineering,Advanced,false
+SSK_00558,USN_2025_129,SQL,Data Engineering & Cloud,Advanced,false
+SSK_00559,USN_2025_129,GENAI_LLMS,AI / GenAI,Beginner,false
+SSK_00560,USN_2025_129,VECTOR_DATABASES,AI / GenAI,Beginner,true
+SSK_00561,USN_2025_129,MACHINE_LEARNING,AI / GenAI,Advanced,false
+SSK_00562,USN_2025_129,LANGCHAIN,AI / GenAI,Intermediate,false
+SSK_00563,USN_2025_130,JAVA_BACKEND,Core Engineering,Advanced,false
+SSK_00564,USN_2025_130,SQL,Data Engineering & Cloud,Intermediate,false
+SSK_00565,USN_2025_130,GENAI_LLMS,AI / GenAI,Intermediate,false
+SSK_00566,USN_2025_130,VECTOR_DATABASES,AI / GenAI,Beginner,false
+SSK_00567,USN_2025_130,AWS_CLOUD,Data Engineering & Cloud,Advanced,false
+SSK_00568,USN_2025_130,LANGCHAIN,AI / GenAI,Beginner,false
+SSK_00569,USN_2025_131,SQL,Data Engineering & Cloud,Beginner,false
+SSK_00570,USN_2025_131,PYTHON,Core Engineering,Intermediate,false
+SSK_00571,USN_2025_131,PYSPARK,Data Engineering & Cloud,Advanced,false
+SSK_00572,USN_2025_131,LANGCHAIN,AI / GenAI,Beginner,false
+SSK_00573,USN_2025_131,GENAI_LLMS,AI / GenAI,Beginner,false
+SSK_00574,USN_2025_131,DATABRICKS_DE,Data Engineering & Cloud,Beginner,true
+SSK_00575,USN_2025_132,REACT,Core Engineering,Intermediate,false
+SSK_00576,USN_2025_132,PYTHON,Core Engineering,Beginner,false
+SSK_00577,USN_2025_132,AWS_CLOUD,Data Engineering & Cloud,Advanced,false
+SSK_00578,USN_2025_132,DATABRICKS_DE,Data Engineering & Cloud,Beginner,true
+SSK_00579,USN_2025_133,SQL,Data Engineering & Cloud,Advanced,true
+SSK_00580,USN_2025_133,PYTHON,Core Engineering,Advanced,true
+SSK_00581,USN_2025_133,VECTOR_DATABASES,AI / GenAI,Intermediate,false
+SSK_00582,USN_2025_134,SQL,Data Engineering & Cloud,Intermediate,false
+SSK_00583,USN_2025_134,CPP,Core Engineering,Intermediate,false
+SSK_00584,USN_2025_134,DATABRICKS_DE,Data Engineering & Cloud,Beginner,false
+SSK_00585,USN_2025_134,GENAI_LLMS,AI / GenAI,Intermediate,false
+SSK_00586,USN_2025_135,SQL,Data Engineering & Cloud,Intermediate,false
+SSK_00587,USN_2025_135,PYTHON,Core Engineering,Advanced,false
+SSK_00588,USN_2025_135,MACHINE_LEARNING,AI / GenAI,Intermediate,true
+SSK_00589,USN_2025_135,AWS_CLOUD,Data Engineering & Cloud,Intermediate,true
+SSK_00590,USN_2025_135,GENAI_LLMS,AI / GenAI,Advanced,false
+SSK_00591,USN_2025_135,LANGCHAIN,AI / GenAI,Advanced,false
+SSK_00592,USN_2025_136,SQL,Data Engineering & Cloud,Advanced,false
+SSK_00593,USN_2025_136,REACT,Core Engineering,Intermediate,false
+SSK_00594,USN_2025_136,LANGCHAIN,AI / GenAI,Advanced,false
+SSK_00595,USN_2025_136,DATABRICKS_DE,Data Engineering & Cloud,Advanced,false
+SSK_00596,USN_2025_136,GENAI_LLMS,AI / GenAI,Beginner,false
+SSK_00597,USN_2025_136,AWS_CLOUD,Data Engineering & Cloud,Beginner,false
+SSK_00598,USN_2025_137,CPP,Core Engineering,Intermediate,false
+SSK_00599,USN_2025_137,REACT,Core Engineering,Intermediate,true
+SSK_00600,USN_2025_137,MACHINE_LEARNING,AI / GenAI,Advanced,false
+SSK_00601,USN_2025_137,AWS_CLOUD,Data Engineering & Cloud,Intermediate,true
+SSK_00602,USN_2025_137,GENAI_LLMS,AI / GenAI,Beginner,true
+SSK_00603,USN_2025_137,PYSPARK,Data Engineering & Cloud,Advanced,false
+SSK_00604,USN_2025_138,CPP,Core Engineering,Advanced,true
+SSK_00605,USN_2025_138,SQL,Data Engineering & Cloud,Beginner,false
+SSK_00606,USN_2025_138,VECTOR_DATABASES,AI / GenAI,Beginner,true
+SSK_00607,USN_2025_138,PYSPARK,Data Engineering & Cloud,Intermediate,true
+SSK_00608,USN_2025_138,LANGCHAIN,AI / GenAI,Advanced,true
+SSK_00609,USN_2025_139,JAVA_BACKEND,Core Engineering,Beginner,false
+SSK_00610,USN_2025_139,PYTHON,Core Engineering,Beginner,false
+SSK_00611,USN_2025_139,VECTOR_DATABASES,AI / GenAI,Beginner,false
+SSK_00612,USN_2025_139,LANGCHAIN,AI / GenAI,Beginner,false
+SSK_00613,USN_2025_139,DATABRICKS_DE,Data Engineering & Cloud,Beginner,false
+SSK_00614,USN_2025_140,PYTHON,Core Engineering,Intermediate,false
+SSK_00615,USN_2025_140,REACT,Core Engineering,Advanced,false
+SSK_00616,USN_2025_140,LANGCHAIN,AI / GenAI,Advanced,false
+SSK_00617,USN_2025_140,PYSPARK,Data Engineering & Cloud,Intermediate,false
+SSK_00618,USN_2025_141,PYTHON,Core Engineering,Advanced,false
+SSK_00619,USN_2025_141,JAVA_BACKEND,Core Engineering,Beginner,false
+SSK_00620,USN_2025_141,GENAI_LLMS,AI / GenAI,Beginner,true
+SSK_00621,USN_2025_141,LANGCHAIN,AI / GenAI,Intermediate,false
+SSK_00622,USN_2025_141,PYSPARK,Data Engineering & Cloud,Intermediate,false
+SSK_00623,USN_2025_142,REACT,Core Engineering,Intermediate,true
+SSK_00624,USN_2025_142,PYTHON,Core Engineering,Advanced,false
+SSK_00625,USN_2025_142,PYSPARK,Data Engineering & Cloud,Intermediate,false
+SSK_00626,USN_2025_142,MACHINE_LEARNING,AI / GenAI,Advanced,false
+SSK_00627,USN_2025_143,SQL,Data Engineering & Cloud,Advanced,true
+SSK_00628,USN_2025_143,JAVA_BACKEND,Core Engineering,Beginner,true
+SSK_00629,USN_2025_143,LANGCHAIN,AI / GenAI,Intermediate,true
+SSK_00630,USN_2025_143,AWS_CLOUD,Data Engineering & Cloud,Advanced,false
+SSK_00631,USN_2025_143,DATABRICKS_DE,Data Engineering & Cloud,Beginner,true
+SSK_00632,USN_2025_144,PYTHON,Core Engineering,Beginner,false
+SSK_00633,USN_2025_144,REACT,Core Engineering,Advanced,false
+SSK_00634,USN_2025_144,MACHINE_LEARNING,AI / GenAI,Beginner,false
+SSK_00635,USN_2025_144,PYSPARK,Data Engineering & Cloud,Intermediate,true
+SSK_00636,USN_2025_145,JAVA_BACKEND,Core Engineering,Intermediate,false
+SSK_00637,USN_2025_145,CPP,Core Engineering,Advanced,true
+SSK_00638,USN_2025_145,LANGCHAIN,AI / GenAI,Beginner,false
+SSK_00639,USN_2025_145,GENAI_LLMS,AI / GenAI,Intermediate,false
+SSK_00640,USN_2025_146,JAVA_BACKEND,Core Engineering,Intermediate,true
+SSK_00641,USN_2025_146,REACT,Core Engineering,Intermediate,false
+SSK_00642,USN_2025_146,VECTOR_DATABASES,AI / GenAI,Intermediate,false
+SSK_00643,USN_2025_147,JAVA_BACKEND,Core Engineering,Intermediate,false
+SSK_00644,USN_2025_147,REACT,Core Engineering,Beginner,false
+SSK_00645,USN_2025_147,PYSPARK,Data Engineering & Cloud,Advanced,false
+SSK_00646,USN_2025_148,CPP,Core Engineering,Advanced,true
+SSK_00647,USN_2025_148,SQL,Data Engineering & Cloud,Beginner,false
+SSK_00648,USN_2025_148,MACHINE_LEARNING,AI / GenAI,Beginner,true
+SSK_00649,USN_2025_149,CPP,Core Engineering,Advanced,false
+SSK_00650,USN_2025_149,SQL,Data Engineering & Cloud,Advanced,true
+SSK_00651,USN_2025_149,VECTOR_DATABASES,AI / GenAI,Advanced,true
+SSK_00652,USN_2025_149,PYSPARK,Data Engineering & Cloud,Advanced,false
+SSK_00653,USN_2025_149,DATABRICKS_DE,Data Engineering & Cloud,Advanced,false
+SSK_00654,USN_2025_149,AWS_CLOUD,Data Engineering & Cloud,Intermediate,true
+SSK_00655,USN_2025_150,PYTHON,Core Engineering,Advanced,false
+SSK_00656,USN_2025_150,REACT,Core Engineering,Beginner,true
+SSK_00657,USN_2025_150,DATABRICKS_DE,Data Engineering & Cloud,Intermediate,false
+SSK_00658,USN_2025_150,PYSPARK,Data Engineering & Cloud,Intermediate,true
+SSK_00659,USN_2025_150,VECTOR_DATABASES,AI / GenAI,Beginner,true
+SSK_00660,USN_2025_151,REACT,Core Engineering,Intermediate,false
+SSK_00661,USN_2025_151,SQL,Data Engineering & Cloud,Beginner,false
+SSK_00662,USN_2025_151,DATABRICKS_DE,Data Engineering & Cloud,Advanced,false
+SSK_00663,USN_2025_151,LANGCHAIN,AI / GenAI,Advanced,false
+SSK_00664,USN_2025_151,VECTOR_DATABASES,AI / GenAI,Advanced,true
+SSK_00665,USN_2025_152,REACT,Core Engineering,Advanced,false
+SSK_00666,USN_2025_152,PYTHON,Core Engineering,Advanced,false
+SSK_00667,USN_2025_152,DATABRICKS_DE,Data Engineering & Cloud,Advanced,false
+SSK_00668,USN_2025_152,VECTOR_DATABASES,AI / GenAI,Beginner,true
+SSK_00669,USN_2025_153,SQL,Data Engineering & Cloud,Advanced,true
+SSK_00670,USN_2025_153,REACT,Core Engineering,Beginner,false
+SSK_00671,USN_2025_153,PYSPARK,Data Engineering & Cloud,Beginner,false
+SSK_00672,USN_2025_153,VECTOR_DATABASES,AI / GenAI,Advanced,false
+SSK_00673,USN_2025_154,CPP,Core Engineering,Beginner,false
+SSK_00674,USN_2025_154,REACT,Core Engineering,Beginner,false
+SSK_00675,USN_2025_154,PYSPARK,Data Engineering & Cloud,Intermediate,false
+SSK_00676,USN_2025_155,SQL,Data Engineering & Cloud,Advanced,true
+SSK_00677,USN_2025_155,REACT,Core Engineering,Advanced,true
+SSK_00678,USN_2025_155,VECTOR_DATABASES,AI / GenAI,Beginner,true
+SSK_00679,USN_2025_155,GENAI_LLMS,AI / GenAI,Intermediate,false
+SSK_00680,USN_2025_155,PYSPARK,Data Engineering & Cloud,Beginner,true
+SSK_00681,USN_2025_155,AWS_CLOUD,Data Engineering & Cloud,Beginner,false
+SSK_00682,USN_2025_156,SQL,Data Engineering & Cloud,Intermediate,false
+SSK_00683,USN_2025_156,JAVA_BACKEND,Core Engineering,Beginner,false
+SSK_00684,USN_2025_156,GENAI_LLMS,AI / GenAI,Intermediate,true
+SSK_00685,USN_2025_156,AWS_CLOUD,Data Engineering & Cloud,Beginner,false
+SSK_00686,USN_2025_156,DATABRICKS_DE,Data Engineering & Cloud,Advanced,false
+SSK_00687,USN_2025_156,VECTOR_DATABASES,AI / GenAI,Intermediate,false
+SSK_00688,USN_2025_157,JAVA_BACKEND,Core Engineering,Intermediate,false
+SSK_00689,USN_2025_157,REACT,Core Engineering,Beginner,false
+SSK_00690,USN_2025_157,VECTOR_DATABASES,AI / GenAI,Intermediate,false
+SSK_00691,USN_2025_158,JAVA_BACKEND,Core Engineering,Beginner,true
+SSK_00692,USN_2025_158,SQL,Data Engineering & Cloud,Intermediate,false
+SSK_00693,USN_2025_158,PYSPARK,Data Engineering & Cloud,Intermediate,false
+SSK_00694,USN_2025_158,VECTOR_DATABASES,AI / GenAI,Beginner,false
+SSK_00695,USN_2025_158,LANGCHAIN,AI / GenAI,Beginner,false
+SSK_00696,USN_2025_159,JAVA_BACKEND,Core Engineering,Advanced,false
+SSK_00697,USN_2025_159,SQL,Data Engineering & Cloud,Beginner,true
+SSK_00698,USN_2025_159,GENAI_LLMS,AI / GenAI,Advanced,false
+SSK_00699,USN_2025_159,PYSPARK,Data Engineering & Cloud,Intermediate,false
+SSK_00700,USN_2025_159,DATABRICKS_DE,Data Engineering & Cloud,Advanced,false
+SSK_00701,USN_2025_160,SQL,Data Engineering & Cloud,Advanced,false
+SSK_00702,USN_2025_160,PYTHON,Core Engineering,Advanced,false
+SSK_00703,USN_2025_160,MACHINE_LEARNING,AI / GenAI,Advanced,false
+SSK_00704,USN_2025_161,JAVA_BACKEND,Core Engineering,Advanced,true
+SSK_00705,USN_2025_161,REACT,Core Engineering,Advanced,true
+SSK_00706,USN_2025_161,GENAI_LLMS,AI / GenAI,Intermediate,true
+SSK_00707,USN_2025_161,LANGCHAIN,AI / GenAI,Intermediate,true
+SSK_00708,USN_2025_162,SQL,Data Engineering & Cloud,Intermediate,false
+SSK_00709,USN_2025_162,REACT,Core Engineering,Beginner,false
+SSK_00710,USN_2025_162,GENAI_LLMS,AI / GenAI,Intermediate,true
+SSK_00711,USN_2025_163,REACT,Core Engineering,Advanced,false
+SSK_00712,USN_2025_163,PYTHON,Core Engineering,Advanced,true
+SSK_00713,USN_2025_163,GENAI_LLMS,AI / GenAI,Beginner,true
+SSK_00714,USN_2025_163,MACHINE_LEARNING,AI / GenAI,Beginner,false
+SSK_00715,USN_2025_163,PYSPARK,Data Engineering & Cloud,Advanced,false
+SSK_00716,USN_2025_164,SQL,Data Engineering & Cloud,Beginner,false
+SSK_00717,USN_2025_164,REACT,Core Engineering,Beginner,true
+SSK_00718,USN_2025_164,GENAI_LLMS,AI / GenAI,Intermediate,false
+SSK_00719,USN_2025_164,AWS_CLOUD,Data Engineering & Cloud,Intermediate,false
+SSK_00720,USN_2025_164,VECTOR_DATABASES,AI / GenAI,Intermediate,true
+SSK_00721,USN_2025_165,JAVA_BACKEND,Core Engineering,Advanced,false
+SSK_00722,USN_2025_165,PYTHON,Core Engineering,Advanced,false
+SSK_00723,USN_2025_165,VECTOR_DATABASES,AI / GenAI,Intermediate,true
+SSK_00724,USN_2025_165,AWS_CLOUD,Data Engineering & Cloud,Advanced,false
+SSK_00725,USN_2025_165,LANGCHAIN,AI / GenAI,Advanced,true
+SSK_00726,USN_2025_166,REACT,Core Engineering,Beginner,true
+SSK_00727,USN_2025_166,CPP,Core Engineering,Beginner,false
+SSK_00728,USN_2025_166,LANGCHAIN,AI / GenAI,Beginner,false
+SSK_00729,USN_2025_166,PYSPARK,Data Engineering & Cloud,Beginner,true
+SSK_00730,USN_2025_166,MACHINE_LEARNING,AI / GenAI,Advanced,false
+SSK_00731,USN_2025_167,PYTHON,Core Engineering,Beginner,true
+SSK_00732,USN_2025_167,REACT,Core Engineering,Advanced,false
+SSK_00733,USN_2025_167,MACHINE_LEARNING,AI / GenAI,Beginner,true
+SSK_00734,USN_2025_167,VECTOR_DATABASES,AI / GenAI,Advanced,true
+SSK_00735,USN_2025_167,PYSPARK,Data Engineering & Cloud,Advanced,true
+SSK_00736,USN_2025_168,JAVA_BACKEND,Core Engineering,Intermediate,false
+SSK_00737,USN_2025_168,SQL,Data Engineering & Cloud,Advanced,true
+SSK_00738,USN_2025_168,GENAI_LLMS,AI / GenAI,Beginner,true
+SSK_00739,USN_2025_168,PYSPARK,Data Engineering & Cloud,Beginner,true
+SSK_00740,USN_2025_168,DATABRICKS_DE,Data Engineering & Cloud,Beginner,true
+SSK_00741,USN_2025_168,MACHINE_LEARNING,AI / GenAI,Advanced,false
+SSK_00742,USN_2025_169,REACT,Core Engineering,Advanced,false
+SSK_00743,USN_2025_169,JAVA_BACKEND,Core Engineering,Advanced,true
+SSK_00744,USN_2025_169,PYSPARK,Data Engineering & Cloud,Beginner,true
+SSK_00745,USN_2025_169,AWS_CLOUD,Data Engineering & Cloud,Beginner,true
+SSK_00746,USN_2025_169,GENAI_LLMS,AI / GenAI,Intermediate,false
+SSK_00747,USN_2025_170,JAVA_BACKEND,Core Engineering,Advanced,true
+SSK_00748,USN_2025_170,PYTHON,Core Engineering,Intermediate,true
+SSK_00749,USN_2025_170,GENAI_LLMS,AI / GenAI,Beginner,false
+SSK_00750,USN_2025_170,AWS_CLOUD,Data Engineering & Cloud,Intermediate,false
+SSK_00751,USN_2025_170,VECTOR_DATABASES,AI / GenAI,Advanced,true
+SSK_00752,USN_2025_171,SQL,Data Engineering & Cloud,Intermediate,false
+SSK_00753,USN_2025_171,CPP,Core Engineering,Beginner,true
+SSK_00754,USN_2025_171,LANGCHAIN,AI / GenAI,Beginner,false
+SSK_00755,USN_2025_171,AWS_CLOUD,Data Engineering & Cloud,Intermediate,false
+SSK_00756,USN_2025_171,GENAI_LLMS,AI / GenAI,Intermediate,false
+SSK_00757,USN_2025_172,REACT,Core Engineering,Intermediate,true
+SSK_00758,USN_2025_172,CPP,Core Engineering,Intermediate,false
+SSK_00759,USN_2025_172,AWS_CLOUD,Data Engineering & Cloud,Intermediate,false
+SSK_00760,USN_2025_173,SQL,Data Engineering & Cloud,Intermediate,true
+SSK_00761,USN_2025_173,PYTHON,Core Engineering,Intermediate,true
+SSK_00762,USN_2025_173,VECTOR_DATABASES,AI / GenAI,Intermediate,false
+SSK_00763,USN_2025_173,DATABRICKS_DE,Data Engineering & Cloud,Beginner,false
+SSK_00764,USN_2025_173,MACHINE_LEARNING,AI / GenAI,Intermediate,false
+SSK_00765,USN_2025_173,GENAI_LLMS,AI / GenAI,Intermediate,false
+SSK_00766,USN_2025_174,JAVA_BACKEND,Core Engineering,Advanced,false
+SSK_00767,USN_2025_174,PYTHON,Core Engineering,Beginner,false
+SSK_00768,USN_2025_174,LANGCHAIN,AI / GenAI,Advanced,false
+SSK_00769,USN_2025_174,AWS_CLOUD,Data Engineering & Cloud,Beginner,false
+SSK_00770,USN_2025_175,PYTHON,Core Engineering,Intermediate,false
+SSK_00771,USN_2025_175,CPP,Core Engineering,Intermediate,false
+SSK_00772,USN_2025_175,DATABRICKS_DE,Data Engineering & Cloud,Intermediate,false
+SSK_00773,USN_2025_175,AWS_CLOUD,Data Engineering & Cloud,Intermediate,false
+SSK_00774,USN_2025_176,SQL,Data Engineering & Cloud,Beginner,true
+SSK_00775,USN_2025_176,PYTHON,Core Engineering,Advanced,false
+SSK_00776,USN_2025_176,MACHINE_LEARNING,AI / GenAI,Intermediate,false
+SSK_00777,USN_2025_176,VECTOR_DATABASES,AI / GenAI,Beginner,false
+SSK_00778,USN_2025_176,DATABRICKS_DE,Data Engineering & Cloud,Beginner,false
+SSK_00779,USN_2025_177,PYTHON,Core Engineering,Advanced,false
+SSK_00780,USN_2025_177,JAVA_BACKEND,Core Engineering,Beginner,false
+SSK_00781,USN_2025_177,MACHINE_LEARNING,AI / GenAI,Advanced,true
+SSK_00782,USN_2025_177,AWS_CLOUD,Data Engineering & Cloud,Beginner,false
+SSK_00783,USN_2025_177,GENAI_LLMS,AI / GenAI,Beginner,false
+SSK_00784,USN_2025_178,JAVA_BACKEND,Core Engineering,Advanced,false
+SSK_00785,USN_2025_178,CPP,Core Engineering,Intermediate,false
+SSK_00786,USN_2025_178,VECTOR_DATABASES,AI / GenAI,Advanced,false
+SSK_00787,USN_2025_178,DATABRICKS_DE,Data Engineering & Cloud,Beginner,false
+SSK_00788,USN_2025_178,MACHINE_LEARNING,AI / GenAI,Beginner,false
+SSK_00789,USN_2025_179,JAVA_BACKEND,Core Engineering,Advanced,false
+SSK_00790,USN_2025_179,REACT,Core Engineering,Intermediate,false
+SSK_00791,USN_2025_179,LANGCHAIN,AI / GenAI,Advanced,false
+SSK_00792,USN_2025_180,REACT,Core Engineering,Advanced,false
+SSK_00793,USN_2025_180,JAVA_BACKEND,Core Engineering,Intermediate,false
+SSK_00794,USN_2025_180,GENAI_LLMS,AI / GenAI,Beginner,false
+SSK_00795,USN_2025_180,MACHINE_LEARNING,AI / GenAI,Intermediate,false
+SSK_00796,USN_2025_181,CPP,Core Engineering,Beginner,false
+SSK_00797,USN_2025_181,PYTHON,Core Engineering,Intermediate,false
+SSK_00798,USN_2025_181,VECTOR_DATABASES,AI / GenAI,Beginner,false
+SSK_00799,USN_2025_181,AWS_CLOUD,Data Engineering & Cloud,Beginner,false
+SSK_00800,USN_2025_182,REACT,Core Engineering,Advanced,true
+SSK_00801,USN_2025_182,JAVA_BACKEND,Core Engineering,Advanced,true
+SSK_00802,USN_2025_182,MACHINE_LEARNING,AI / GenAI,Advanced,false
+SSK_00803,USN_2025_182,LANGCHAIN,AI / GenAI,Beginner,false
+SSK_00804,USN_2025_182,GENAI_LLMS,AI / GenAI,Beginner,false
+SSK_00805,USN_2025_183,JAVA_BACKEND,Core Engineering,Intermediate,true
+SSK_00806,USN_2025_183,CPP,Core Engineering,Beginner,true
+SSK_00807,USN_2025_183,MACHINE_LEARNING,AI / GenAI,Intermediate,false
+SSK_00808,USN_2025_183,DATABRICKS_DE,Data Engineering & Cloud,Beginner,false
+SSK_00809,USN_2025_183,LANGCHAIN,AI / GenAI,Advanced,true
+SSK_00810,USN_2025_183,VECTOR_DATABASES,AI / GenAI,Beginner,false
+SSK_00811,USN_2025_184,PYTHON,Core Engineering,Advanced,false
+SSK_00812,USN_2025_184,CPP,Core Engineering,Beginner,false
+SSK_00813,USN_2025_184,VECTOR_DATABASES,AI / GenAI,Advanced,false
+SSK_00814,USN_2025_184,AWS_CLOUD,Data Engineering & Cloud,Beginner,false
+SSK_00815,USN_2025_185,REACT,Core Engineering,Beginner,false
+SSK_00816,USN_2025_185,SQL,Data Engineering & Cloud,Beginner,false
+SSK_00817,USN_2025_185,VECTOR_DATABASES,AI / GenAI,Intermediate,false
+SSK_00818,USN_2025_186,JAVA_BACKEND,Core Engineering,Advanced,false
+SSK_00819,USN_2025_186,REACT,Core Engineering,Advanced,false
+SSK_00820,USN_2025_186,GENAI_LLMS,AI / GenAI,Advanced,true
+SSK_00821,USN_2025_186,VECTOR_DATABASES,AI / GenAI,Advanced,false
+SSK_00822,USN_2025_186,LANGCHAIN,AI / GenAI,Advanced,false
+SSK_00823,USN_2025_186,DATABRICKS_DE,Data Engineering & Cloud,Advanced,true
+SSK_00824,USN_2025_187,JAVA_BACKEND,Core Engineering,Intermediate,true
+SSK_00825,USN_2025_187,CPP,Core Engineering,Beginner,false
+SSK_00826,USN_2025_187,VECTOR_DATABASES,AI / GenAI,Beginner,false
+SSK_00827,USN_2025_187,AWS_CLOUD,Data Engineering & Cloud,Advanced,false
+SSK_00828,USN_2025_187,LANGCHAIN,AI / GenAI,Advanced,true
+SSK_00829,USN_2025_187,PYSPARK,Data Engineering & Cloud,Intermediate,false
+SSK_00830,USN_2025_188,REACT,Core Engineering,Intermediate,true
+SSK_00831,USN_2025_188,PYTHON,Core Engineering,Beginner,false
+SSK_00832,USN_2025_188,MACHINE_LEARNING,AI / GenAI,Beginner,false
+SSK_00833,USN_2025_188,PYSPARK,Data Engineering & Cloud,Intermediate,false
+SSK_00834,USN_2025_188,AWS_CLOUD,Data Engineering & Cloud,Intermediate,false
+SSK_00835,USN_2025_188,DATABRICKS_DE,Data Engineering & Cloud,Advanced,false
+SSK_00836,USN_2025_189,REACT,Core Engineering,Advanced,false
+SSK_00837,USN_2025_189,CPP,Core Engineering,Beginner,false
+SSK_00838,USN_2025_189,PYSPARK,Data Engineering & Cloud,Intermediate,false
+SSK_00839,USN_2025_189,VECTOR_DATABASES,AI / GenAI,Beginner,true
+SSK_00840,USN_2025_189,AWS_CLOUD,Data Engineering & Cloud,Beginner,false
+SSK_00841,USN_2025_190,PYTHON,Core Engineering,Intermediate,false
+SSK_00842,USN_2025_190,REACT,Core Engineering,Beginner,true
+SSK_00843,USN_2025_190,PYSPARK,Data Engineering & Cloud,Beginner,false
+SSK_00844,USN_2025_190,GENAI_LLMS,AI / GenAI,Beginner,false
+SSK_00845,USN_2025_191,REACT,Core Engineering,Beginner,true
+SSK_00846,USN_2025_191,CPP,Core Engineering,Advanced,false
+SSK_00847,USN_2025_191,LANGCHAIN,AI / GenAI,Intermediate,false
+SSK_00848,USN_2025_191,VECTOR_DATABASES,AI / GenAI,Beginner,false
+SSK_00849,USN_2025_191,MACHINE_LEARNING,AI / GenAI,Advanced,true
+SSK_00850,USN_2025_192,CPP,Core Engineering,Intermediate,false
+SSK_00851,USN_2025_192,PYTHON,Core Engineering,Intermediate,false
+SSK_00852,USN_2025_192,DATABRICKS_DE,Data Engineering & Cloud,Beginner,false
+SSK_00853,USN_2025_192,PYSPARK,Data Engineering & Cloud,Advanced,false
+SSK_00854,USN_2025_192,VECTOR_DATABASES,AI / GenAI,Beginner,false
+SSK_00855,USN_2025_192,AWS_CLOUD,Data Engineering & Cloud,Advanced,true
+SSK_00856,USN_2025_193,PYTHON,Core Engineering,Beginner,false
+SSK_00857,USN_2025_193,CPP,Core Engineering,Beginner,false
+SSK_00858,USN_2025_193,VECTOR_DATABASES,AI / GenAI,Advanced,true
+SSK_00859,USN_2025_194,REACT,Core Engineering,Advanced,true
+SSK_00860,USN_2025_194,CPP,Core Engineering,Intermediate,false
+SSK_00861,USN_2025_194,PYSPARK,Data Engineering & Cloud,Intermediate,false
+SSK_00862,USN_2025_194,AWS_CLOUD,Data Engineering & Cloud,Intermediate,true
+SSK_00863,USN_2025_194,MACHINE_LEARNING,AI / GenAI,Beginner,false
+SSK_00864,USN_2025_194,VECTOR_DATABASES,AI / GenAI,Beginner,false
+SSK_00865,USN_2025_195,REACT,Core Engineering,Beginner,false
+SSK_00866,USN_2025_195,PYTHON,Core Engineering,Intermediate,false
+SSK_00867,USN_2025_195,MACHINE_LEARNING,AI / GenAI,Beginner,true
+SSK_00868,USN_2025_195,LANGCHAIN,AI / GenAI,Intermediate,false
+SSK_00869,USN_2025_195,GENAI_LLMS,AI / GenAI,Intermediate,false
+SSK_00870,USN_2025_195,VECTOR_DATABASES,AI / GenAI,Beginner,true
+SSK_00871,USN_2025_196,SQL,Data Engineering & Cloud,Advanced,false
+SSK_00872,USN_2025_196,REACT,Core Engineering,Beginner,true
+SSK_00873,USN_2025_196,MACHINE_LEARNING,AI / GenAI,Intermediate,false
+SSK_00874,USN_2025_197,REACT,Core Engineering,Beginner,true
+SSK_00875,USN_2025_197,PYTHON,Core Engineering,Intermediate,false
+SSK_00876,USN_2025_197,DATABRICKS_DE,Data Engineering & Cloud,Beginner,true
+SSK_00877,USN_2025_198,REACT,Core Engineering,Beginner,false
+SSK_00878,USN_2025_198,PYTHON,Core Engineering,Beginner,false
+SSK_00879,USN_2025_198,AWS_CLOUD,Data Engineering & Cloud,Intermediate,false
+SSK_00880,USN_2025_198,VECTOR_DATABASES,AI / GenAI,Intermediate,false
+SSK_00881,USN_2025_199,REACT,Core Engineering,Intermediate,false
+SSK_00882,USN_2025_199,JAVA_BACKEND,Core Engineering,Intermediate,false
+SSK_00883,USN_2025_199,MACHINE_LEARNING,AI / GenAI,Intermediate,false
+SSK_00884,USN_2025_199,PYSPARK,Data Engineering & Cloud,Beginner,false
+SSK_00885,USN_2025_199,LANGCHAIN,AI / GenAI,Advanced,false
+SSK_00886,USN_2025_199,GENAI_LLMS,AI / GenAI,Intermediate,true
+SSK_00887,USN_2025_200,PYTHON,Core Engineering,Beginner,false
+SSK_00888,USN_2025_200,JAVA_BACKEND,Core Engineering,Intermediate,false
+SSK_00889,USN_2025_200,GENAI_LLMS,AI / GenAI,Beginner,false
+SSK_00890,USN_2025_200,DATABRICKS_DE,Data Engineering & Cloud,Advanced,false
+SSK_00891,USN_2025_201,REACT,Core Engineering,Intermediate,false
+SSK_00892,USN_2025_201,CPP,Core Engineering,Beginner,false
+SSK_00893,USN_2025_201,GENAI_LLMS,AI / GenAI,Intermediate,false
+SSK_00894,USN_2025_202,JAVA_BACKEND,Core Engineering,Intermediate,true
+SSK_00895,USN_2025_202,CPP,Core Engineering,Advanced,true
+SSK_00896,USN_2025_202,PYSPARK,Data Engineering & Cloud,Beginner,false
+SSK_00897,USN_2025_202,VECTOR_DATABASES,AI / GenAI,Intermediate,false
+SSK_00898,USN_2025_203,CPP,Core Engineering,Intermediate,true
+SSK_00899,USN_2025_203,SQL,Data Engineering & Cloud,Intermediate,false
+SSK_00900,USN_2025_203,PYSPARK,Data Engineering & Cloud,Advanced,false
+SSK_00901,USN_2025_203,VECTOR_DATABASES,AI / GenAI,Advanced,false
+SSK_00902,USN_2025_204,PYTHON,Core Engineering,Advanced,true
+SSK_00903,USN_2025_204,REACT,Core Engineering,Beginner,true
+SSK_00904,USN_2025_204,GENAI_LLMS,AI / GenAI,Beginner,true
+SSK_00905,USN_2025_204,VECTOR_DATABASES,AI / GenAI,Beginner,false
+SSK_00906,USN_2025_205,SQL,Data Engineering & Cloud,Advanced,true
+SSK_00907,USN_2025_205,REACT,Core Engineering,Intermediate,true
+SSK_00908,USN_2025_205,DATABRICKS_DE,Data Engineering & Cloud,Intermediate,false
+SSK_00909,USN_2025_206,REACT,Core Engineering,Advanced,false
+SSK_00910,USN_2025_206,PYTHON,Core Engineering,Intermediate,false
+SSK_00911,USN_2025_206,GENAI_LLMS,AI / GenAI,Beginner,false
+SSK_00912,USN_2025_206,PYSPARK,Data Engineering & Cloud,Beginner,false
+SSK_00913,USN_2025_206,VECTOR_DATABASES,AI / GenAI,Intermediate,false
+SSK_00914,USN_2025_206,LANGCHAIN,AI / GenAI,Beginner,false
+SSK_00915,USN_2025_207,JAVA_BACKEND,Core Engineering,Intermediate,true
+SSK_00916,USN_2025_207,SQL,Data Engineering & Cloud,Advanced,false
+SSK_00917,USN_2025_207,MACHINE_LEARNING,AI / GenAI,Intermediate,true
+SSK_00918,USN_2025_208,JAVA_BACKEND,Core Engineering,Beginner,true
+SSK_00919,USN_2025_208,PYTHON,Core Engineering,Beginner,true
+SSK_00920,USN_2025_208,MACHINE_LEARNING,AI / GenAI,Intermediate,false
+SSK_00921,USN_2025_208,PYSPARK,Data Engineering & Cloud,Intermediate,false
+SSK_00922,USN_2025_209,PYTHON,Core Engineering,Advanced,false
+SSK_00923,USN_2025_209,SQL,Data Engineering & Cloud,Beginner,false
+SSK_00924,USN_2025_209,DATABRICKS_DE,Data Engineering & Cloud,Beginner,false
+SSK_00925,USN_2025_209,AWS_CLOUD,Data Engineering & Cloud,Intermediate,true
+SSK_00926,USN_2025_210,JAVA_BACKEND,Core Engineering,Advanced,true
+SSK_00927,USN_2025_210,REACT,Core Engineering,Advanced,false
+SSK_00928,USN_2025_210,MACHINE_LEARNING,AI / GenAI,Intermediate,false
+SSK_00929,USN_2025_210,DATABRICKS_DE,Data Engineering & Cloud,Advanced,false
+SSK_00930,USN_2025_211,SQL,Data Engineering & Cloud,Advanced,false
+SSK_00931,USN_2025_211,JAVA_BACKEND,Core Engineering,Advanced,true
+SSK_00932,USN_2025_211,DATABRICKS_DE,Data Engineering & Cloud,Intermediate,false
+SSK_00933,USN_2025_212,CPP,Core Engineering,Beginner,false
+SSK_00934,USN_2025_212,PYTHON,Core Engineering,Intermediate,false
+SSK_00935,USN_2025_212,MACHINE_LEARNING,AI / GenAI,Advanced,false
+SSK_00936,USN_2025_212,VECTOR_DATABASES,AI / GenAI,Beginner,false
+SSK_00937,USN_2025_212,AWS_CLOUD,Data Engineering & Cloud,Beginner,false
+SSK_00938,USN_2025_212,PYSPARK,Data Engineering & Cloud,Advanced,false
+SSK_00939,USN_2025_213,SQL,Data Engineering & Cloud,Intermediate,false
+SSK_00940,USN_2025_213,REACT,Core Engineering,Advanced,true
+SSK_00941,USN_2025_213,LANGCHAIN,AI / GenAI,Intermediate,false
+SSK_00942,USN_2025_213,PYSPARK,Data Engineering & Cloud,Beginner,false
+SSK_00943,USN_2025_214,PYTHON,Core Engineering,Beginner,false
+SSK_00944,USN_2025_214,REACT,Core Engineering,Intermediate,false
+SSK_00945,USN_2025_214,LANGCHAIN,AI / GenAI,Intermediate,false
+SSK_00946,USN_2025_214,PYSPARK,Data Engineering & Cloud,Advanced,true
+SSK_00947,USN_2025_215,CPP,Core Engineering,Intermediate,false
+SSK_00948,USN_2025_215,SQL,Data Engineering & Cloud,Advanced,false
+SSK_00949,USN_2025_215,PYSPARK,Data Engineering & Cloud,Beginner,true
+SSK_00950,USN_2025_216,SQL,Data Engineering & Cloud,Beginner,false
+SSK_00951,USN_2025_216,REACT,Core Engineering,Advanced,false
+SSK_00952,USN_2025_216,DATABRICKS_DE,Data Engineering & Cloud,Intermediate,true
+SSK_00953,USN_2025_216,PYSPARK,Data Engineering & Cloud,Intermediate,true
+SSK_00954,USN_2025_216,AWS_CLOUD,Data Engineering & Cloud,Beginner,false
+SSK_00955,USN_2025_217,JAVA_BACKEND,Core Engineering,Intermediate,true
+SSK_00956,USN_2025_217,SQL,Data Engineering & Cloud,Advanced,false
+SSK_00957,USN_2025_217,AWS_CLOUD,Data Engineering & Cloud,Intermediate,false
+SSK_00958,USN_2025_217,PYSPARK,Data Engineering & Cloud,Beginner,false
+SSK_00959,USN_2025_217,VECTOR_DATABASES,AI / GenAI,Intermediate,false
+SSK_00960,USN_2025_217,MACHINE_LEARNING,AI / GenAI,Beginner,false
+SSK_00961,USN_2025_218,PYTHON,Core Engineering,Beginner,false
+SSK_00962,USN_2025_218,REACT,Core Engineering,Beginner,false
+SSK_00963,USN_2025_218,LANGCHAIN,AI / GenAI,Advanced,true
+SSK_00964,USN_2025_219,JAVA_BACKEND,Core Engineering,Advanced,false
+SSK_00965,USN_2025_219,PYTHON,Core Engineering,Beginner,true
+SSK_00966,USN_2025_219,DATABRICKS_DE,Data Engineering & Cloud,Beginner,true
+SSK_00967,USN_2025_219,MACHINE_LEARNING,AI / GenAI,Beginner,true
+SSK_00968,USN_2025_219,AWS_CLOUD,Data Engineering & Cloud,Intermediate,true
+SSK_00969,USN_2025_220,PYTHON,Core Engineering,Advanced,false
+SSK_00970,USN_2025_220,CPP,Core Engineering,Intermediate,false
+SSK_00971,USN_2025_220,AWS_CLOUD,Data Engineering & Cloud,Advanced,false
+SSK_00972,USN_2025_220,LANGCHAIN,AI / GenAI,Advanced,true
+SSK_00973,USN_2025_221,CPP,Core Engineering,Advanced,true
+SSK_00974,USN_2025_221,REACT,Core Engineering,Beginner,false
+SSK_00975,USN_2025_221,VECTOR_DATABASES,AI / GenAI,Advanced,false
+SSK_00976,USN_2025_222,SQL,Data Engineering & Cloud,Beginner,true
+SSK_00977,USN_2025_222,PYTHON,Core Engineering,Beginner,false
+SSK_00978,USN_2025_222,LANGCHAIN,AI / GenAI,Beginner,false
+SSK_00979,USN_2025_222,VECTOR_DATABASES,AI / GenAI,Advanced,true
+SSK_00980,USN_2025_222,AWS_CLOUD,Data Engineering & Cloud,Advanced,true
+SSK_00981,USN_2025_223,JAVA_BACKEND,Core Engineering,Advanced,true
+SSK_00982,USN_2025_223,CPP,Core Engineering,Advanced,false
+SSK_00983,USN_2025_223,MACHINE_LEARNING,AI / GenAI,Intermediate,true
+SSK_00984,USN_2025_224,JAVA_BACKEND,Core Engineering,Intermediate,false
+SSK_00985,USN_2025_224,PYTHON,Core Engineering,Advanced,false
+SSK_00986,USN_2025_224,AWS_CLOUD,Data Engineering & Cloud,Intermediate,true
+SSK_00987,USN_2025_225,REACT,Core Engineering,Advanced,false
+SSK_00988,USN_2025_225,SQL,Data Engineering & Cloud,Beginner,false
+SSK_00989,USN_2025_225,GENAI_LLMS,AI / GenAI,Intermediate,false
+SSK_00990,USN_2025_225,DATABRICKS_DE,Data Engineering & Cloud,Advanced,false
+SSK_00991,USN_2025_225,LANGCHAIN,AI / GenAI,Advanced,false
+SSK_00992,USN_2025_225,MACHINE_LEARNING,AI / GenAI,Beginner,false
+SSK_00993,USN_2025_226,JAVA_BACKEND,Core Engineering,Beginner,false
+SSK_00994,USN_2025_226,SQL,Data Engineering & Cloud,Intermediate,false
+SSK_00995,USN_2025_226,VECTOR_DATABASES,AI / GenAI,Advanced,false
+SSK_00996,USN_2025_226,AWS_CLOUD,Data Engineering & Cloud,Beginner,true
+SSK_00997,USN_2025_227,REACT,Core Engineering,Intermediate,false
+SSK_00998,USN_2025_227,PYTHON,Core Engineering,Advanced,true
+SSK_00999,USN_2025_227,AWS_CLOUD,Data Engineering & Cloud,Intermediate,true
+SSK_01000,USN_2025_227,DATABRICKS_DE,Data Engineering & Cloud,Advanced,false
+SSK_01001,USN_2025_227,GENAI_LLMS,AI / GenAI,Advanced,true
+SSK_01002,USN_2025_227,MACHINE_LEARNING,AI / GenAI,Intermediate,false
+SSK_01003,USN_2025_228,REACT,Core Engineering,Beginner,false
+SSK_01004,USN_2025_228,JAVA_BACKEND,Core Engineering,Intermediate,true
+SSK_01005,USN_2025_228,VECTOR_DATABASES,AI / GenAI,Intermediate,false
+SSK_01006,USN_2025_229,SQL,Data Engineering & Cloud,Advanced,true
+SSK_01007,USN_2025_229,REACT,Core Engineering,Intermediate,false
+SSK_01008,USN_2025_229,LANGCHAIN,AI / GenAI,Intermediate,false
+SSK_01009,USN_2025_229,VECTOR_DATABASES,AI / GenAI,Intermediate,false
+SSK_01010,USN_2025_229,GENAI_LLMS,AI / GenAI,Beginner,true
+SSK_01011,USN_2025_229,PYSPARK,Data Engineering & Cloud,Intermediate,false
+SSK_01012,USN_2025_230,REACT,Core Engineering,Intermediate,false
+SSK_01013,USN_2025_230,SQL,Data Engineering & Cloud,Advanced,false
+SSK_01014,USN_2025_230,VECTOR_DATABASES,AI / GenAI,Intermediate,false
+SSK_01015,USN_2025_230,MACHINE_LEARNING,AI / GenAI,Advanced,true
+SSK_01016,USN_2025_230,AWS_CLOUD,Data Engineering & Cloud,Advanced,false
+SSK_01017,USN_2025_231,CPP,Core Engineering,Advanced,false
+SSK_01018,USN_2025_231,PYTHON,Core Engineering,Intermediate,true
+SSK_01019,USN_2025_231,GENAI_LLMS,AI / GenAI,Advanced,false
+SSK_01020,USN_2025_231,VECTOR_DATABASES,AI / GenAI,Beginner,false
+SSK_01021,USN_2025_231,AWS_CLOUD,Data Engineering & Cloud,Advanced,false
+SSK_01022,USN_2025_232,REACT,Core Engineering,Advanced,false
+SSK_01023,USN_2025_232,CPP,Core Engineering,Intermediate,true
+SSK_01024,USN_2025_232,PYSPARK,Data Engineering & Cloud,Advanced,false
+SSK_01025,USN_2025_232,MACHINE_LEARNING,AI / GenAI,Intermediate,false
+SSK_01026,USN_2025_233,SQL,Data Engineering & Cloud,Beginner,true
+SSK_01027,USN_2025_233,JAVA_BACKEND,Core Engineering,Beginner,false
+SSK_01028,USN_2025_233,GENAI_LLMS,AI / GenAI,Intermediate,false
+SSK_01029,USN_2025_233,LANGCHAIN,AI / GenAI,Beginner,false
+SSK_01030,USN_2025_234,JAVA_BACKEND,Core Engineering,Advanced,false
+SSK_01031,USN_2025_234,PYTHON,Core Engineering,Intermediate,false
+SSK_01032,USN_2025_234,LANGCHAIN,AI / GenAI,Intermediate,false
+SSK_01033,USN_2025_234,GENAI_LLMS,AI / GenAI,Intermediate,true
+SSK_01034,USN_2025_235,CPP,Core Engineering,Advanced,false
+SSK_01035,USN_2025_235,JAVA_BACKEND,Core Engineering,Beginner,false
+SSK_01036,USN_2025_235,LANGCHAIN,AI / GenAI,Advanced,false
+SSK_01037,USN_2025_235,VECTOR_DATABASES,AI / GenAI,Advanced,false
+SSK_01038,USN_2025_235,MACHINE_LEARNING,AI / GenAI,Intermediate,true
+SSK_01039,USN_2025_236,REACT,Core Engineering,Intermediate,false
+SSK_01040,USN_2025_236,PYTHON,Core Engineering,Beginner,true
+SSK_01041,USN_2025_236,PYSPARK,Data Engineering & Cloud,Intermediate,true
+SSK_01042,USN_2025_237,JAVA_BACKEND,Core Engineering,Advanced,false
+SSK_01043,USN_2025_237,CPP,Core Engineering,Intermediate,false
+SSK_01044,USN_2025_237,DATABRICKS_DE,Data Engineering & Cloud,Advanced,true
+SSK_01045,USN_2025_238,CPP,Core Engineering,Advanced,false
+SSK_01046,USN_2025_238,SQL,Data Engineering & Cloud,Intermediate,true
+SSK_01047,USN_2025_238,GENAI_LLMS,AI / GenAI,Intermediate,true
+SSK_01048,USN_2025_238,DATABRICKS_DE,Data Engineering & Cloud,Advanced,false
+SSK_01049,USN_2025_239,REACT,Core Engineering,Beginner,true
+SSK_01050,USN_2025_239,SQL,Data Engineering & Cloud,Beginner,false
+SSK_01051,USN_2025_239,PYSPARK,Data Engineering & Cloud,Intermediate,true
+SSK_01052,USN_2025_240,SQL,Data Engineering & Cloud,Beginner,false
+SSK_01053,USN_2025_240,JAVA_BACKEND,Core Engineering,Intermediate,false
+SSK_01054,USN_2025_240,MACHINE_LEARNING,AI / GenAI,Intermediate,false
+SSK_01055,USN_2025_240,VECTOR_DATABASES,AI / GenAI,Intermediate,false
+SSK_01056,USN_2025_241,REACT,Core Engineering,Intermediate,false
+SSK_01057,USN_2025_241,PYTHON,Core Engineering,Advanced,false
+SSK_01058,USN_2025_241,LANGCHAIN,AI / GenAI,Intermediate,false
+SSK_01059,USN_2025_241,AWS_CLOUD,Data Engineering & Cloud,Intermediate,true
+SSK_01060,USN_2025_241,DATABRICKS_DE,Data Engineering & Cloud,Beginner,true
+SSK_01061,USN_2025_242,SQL,Data Engineering & Cloud,Beginner,false
+SSK_01062,USN_2025_242,CPP,Core Engineering,Beginner,false
+SSK_01063,USN_2025_242,LANGCHAIN,AI / GenAI,Beginner,false
+SSK_01064,USN_2025_243,CPP,Core Engineering,Advanced,false
+SSK_01065,USN_2025_243,JAVA_BACKEND,Core Engineering,Beginner,false
+SSK_01066,USN_2025_243,LANGCHAIN,AI / GenAI,Advanced,false
+SSK_01067,USN_2025_243,AWS_CLOUD,Data Engineering & Cloud,Advanced,true
+SSK_01068,USN_2025_243,DATABRICKS_DE,Data Engineering & Cloud,Intermediate,false
+SSK_01069,USN_2025_243,GENAI_LLMS,AI / GenAI,Beginner,false
+SSK_01070,USN_2025_244,JAVA_BACKEND,Core Engineering,Advanced,false
+SSK_01071,USN_2025_244,REACT,Core Engineering,Advanced,false
+SSK_01072,USN_2025_244,MACHINE_LEARNING,AI / GenAI,Intermediate,true
+SSK_01073,USN_2025_245,SQL,Data Engineering & Cloud,Intermediate,false
+SSK_01074,USN_2025_245,JAVA_BACKEND,Core Engineering,Beginner,true
+SSK_01075,USN_2025_245,MACHINE_LEARNING,AI / GenAI,Beginner,true
+SSK_01076,USN_2025_246,JAVA_BACKEND,Core Engineering,Intermediate,false
+SSK_01077,USN_2025_246,CPP,Core Engineering,Advanced,true
+SSK_01078,USN_2025_246,VECTOR_DATABASES,AI / GenAI,Advanced,false
+SSK_01079,USN_2025_247,JAVA_BACKEND,Core Engineering,Intermediate,false
+SSK_01080,USN_2025_247,CPP,Core Engineering,Intermediate,false
+SSK_01081,USN_2025_247,LANGCHAIN,AI / GenAI,Advanced,false
+SSK_01082,USN_2025_247,GENAI_LLMS,AI / GenAI,Intermediate,false
+SSK_01083,USN_2025_247,MACHINE_LEARNING,AI / GenAI,Advanced,false
+SSK_01084,USN_2025_248,CPP,Core Engineering,Intermediate,false
+SSK_01085,USN_2025_248,PYTHON,Core Engineering,Beginner,false
+SSK_01086,USN_2025_248,AWS_CLOUD,Data Engineering & Cloud,Advanced,false
+SSK_01087,USN_2025_248,MACHINE_LEARNING,AI / GenAI,Intermediate,true
+SSK_01088,USN_2025_249,JAVA_BACKEND,Core Engineering,Intermediate,false
+SSK_01089,USN_2025_249,CPP,Core Engineering,Intermediate,false
+SSK_01090,USN_2025_249,VECTOR_DATABASES,AI / GenAI,Beginner,false
+SSK_01091,USN_2025_250,PYTHON,Core Engineering,Beginner,false
+SSK_01092,USN_2025_250,JAVA_BACKEND,Core Engineering,Beginner,false
+SSK_01093,USN_2025_250,PYSPARK,Data Engineering & Cloud,Intermediate,true
+SSK_01094,USN_2025_250,DATABRICKS_DE,Data Engineering & Cloud,Intermediate,false
+SSK_01095,USN_2025_250,VECTOR_DATABASES,AI / GenAI,Beginner,false
+SSK_01096,USN_2025_250,MACHINE_LEARNING,AI / GenAI,Advanced,true
+SSK_01097,USN_2025_251,PYTHON,Core Engineering,Intermediate,true
+SSK_01098,USN_2025_251,JAVA_BACKEND,Core Engineering,Beginner,false
+SSK_01099,USN_2025_251,DATABRICKS_DE,Data Engineering & Cloud,Advanced,false
+SSK_01100,USN_2025_251,GENAI_LLMS,AI / GenAI,Intermediate,false
+SSK_01101,USN_2025_251,MACHINE_LEARNING,AI / GenAI,Beginner,false
+SSK_01102,USN_2025_252,REACT,Core Engineering,Beginner,false
+SSK_01103,USN_2025_252,SQL,Data Engineering & Cloud,Intermediate,false
+SSK_01104,USN_2025_252,LANGCHAIN,AI / GenAI,Advanced,false
+SSK_01105,USN_2025_252,VECTOR_DATABASES,AI / GenAI,Beginner,true
+SSK_01106,USN_2025_252,PYSPARK,Data Engineering & Cloud,Intermediate,true
+SSK_01107,USN_2025_252,GENAI_LLMS,AI / GenAI,Intermediate,false
+SSK_01108,USN_2025_253,SQL,Data Engineering & Cloud,Intermediate,true
+SSK_01109,USN_2025_253,CPP,Core Engineering,Advanced,true
+SSK_01110,USN_2025_253,VECTOR_DATABASES,AI / GenAI,Intermediate,true
+SSK_01111,USN_2025_253,LANGCHAIN,AI / GenAI,Advanced,false
+SSK_01112,USN_2025_254,CPP,Core Engineering,Beginner,false
+SSK_01113,USN_2025_254,JAVA_BACKEND,Core Engineering,Beginner,false
+SSK_01114,USN_2025_254,GENAI_LLMS,AI / GenAI,Advanced,true
+SSK_01115,USN_2025_254,MACHINE_LEARNING,AI / GenAI,Beginner,true
+SSK_01116,USN_2025_254,DATABRICKS_DE,Data Engineering & Cloud,Advanced,false
+SSK_01117,USN_2025_254,PYSPARK,Data Engineering & Cloud,Intermediate,false
+SSK_01118,USN_2025_255,REACT,Core Engineering,Advanced,false
+SSK_01119,USN_2025_255,CPP,Core Engineering,Advanced,false
+SSK_01120,USN_2025_255,DATABRICKS_DE,Data Engineering & Cloud,Intermediate,false
+SSK_01121,USN_2025_255,LANGCHAIN,AI / GenAI,Beginner,true
+SSK_01122,USN_2025_256,JAVA_BACKEND,Core Engineering,Advanced,false
+SSK_01123,USN_2025_256,CPP,Core Engineering,Beginner,true
+SSK_01124,USN_2025_256,GENAI_LLMS,AI / GenAI,Intermediate,false
+SSK_01125,USN_2025_256,DATABRICKS_DE,Data Engineering & Cloud,Intermediate,true
+SSK_01126,USN_2025_256,PYSPARK,Data Engineering & Cloud,Intermediate,false
+SSK_01127,USN_2025_257,SQL,Data Engineering & Cloud,Intermediate,false
+SSK_01128,USN_2025_257,PYTHON,Core Engineering,Advanced,true
+SSK_01129,USN_2025_257,DATABRICKS_DE,Data Engineering & Cloud,Advanced,true
+SSK_01130,USN_2025_257,MACHINE_LEARNING,AI / GenAI,Intermediate,false
+SSK_01131,USN_2025_257,AWS_CLOUD,Data Engineering & Cloud,Intermediate,false
+SSK_01132,USN_2025_257,LANGCHAIN,AI / GenAI,Advanced,false
+SSK_01133,USN_2025_258,SQL,Data Engineering & Cloud,Advanced,false
+SSK_01134,USN_2025_258,CPP,Core Engineering,Intermediate,false
+SSK_01135,USN_2025_258,VECTOR_DATABASES,AI / GenAI,Beginner,true
+SSK_01136,USN_2025_258,MACHINE_LEARNING,AI / GenAI,Advanced,false
+SSK_01137,USN_2025_258,GENAI_LLMS,AI / GenAI,Advanced,false
+SSK_01138,USN_2025_259,REACT,Core Engineering,Advanced,false
+SSK_01139,USN_2025_259,JAVA_BACKEND,Core Engineering,Intermediate,false
+SSK_01140,USN_2025_259,LANGCHAIN,AI / GenAI,Intermediate,true
+SSK_01141,USN_2025_259,PYSPARK,Data Engineering & Cloud,Intermediate,false
+SSK_01142,USN_2025_260,JAVA_BACKEND,Core Engineering,Beginner,false
+SSK_01143,USN_2025_260,CPP,Core Engineering,Intermediate,false
+SSK_01144,USN_2025_260,GENAI_LLMS,AI / GenAI,Beginner,false
+SSK_01145,USN_2025_260,DATABRICKS_DE,Data Engineering & Cloud,Advanced,false
+SSK_01146,USN_2025_261,REACT,Core Engineering,Beginner,false
+SSK_01147,USN_2025_261,SQL,Data Engineering & Cloud,Beginner,false
+SSK_01148,USN_2025_261,DATABRICKS_DE,Data Engineering & Cloud,Beginner,false
+SSK_01149,USN_2025_261,MACHINE_LEARNING,AI / GenAI,Intermediate,true
+SSK_01150,USN_2025_261,PYSPARK,Data Engineering & Cloud,Intermediate,false
+SSK_01151,USN_2025_262,REACT,Core Engineering,Intermediate,false
+SSK_01152,USN_2025_262,PYTHON,Core Engineering,Intermediate,false
+SSK_01153,USN_2025_262,VECTOR_DATABASES,AI / GenAI,Beginner,false
+SSK_01154,USN_2025_263,PYTHON,Core Engineering,Advanced,true
+SSK_01155,USN_2025_263,CPP,Core Engineering,Advanced,true
+SSK_01156,USN_2025_263,DATABRICKS_DE,Data Engineering & Cloud,Advanced,false
+SSK_01157,USN_2025_264,PYTHON,Core Engineering,Advanced,false
+SSK_01158,USN_2025_264,SQL,Data Engineering & Cloud,Advanced,false
+SSK_01159,USN_2025_264,LANGCHAIN,AI / GenAI,Beginner,false
+SSK_01160,USN_2025_264,MACHINE_LEARNING,AI / GenAI,Intermediate,false
+SSK_01161,USN_2025_264,VECTOR_DATABASES,AI / GenAI,Beginner,false
+SSK_01162,USN_2025_265,JAVA_BACKEND,Core Engineering,Advanced,false
+SSK_01163,USN_2025_265,SQL,Data Engineering & Cloud,Beginner,false
+SSK_01164,USN_2025_265,LANGCHAIN,AI / GenAI,Intermediate,false
+SSK_01165,USN_2025_265,DATABRICKS_DE,Data Engineering & Cloud,Beginner,true
+SSK_01166,USN_2025_265,AWS_CLOUD,Data Engineering & Cloud,Advanced,false
+SSK_01167,USN_2025_265,MACHINE_LEARNING,AI / GenAI,Beginner,false
+SSK_01168,USN_2025_266,SQL,Data Engineering & Cloud,Intermediate,false
+SSK_01169,USN_2025_266,REACT,Core Engineering,Advanced,false
+SSK_01170,USN_2025_266,MACHINE_LEARNING,AI / GenAI,Beginner,false
+SSK_01171,USN_2025_266,GENAI_LLMS,AI / GenAI,Beginner,false
+SSK_01172,USN_2025_266,DATABRICKS_DE,Data Engineering & Cloud,Intermediate,false
+SSK_01173,USN_2025_267,CPP,Core Engineering,Beginner,true
+SSK_01174,USN_2025_267,JAVA_BACKEND,Core Engineering,Intermediate,false
+SSK_01175,USN_2025_267,VECTOR_DATABASES,AI / GenAI,Beginner,true
+SSK_01176,USN_2025_267,MACHINE_LEARNING,AI / GenAI,Intermediate,false
+SSK_01177,USN_2025_267,DATABRICKS_DE,Data Engineering & Cloud,Intermediate,true
+SSK_01178,USN_2025_268,SQL,Data Engineering & Cloud,Advanced,false
+SSK_01179,USN_2025_268,JAVA_BACKEND,Core Engineering,Intermediate,true
+SSK_01180,USN_2025_268,DATABRICKS_DE,Data Engineering & Cloud,Beginner,false
+SSK_01181,USN_2025_268,GENAI_LLMS,AI / GenAI,Intermediate,false
+SSK_01182,USN_2025_269,CPP,Core Engineering,Advanced,true
+SSK_01183,USN_2025_269,REACT,Core Engineering,Intermediate,true
+SSK_01184,USN_2025_269,PYSPARK,Data Engineering & Cloud,Advanced,false
+SSK_01185,USN_2025_269,VECTOR_DATABASES,AI / GenAI,Advanced,false
+SSK_01186,USN_2025_270,PYTHON,Core Engineering,Advanced,true
+SSK_01187,USN_2025_270,REACT,Core Engineering,Intermediate,false
+SSK_01188,USN_2025_270,LANGCHAIN,AI / GenAI,Advanced,false
+SSK_01189,USN_2025_270,VECTOR_DATABASES,AI / GenAI,Advanced,false
+SSK_01190,USN_2025_271,JAVA_BACKEND,Core Engineering,Intermediate,true
+SSK_01191,USN_2025_271,PYTHON,Core Engineering,Beginner,false
+SSK_01192,USN_2025_271,GENAI_LLMS,AI / GenAI,Beginner,false
+SSK_01193,USN_2025_272,CPP,Core Engineering,Advanced,false
+SSK_01194,USN_2025_272,REACT,Core Engineering,Intermediate,false
+SSK_01195,USN_2025_272,LANGCHAIN,AI / GenAI,Advanced,true
+SSK_01196,USN_2025_272,AWS_CLOUD,Data Engineering & Cloud,Intermediate,false
+SSK_01197,USN_2025_273,SQL,Data Engineering & Cloud,Advanced,false
+SSK_01198,USN_2025_273,REACT,Core Engineering,Advanced,true
+SSK_01199,USN_2025_273,VECTOR_DATABASES,AI / GenAI,Advanced,true
+SSK_01200,USN_2025_273,DATABRICKS_DE,Data Engineering & Cloud,Beginner,true
+SSK_01201,USN_2025_273,LANGCHAIN,AI / GenAI,Advanced,false
+SSK_01202,USN_2025_273,AWS_CLOUD,Data Engineering & Cloud,Advanced,true
+SSK_01203,USN_2025_274,SQL,Data Engineering & Cloud,Beginner,false
+SSK_01204,USN_2025_274,JAVA_BACKEND,Core Engineering,Beginner,false
+SSK_01205,USN_2025_274,MACHINE_LEARNING,AI / GenAI,Advanced,false
+SSK_01206,USN_2025_274,GENAI_LLMS,AI / GenAI,Beginner,false
+SSK_01207,USN_2025_274,LANGCHAIN,AI / GenAI,Advanced,true
+SSK_01208,USN_2025_275,JAVA_BACKEND,Core Engineering,Beginner,true
+SSK_01209,USN_2025_275,REACT,Core Engineering,Intermediate,false
+SSK_01210,USN_2025_275,AWS_CLOUD,Data Engineering & Cloud,Advanced,true
+SSK_01211,USN_2025_275,PYSPARK,Data Engineering & Cloud,Intermediate,false
+SSK_01212,USN_2025_275,MACHINE_LEARNING,AI / GenAI,Beginner,false
+SSK_01213,USN_2025_276,PYTHON,Core Engineering,Beginner,false
+SSK_01214,USN_2025_276,SQL,Data Engineering & Cloud,Intermediate,true
+SSK_01215,USN_2025_276,LANGCHAIN,AI / GenAI,Intermediate,false
+SSK_01216,USN_2025_276,VECTOR_DATABASES,AI / GenAI,Advanced,false
+SSK_01217,USN_2025_276,DATABRICKS_DE,Data Engineering & Cloud,Intermediate,false
+SSK_01218,USN_2025_277,CPP,Core Engineering,Intermediate,false
+SSK_01219,USN_2025_277,SQL,Data Engineering & Cloud,Advanced,true
+SSK_01220,USN_2025_277,MACHINE_LEARNING,AI / GenAI,Advanced,false
+SSK_01221,USN_2025_277,PYSPARK,Data Engineering & Cloud,Advanced,true
+SSK_01222,USN_2025_277,GENAI_LLMS,AI / GenAI,Intermediate,false
+SSK_01223,USN_2025_277,VECTOR_DATABASES,AI / GenAI,Advanced,false
+SSK_01224,USN_2025_278,CPP,Core Engineering,Advanced,false
+SSK_01225,USN_2025_278,JAVA_BACKEND,Core Engineering,Beginner,false
+SSK_01226,USN_2025_278,LANGCHAIN,AI / GenAI,Beginner,false
+SSK_01227,USN_2025_278,AWS_CLOUD,Data Engineering & Cloud,Beginner,false
+SSK_01228,USN_2025_278,VECTOR_DATABASES,AI / GenAI,Intermediate,false
+SSK_01229,USN_2025_279,JAVA_BACKEND,Core Engineering,Intermediate,false
+SSK_01230,USN_2025_279,REACT,Core Engineering,Beginner,true
+SSK_01231,USN_2025_279,PYSPARK,Data Engineering & Cloud,Beginner,false
+SSK_01232,USN_2025_280,SQL,Data Engineering & Cloud,Intermediate,false
+SSK_01233,USN_2025_280,JAVA_BACKEND,Core Engineering,Beginner,false
+SSK_01234,USN_2025_280,VECTOR_DATABASES,AI / GenAI,Advanced,true
+SSK_01235,USN_2025_280,LANGCHAIN,AI / GenAI,Beginner,true
+SSK_01236,USN_2025_280,PYSPARK,Data Engineering & Cloud,Beginner,false
+SSK_01237,USN_2025_280,GENAI_LLMS,AI / GenAI,Beginner,false
+SSK_01238,USN_2025_281,PYTHON,Core Engineering,Beginner,false
+SSK_01239,USN_2025_281,CPP,Core Engineering,Advanced,false
+SSK_01240,USN_2025_281,VECTOR_DATABASES,AI / GenAI,Beginner,false
+SSK_01241,USN_2025_281,MACHINE_LEARNING,AI / GenAI,Beginner,false
+SSK_01242,USN_2025_281,DATABRICKS_DE,Data Engineering & Cloud,Beginner,false
+SSK_01243,USN_2025_282,SQL,Data Engineering & Cloud,Advanced,false
+SSK_01244,USN_2025_282,CPP,Core Engineering,Beginner,true
+SSK_01245,USN_2025_282,LANGCHAIN,AI / GenAI,Intermediate,true
+SSK_01246,USN_2025_282,AWS_CLOUD,Data Engineering & Cloud,Beginner,true
+SSK_01247,USN_2025_282,VECTOR_DATABASES,AI / GenAI,Beginner,false
+SSK_01248,USN_2025_282,MACHINE_LEARNING,AI / GenAI,Advanced,false
+SSK_01249,USN_2025_283,JAVA_BACKEND,Core Engineering,Intermediate,false
+SSK_01250,USN_2025_283,PYTHON,Core Engineering,Intermediate,false
+SSK_01251,USN_2025_283,GENAI_LLMS,AI / GenAI,Beginner,false
+SSK_01252,USN_2025_284,JAVA_BACKEND,Core Engineering,Advanced,true
+SSK_01253,USN_2025_284,PYTHON,Core Engineering,Advanced,false
+SSK_01254,USN_2025_284,GENAI_LLMS,AI / GenAI,Beginner,false
+SSK_01255,USN_2025_284,AWS_CLOUD,Data Engineering & Cloud,Intermediate,false
+SSK_01256,USN_2025_284,PYSPARK,Data Engineering & Cloud,Beginner,false
+SSK_01257,USN_2025_285,SQL,Data Engineering & Cloud,Advanced,false
+SSK_01258,USN_2025_285,REACT,Core Engineering,Beginner,false
+SSK_01259,USN_2025_285,GENAI_LLMS,AI / GenAI,Intermediate,false
+SSK_01260,USN_2025_285,AWS_CLOUD,Data Engineering & Cloud,Intermediate,false
+SSK_01261,USN_2025_285,VECTOR_DATABASES,AI / GenAI,Intermediate,false
+SSK_01262,USN_2025_286,REACT,Core Engineering,Beginner,false
+SSK_01263,USN_2025_286,JAVA_BACKEND,Core Engineering,Intermediate,false
+SSK_01264,USN_2025_286,LANGCHAIN,AI / GenAI,Advanced,false
+SSK_01265,USN_2025_286,GENAI_LLMS,AI / GenAI,Intermediate,false
+SSK_01266,USN_2025_287,CPP,Core Engineering,Advanced,true
+SSK_01267,USN_2025_287,PYTHON,Core Engineering,Intermediate,true
+SSK_01268,USN_2025_287,GENAI_LLMS,AI / GenAI,Intermediate,false
+SSK_01269,USN_2025_287,VECTOR_DATABASES,AI / GenAI,Intermediate,true
+SSK_01270,USN_2025_288,JAVA_BACKEND,Core Engineering,Advanced,true
+SSK_01271,USN_2025_288,SQL,Data Engineering & Cloud,Intermediate,false
+SSK_01272,USN_2025_288,GENAI_LLMS,AI / GenAI,Advanced,false
+SSK_01273,USN_2025_288,DATABRICKS_DE,Data Engineering & Cloud,Advanced,true
+SSK_01274,USN_2025_289,SQL,Data Engineering & Cloud,Intermediate,false
+SSK_01275,USN_2025_289,REACT,Core Engineering,Beginner,false
+SSK_01276,USN_2025_289,AWS_CLOUD,Data Engineering & Cloud,Advanced,false
+SSK_01277,USN_2025_289,MACHINE_LEARNING,AI / GenAI,Intermediate,true
+SSK_01278,USN_2025_290,REACT,Core Engineering,Intermediate,false
+SSK_01279,USN_2025_290,SQL,Data Engineering & Cloud,Advanced,false
+SSK_01280,USN_2025_290,LANGCHAIN,AI / GenAI,Intermediate,false
+SSK_01281,USN_2025_290,AWS_CLOUD,Data Engineering & Cloud,Intermediate,false
+SSK_01282,USN_2025_290,GENAI_LLMS,AI / GenAI,Intermediate,true
+SSK_01283,USN_2025_290,MACHINE_LEARNING,AI / GenAI,Intermediate,false
+SSK_01284,USN_2025_291,PYTHON,Core Engineering,Intermediate,true
+SSK_01285,USN_2025_291,SQL,Data Engineering & Cloud,Intermediate,false
+SSK_01286,USN_2025_291,MACHINE_LEARNING,AI / GenAI,Intermediate,false
+SSK_01287,USN_2025_291,VECTOR_DATABASES,AI / GenAI,Intermediate,false
+SSK_01288,USN_2025_291,AWS_CLOUD,Data Engineering & Cloud,Beginner,false
+SSK_01289,USN_2025_291,DATABRICKS_DE,Data Engineering & Cloud,Intermediate,false
+SSK_01290,USN_2025_292,SQL,Data Engineering & Cloud,Advanced,true
+SSK_01291,USN_2025_292,JAVA_BACKEND,Core Engineering,Advanced,false
+SSK_01292,USN_2025_292,LANGCHAIN,AI / GenAI,Beginner,false
+SSK_01293,USN_2025_292,PYSPARK,Data Engineering & Cloud,Intermediate,false
+SSK_01294,USN_2025_293,REACT,Core Engineering,Advanced,false
+SSK_01295,USN_2025_293,JAVA_BACKEND,Core Engineering,Intermediate,true
+SSK_01296,USN_2025_293,VECTOR_DATABASES,AI / GenAI,Advanced,false
+SSK_01297,USN_2025_294,CPP,Core Engineering,Beginner,false
+SSK_01298,USN_2025_294,REACT,Core Engineering,Advanced,false
+SSK_01299,USN_2025_294,DATABRICKS_DE,Data Engineering & Cloud,Advanced,false
+SSK_01300,USN_2025_295,CPP,Core Engineering,Advanced,false
+SSK_01301,USN_2025_295,REACT,Core Engineering,Intermediate,false
+SSK_01302,USN_2025_295,VECTOR_DATABASES,AI / GenAI,Intermediate,false
+SSK_01303,USN_2025_295,DATABRICKS_DE,Data Engineering & Cloud,Beginner,false
+SSK_01304,USN_2025_295,AWS_CLOUD,Data Engineering & Cloud,Intermediate,false
+SSK_01305,USN_2025_295,LANGCHAIN,AI / GenAI,Intermediate,false
+SSK_01306,USN_2025_296,PYTHON,Core Engineering,Advanced,false
+SSK_01307,USN_2025_296,CPP,Core Engineering,Beginner,false
+SSK_01308,USN_2025_296,PYSPARK,Data Engineering & Cloud,Beginner,true
+SSK_01309,USN_2025_296,MACHINE_LEARNING,AI / GenAI,Advanced,false
+SSK_01310,USN_2025_297,JAVA_BACKEND,Core Engineering,Advanced,false
+SSK_01311,USN_2025_297,REACT,Core Engineering,Intermediate,false
+SSK_01312,USN_2025_297,LANGCHAIN,AI / GenAI,Intermediate,false
+SSK_01313,USN_2025_297,AWS_CLOUD,Data Engineering & Cloud,Intermediate,false
+SSK_01314,USN_2025_297,MACHINE_LEARNING,AI / GenAI,Advanced,false
+SSK_01315,USN_2025_298,SQL,Data Engineering & Cloud,Advanced,false
+SSK_01316,USN_2025_298,JAVA_BACKEND,Core Engineering,Advanced,false
+SSK_01317,USN_2025_298,VECTOR_DATABASES,AI / GenAI,Intermediate,false
+SSK_01318,USN_2025_298,GENAI_LLMS,AI / GenAI,Intermediate,false
+SSK_01319,USN_2025_299,JAVA_BACKEND,Core Engineering,Intermediate,false
+SSK_01320,USN_2025_299,REACT,Core Engineering,Beginner,false
+SSK_01321,USN_2025_299,DATABRICKS_DE,Data Engineering & Cloud,Beginner,false
+SSK_01322,USN_2025_299,AWS_CLOUD,Data Engineering & Cloud,Intermediate,false
+SSK_01323,USN_2025_299,GENAI_LLMS,AI / GenAI,Beginner,false
+SSK_01324,USN_2025_299,MACHINE_LEARNING,AI / GenAI,Beginner,true
+SSK_01325,USN_2025_300,SQL,Data Engineering & Cloud,Beginner,false
+SSK_01326,USN_2025_300,PYTHON,Core Engineering,Beginner,true
+SSK_01327,USN_2025_300,DATABRICKS_DE,Data Engineering & Cloud,Advanced,false
+SSK_01328,USN_2025_300,PYSPARK,Data Engineering & Cloud,Beginner,true
+SSK_01329,USN_2025_300,GENAI_LLMS,AI / GenAI,Intermediate,false
+SSK_01330,USN_2025_300,MACHINE_LEARNING,AI / GenAI,Beginner,false
+SSK_01331,USN_2025_301,REACT,Core Engineering,Intermediate,false
+SSK_01332,USN_2025_301,CPP,Core Engineering,Intermediate,false
+SSK_01333,USN_2025_301,VECTOR_DATABASES,AI / GenAI,Beginner,false
+SSK_01334,USN_2025_301,GENAI_LLMS,AI / GenAI,Beginner,true
+SSK_01335,USN_2025_302,REACT,Core Engineering,Intermediate,false
+SSK_01336,USN_2025_302,JAVA_BACKEND,Core Engineering,Advanced,false
+SSK_01337,USN_2025_302,MACHINE_LEARNING,AI / GenAI,Intermediate,false
+SSK_01338,USN_2025_302,DATABRICKS_DE,Data Engineering & Cloud,Beginner,false
+SSK_01339,USN_2025_302,PYSPARK,Data Engineering & Cloud,Beginner,false
+SSK_01340,USN_2025_302,VECTOR_DATABASES,AI / GenAI,Intermediate,false
+SSK_01341,USN_2025_303,REACT,Core Engineering,Intermediate,true
+SSK_01342,USN_2025_303,PYTHON,Core Engineering,Beginner,true
+SSK_01343,USN_2025_303,AWS_CLOUD,Data Engineering & Cloud,Intermediate,false
+SSK_01344,USN_2025_303,MACHINE_LEARNING,AI / GenAI,Intermediate,false
+SSK_01345,USN_2025_303,PYSPARK,Data Engineering & Cloud,Beginner,false
+SSK_01346,USN_2025_304,PYTHON,Core Engineering,Beginner,true
+SSK_01347,USN_2025_304,CPP,Core Engineering,Beginner,false
+SSK_01348,USN_2025_304,MACHINE_LEARNING,AI / GenAI,Beginner,false
+SSK_01349,USN_2025_305,PYTHON,Core Engineering,Intermediate,false
+SSK_01350,USN_2025_305,CPP,Core Engineering,Advanced,true
+SSK_01351,USN_2025_305,GENAI_LLMS,AI / GenAI,Beginner,false
+SSK_01352,USN_2025_306,SQL,Data Engineering & Cloud,Beginner,true
+SSK_01353,USN_2025_306,PYTHON,Core Engineering,Advanced,false
+SSK_01354,USN_2025_306,PYSPARK,Data Engineering & Cloud,Beginner,true
+SSK_01355,USN_2025_307,REACT,Core Engineering,Intermediate,false
+SSK_01356,USN_2025_307,SQL,Data Engineering & Cloud,Advanced,false
+SSK_01357,USN_2025_307,GENAI_LLMS,AI / GenAI,Intermediate,true
+SSK_01358,USN_2025_307,LANGCHAIN,AI / GenAI,Advanced,false
+SSK_01359,USN_2025_307,VECTOR_DATABASES,AI / GenAI,Advanced,false
+SSK_01360,USN_2025_307,AWS_CLOUD,Data Engineering & Cloud,Advanced,false
+SSK_01361,USN_2025_308,REACT,Core Engineering,Intermediate,true
+SSK_01362,USN_2025_308,JAVA_BACKEND,Core Engineering,Beginner,true
+SSK_01363,USN_2025_308,PYSPARK,Data Engineering & Cloud,Intermediate,true
+SSK_01364,USN_2025_308,AWS_CLOUD,Data Engineering & Cloud,Advanced,false
+SSK_01365,USN_2025_309,SQL,Data Engineering & Cloud,Advanced,false
+SSK_01366,USN_2025_309,JAVA_BACKEND,Core Engineering,Beginner,false
+SSK_01367,USN_2025_309,VECTOR_DATABASES,AI / GenAI,Intermediate,false
+SSK_01368,USN_2025_309,GENAI_LLMS,AI / GenAI,Intermediate,true
+SSK_01369,USN_2025_309,LANGCHAIN,AI / GenAI,Intermediate,true
+SSK_01370,USN_2025_309,MACHINE_LEARNING,AI / GenAI,Advanced,true
+SSK_01371,USN_2025_310,CPP,Core Engineering,Intermediate,false
+SSK_01372,USN_2025_310,SQL,Data Engineering & Cloud,Intermediate,false
+SSK_01373,USN_2025_310,AWS_CLOUD,Data Engineering & Cloud,Intermediate,false
+SSK_01374,USN_2025_310,VECTOR_DATABASES,AI / GenAI,Intermediate,false
+SSK_01375,USN_2025_310,MACHINE_LEARNING,AI / GenAI,Beginner,true
+SSK_01376,USN_2025_311,REACT,Core Engineering,Beginner,false
+SSK_01377,USN_2025_311,PYTHON,Core Engineering,Advanced,true
+SSK_01378,USN_2025_311,GENAI_LLMS,AI / GenAI,Intermediate,false
+SSK_01379,USN_2025_311,VECTOR_DATABASES,AI / GenAI,Beginner,true
+SSK_01380,USN_2025_311,LANGCHAIN,AI / GenAI,Beginner,true
+SSK_01381,USN_2025_311,MACHINE_LEARNING,AI / GenAI,Beginner,false
+SSK_01382,USN_2025_312,SQL,Data Engineering & Cloud,Beginner,false
+SSK_01383,USN_2025_312,PYTHON,Core Engineering,Advanced,false
+SSK_01384,USN_2025_312,MACHINE_LEARNING,AI / GenAI,Advanced,false
+SSK_01385,USN_2025_312,AWS_CLOUD,Data Engineering & Cloud,Intermediate,false
+SSK_01386,USN_2025_313,CPP,Core Engineering,Advanced,false
+SSK_01387,USN_2025_313,REACT,Core Engineering,Advanced,false
+SSK_01388,USN_2025_313,DATABRICKS_DE,Data Engineering & Cloud,Advanced,false
+SSK_01389,USN_2025_313,LANGCHAIN,AI / GenAI,Beginner,false
+SSK_01390,USN_2025_313,AWS_CLOUD,Data Engineering & Cloud,Intermediate,false
+SSK_01391,USN_2025_314,CPP,Core Engineering,Advanced,false
+SSK_01392,USN_2025_314,REACT,Core Engineering,Intermediate,false
+SSK_01393,USN_2025_314,MACHINE_LEARNING,AI / GenAI,Beginner,false
+SSK_01394,USN_2025_314,LANGCHAIN,AI / GenAI,Advanced,false
+SSK_01395,USN_2025_315,CPP,Core Engineering,Intermediate,true
+SSK_01396,USN_2025_315,SQL,Data Engineering & Cloud,Intermediate,true
+SSK_01397,USN_2025_315,DATABRICKS_DE,Data Engineering & Cloud,Intermediate,true
+SSK_01398,USN_2025_316,SQL,Data Engineering & Cloud,Intermediate,true
+SSK_01399,USN_2025_316,CPP,Core Engineering,Beginner,false
+SSK_01400,USN_2025_316,VECTOR_DATABASES,AI / GenAI,Advanced,false
+SSK_01401,USN_2025_316,PYSPARK,Data Engineering & Cloud,Advanced,true
+SSK_01402,USN_2025_317,PYTHON,Core Engineering,Intermediate,false
+SSK_01403,USN_2025_317,JAVA_BACKEND,Core Engineering,Intermediate,false
+SSK_01404,USN_2025_317,LANGCHAIN,AI / GenAI,Advanced,true
+SSK_01405,USN_2025_318,CPP,Core Engineering,Intermediate,true
+SSK_01406,USN_2025_318,PYTHON,Core Engineering,Beginner,false
+SSK_01407,USN_2025_318,LANGCHAIN,AI / GenAI,Beginner,false
+SSK_01408,USN_2025_318,MACHINE_LEARNING,AI / GenAI,Advanced,false
+SSK_01409,USN_2025_319,REACT,Core Engineering,Beginner,false
+SSK_01410,USN_2025_319,SQL,Data Engineering & Cloud,Advanced,false
+SSK_01411,USN_2025_319,DATABRICKS_DE,Data Engineering & Cloud,Intermediate,true
+SSK_01412,USN_2025_319,VECTOR_DATABASES,AI / GenAI,Advanced,true
+SSK_01413,USN_2025_320,SQL,Data Engineering & Cloud,Beginner,false
+SSK_01414,USN_2025_320,REACT,Core Engineering,Beginner,true
+SSK_01415,USN_2025_320,VECTOR_DATABASES,AI / GenAI,Beginner,false
+SSK_01416,USN_2025_320,PYSPARK,Data Engineering & Cloud,Advanced,false
+SSK_01417,USN_2025_320,DATABRICKS_DE,Data Engineering & Cloud,Advanced,false
+SSK_01418,USN_2025_321,SQL,Data Engineering & Cloud,Beginner,false
+SSK_01419,USN_2025_321,JAVA_BACKEND,Core Engineering,Advanced,false
+SSK_01420,USN_2025_321,MACHINE_LEARNING,AI / GenAI,Intermediate,true
+SSK_01421,USN_2025_321,GENAI_LLMS,AI / GenAI,Beginner,false
+SSK_01422,USN_2025_321,AWS_CLOUD,Data Engineering & Cloud,Advanced,false
+SSK_01423,USN_2025_322,REACT,Core Engineering,Intermediate,false
+SSK_01424,USN_2025_322,SQL,Data Engineering & Cloud,Beginner,false
+SSK_01425,USN_2025_322,DATABRICKS_DE,Data Engineering & Cloud,Beginner,false
+SSK_01426,USN_2025_323,PYTHON,Core Engineering,Intermediate,false
+SSK_01427,USN_2025_323,REACT,Core Engineering,Beginner,false
+SSK_01428,USN_2025_323,DATABRICKS_DE,Data Engineering & Cloud,Advanced,false
+SSK_01429,USN_2025_324,JAVA_BACKEND,Core Engineering,Advanced,true
+SSK_01430,USN_2025_324,REACT,Core Engineering,Beginner,false
+SSK_01431,USN_2025_324,MACHINE_LEARNING,AI / GenAI,Intermediate,false
+SSK_01432,USN_2025_324,PYSPARK,Data Engineering & Cloud,Beginner,false
+SSK_01433,USN_2025_325,JAVA_BACKEND,Core Engineering,Intermediate,false
+SSK_01434,USN_2025_325,SQL,Data Engineering & Cloud,Beginner,true
+SSK_01435,USN_2025_325,AWS_CLOUD,Data Engineering & Cloud,Beginner,false
+SSK_01436,USN_2025_325,PYSPARK,Data Engineering & Cloud,Beginner,true
+SSK_01437,USN_2025_325,MACHINE_LEARNING,AI / GenAI,Intermediate,false
+SSK_01438,USN_2025_325,GENAI_LLMS,AI / GenAI,Advanced,true
+SSK_01439,USN_2025_326,SQL,Data Engineering & Cloud,Beginner,false
+SSK_01440,USN_2025_326,PYTHON,Core Engineering,Intermediate,false
+SSK_01441,USN_2025_326,COMPUTER_VISION,AI / GenAI,Advanced,false
+SSK_01442,USN_2025_326,JAVA_BACKEND,Core Engineering,Advanced,false
+SSK_01443,USN_2025_326,DEEP_LEARNING,AI / GenAI,Intermediate,false
+SSK_01444,USN_2025_327,SQL,Data Engineering & Cloud,Advanced,true
+SSK_01445,USN_2025_327,PYTHON,Core Engineering,Advanced,false
+SSK_01446,USN_2025_327,DEEP_LEARNING,AI / GenAI,Advanced,false
+SSK_01447,USN_2025_327,COMPUTER_VISION,AI / GenAI,Advanced,false
+SSK_01448,USN_2025_328,PYTHON,Core Engineering,Beginner,false
+SSK_01449,USN_2025_328,CPP,Core Engineering,Advanced,false
+SSK_01450,USN_2025_328,COMPUTER_VISION,AI / GenAI,Advanced,false
+SSK_01451,USN_2025_329,SQL,Data Engineering & Cloud,Advanced,false
+SSK_01452,USN_2025_329,CPP,Core Engineering,Beginner,false
+SSK_01453,USN_2025_329,AWS_CLOUD,Data Engineering & Cloud,Intermediate,false
+SSK_01454,USN_2025_329,DEEP_LEARNING,AI / GenAI,Advanced,true
+SSK_01455,USN_2025_330,SQL,Data Engineering & Cloud,Beginner,true
+SSK_01456,USN_2025_330,CPP,Core Engineering,Beginner,false
+SSK_01457,USN_2025_330,JAVA_BACKEND,Core Engineering,Intermediate,false
+SSK_01458,USN_2025_331,SQL,Data Engineering & Cloud,Intermediate,true
+SSK_01459,USN_2025_331,CPP,Core Engineering,Beginner,false
+SSK_01460,USN_2025_331,DEEP_LEARNING,AI / GenAI,Intermediate,false
+SSK_01461,USN_2025_332,PYTHON,Core Engineering,Beginner,false
+SSK_01462,USN_2025_332,SQL,Data Engineering & Cloud,Intermediate,false
+SSK_01463,USN_2025_332,AWS_CLOUD,Data Engineering & Cloud,Beginner,false
+SSK_01464,USN_2025_333,PYTHON,Core Engineering,Intermediate,false
+SSK_01465,USN_2025_333,CPP,Core Engineering,Advanced,true
+SSK_01466,USN_2025_333,AWS_CLOUD,Data Engineering & Cloud,Intermediate,false
+SSK_01467,USN_2025_333,JAVA_BACKEND,Core Engineering,Beginner,false
+SSK_01468,USN_2025_334,CPP,Core Engineering,Intermediate,true
+SSK_01469,USN_2025_334,PYTHON,Core Engineering,Advanced,false
+SSK_01470,USN_2025_334,JAVA_BACKEND,Core Engineering,Intermediate,false
+SSK_01471,USN_2025_335,CPP,Core Engineering,Advanced,true
+SSK_01472,USN_2025_335,SQL,Data Engineering & Cloud,Intermediate,true
+SSK_01473,USN_2025_335,AWS_CLOUD,Data Engineering & Cloud,Intermediate,false
+SSK_01474,USN_2025_335,DEEP_LEARNING,AI / GenAI,Advanced,true
+SSK_01475,USN_2025_335,COMPUTER_VISION,AI / GenAI,Advanced,false
+SSK_01476,USN_2025_336,SQL,Data Engineering & Cloud,Intermediate,false
+SSK_01477,USN_2025_336,PYTHON,Core Engineering,Advanced,false
+SSK_01478,USN_2025_336,COMPUTER_VISION,AI / GenAI,Beginner,false
+SSK_01479,USN_2025_336,JAVA_BACKEND,Core Engineering,Intermediate,false
+SSK_01480,USN_2025_336,MACHINE_LEARNING,AI / GenAI,Advanced,false
+SSK_01481,USN_2025_337,PYTHON,Core Engineering,Advanced,true
+SSK_01482,USN_2025_337,SQL,Data Engineering & Cloud,Beginner,false
+SSK_01483,USN_2025_337,DEEP_LEARNING,AI / GenAI,Intermediate,false
+SSK_01484,USN_2025_337,AWS_CLOUD,Data Engineering & Cloud,Beginner,false
+SSK_01485,USN_2025_337,JAVA_BACKEND,Core Engineering,Beginner,false
+SSK_01486,USN_2025_337,MACHINE_LEARNING,AI / GenAI,Advanced,false
+SSK_01487,USN_2025_338,SQL,Data Engineering & Cloud,Beginner,false
+SSK_01488,USN_2025_338,PYTHON,Core Engineering,Beginner,false
+SSK_01489,USN_2025_338,JAVA_BACKEND,Core Engineering,Intermediate,true
+SSK_01490,USN_2025_338,AWS_CLOUD,Data Engineering & Cloud,Intermediate,false
+SSK_01491,USN_2025_338,COMPUTER_VISION,AI / GenAI,Intermediate,false
+SSK_01492,USN_2025_339,PYTHON,Core Engineering,Intermediate,true
+SSK_01493,USN_2025_339,SQL,Data Engineering & Cloud,Intermediate,true
+SSK_01494,USN_2025_339,DEEP_LEARNING,AI / GenAI,Beginner,false
+SSK_01495,USN_2025_339,JAVA_BACKEND,Core Engineering,Advanced,false
+SSK_01496,USN_2025_340,SQL,Data Engineering & Cloud,Advanced,false
+SSK_01497,USN_2025_340,CPP,Core Engineering,Advanced,false
+SSK_01498,USN_2025_340,MACHINE_LEARNING,AI / GenAI,Advanced,false
+SSK_01499,USN_2025_340,DEEP_LEARNING,AI / GenAI,Intermediate,false
+SSK_01500,USN_2025_341,CPP,Core Engineering,Intermediate,false
+SSK_01501,USN_2025_341,PYTHON,Core Engineering,Beginner,false
+SSK_01502,USN_2025_341,AWS_CLOUD,Data Engineering & Cloud,Beginner,false
+SSK_01503,USN_2025_342,SQL,Data Engineering & Cloud,Intermediate,false
+SSK_01504,USN_2025_342,CPP,Core Engineering,Intermediate,true
+SSK_01505,USN_2025_342,COMPUTER_VISION,AI / GenAI,Beginner,false
+SSK_01506,USN_2025_342,DEEP_LEARNING,AI / GenAI,Beginner,false
+SSK_01507,USN_2025_342,AWS_CLOUD,Data Engineering & Cloud,Advanced,true
+SSK_01508,USN_2025_343,CPP,Core Engineering,Beginner,false
+SSK_01509,USN_2025_343,SQL,Data Engineering & Cloud,Beginner,false
+SSK_01510,USN_2025_343,COMPUTER_VISION,AI / GenAI,Beginner,false
+SSK_01511,USN_2025_343,JAVA_BACKEND,Core Engineering,Beginner,false
+SSK_01512,USN_2025_343,MACHINE_LEARNING,AI / GenAI,Intermediate,false
+SSK_01513,USN_2025_344,CPP,Core Engineering,Advanced,false
+SSK_01514,USN_2025_344,PYTHON,Core Engineering,Intermediate,true
+SSK_01515,USN_2025_344,DEEP_LEARNING,AI / GenAI,Advanced,false
+SSK_01516,USN_2025_344,AWS_CLOUD,Data Engineering & Cloud,Beginner,false
+SSK_01517,USN_2025_345,SQL,Data Engineering & Cloud,Beginner,false
+SSK_01518,USN_2025_345,CPP,Core Engineering,Advanced,false
+SSK_01519,USN_2025_345,COMPUTER_VISION,AI / GenAI,Intermediate,true
+SSK_01520,USN_2025_346,CPP,Core Engineering,Intermediate,false
+SSK_01521,USN_2025_346,SQL,Data Engineering & Cloud,Intermediate,true
+SSK_01522,USN_2025_346,DEEP_LEARNING,AI / GenAI,Intermediate,false
+SSK_01523,USN_2025_346,COMPUTER_VISION,AI / GenAI,Advanced,false
+SSK_01524,USN_2025_347,PYTHON,Core Engineering,Beginner,false
+SSK_01525,USN_2025_347,SQL,Data Engineering & Cloud,Beginner,true
+SSK_01526,USN_2025_347,MACHINE_LEARNING,AI / GenAI,Beginner,false
+SSK_01527,USN_2025_347,DEEP_LEARNING,AI / GenAI,Beginner,false
+SSK_01528,USN_2025_347,COMPUTER_VISION,AI / GenAI,Intermediate,false
+SSK_01529,USN_2025_348,PYTHON,Core Engineering,Intermediate,false
+SSK_01530,USN_2025_348,SQL,Data Engineering & Cloud,Beginner,false
+SSK_01531,USN_2025_348,JAVA_BACKEND,Core Engineering,Intermediate,false
+SSK_01532,USN_2025_348,DEEP_LEARNING,AI / GenAI,Advanced,false
+SSK_01533,USN_2025_348,MACHINE_LEARNING,AI / GenAI,Beginner,false
+SSK_01534,USN_2025_348,AWS_CLOUD,Data Engineering & Cloud,Beginner,true
+SSK_01535,USN_2025_349,SQL,Data Engineering & Cloud,Advanced,true
+SSK_01536,USN_2025_349,CPP,Core Engineering,Beginner,false
+SSK_01537,USN_2025_349,AWS_CLOUD,Data Engineering & Cloud,Beginner,true
+SSK_01538,USN_2025_349,JAVA_BACKEND,Core Engineering,Intermediate,false
+SSK_01539,USN_2025_349,COMPUTER_VISION,AI / GenAI,Intermediate,false
+SSK_01540,USN_2025_349,MACHINE_LEARNING,AI / GenAI,Advanced,false
+SSK_01541,USN_2025_350,PYTHON,Core Engineering,Beginner,false
+SSK_01542,USN_2025_350,SQL,Data Engineering & Cloud,Advanced,false
+SSK_01543,USN_2025_350,AWS_CLOUD,Data Engineering & Cloud,Intermediate,false
+SSK_01544,USN_2025_350,DEEP_LEARNING,AI / GenAI,Beginner,false
+SSK_01545,USN_2025_351,SQL,Data Engineering & Cloud,Intermediate,false
+SSK_01546,USN_2025_351,PYTHON,Core Engineering,Beginner,false
+SSK_01547,USN_2025_351,DEEP_LEARNING,AI / GenAI,Beginner,false
+SSK_01548,USN_2025_351,JAVA_BACKEND,Core Engineering,Intermediate,false
+SSK_01549,USN_2025_351,AWS_CLOUD,Data Engineering & Cloud,Intermediate,false
+SSK_01550,USN_2025_351,COMPUTER_VISION,AI / GenAI,Beginner,true
+SSK_01551,USN_2025_352,SQL,Data Engineering & Cloud,Beginner,false
+SSK_01552,USN_2025_352,CPP,Core Engineering,Advanced,true
+SSK_01553,USN_2025_352,MACHINE_LEARNING,AI / GenAI,Advanced,false
+SSK_01554,USN_2025_352,DEEP_LEARNING,AI / GenAI,Beginner,true
+SSK_01555,USN_2025_353,SQL,Data Engineering & Cloud,Beginner,false
+SSK_01556,USN_2025_353,PYTHON,Core Engineering,Beginner,false
+SSK_01557,USN_2025_353,COMPUTER_VISION,AI / GenAI,Advanced,true
+SSK_01558,USN_2025_354,PYTHON,Core Engineering,Beginner,false
+SSK_01559,USN_2025_354,SQL,Data Engineering & Cloud,Intermediate,true
+SSK_01560,USN_2025_354,AWS_CLOUD,Data Engineering & Cloud,Intermediate,false
+SSK_01561,USN_2025_354,MACHINE_LEARNING,AI / GenAI,Beginner,false
+SSK_01562,USN_2025_354,JAVA_BACKEND,Core Engineering,Intermediate,false
+SSK_01563,USN_2025_355,CPP,Core Engineering,Intermediate,false
+SSK_01564,USN_2025_355,PYTHON,Core Engineering,Advanced,true
+SSK_01565,USN_2025_355,MACHINE_LEARNING,AI / GenAI,Beginner,false
+SSK_01566,USN_2025_356,CPP,Core Engineering,Advanced,true
+SSK_01567,USN_2025_356,PYTHON,Core Engineering,Intermediate,false
+SSK_01568,USN_2025_356,JAVA_BACKEND,Core Engineering,Intermediate,false
+SSK_01569,USN_2025_356,AWS_CLOUD,Data Engineering & Cloud,Advanced,false
+SSK_01570,USN_2025_356,DEEP_LEARNING,AI / GenAI,Intermediate,true
+SSK_01571,USN_2025_357,PYTHON,Core Engineering,Beginner,true
+SSK_01572,USN_2025_357,CPP,Core Engineering,Advanced,false
+SSK_01573,USN_2025_357,COMPUTER_VISION,AI / GenAI,Beginner,false
+SSK_01574,USN_2025_357,JAVA_BACKEND,Core Engineering,Intermediate,true
+SSK_01575,USN_2025_357,MACHINE_LEARNING,AI / GenAI,Intermediate,true
+SSK_01576,USN_2025_358,PYTHON,Core Engineering,Advanced,false
+SSK_01577,USN_2025_358,SQL,Data Engineering & Cloud,Advanced,false
+SSK_01578,USN_2025_358,MACHINE_LEARNING,AI / GenAI,Intermediate,false
+SSK_01579,USN_2025_359,PYTHON,Core Engineering,Intermediate,false
+SSK_01580,USN_2025_359,CPP,Core Engineering,Intermediate,false
+SSK_01581,USN_2025_359,MACHINE_LEARNING,AI / GenAI,Advanced,false
+SSK_01582,USN_2025_359,COMPUTER_VISION,AI / GenAI,Intermediate,false
+SSK_01583,USN_2025_360,SQL,Data Engineering & Cloud,Beginner,true
+SSK_01584,USN_2025_360,CPP,Core Engineering,Beginner,true
+SSK_01585,USN_2025_360,AWS_CLOUD,Data Engineering & Cloud,Beginner,false
+SSK_01586,USN_2025_360,MACHINE_LEARNING,AI / GenAI,Intermediate,false
+SSK_01587,USN_2025_360,COMPUTER_VISION,AI / GenAI,Advanced,false
+SSK_01588,USN_2025_361,SQL,Data Engineering & Cloud,Advanced,false
+SSK_01589,USN_2025_361,CPP,Core Engineering,Advanced,false
+SSK_01590,USN_2025_361,COMPUTER_VISION,AI / GenAI,Advanced,false
+SSK_01591,USN_2025_361,DEEP_LEARNING,AI / GenAI,Beginner,true
+SSK_01592,USN_2025_362,PYTHON,Core Engineering,Beginner,false
+SSK_01593,USN_2025_362,SQL,Data Engineering & Cloud,Beginner,false
+SSK_01594,USN_2025_362,DEEP_LEARNING,AI / GenAI,Beginner,false
+SSK_01595,USN_2025_362,JAVA_BACKEND,Core Engineering,Intermediate,false
+SSK_01596,USN_2025_362,MACHINE_LEARNING,AI / GenAI,Intermediate,false
+SSK_01597,USN_2025_363,CPP,Core Engineering,Beginner,false
+SSK_01598,USN_2025_363,PYTHON,Core Engineering,Advanced,true
+SSK_01599,USN_2025_363,AWS_CLOUD,Data Engineering & Cloud,Beginner,true
+SSK_01600,USN_2025_363,DEEP_LEARNING,AI / GenAI,Beginner,false
+SSK_01601,USN_2025_363,JAVA_BACKEND,Core Engineering,Advanced,false
+SSK_01602,USN_2025_364,PYTHON,Core Engineering,Beginner,false
+SSK_01603,USN_2025_364,SQL,Data Engineering & Cloud,Beginner,true
+SSK_01604,USN_2025_364,AWS_CLOUD,Data Engineering & Cloud,Advanced,false
+SSK_01605,USN_2025_365,CPP,Core Engineering,Intermediate,false
+SSK_01606,USN_2025_365,PYTHON,Core Engineering,Intermediate,false
+SSK_01607,USN_2025_365,JAVA_BACKEND,Core Engineering,Beginner,false
+SSK_01608,USN_2025_366,PYTHON,Core Engineering,Intermediate,false
+SSK_01609,USN_2025_366,CPP,Core Engineering,Advanced,true
+SSK_01610,USN_2025_366,JAVA_BACKEND,Core Engineering,Intermediate,false
+SSK_01611,USN_2025_366,AWS_CLOUD,Data Engineering & Cloud,Intermediate,true
+SSK_01612,USN_2025_367,SQL,Data Engineering & Cloud,Intermediate,false
+SSK_01613,USN_2025_367,CPP,Core Engineering,Beginner,true
+SSK_01614,USN_2025_367,MACHINE_LEARNING,AI / GenAI,Intermediate,true
+SSK_01615,USN_2025_367,JAVA_BACKEND,Core Engineering,Intermediate,true
+SSK_01616,USN_2025_367,AWS_CLOUD,Data Engineering & Cloud,Beginner,true
+SSK_01617,USN_2025_368,PYTHON,Core Engineering,Beginner,false
+SSK_01618,USN_2025_368,CPP,Core Engineering,Beginner,false
+SSK_01619,USN_2025_368,AWS_CLOUD,Data Engineering & Cloud,Intermediate,true
+SSK_01620,USN_2025_369,PYTHON,Core Engineering,Beginner,true
+SSK_01621,USN_2025_369,CPP,Core Engineering,Beginner,true
+SSK_01622,USN_2025_369,JAVA_BACKEND,Core Engineering,Beginner,false
+SSK_01623,USN_2025_369,MACHINE_LEARNING,AI / GenAI,Advanced,false
+SSK_01624,USN_2025_370,SQL,Data Engineering & Cloud,Advanced,true
+SSK_01625,USN_2025_370,PYTHON,Core Engineering,Advanced,false
+SSK_01626,USN_2025_370,DEEP_LEARNING,AI / GenAI,Intermediate,false
+SSK_01627,USN_2025_370,JAVA_BACKEND,Core Engineering,Advanced,true
+SSK_01628,USN_2025_370,AWS_CLOUD,Data Engineering & Cloud,Intermediate,true
+SSK_01629,USN_2025_371,PYTHON,Core Engineering,Intermediate,false
+SSK_01630,USN_2025_371,CPP,Core Engineering,Intermediate,true
+SSK_01631,USN_2025_371,DEEP_LEARNING,AI / GenAI,Intermediate,true
+SSK_01632,USN_2025_371,JAVA_BACKEND,Core Engineering,Advanced,false
+SSK_01633,USN_2025_371,COMPUTER_VISION,AI / GenAI,Intermediate,false
+SSK_01634,USN_2025_371,AWS_CLOUD,Data Engineering & Cloud,Advanced,false
+SSK_01635,USN_2025_372,PYTHON,Core Engineering,Intermediate,false
+SSK_01636,USN_2025_372,CPP,Core Engineering,Intermediate,true
+SSK_01637,USN_2025_372,AWS_CLOUD,Data Engineering & Cloud,Beginner,false
+SSK_01638,USN_2025_372,JAVA_BACKEND,Core Engineering,Beginner,false
+SSK_01639,USN_2025_372,MACHINE_LEARNING,AI / GenAI,Intermediate,false
+SSK_01640,USN_2025_372,COMPUTER_VISION,AI / GenAI,Intermediate,false
+SSK_01641,USN_2025_373,PYTHON,Core Engineering,Intermediate,false
+SSK_01642,USN_2025_373,CPP,Core Engineering,Beginner,true
+SSK_01643,USN_2025_373,DEEP_LEARNING,AI / GenAI,Beginner,false
+SSK_01644,USN_2025_373,AWS_CLOUD,Data Engineering & Cloud,Beginner,false
+SSK_01645,USN_2025_373,MACHINE_LEARNING,AI / GenAI,Beginner,false
+SSK_01646,USN_2025_374,SQL,Data Engineering & Cloud,Advanced,false
+SSK_01647,USN_2025_374,PYTHON,Core Engineering,Beginner,true
+SSK_01648,USN_2025_374,AWS_CLOUD,Data Engineering & Cloud,Advanced,true
+SSK_01649,USN_2025_375,SQL,Data Engineering & Cloud,Advanced,false
+SSK_01650,USN_2025_375,PYTHON,Core Engineering,Intermediate,false
+SSK_01651,USN_2025_375,AWS_CLOUD,Data Engineering & Cloud,Advanced,true
+SSK_01652,USN_2025_375,DEEP_LEARNING,AI / GenAI,Advanced,false
+SSK_01653,USN_2025_375,JAVA_BACKEND,Core Engineering,Intermediate,true
+SSK_01654,USN_2025_376,CPP,Core Engineering,Advanced,true
+SSK_01655,USN_2025_376,PYTHON,Core Engineering,Advanced,false
+SSK_01656,USN_2025_376,AWS_CLOUD,Data Engineering & Cloud,Intermediate,false
+SSK_01657,USN_2025_376,COMPUTER_VISION,AI / GenAI,Advanced,false
+SSK_01658,USN_2025_376,MACHINE_LEARNING,AI / GenAI,Advanced,false
+SSK_01659,USN_2025_376,JAVA_BACKEND,Core Engineering,Advanced,false
+SSK_01660,USN_2025_377,SQL,Data Engineering & Cloud,Advanced,false
+SSK_01661,USN_2025_377,CPP,Core Engineering,Intermediate,true
+SSK_01662,USN_2025_377,JAVA_BACKEND,Core Engineering,Intermediate,false
+SSK_01663,USN_2025_377,MACHINE_LEARNING,AI / GenAI,Advanced,true
+SSK_01664,USN_2025_377,DEEP_LEARNING,AI / GenAI,Advanced,false
+SSK_01665,USN_2025_378,PYTHON,Core Engineering,Beginner,false
+SSK_01666,USN_2025_378,SQL,Data Engineering & Cloud,Advanced,false
+SSK_01667,USN_2025_378,JAVA_BACKEND,Core Engineering,Beginner,false
+SSK_01668,USN_2025_378,AWS_CLOUD,Data Engineering & Cloud,Beginner,true
+SSK_01669,USN_2025_379,PYTHON,Core Engineering,Intermediate,false
+SSK_01670,USN_2025_379,CPP,Core Engineering,Intermediate,false
+SSK_01671,USN_2025_379,JAVA_BACKEND,Core Engineering,Intermediate,true
+SSK_01672,USN_2025_380,CPP,Core Engineering,Beginner,true
+SSK_01673,USN_2025_380,PYTHON,Core Engineering,Intermediate,false
+SSK_01674,USN_2025_380,AWS_CLOUD,Data Engineering & Cloud,Beginner,true
+SSK_01675,USN_2025_380,COMPUTER_VISION,AI / GenAI,Intermediate,false
+SSK_01676,USN_2025_380,JAVA_BACKEND,Core Engineering,Advanced,false
+SSK_01677,USN_2025_380,MACHINE_LEARNING,AI / GenAI,Advanced,false
+SSK_01678,USN_2025_381,PYTHON,Core Engineering,Beginner,false
+SSK_01679,USN_2025_381,CPP,Core Engineering,Intermediate,false
+SSK_01680,USN_2025_381,AWS_CLOUD,Data Engineering & Cloud,Intermediate,false
+SSK_01681,USN_2025_381,COMPUTER_VISION,AI / GenAI,Intermediate,false
+SSK_01682,USN_2025_382,SQL,Data Engineering & Cloud,Intermediate,false
+SSK_01683,USN_2025_382,CPP,Core Engineering,Advanced,true
+SSK_01684,USN_2025_382,JAVA_BACKEND,Core Engineering,Beginner,false
+SSK_01685,USN_2025_382,MACHINE_LEARNING,AI / GenAI,Advanced,false
+SSK_01686,USN_2025_383,SQL,Data Engineering & Cloud,Advanced,true
+SSK_01687,USN_2025_383,CPP,Core Engineering,Beginner,true
+SSK_01688,USN_2025_383,DEEP_LEARNING,AI / GenAI,Beginner,false
+SSK_01689,USN_2025_383,AWS_CLOUD,Data Engineering & Cloud,Intermediate,true
+SSK_01690,USN_2025_383,COMPUTER_VISION,AI / GenAI,Beginner,false
+SSK_01691,USN_2025_384,PYTHON,Core Engineering,Advanced,true
+SSK_01692,USN_2025_384,SQL,Data Engineering & Cloud,Beginner,false
+SSK_01693,USN_2025_384,AWS_CLOUD,Data Engineering & Cloud,Beginner,false
+SSK_01694,USN_2025_384,DEEP_LEARNING,AI / GenAI,Intermediate,false
+SSK_01695,USN_2025_385,CPP,Core Engineering,Advanced,false
+SSK_01696,USN_2025_385,SQL,Data Engineering & Cloud,Advanced,false
+SSK_01697,USN_2025_385,COMPUTER_VISION,AI / GenAI,Intermediate,false
+SSK_01698,USN_2025_386,CPP,Core Engineering,Advanced,true
+SSK_01699,USN_2025_386,PYTHON,Core Engineering,Intermediate,false
+SSK_01700,USN_2025_386,JAVA_BACKEND,Core Engineering,Beginner,false
+SSK_01701,USN_2025_386,AWS_CLOUD,Data Engineering & Cloud,Beginner,false
+SSK_01702,USN_2025_387,SQL,Data Engineering & Cloud,Intermediate,false
+SSK_01703,USN_2025_387,PYTHON,Core Engineering,Intermediate,false
+SSK_01704,USN_2025_387,COMPUTER_VISION,AI / GenAI,Advanced,false
+SSK_01705,USN_2025_387,AWS_CLOUD,Data Engineering & Cloud,Intermediate,false
+SSK_01706,USN_2025_387,JAVA_BACKEND,Core Engineering,Intermediate,true
+SSK_01707,USN_2025_388,PYTHON,Core Engineering,Intermediate,false
+SSK_01708,USN_2025_388,SQL,Data Engineering & Cloud,Beginner,false
+SSK_01709,USN_2025_388,COMPUTER_VISION,AI / GenAI,Intermediate,true
+SSK_01710,USN_2025_388,JAVA_BACKEND,Core Engineering,Beginner,false
+SSK_01711,USN_2025_388,MACHINE_LEARNING,AI / GenAI,Advanced,false
+SSK_01712,USN_2025_388,DEEP_LEARNING,AI / GenAI,Beginner,false
+SSK_01713,USN_2025_389,CPP,Core Engineering,Advanced,true
+SSK_01714,USN_2025_389,SQL,Data Engineering & Cloud,Intermediate,true
+SSK_01715,USN_2025_389,JAVA_BACKEND,Core Engineering,Advanced,false
+SSK_01716,USN_2025_389,AWS_CLOUD,Data Engineering & Cloud,Advanced,false
+SSK_01717,USN_2025_390,PYTHON,Core Engineering,Advanced,true
+SSK_01718,USN_2025_390,CPP,Core Engineering,Beginner,true
+SSK_01719,USN_2025_390,JAVA_BACKEND,Core Engineering,Intermediate,false
+SSK_01720,USN_2025_390,DEEP_LEARNING,AI / GenAI,Intermediate,false
+SSK_01721,USN_2025_390,COMPUTER_VISION,AI / GenAI,Beginner,true
+SSK_01722,USN_2025_391,PYTHON,Core Engineering,Beginner,false
+SSK_01723,USN_2025_391,SQL,Data Engineering & Cloud,Intermediate,true
+SSK_01724,USN_2025_391,MACHINE_LEARNING,AI / GenAI,Intermediate,false
+SSK_01725,USN_2025_391,AWS_CLOUD,Data Engineering & Cloud,Advanced,false
+SSK_01726,USN_2025_391,COMPUTER_VISION,AI / GenAI,Beginner,false
+SSK_01727,USN_2025_392,CPP,Core Engineering,Advanced,false
+SSK_01728,USN_2025_392,PYTHON,Core Engineering,Intermediate,false
+SSK_01729,USN_2025_392,MACHINE_LEARNING,AI / GenAI,Advanced,false
+SSK_01730,USN_2025_392,DEEP_LEARNING,AI / GenAI,Intermediate,false
+SSK_01731,USN_2025_392,COMPUTER_VISION,AI / GenAI,Intermediate,false
+SSK_01732,USN_2025_393,CPP,Core Engineering,Advanced,false
+SSK_01733,USN_2025_393,PYTHON,Core Engineering,Intermediate,false
+SSK_01734,USN_2025_393,AWS_CLOUD,Data Engineering & Cloud,Advanced,false
+SSK_01735,USN_2025_394,SQL,Data Engineering & Cloud,Advanced,false
+SSK_01736,USN_2025_394,PYTHON,Core Engineering,Advanced,true
+SSK_01737,USN_2025_394,DEEP_LEARNING,AI / GenAI,Advanced,true
+SSK_01738,USN_2025_394,JAVA_BACKEND,Core Engineering,Beginner,false
+SSK_01739,USN_2025_395,PYTHON,Core Engineering,Beginner,false
+SSK_01740,USN_2025_395,SQL,Data Engineering & Cloud,Intermediate,false
+SSK_01741,USN_2025_395,COMPUTER_VISION,AI / GenAI,Intermediate,false
+SSK_01742,USN_2025_396,PYTHON,Core Engineering,Intermediate,false
+SSK_01743,USN_2025_396,SQL,Data Engineering & Cloud,Intermediate,false
+SSK_01744,USN_2025_396,JAVA_BACKEND,Core Engineering,Intermediate,true
+SSK_01745,USN_2025_396,MACHINE_LEARNING,AI / GenAI,Advanced,true
+SSK_01746,USN_2025_396,DEEP_LEARNING,AI / GenAI,Advanced,true
+SSK_01747,USN_2025_396,AWS_CLOUD,Data Engineering & Cloud,Beginner,true
+SSK_01748,USN_2025_397,SQL,Data Engineering & Cloud,Beginner,false
+SSK_01749,USN_2025_397,PYTHON,Core Engineering,Beginner,false
+SSK_01750,USN_2025_397,MACHINE_LEARNING,AI / GenAI,Advanced,true
+SSK_01751,USN_2025_397,JAVA_BACKEND,Core Engineering,Intermediate,true
+SSK_01752,USN_2025_397,COMPUTER_VISION,AI / GenAI,Intermediate,false
+SSK_01753,USN_2025_397,DEEP_LEARNING,AI / GenAI,Beginner,false
+SSK_01754,USN_2025_398,CPP,Core Engineering,Intermediate,true
+SSK_01755,USN_2025_398,PYTHON,Core Engineering,Intermediate,false
+SSK_01756,USN_2025_398,DEEP_LEARNING,AI / GenAI,Beginner,false
+SSK_01757,USN_2025_398,AWS_CLOUD,Data Engineering & Cloud,Advanced,false
+SSK_01758,USN_2025_398,MACHINE_LEARNING,AI / GenAI,Beginner,true
+SSK_01759,USN_2025_398,COMPUTER_VISION,AI / GenAI,Intermediate,true
+SSK_01760,USN_2025_399,PYTHON,Core Engineering,Intermediate,false
+SSK_01761,USN_2025_399,CPP,Core Engineering,Beginner,false
+SSK_01762,USN_2025_399,DEEP_LEARNING,AI / GenAI,Advanced,false
+SSK_01763,USN_2025_400,CPP,Core Engineering,Advanced,true
+SSK_01764,USN_2025_400,SQL,Data Engineering & Cloud,Advanced,false
+SSK_01765,USN_2025_400,DEEP_LEARNING,AI / GenAI,Beginner,true
+SSK_01766,USN_2025_400,JAVA_BACKEND,Core Engineering,Advanced,false
+SSK_01767,USN_2025_400,COMPUTER_VISION,AI / GenAI,Intermediate,false
+SSK_01768,USN_2025_400,AWS_CLOUD,Data Engineering & Cloud,Intermediate,true
+SSK_01769,USN_2025_401,SQL,Data Engineering & Cloud,Beginner,true
+SSK_01770,USN_2025_401,CPP,Core Engineering,Advanced,true
+SSK_01771,USN_2025_401,AWS_CLOUD,Data Engineering & Cloud,Beginner,true
+SSK_01772,USN_2025_401,COMPUTER_VISION,AI / GenAI,Advanced,true
+SSK_01773,USN_2025_402,CPP,Core Engineering,Intermediate,true
+SSK_01774,USN_2025_402,PYTHON,Core Engineering,Advanced,false
+SSK_01775,USN_2025_402,JAVA_BACKEND,Core Engineering,Beginner,false
+SSK_01776,USN_2025_402,MACHINE_LEARNING,AI / GenAI,Advanced,true
+SSK_01777,USN_2025_402,AWS_CLOUD,Data Engineering & Cloud,Beginner,false
+SSK_01778,USN_2025_403,SQL,Data Engineering & Cloud,Beginner,false
+SSK_01779,USN_2025_403,PYTHON,Core Engineering,Beginner,false
+SSK_01780,USN_2025_403,AWS_CLOUD,Data Engineering & Cloud,Advanced,false
+SSK_01781,USN_2025_403,COMPUTER_VISION,AI / GenAI,Advanced,false
+SSK_01782,USN_2025_403,MACHINE_LEARNING,AI / GenAI,Intermediate,false
+SSK_01783,USN_2025_404,CPP,Core Engineering,Beginner,false
+SSK_01784,USN_2025_404,PYTHON,Core Engineering,Intermediate,true
+SSK_01785,USN_2025_404,AWS_CLOUD,Data Engineering & Cloud,Advanced,true
+SSK_01786,USN_2025_404,COMPUTER_VISION,AI / GenAI,Advanced,true
+SSK_01787,USN_2025_405,SQL,Data Engineering & Cloud,Intermediate,false
+SSK_01788,USN_2025_405,PYTHON,Core Engineering,Intermediate,false
+SSK_01789,USN_2025_405,AWS_CLOUD,Data Engineering & Cloud,Advanced,true
+SSK_01790,USN_2025_405,COMPUTER_VISION,AI / GenAI,Advanced,true
+SSK_01791,USN_2025_405,MACHINE_LEARNING,AI / GenAI,Intermediate,true
+SSK_01792,USN_2025_405,DEEP_LEARNING,AI / GenAI,Advanced,true
+SSK_01793,USN_2025_406,SQL,Data Engineering & Cloud,Intermediate,true
+SSK_01794,USN_2025_406,CPP,Core Engineering,Intermediate,false
+SSK_01795,USN_2025_406,JAVA_BACKEND,Core Engineering,Beginner,false
+SSK_01796,USN_2025_407,CPP,Core Engineering,Advanced,false
+SSK_01797,USN_2025_407,PYTHON,Core Engineering,Intermediate,true
+SSK_01798,USN_2025_407,JAVA_BACKEND,Core Engineering,Advanced,true
+SSK_01799,USN_2025_407,COMPUTER_VISION,AI / GenAI,Intermediate,true
+SSK_01800,USN_2025_407,DEEP_LEARNING,AI / GenAI,Advanced,false
+SSK_01801,USN_2025_407,MACHINE_LEARNING,AI / GenAI,Advanced,true
+SSK_01802,USN_2025_408,PYTHON,Core Engineering,Intermediate,false
+SSK_01803,USN_2025_408,SQL,Data Engineering & Cloud,Advanced,true
+SSK_01804,USN_2025_408,COMPUTER_VISION,AI / GenAI,Advanced,true
+SSK_01805,USN_2025_408,MACHINE_LEARNING,AI / GenAI,Intermediate,false
+SSK_01806,USN_2025_409,CPP,Core Engineering,Intermediate,false
+SSK_01807,USN_2025_409,SQL,Data Engineering & Cloud,Advanced,false
+SSK_01808,USN_2025_409,DEEP_LEARNING,AI / GenAI,Beginner,true
+SSK_01809,USN_2025_409,MACHINE_LEARNING,AI / GenAI,Intermediate,false
+SSK_01810,USN_2025_410,PYTHON,Core Engineering,Beginner,false
+SSK_01811,USN_2025_410,SQL,Data Engineering & Cloud,Beginner,true
+SSK_01812,USN_2025_410,JAVA_BACKEND,Core Engineering,Advanced,false
+SSK_01813,USN_2025_410,MACHINE_LEARNING,AI / GenAI,Intermediate,false
+SSK_01814,USN_2025_410,DEEP_LEARNING,AI / GenAI,Beginner,false
+SSK_01815,USN_2025_410,COMPUTER_VISION,AI / GenAI,Intermediate,false
+SSK_01816,USN_2025_411,CPP,Core Engineering,Advanced,true
+SSK_01817,USN_2025_411,SQL,Data Engineering & Cloud,Advanced,false
+SSK_01818,USN_2025_411,COMPUTER_VISION,AI / GenAI,Advanced,false
+SSK_01819,USN_2025_412,PYTHON,Core Engineering,Intermediate,true
+SSK_01820,USN_2025_412,CPP,Core Engineering,Beginner,true
+SSK_01821,USN_2025_412,MACHINE_LEARNING,AI / GenAI,Intermediate,false
+SSK_01822,USN_2025_412,JAVA_BACKEND,Core Engineering,Beginner,false
+SSK_01823,USN_2025_412,COMPUTER_VISION,AI / GenAI,Beginner,true
+SSK_01824,USN_2025_413,PYTHON,Core Engineering,Intermediate,true
+SSK_01825,USN_2025_413,SQL,Data Engineering & Cloud,Beginner,false
+SSK_01826,USN_2025_413,AWS_CLOUD,Data Engineering & Cloud,Advanced,false
+SSK_01827,USN_2025_413,DEEP_LEARNING,AI / GenAI,Advanced,false
+SSK_01828,USN_2025_413,COMPUTER_VISION,AI / GenAI,Intermediate,true
+SSK_01829,USN_2025_414,PYTHON,Core Engineering,Intermediate,false
+SSK_01830,USN_2025_414,SQL,Data Engineering & Cloud,Beginner,false
+SSK_01831,USN_2025_414,COMPUTER_VISION,AI / GenAI,Advanced,false
+SSK_01832,USN_2025_415,PYTHON,Core Engineering,Beginner,false
+SSK_01833,USN_2025_415,SQL,Data Engineering & Cloud,Advanced,false
+SSK_01834,USN_2025_415,DEEP_LEARNING,AI / GenAI,Advanced,false
+SSK_01835,USN_2025_415,AWS_CLOUD,Data Engineering & Cloud,Intermediate,false
+SSK_01836,USN_2025_415,MACHINE_LEARNING,AI / GenAI,Intermediate,false
+SSK_01837,USN_2025_416,SQL,Data Engineering & Cloud,Advanced,true
+SSK_01838,USN_2025_416,CPP,Core Engineering,Advanced,true
+SSK_01839,USN_2025_416,MACHINE_LEARNING,AI / GenAI,Beginner,false
+SSK_01840,USN_2025_417,CPP,Core Engineering,Beginner,true
+SSK_01841,USN_2025_417,SQL,Data Engineering & Cloud,Advanced,false
+SSK_01842,USN_2025_417,AWS_CLOUD,Data Engineering & Cloud,Beginner,false
+SSK_01843,USN_2025_417,COMPUTER_VISION,AI / GenAI,Intermediate,true
+SSK_01844,USN_2025_418,SQL,Data Engineering & Cloud,Beginner,false
+SSK_01845,USN_2025_418,PYTHON,Core Engineering,Beginner,true
+SSK_01846,USN_2025_418,COMPUTER_VISION,AI / GenAI,Advanced,false
+SSK_01847,USN_2025_419,PYTHON,Core Engineering,Beginner,false
+SSK_01848,USN_2025_419,CPP,Core Engineering,Beginner,false
+SSK_01849,USN_2025_419,DEEP_LEARNING,AI / GenAI,Beginner,true
+SSK_01850,USN_2025_420,CPP,Core Engineering,Intermediate,false
+SSK_01851,USN_2025_420,SQL,Data Engineering & Cloud,Intermediate,true
+SSK_01852,USN_2025_420,DEEP_LEARNING,AI / GenAI,Advanced,false
+SSK_01853,USN_2025_420,COMPUTER_VISION,AI / GenAI,Beginner,false
+SSK_01854,USN_2025_420,AWS_CLOUD,Data Engineering & Cloud,Intermediate,false
+SSK_01855,USN_2025_420,MACHINE_LEARNING,AI / GenAI,Advanced,true
+SSK_01856,USN_2025_421,CPP,Core Engineering,Beginner,false
+SSK_01857,USN_2025_421,PYTHON,Core Engineering,Beginner,false
+SSK_01858,USN_2025_421,JAVA_BACKEND,Core Engineering,Advanced,false
+SSK_01859,USN_2025_421,COMPUTER_VISION,AI / GenAI,Beginner,false
+SSK_01860,USN_2025_422,SQL,Data Engineering & Cloud,Intermediate,false
+SSK_01861,USN_2025_422,PYTHON,Core Engineering,Advanced,false
+SSK_01862,USN_2025_422,JAVA_BACKEND,Core Engineering,Intermediate,true
+SSK_01863,USN_2025_422,COMPUTER_VISION,AI / GenAI,Intermediate,false
+SSK_01864,USN_2025_422,DEEP_LEARNING,AI / GenAI,Intermediate,true
+SSK_01865,USN_2025_423,PYTHON,Core Engineering,Intermediate,false
+SSK_01866,USN_2025_423,CPP,Core Engineering,Beginner,true
+SSK_01867,USN_2025_423,AWS_CLOUD,Data Engineering & Cloud,Intermediate,false
+SSK_01868,USN_2025_423,MACHINE_LEARNING,AI / GenAI,Beginner,true
+SSK_01869,USN_2025_423,DEEP_LEARNING,AI / GenAI,Beginner,false
+SSK_01870,USN_2025_423,COMPUTER_VISION,AI / GenAI,Beginner,false
+SSK_01871,USN_2025_424,SQL,Data Engineering & Cloud,Advanced,false
+SSK_01872,USN_2025_424,PYTHON,Core Engineering,Advanced,true
+SSK_01873,USN_2025_424,DEEP_LEARNING,AI / GenAI,Advanced,true
+SSK_01874,USN_2025_424,COMPUTER_VISION,AI / GenAI,Beginner,true
+SSK_01875,USN_2025_424,JAVA_BACKEND,Core Engineering,Advanced,false
+SSK_01876,USN_2025_425,CPP,Core Engineering,Advanced,false
+SSK_01877,USN_2025_425,SQL,Data Engineering & Cloud,Advanced,false
+SSK_01878,USN_2025_425,AWS_CLOUD,Data Engineering & Cloud,Intermediate,false
+SSK_01879,USN_2025_426,PYTHON,Core Engineering,Beginner,false
+SSK_01880,USN_2025_426,SQL,Data Engineering & Cloud,Intermediate,true
+SSK_01881,USN_2025_426,NLP,AI / GenAI,Intermediate,false
+SSK_01882,USN_2025_426,GENAI_LLMS,AI / GenAI,Intermediate,false
+SSK_01883,USN_2025_426,DATABRICKS_DE,Data Engineering & Cloud,Beginner,true
+SSK_01884,USN_2025_427,MACHINE_LEARNING,AI / GenAI,Intermediate,false
+SSK_01885,USN_2025_427,DEEP_LEARNING,AI / GenAI,Intermediate,false
+SSK_01886,USN_2025_427,VECTOR_DATABASES,AI / GenAI,Intermediate,false
+SSK_01887,USN_2025_427,DATABRICKS_DE,Data Engineering & Cloud,Beginner,false
+SSK_01888,USN_2025_427,PROMPT_ENGINEERING,AI / GenAI,Beginner,true
+SSK_01889,USN_2025_427,NLP,AI / GenAI,Beginner,false
+SSK_01890,USN_2025_428,PYTHON,Core Engineering,Intermediate,false
+SSK_01891,USN_2025_428,DEEP_LEARNING,AI / GenAI,Advanced,false
+SSK_01892,USN_2025_428,COMPUTER_VISION,AI / GenAI,Intermediate,false
+SSK_01893,USN_2025_428,DATABRICKS_DE,Data Engineering & Cloud,Beginner,false
+SSK_01894,USN_2025_428,PYSPARK,Data Engineering & Cloud,Beginner,false
+SSK_01895,USN_2025_429,DEEP_LEARNING,AI / GenAI,Intermediate,false
+SSK_01896,USN_2025_429,PYTHON,Core Engineering,Beginner,false
+SSK_01897,USN_2025_429,NLP,AI / GenAI,Intermediate,false
+SSK_01898,USN_2025_429,COMPUTER_VISION,AI / GenAI,Beginner,false
+SSK_01899,USN_2025_429,PYSPARK,Data Engineering & Cloud,Intermediate,true
+SSK_01900,USN_2025_430,DEEP_LEARNING,AI / GenAI,Advanced,false
+SSK_01901,USN_2025_430,SQL,Data Engineering & Cloud,Beginner,false
+SSK_01902,USN_2025_430,GENAI_LLMS,AI / GenAI,Advanced,true
+SSK_01903,USN_2025_431,PYTHON,Core Engineering,Intermediate,true
+SSK_01904,USN_2025_431,DEEP_LEARNING,AI / GenAI,Advanced,false
+SSK_01905,USN_2025_431,GENAI_LLMS,AI / GenAI,Intermediate,true
+SSK_01906,USN_2025_431,PYSPARK,Data Engineering & Cloud,Intermediate,false
+SSK_01907,USN_2025_431,DATABRICKS_DE,Data Engineering & Cloud,Beginner,false
+SSK_01908,USN_2025_432,DEEP_LEARNING,AI / GenAI,Intermediate,false
+SSK_01909,USN_2025_432,SQL,Data Engineering & Cloud,Intermediate,true
+SSK_01910,USN_2025_432,GENAI_LLMS,AI / GenAI,Beginner,true
+SSK_01911,USN_2025_432,PROMPT_ENGINEERING,AI / GenAI,Intermediate,true
+SSK_01912,USN_2025_432,DATABRICKS_DE,Data Engineering & Cloud,Intermediate,true
+SSK_01913,USN_2025_432,PYSPARK,Data Engineering & Cloud,Beginner,false
+SSK_01914,USN_2025_433,MACHINE_LEARNING,AI / GenAI,Intermediate,false
+SSK_01915,USN_2025_433,SQL,Data Engineering & Cloud,Intermediate,true
+SSK_01916,USN_2025_433,VECTOR_DATABASES,AI / GenAI,Beginner,false
+SSK_01917,USN_2025_434,PYTHON,Core Engineering,Advanced,false
+SSK_01918,USN_2025_434,MACHINE_LEARNING,AI / GenAI,Beginner,false
+SSK_01919,USN_2025_434,DATABRICKS_DE,Data Engineering & Cloud,Beginner,false
+SSK_01920,USN_2025_434,GENAI_LLMS,AI / GenAI,Beginner,false
+SSK_01921,USN_2025_434,VECTOR_DATABASES,AI / GenAI,Beginner,false
+SSK_01922,USN_2025_434,PYSPARK,Data Engineering & Cloud,Beginner,false
+SSK_01923,USN_2025_435,SQL,Data Engineering & Cloud,Advanced,false
+SSK_01924,USN_2025_435,PYTHON,Core Engineering,Advanced,false
+SSK_01925,USN_2025_435,PYSPARK,Data Engineering & Cloud,Advanced,true
+SSK_01926,USN_2025_435,DATABRICKS_DE,Data Engineering & Cloud,Advanced,true
+SSK_01927,USN_2025_436,DEEP_LEARNING,AI / GenAI,Beginner,false
+SSK_01928,USN_2025_436,SQL,Data Engineering & Cloud,Advanced,false
+SSK_01929,USN_2025_436,NLP,AI / GenAI,Beginner,true
+SSK_01930,USN_2025_437,PYTHON,Core Engineering,Advanced,false
+SSK_01931,USN_2025_437,MACHINE_LEARNING,AI / GenAI,Advanced,true
+SSK_01932,USN_2025_437,VECTOR_DATABASES,AI / GenAI,Intermediate,false
+SSK_01933,USN_2025_437,PYSPARK,Data Engineering & Cloud,Beginner,false
+SSK_01934,USN_2025_437,COMPUTER_VISION,AI / GenAI,Intermediate,true
+SSK_01935,USN_2025_438,DEEP_LEARNING,AI / GenAI,Advanced,false
+SSK_01936,USN_2025_438,PYTHON,Core Engineering,Advanced,true
+SSK_01937,USN_2025_438,PYSPARK,Data Engineering & Cloud,Advanced,false
+SSK_01938,USN_2025_438,COMPUTER_VISION,AI / GenAI,Advanced,true
+SSK_01939,USN_2025_438,VECTOR_DATABASES,AI / GenAI,Advanced,true
+SSK_01940,USN_2025_438,DATABRICKS_DE,Data Engineering & Cloud,Advanced,false
+SSK_01941,USN_2025_439,PYTHON,Core Engineering,Advanced,false
+SSK_01942,USN_2025_439,MACHINE_LEARNING,AI / GenAI,Intermediate,true
+SSK_01943,USN_2025_439,GENAI_LLMS,AI / GenAI,Advanced,false
+SSK_01944,USN_2025_439,PROMPT_ENGINEERING,AI / GenAI,Intermediate,false
+SSK_01945,USN_2025_439,COMPUTER_VISION,AI / GenAI,Advanced,false
+SSK_01946,USN_2025_439,PYSPARK,Data Engineering & Cloud,Advanced,true
+SSK_01947,USN_2025_440,SQL,Data Engineering & Cloud,Advanced,false
+SSK_01948,USN_2025_440,PYTHON,Core Engineering,Advanced,false
+SSK_01949,USN_2025_440,COMPUTER_VISION,AI / GenAI,Advanced,false
+SSK_01950,USN_2025_441,PYTHON,Core Engineering,Intermediate,true
+SSK_01951,USN_2025_441,SQL,Data Engineering & Cloud,Intermediate,false
+SSK_01952,USN_2025_441,DATABRICKS_DE,Data Engineering & Cloud,Beginner,false
+SSK_01953,USN_2025_441,PROMPT_ENGINEERING,AI / GenAI,Beginner,true
+SSK_01954,USN_2025_442,MACHINE_LEARNING,AI / GenAI,Intermediate,true
+SSK_01955,USN_2025_442,SQL,Data Engineering & Cloud,Advanced,true
+SSK_01956,USN_2025_442,COMPUTER_VISION,AI / GenAI,Advanced,false
+SSK_01957,USN_2025_442,NLP,AI / GenAI,Beginner,false
+SSK_01958,USN_2025_442,VECTOR_DATABASES,AI / GenAI,Advanced,false
+SSK_01959,USN_2025_443,SQL,Data Engineering & Cloud,Advanced,false
+SSK_01960,USN_2025_443,DEEP_LEARNING,AI / GenAI,Advanced,false
+SSK_01961,USN_2025_443,GENAI_LLMS,AI / GenAI,Intermediate,false
+SSK_01962,USN_2025_444,DEEP_LEARNING,AI / GenAI,Beginner,true
+SSK_01963,USN_2025_444,MACHINE_LEARNING,AI / GenAI,Beginner,true
+SSK_01964,USN_2025_444,PYSPARK,Data Engineering & Cloud,Beginner,true
+SSK_01965,USN_2025_444,NLP,AI / GenAI,Advanced,false
+SSK_01966,USN_2025_444,DATABRICKS_DE,Data Engineering & Cloud,Intermediate,false
+SSK_01967,USN_2025_445,MACHINE_LEARNING,AI / GenAI,Intermediate,true
+SSK_01968,USN_2025_445,DEEP_LEARNING,AI / GenAI,Advanced,true
+SSK_01969,USN_2025_445,PYSPARK,Data Engineering & Cloud,Intermediate,false
+SSK_01970,USN_2025_446,PYTHON,Core Engineering,Intermediate,true
+SSK_01971,USN_2025_446,SQL,Data Engineering & Cloud,Intermediate,true
+SSK_01972,USN_2025_446,NLP,AI / GenAI,Intermediate,false
+SSK_01973,USN_2025_446,VECTOR_DATABASES,AI / GenAI,Beginner,false
+SSK_01974,USN_2025_446,PROMPT_ENGINEERING,AI / GenAI,Advanced,true
+SSK_01975,USN_2025_446,COMPUTER_VISION,AI / GenAI,Intermediate,true
+SSK_01976,USN_2025_447,PYTHON,Core Engineering,Intermediate,false
+SSK_01977,USN_2025_447,MACHINE_LEARNING,AI / GenAI,Advanced,false
+SSK_01978,USN_2025_447,NLP,AI / GenAI,Intermediate,true
+SSK_01979,USN_2025_447,COMPUTER_VISION,AI / GenAI,Intermediate,false
+SSK_01980,USN_2025_447,VECTOR_DATABASES,AI / GenAI,Advanced,true
+SSK_01981,USN_2025_447,PROMPT_ENGINEERING,AI / GenAI,Beginner,true
+SSK_01982,USN_2025_448,PYTHON,Core Engineering,Intermediate,false
+SSK_01983,USN_2025_448,DEEP_LEARNING,AI / GenAI,Intermediate,false
+SSK_01984,USN_2025_448,COMPUTER_VISION,AI / GenAI,Beginner,false
+SSK_01985,USN_2025_448,VECTOR_DATABASES,AI / GenAI,Intermediate,false
+SSK_01986,USN_2025_448,GENAI_LLMS,AI / GenAI,Beginner,false
+SSK_01987,USN_2025_448,PROMPT_ENGINEERING,AI / GenAI,Advanced,false
+SSK_01988,USN_2025_449,DEEP_LEARNING,AI / GenAI,Intermediate,false
+SSK_01989,USN_2025_449,MACHINE_LEARNING,AI / GenAI,Intermediate,false
+SSK_01990,USN_2025_449,VECTOR_DATABASES,AI / GenAI,Advanced,false
+SSK_01991,USN_2025_449,COMPUTER_VISION,AI / GenAI,Beginner,false
+SSK_01992,USN_2025_449,DATABRICKS_DE,Data Engineering & Cloud,Beginner,false
+SSK_01993,USN_2025_449,GENAI_LLMS,AI / GenAI,Intermediate,true
+SSK_01994,USN_2025_450,SQL,Data Engineering & Cloud,Intermediate,false
+SSK_01995,USN_2025_450,PYTHON,Core Engineering,Intermediate,false
+SSK_01996,USN_2025_450,COMPUTER_VISION,AI / GenAI,Beginner,false
+SSK_01997,USN_2025_450,PYSPARK,Data Engineering & Cloud,Beginner,false
+SSK_01998,USN_2025_451,DEEP_LEARNING,AI / GenAI,Intermediate,true
+SSK_01999,USN_2025_451,PYTHON,Core Engineering,Advanced,true
+SSK_02000,USN_2025_451,PROMPT_ENGINEERING,AI / GenAI,Intermediate,true
+SSK_02001,USN_2025_451,GENAI_LLMS,AI / GenAI,Intermediate,true
+SSK_02002,USN_2025_451,NLP,AI / GenAI,Beginner,true
+SSK_02003,USN_2025_451,PYSPARK,Data Engineering & Cloud,Beginner,false
+SSK_02004,USN_2025_452,SQL,Data Engineering & Cloud,Intermediate,false
+SSK_02005,USN_2025_452,MACHINE_LEARNING,AI / GenAI,Intermediate,true
+SSK_02006,USN_2025_452,PYSPARK,Data Engineering & Cloud,Advanced,true
+SSK_02007,USN_2025_452,COMPUTER_VISION,AI / GenAI,Advanced,true
+SSK_02008,USN_2025_452,PROMPT_ENGINEERING,AI / GenAI,Advanced,true
+SSK_02009,USN_2025_453,MACHINE_LEARNING,AI / GenAI,Intermediate,false
+SSK_02010,USN_2025_453,PYTHON,Core Engineering,Intermediate,false
+SSK_02011,USN_2025_453,GENAI_LLMS,AI / GenAI,Intermediate,true
+SSK_02012,USN_2025_454,SQL,Data Engineering & Cloud,Intermediate,false
+SSK_02013,USN_2025_454,MACHINE_LEARNING,AI / GenAI,Intermediate,true
+SSK_02014,USN_2025_454,COMPUTER_VISION,AI / GenAI,Intermediate,false
+SSK_02015,USN_2025_454,GENAI_LLMS,AI / GenAI,Advanced,true
+SSK_02016,USN_2025_454,PYSPARK,Data Engineering & Cloud,Advanced,false
+SSK_02017,USN_2025_455,SQL,Data Engineering & Cloud,Beginner,false
+SSK_02018,USN_2025_455,MACHINE_LEARNING,AI / GenAI,Advanced,false
+SSK_02019,USN_2025_455,GENAI_LLMS,AI / GenAI,Beginner,false
+SSK_02020,USN_2025_455,COMPUTER_VISION,AI / GenAI,Intermediate,false
+SSK_02021,USN_2025_456,MACHINE_LEARNING,AI / GenAI,Intermediate,false
+SSK_02022,USN_2025_456,PYTHON,Core Engineering,Advanced,true
+SSK_02023,USN_2025_456,GENAI_LLMS,AI / GenAI,Beginner,false
+SSK_02024,USN_2025_456,NLP,AI / GenAI,Intermediate,false
+SSK_02025,USN_2025_456,DATABRICKS_DE,Data Engineering & Cloud,Intermediate,false
+SSK_02026,USN_2025_457,SQL,Data Engineering & Cloud,Advanced,true
+SSK_02027,USN_2025_457,PYTHON,Core Engineering,Intermediate,true
+SSK_02028,USN_2025_457,VECTOR_DATABASES,AI / GenAI,Advanced,true
+SSK_02029,USN_2025_457,NLP,AI / GenAI,Beginner,true
+SSK_02030,USN_2025_457,COMPUTER_VISION,AI / GenAI,Intermediate,false
+SSK_02031,USN_2025_457,PROMPT_ENGINEERING,AI / GenAI,Advanced,false
+SSK_02032,USN_2025_458,SQL,Data Engineering & Cloud,Beginner,true
+SSK_02033,USN_2025_458,PYTHON,Core Engineering,Intermediate,false
+SSK_02034,USN_2025_458,PROMPT_ENGINEERING,AI / GenAI,Advanced,false
+SSK_02035,USN_2025_458,NLP,AI / GenAI,Advanced,true
+SSK_02036,USN_2025_458,COMPUTER_VISION,AI / GenAI,Advanced,false
+SSK_02037,USN_2025_458,DATABRICKS_DE,Data Engineering & Cloud,Advanced,false
+SSK_02038,USN_2025_459,MACHINE_LEARNING,AI / GenAI,Beginner,false
+SSK_02039,USN_2025_459,DEEP_LEARNING,AI / GenAI,Beginner,false
+SSK_02040,USN_2025_459,PROMPT_ENGINEERING,AI / GenAI,Advanced,false
+SSK_02041,USN_2025_459,VECTOR_DATABASES,AI / GenAI,Beginner,true
+SSK_02042,USN_2025_459,NLP,AI / GenAI,Beginner,false
+SSK_02043,USN_2025_460,PYTHON,Core Engineering,Intermediate,false
+SSK_02044,USN_2025_460,DEEP_LEARNING,AI / GenAI,Intermediate,false
+SSK_02045,USN_2025_460,PROMPT_ENGINEERING,AI / GenAI,Intermediate,false
+SSK_02046,USN_2025_460,NLP,AI / GenAI,Beginner,false
+SSK_02047,USN_2025_460,COMPUTER_VISION,AI / GenAI,Advanced,false
+SSK_02048,USN_2025_461,MACHINE_LEARNING,AI / GenAI,Intermediate,false
+SSK_02049,USN_2025_461,DEEP_LEARNING,AI / GenAI,Intermediate,true
+SSK_02050,USN_2025_461,COMPUTER_VISION,AI / GenAI,Intermediate,true
+SSK_02051,USN_2025_461,NLP,AI / GenAI,Advanced,false
+SSK_02052,USN_2025_462,MACHINE_LEARNING,AI / GenAI,Intermediate,true
+SSK_02053,USN_2025_462,SQL,Data Engineering & Cloud,Beginner,false
+SSK_02054,USN_2025_462,DATABRICKS_DE,Data Engineering & Cloud,Beginner,true
+SSK_02055,USN_2025_463,MACHINE_LEARNING,AI / GenAI,Beginner,false
+SSK_02056,USN_2025_463,SQL,Data Engineering & Cloud,Intermediate,false
+SSK_02057,USN_2025_463,COMPUTER_VISION,AI / GenAI,Beginner,true
+SSK_02058,USN_2025_464,SQL,Data Engineering & Cloud,Intermediate,false
+SSK_02059,USN_2025_464,MACHINE_LEARNING,AI / GenAI,Advanced,false
+SSK_02060,USN_2025_464,COMPUTER_VISION,AI / GenAI,Intermediate,false
+SSK_02061,USN_2025_464,VECTOR_DATABASES,AI / GenAI,Advanced,false
+SSK_02062,USN_2025_464,PROMPT_ENGINEERING,AI / GenAI,Intermediate,false
+SSK_02063,USN_2025_465,PYTHON,Core Engineering,Intermediate,false
+SSK_02064,USN_2025_465,MACHINE_LEARNING,AI / GenAI,Intermediate,false
+SSK_02065,USN_2025_465,VECTOR_DATABASES,AI / GenAI,Advanced,false
+SSK_02066,USN_2025_465,PROMPT_ENGINEERING,AI / GenAI,Beginner,false
+SSK_02067,USN_2025_465,DATABRICKS_DE,Data Engineering & Cloud,Intermediate,false
+SSK_02068,USN_2025_466,MACHINE_LEARNING,AI / GenAI,Advanced,true
+SSK_02069,USN_2025_466,SQL,Data Engineering & Cloud,Intermediate,false
+SSK_02070,USN_2025_466,GENAI_LLMS,AI / GenAI,Intermediate,true
+SSK_02071,USN_2025_467,MACHINE_LEARNING,AI / GenAI,Advanced,false
+SSK_02072,USN_2025_467,PYTHON,Core Engineering,Advanced,true
+SSK_02073,USN_2025_467,GENAI_LLMS,AI / GenAI,Beginner,false
+SSK_02074,USN_2025_468,PYTHON,Core Engineering,Intermediate,true
+SSK_02075,USN_2025_468,SQL,Data Engineering & Cloud,Beginner,false
+SSK_02076,USN_2025_468,NLP,AI / GenAI,Advanced,false
+SSK_02077,USN_2025_468,GENAI_LLMS,AI / GenAI,Intermediate,true
+SSK_02078,USN_2025_469,MACHINE_LEARNING,AI / GenAI,Intermediate,false
+SSK_02079,USN_2025_469,DEEP_LEARNING,AI / GenAI,Intermediate,true
+SSK_02080,USN_2025_469,NLP,AI / GenAI,Advanced,false
+SSK_02081,USN_2025_470,SQL,Data Engineering & Cloud,Intermediate,true
+SSK_02082,USN_2025_470,PYTHON,Core Engineering,Advanced,true
+SSK_02083,USN_2025_470,GENAI_LLMS,AI / GenAI,Advanced,true
+SSK_02084,USN_2025_470,VECTOR_DATABASES,AI / GenAI,Advanced,false
+SSK_02085,USN_2025_471,PYTHON,Core Engineering,Beginner,false
+SSK_02086,USN_2025_471,SQL,Data Engineering & Cloud,Intermediate,false
+SSK_02087,USN_2025_471,NLP,AI / GenAI,Intermediate,false
+SSK_02088,USN_2025_471,COMPUTER_VISION,AI / GenAI,Intermediate,false
+SSK_02089,USN_2025_471,PYSPARK,Data Engineering & Cloud,Intermediate,false
+SSK_02090,USN_2025_472,MACHINE_LEARNING,AI / GenAI,Beginner,false
+SSK_02091,USN_2025_472,PYTHON,Core Engineering,Beginner,false
+SSK_02092,USN_2025_472,COMPUTER_VISION,AI / GenAI,Beginner,true
+SSK_02093,USN_2025_472,DATABRICKS_DE,Data Engineering & Cloud,Intermediate,false
+SSK_02094,USN_2025_472,VECTOR_DATABASES,AI / GenAI,Beginner,false
+SSK_02095,USN_2025_473,PYTHON,Core Engineering,Advanced,true
+SSK_02096,USN_2025_473,MACHINE_LEARNING,AI / GenAI,Intermediate,true
+SSK_02097,USN_2025_473,PROMPT_ENGINEERING,AI / GenAI,Intermediate,true
+SSK_02098,USN_2025_474,DEEP_LEARNING,AI / GenAI,Beginner,false
+SSK_02099,USN_2025_474,SQL,Data Engineering & Cloud,Intermediate,true
+SSK_02100,USN_2025_474,PYSPARK,Data Engineering & Cloud,Beginner,false
+SSK_02101,USN_2025_474,GENAI_LLMS,AI / GenAI,Advanced,true
+SSK_02102,USN_2025_474,NLP,AI / GenAI,Beginner,false
+SSK_02103,USN_2025_474,VECTOR_DATABASES,AI / GenAI,Beginner,false
+SSK_02104,USN_2025_475,SQL,Data Engineering & Cloud,Beginner,true
+SSK_02105,USN_2025_475,MACHINE_LEARNING,AI / GenAI,Beginner,false
+SSK_02106,USN_2025_475,PYSPARK,Data Engineering & Cloud,Intermediate,true
+SSK_02107,USN_2025_476,PYTHON,Core Engineering,Intermediate,true
+SSK_02108,USN_2025_476,SQL,Data Engineering & Cloud,Beginner,true
+SSK_02109,USN_2025_476,PYSPARK,Data Engineering & Cloud,Beginner,false
+SSK_02110,USN_2025_476,VECTOR_DATABASES,AI / GenAI,Intermediate,true
+SSK_02111,USN_2025_476,COMPUTER_VISION,AI / GenAI,Beginner,true
+SSK_02112,USN_2025_476,NLP,AI / GenAI,Advanced,false
+SSK_02113,USN_2025_477,PYTHON,Core Engineering,Intermediate,false
+SSK_02114,USN_2025_477,SQL,Data Engineering & Cloud,Beginner,true
+SSK_02115,USN_2025_477,GENAI_LLMS,AI / GenAI,Beginner,false
+SSK_02116,USN_2025_478,PYTHON,Core Engineering,Advanced,false
+SSK_02117,USN_2025_478,SQL,Data Engineering & Cloud,Beginner,false
+SSK_02118,USN_2025_478,PYSPARK,Data Engineering & Cloud,Advanced,false
+SSK_02119,USN_2025_478,GENAI_LLMS,AI / GenAI,Beginner,false
+SSK_02120,USN_2025_478,DATABRICKS_DE,Data Engineering & Cloud,Intermediate,true
+SSK_02121,USN_2025_478,VECTOR_DATABASES,AI / GenAI,Intermediate,false
+SSK_02122,USN_2025_479,DEEP_LEARNING,AI / GenAI,Intermediate,true
+SSK_02123,USN_2025_479,PYTHON,Core Engineering,Beginner,false
+SSK_02124,USN_2025_479,PROMPT_ENGINEERING,AI / GenAI,Intermediate,false
+SSK_02125,USN_2025_480,DEEP_LEARNING,AI / GenAI,Intermediate,true
+SSK_02126,USN_2025_480,MACHINE_LEARNING,AI / GenAI,Intermediate,false
+SSK_02127,USN_2025_480,NLP,AI / GenAI,Advanced,false
+SSK_02128,USN_2025_480,COMPUTER_VISION,AI / GenAI,Advanced,false
+SSK_02129,USN_2025_481,PYTHON,Core Engineering,Beginner,false
+SSK_02130,USN_2025_481,MACHINE_LEARNING,AI / GenAI,Advanced,false
+SSK_02131,USN_2025_481,PYSPARK,Data Engineering & Cloud,Advanced,false
+SSK_02132,USN_2025_481,VECTOR_DATABASES,AI / GenAI,Intermediate,true
+SSK_02133,USN_2025_481,GENAI_LLMS,AI / GenAI,Intermediate,true
+SSK_02134,USN_2025_481,COMPUTER_VISION,AI / GenAI,Advanced,true
+SSK_02135,USN_2025_482,PYTHON,Core Engineering,Advanced,false
+SSK_02136,USN_2025_482,MACHINE_LEARNING,AI / GenAI,Advanced,false
+SSK_02137,USN_2025_482,GENAI_LLMS,AI / GenAI,Intermediate,true
+SSK_02138,USN_2025_483,DEEP_LEARNING,AI / GenAI,Beginner,false
+SSK_02139,USN_2025_483,MACHINE_LEARNING,AI / GenAI,Beginner,true
+SSK_02140,USN_2025_483,DATABRICKS_DE,Data Engineering & Cloud,Beginner,false
+SSK_02141,USN_2025_483,GENAI_LLMS,AI / GenAI,Intermediate,false
+SSK_02142,USN_2025_483,NLP,AI / GenAI,Intermediate,false
+SSK_02143,USN_2025_483,PYSPARK,Data Engineering & Cloud,Beginner,false
+SSK_02144,USN_2025_484,DEEP_LEARNING,AI / GenAI,Beginner,true
+SSK_02145,USN_2025_484,PYTHON,Core Engineering,Advanced,true
+SSK_02146,USN_2025_484,DATABRICKS_DE,Data Engineering & Cloud,Beginner,false
+SSK_02147,USN_2025_485,DEEP_LEARNING,AI / GenAI,Advanced,true
+SSK_02148,USN_2025_485,MACHINE_LEARNING,AI / GenAI,Intermediate,true
+SSK_02149,USN_2025_485,PROMPT_ENGINEERING,AI / GenAI,Advanced,true
+SSK_02150,USN_2025_485,VECTOR_DATABASES,AI / GenAI,Intermediate,false
+SSK_02151,USN_2025_485,DATABRICKS_DE,Data Engineering & Cloud,Advanced,false
+SSK_02152,USN_2025_485,NLP,AI / GenAI,Beginner,true
+SSK_02153,USN_2025_486,PYTHON,Core Engineering,Advanced,true
+SSK_02154,USN_2025_486,DEEP_LEARNING,AI / GenAI,Advanced,false
+SSK_02155,USN_2025_486,DATABRICKS_DE,Data Engineering & Cloud,Advanced,false
+SSK_02156,USN_2025_487,DEEP_LEARNING,AI / GenAI,Beginner,false
+SSK_02157,USN_2025_487,PYTHON,Core Engineering,Intermediate,true
+SSK_02158,USN_2025_487,VECTOR_DATABASES,AI / GenAI,Beginner,false
+SSK_02159,USN_2025_487,PYSPARK,Data Engineering & Cloud,Beginner,true
+SSK_02160,USN_2025_487,NLP,AI / GenAI,Intermediate,false
+SSK_02161,USN_2025_487,COMPUTER_VISION,AI / GenAI,Advanced,false
+SSK_02162,USN_2025_488,PYTHON,Core Engineering,Intermediate,false
+SSK_02163,USN_2025_488,DEEP_LEARNING,AI / GenAI,Beginner,false
+SSK_02164,USN_2025_488,NLP,AI / GenAI,Advanced,false
+SSK_02165,USN_2025_489,SQL,Data Engineering & Cloud,Advanced,true
+SSK_02166,USN_2025_489,PYTHON,Core Engineering,Intermediate,false
+SSK_02167,USN_2025_489,PROMPT_ENGINEERING,AI / GenAI,Advanced,false
+SSK_02168,USN_2025_489,GENAI_LLMS,AI / GenAI,Beginner,false
+SSK_02169,USN_2025_489,COMPUTER_VISION,AI / GenAI,Beginner,false
+SSK_02170,USN_2025_490,PYTHON,Core Engineering,Advanced,false
+SSK_02171,USN_2025_490,MACHINE_LEARNING,AI / GenAI,Intermediate,true
+SSK_02172,USN_2025_490,GENAI_LLMS,AI / GenAI,Advanced,false
+SSK_02173,USN_2025_490,VECTOR_DATABASES,AI / GenAI,Beginner,false
+SSK_02174,USN_2025_491,DEEP_LEARNING,AI / GenAI,Intermediate,true
+SSK_02175,USN_2025_491,PYTHON,Core Engineering,Advanced,true
+SSK_02176,USN_2025_491,PROMPT_ENGINEERING,AI / GenAI,Beginner,false
+SSK_02177,USN_2025_491,VECTOR_DATABASES,AI / GenAI,Advanced,true
+SSK_02178,USN_2025_491,PYSPARK,Data Engineering & Cloud,Advanced,false
+SSK_02179,USN_2025_492,PYTHON,Core Engineering,Advanced,false
+SSK_02180,USN_2025_492,SQL,Data Engineering & Cloud,Beginner,true
+SSK_02181,USN_2025_492,GENAI_LLMS,AI / GenAI,Beginner,true
+SSK_02182,USN_2025_492,COMPUTER_VISION,AI / GenAI,Advanced,true
+SSK_02183,USN_2025_492,DATABRICKS_DE,Data Engineering & Cloud,Beginner,false
+SSK_02184,USN_2025_492,NLP,AI / GenAI,Beginner,false
+SSK_02185,USN_2025_493,SQL,Data Engineering & Cloud,Intermediate,false
+SSK_02186,USN_2025_493,MACHINE_LEARNING,AI / GenAI,Advanced,false
+SSK_02187,USN_2025_493,PROMPT_ENGINEERING,AI / GenAI,Advanced,false
+SSK_02188,USN_2025_493,GENAI_LLMS,AI / GenAI,Beginner,false
+SSK_02189,USN_2025_493,PYSPARK,Data Engineering & Cloud,Beginner,false
+SSK_02190,USN_2025_494,MACHINE_LEARNING,AI / GenAI,Intermediate,false
+SSK_02191,USN_2025_494,SQL,Data Engineering & Cloud,Intermediate,false
+SSK_02192,USN_2025_494,NLP,AI / GenAI,Beginner,false
+SSK_02193,USN_2025_494,PYSPARK,Data Engineering & Cloud,Beginner,false
+SSK_02194,USN_2025_494,VECTOR_DATABASES,AI / GenAI,Intermediate,false
+SSK_02195,USN_2025_495,SQL,Data Engineering & Cloud,Advanced,false
+SSK_02196,USN_2025_495,DEEP_LEARNING,AI / GenAI,Advanced,true
+SSK_02197,USN_2025_495,VECTOR_DATABASES,AI / GenAI,Advanced,false
+SSK_02198,USN_2025_495,GENAI_LLMS,AI / GenAI,Intermediate,false
+SSK_02199,USN_2025_496,SQL,Data Engineering & Cloud,Intermediate,false
+SSK_02200,USN_2025_496,MACHINE_LEARNING,AI / GenAI,Beginner,true
+SSK_02201,USN_2025_496,COMPUTER_VISION,AI / GenAI,Beginner,false
+SSK_02202,USN_2025_496,PYSPARK,Data Engineering & Cloud,Intermediate,false
+SSK_02203,USN_2025_496,PROMPT_ENGINEERING,AI / GenAI,Intermediate,true
+SSK_02204,USN_2025_497,DEEP_LEARNING,AI / GenAI,Intermediate,false
+SSK_02205,USN_2025_497,MACHINE_LEARNING,AI / GenAI,Intermediate,false
+SSK_02206,USN_2025_497,DATABRICKS_DE,Data Engineering & Cloud,Advanced,false
+SSK_02207,USN_2025_497,PYSPARK,Data Engineering & Cloud,Advanced,false
+SSK_02208,USN_2025_498,DEEP_LEARNING,AI / GenAI,Beginner,false
+SSK_02209,USN_2025_498,PYTHON,Core Engineering,Intermediate,true
+SSK_02210,USN_2025_498,COMPUTER_VISION,AI / GenAI,Intermediate,true
+SSK_02211,USN_2025_498,NLP,AI / GenAI,Beginner,false
+SSK_02212,USN_2025_498,PYSPARK,Data Engineering & Cloud,Intermediate,true
+SSK_02213,USN_2025_499,MACHINE_LEARNING,AI / GenAI,Intermediate,true
+SSK_02214,USN_2025_499,DEEP_LEARNING,AI / GenAI,Advanced,false
+SSK_02215,USN_2025_499,NLP,AI / GenAI,Beginner,false
+SSK_02216,USN_2025_499,GENAI_LLMS,AI / GenAI,Intermediate,false
+SSK_02217,USN_2025_500,DEEP_LEARNING,AI / GenAI,Intermediate,false
+SSK_02218,USN_2025_500,MACHINE_LEARNING,AI / GenAI,Intermediate,false
+SSK_02219,USN_2025_500,VECTOR_DATABASES,AI / GenAI,Advanced,false
+SSK_02220,USN_2025_500,COMPUTER_VISION,AI / GenAI,Advanced,false
+SSK_02221,USN_2025_500,GENAI_LLMS,AI / GenAI,Beginner,false
+SSK_02222,USN_2025_500,DATABRICKS_DE,Data Engineering & Cloud,Beginner,false
