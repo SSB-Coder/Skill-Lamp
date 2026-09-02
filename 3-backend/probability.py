@@ -15,6 +15,27 @@ def calculate_simulation(
     Expected Compensation E[CTC], Exact Deltas, and Synergy Multipliers.
     Genie returns raw counts only; all arithmetic is performed here.
     """
+    # Handle empty skills baseline
+    if not added_skills:
+        p_base = (cohort.placed_without_skill / max(1, cohort.total_without_skill)) * 100.0 if cohort.total_without_skill > 0 else 74.5
+        exp_ctc_base = (p_base / 100.0) * (cohort.avg_ctc_without_skill if cohort.avg_ctc_without_skill > 0 else 8.2)
+        baseline = MetricSnapshot(
+            placement_probability_pct=round(p_base, 1),
+            expected_ctc_lpa=round(exp_ctc_base, 2),
+            eligible_company_count=base_eligible_count
+        )
+        simulated = MetricSnapshot(
+            placement_probability_pct=round(p_base, 1),
+            expected_ctc_lpa=round(exp_ctc_base, 2),
+            eligible_company_count=base_eligible_count
+        )
+        delta = DeltaSummary(
+            delta_probability_pct=0.0,
+            delta_ctc_lpa=0.0,
+            newly_eligible_companies=[]
+        )
+        return baseline, simulated, delta, None
+
     # 1. Frequentist Probability with Bayesian Laplace Smoothing (if sample < 5)
     if cohort.total_with_skill < 5:
         p_with = ((cohort.placed_with_skill + 2) / (cohort.total_with_skill + 5)) * 100.0

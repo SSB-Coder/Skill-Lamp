@@ -1,5 +1,5 @@
-import React from 'react';
-import { ALL_SKILLS } from '../api/mockData';
+import React, { useMemo } from 'react';
+import { ALL_SKILLS, normalizeSkill } from '../api/constants';
 import { Cpu, Zap, RotateCcw, Check, Plus } from 'lucide-react';
 
 interface SkillToggleLabProps {
@@ -19,6 +19,14 @@ export const SkillToggleLab: React.FC<SkillToggleLabProps> = ({
 }) => {
   // Group skills by category
   const categories = Array.from(new Set(ALL_SKILLS.map(s => s.category)));
+
+  const normalizedCurrent = useMemo(() => {
+    return new Set(currentStudentSkills.map(s => normalizeSkill(s)));
+  }, [currentStudentSkills]);
+
+  const normalizedSelected = useMemo(() => {
+    return new Set(selectedSkills.map(s => normalizeSkill(s)));
+  }, [selectedSkills]);
 
   return (
     <div className="bg-[#151D2C] border border-[#1E293B] rounded-lg p-4 select-none space-y-4 shadow-sm">
@@ -59,7 +67,7 @@ export const SkillToggleLab: React.FC<SkillToggleLabProps> = ({
         </div>
       )}
 
-      {/* 16 Standardized Skills Grid (Clean Minimal Buttons) */}
+      {/* Standardized Skills Grid (Clean Minimal Buttons) */}
       <div className="space-y-3">
         {categories.map((category) => (
           <div key={category}>
@@ -68,19 +76,21 @@ export const SkillToggleLab: React.FC<SkillToggleLabProps> = ({
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
               {ALL_SKILLS.filter(s => s.category === category).map((skill) => {
-                const isExisting = currentStudentSkills.includes(skill.id);
-                const isToggled = selectedSkills.includes(skill.id);
+                const normId = normalizeSkill(skill.id);
+                const isExisting = normalizedCurrent.has(normId);
+                const isToggled = normalizedSelected.has(normId);
 
                 return (
                   <button
                     key={skill.id}
                     type="button"
                     onClick={() => onToggleSkill(skill.id)}
+                    disabled={isExisting}
                     className={`flex items-center justify-between p-2.5 rounded text-xs font-mono transition-colors duration-150 border text-left ${
                       isToggled
                         ? 'bg-[#0284C7] text-white border-[#0284C7] font-medium shadow-sm'
                         : isExisting
-                        ? 'bg-[#0B0F19] border-[#1E293B] text-[#64748B]'
+                        ? 'bg-[#0B0F19] border-[#1E293B] text-[#64748B] cursor-default'
                         : 'bg-[#0B0F19] border-[#1E293B] text-[#94A3B8] hover:border-[#334155] hover:text-white'
                     }`}
                   >

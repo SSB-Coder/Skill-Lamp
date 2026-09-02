@@ -208,17 +208,54 @@ COMPANIES_CATALOG: List[Dict[str, Any]] = [
 # ---------------------------------------------------------------------------
 
 def normalize_skill(skill: str) -> str:
-    s = skill.strip().upper().replace(" ", "_").replace("-", "_")
+    s = skill.strip().upper().replace(" ", "_").replace("-", "_").replace(".", "").replace("/", "_")
     mapping = {
         "DATABRICKS": "DATABRICKS_DE",
+        "DATABRICKS_DE": "DATABRICKS_DE",
         "DATABRICKS_DATA_ENGINEERING": "DATABRICKS_DE",
         "SPARK": "PYSPARK",
+        "PYSPARK": "PYSPARK",
+        "SQL": "SQL",
+        "DELTA_LAKE": "SQL",
+        "SQL_DELTA_LAKE": "SQL",
+        "SQL___DELTA_LAKE": "SQL",
         "FAST_API": "FASTAPI",
+        "FASTAPI": "FASTAPI",
         "DSA": "DATA_STRUCTURES",
+        "DATA_STRUCTURES": "DATA_STRUCTURES",
         "DATA_STRUCTURE": "DATA_STRUCTURES",
-        "GENAI": "GENAI_LLM",
-        "LLM": "GENAI_LLM",
-        "GEN_AI": "GENAI_LLM",
+        "SYSTEM_DESIGN": "SYSTEM_DESIGN",
+        "DOCKER": "DOCKER",
+        "KUBERNETES": "KUBERNETES",
+        "K8S": "KUBERNETES",
+        "CI_CD": "CICD",
+        "CICD": "CICD",
+        "AWS": "AWS_CLOUD",
+        "AWS_CLOUD": "AWS_CLOUD",
+        "JAVA": "JAVA_BACKEND",
+        "JAVA_BACKEND": "JAVA_BACKEND",
+        "CPP": "CPP",
+        "C++": "CPP",
+        "PYTHON": "PYTHON",
+        "REACT": "REACT",
+        "REACTJS": "REACT",
+        "REACT_JS": "REACT",
+        "GENAI": "GENAI_LLMS",
+        "GENAI_LLM": "GENAI_LLMS",
+        "GENAI_LLMS": "GENAI_LLMS",
+        "GEN_AI": "GENAI_LLMS",
+        "MACHINE_LEARNING": "MACHINE_LEARNING",
+        "ML": "MACHINE_LEARNING",
+        "DEEP_LEARNING": "DEEP_LEARNING",
+        "DL": "DEEP_LEARNING",
+        "LANGCHAIN": "LANGCHAIN",
+        "PROMPT_ENG": "PROMPT_ENGINEERING",
+        "PROMPT_ENGINEERING": "PROMPT_ENGINEERING",
+        "COMPUTER_VISION": "COMPUTER_VISION",
+        "CV": "COMPUTER_VISION",
+        "NLP": "NLP",
+        "VECTOR_DATABASES": "VECTOR_DATABASES",
+        "VECTOR_DB": "VECTOR_DATABASES",
     }
     return mapping.get(s, s)
 
@@ -266,10 +303,11 @@ def check_student_eligibility(
 
 STUDENTS_DB: List[Dict[str, Any]] = [
     {
-        "student_id": "USN_2024_001",
-        "full_name": "Aarav Sharma",
-        "branch": "CSE",
-        "cgpa": 8.4,
+        "student_id": "USN_2025_042",
+        "full_name": "Priya Nair",
+        "email": "priya.ise21@rvce.edu.in",
+        "branch": "ISE",
+        "cgpa": 8.12,
         "active_backlogs": 0,
         "skills": ["Python", "SQL", "Data Structures", "FastAPI"],
     },
@@ -709,18 +747,24 @@ def _load_500_students() -> Optional[List[Dict[str, Any]]]:
 
 CSV_STUDENTS = _load_500_students()
 if CSV_STUDENTS:
-    aarav = {
-        "student_id": "USN_2024_001",
-        "full_name": "Aarav Sharma",
-        "email": "student@rvce.edu.in",
-        "branch": "CSE",
-        "cgpa": 8.4,
-        "graduation_year": 2024,
+    priya = {
+        "student_id": "USN_2025_042",
+        "full_name": "Priya Nair",
+        "email": "priya.ise21@rvce.edu.in",
+        "branch": "ISE",
+        "cgpa": 8.12,
+        "graduation_year": 2025,
         "active_backlogs": 0,
         "skills": ["Python", "SQL", "Data Structures", "FastAPI"]
     }
-    if not any(s["student_id"] == "USN_2024_001" for s in CSV_STUDENTS):
-        STUDENTS_DB = [aarav] + CSV_STUDENTS
+    found = False
+    for idx, s in enumerate(CSV_STUDENTS):
+        if s["student_id"] == "USN_2025_042":
+            CSV_STUDENTS[idx] = priya
+            found = True
+            break
+    if not found:
+        STUDENTS_DB = [priya] + CSV_STUDENTS
     else:
         STUDENTS_DB = CSV_STUDENTS
 
@@ -1180,6 +1224,11 @@ def mock_genie_query(prompt: str, conversation_id: Optional[str] = None) -> Quer
     """
     conv_id = conversation_id or "conv_databricks_genie_gold_01"
     p = prompt.lower().strip()
+    citations = [
+        {"id": "1", "source": "workspace.campus_intelligence_gold.gold_dim_students"},
+        {"id": "2", "source": "workspace.campus_intelligence_gold.gold_dim_companies"},
+        {"id": "3", "source": "workspace.campus_intelligence_gold.gold_fact_placement_history"},
+    ]
 
     # -------------------------------------------------------------------------
     # Priority 1: TPO Candidate Search, Eligibility, Shortlisting, and Batch Analytics
@@ -1724,6 +1773,81 @@ def mock_genie_query(prompt: str, conversation_id: Optional[str] = None) -> Quer
             answer=answer,
             thinking_steps=thinking_steps,
             citations=citations
+        )
+
+    # -------------------------------------------------------------------------
+    # Student What-If Skill Return & Placement Probability Calculation
+    # -------------------------------------------------------------------------
+    if any(k in p for k in ("learn", "increase", "placement %", "what if", "what will", "probability", "boost", "uplift", "gain")):
+        all_skill_keywords = [
+            ("DATABRICKS_DE", ["databricks", "databricks de", "lakehouse"]),
+            ("PYSPARK", ["pyspark", "spark"]),
+            ("DOCKER", ["docker", "container"]),
+            ("KUBERNETES", ["kubernetes", "k8s"]),
+            ("SQL", ["sql", "delta lake"]),
+            ("PYTHON", ["python"]),
+            ("MACHINE_LEARNING", ["machine learning", "ml"]),
+            ("DEEP_LEARNING", ["deep learning", "dl"]),
+            ("LANGCHAIN", ["langchain"]),
+            ("GENAI_LLMS", ["genai", "llm", "llms", "generative ai"]),
+            ("AWS_CLOUD", ["aws", "cloud"]),
+            ("FASTAPI", ["fastapi", "fast api"]),
+            ("REACT", ["react", "react.js", "reactjs"]),
+            ("SYSTEM_DESIGN", ["system design"]),
+            ("DATA_STRUCTURES", ["data structures", "dsa"]),
+            ("CPP", ["c++", "cpp"]),
+            ("JAVA_BACKEND", ["java", "java backend"]),
+        ]
+        detected = []
+        for skill_id, aliases in all_skill_keywords:
+            if any(alias in p for alias in aliases):
+                detected.append(skill_id)
+                
+        if not detected:
+            detected = ["DATABRICKS_DE", "DOCKER"]
+            
+        skills_formatted = ", ".join([f"`{s}`" for s in detected])
+        prob_boost = min(35.0, 12.0 * len(detected))
+        ctc_boost = min(12.5, 3.2 * len(detected))
+        simulated_prob = min(96.0, 65.0 + prob_boost)
+        simulated_ctc = 8.20 + ctc_boost
+        
+        thinking_steps = [
+            f"Parsing skill delta requirements: [{', '.join(detected)}]",
+            "Executing probability engine against 6-year placement cohorts in gold_fact_placement_history",
+            f"Evaluating newly unlocked company cutoffs for skills [{', '.join(detected)}]",
+            "Computing marginal placement probability (ΔP) and expected compensation (ΔCTC)"
+        ]
+        sql = (
+            f"SELECT \n"
+            f"  '{', '.join(detected)}' AS added_skills,\n"
+            f"  COUNT(*) AS historical_cohort_size,\n"
+            f"  ROUND(AVG(CASE WHEN offer_status = 'Placed' THEN 1.0 ELSE 0.0 END) * 100, 1) AS simulated_placement_prob_pct,\n"
+            f"  ROUND(AVG(offered_ctc_lpa), 2) AS expected_avg_ctc_lpa\n"
+            f"FROM workspace.campus_intelligence_gold.gold_fact_placement_history\n"
+            f"WHERE batch_year >= 2019;"
+        )
+        answer = (
+            f"### What-If Skill Return Analysis: Adding {skills_formatted}\n\n"
+            f"Based on 6 years of governed historical placement data from `workspace.campus_intelligence_gold.gold_fact_placement_history` [3]:\n\n"
+            f"• **Placement Probability:** Increases from **65.0%** $\\rightarrow$ **{simulated_prob:.1f}%** (+{prob_boost:.1f} pts boost)\n"
+            f"• **Expected Package (CTC):** Elevates from **8.20 LPA** $\\rightarrow$ **{simulated_ctc:.2f} LPA** (+{ctc_boost:.2f} LPA marginal gain)\n"
+            f"• **Newly Unlocked Drives:** Unlocks eligibility for hiring partners requiring {skills_formatted}.\n\n"
+            f"**Time Machine Synchronized:** The What-If simulation cards and skill matrix have been updated with this calculation."
+        )
+        return QueryResponse(
+            conversation_id=conv_id,
+            status="SUCCESS",
+            sql_query=sql,
+            columns=["added_skills", "historical_cohort_size", "simulated_placement_prob_pct", "expected_avg_ctc_lpa"],
+            rows=[[", ".join(detected), 2400, simulated_prob, simulated_ctc]],
+            row_count=1,
+            execution_time_ms=195,
+            filter_student_ids=[],
+            answer=answer,
+            thinking_steps=thinking_steps,
+            citations=citations,
+            table_title=f"What-If Skill Uplift Simulation ({', '.join(detected)})"
         )
 
     # -------------------------------------------------------------------------

@@ -1,0 +1,14 @@
+# Dependencies
+node_modules/
+__pycache__/
+*.py[cod]
+.env
+.venv/
+env/
+dist/
+
+# Do not track plans or prompts
+*Plan*.md
+*Prompt*.md
+*prompts*.md
+*plan*.md

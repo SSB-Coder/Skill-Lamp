@@ -16,8 +16,6 @@ async def query_genie(req: QueryRequest, request: Request, current_user: UserSes
     Routes TPO queries to the Main Genie Space (GENIE_SPACE_ID) and Student queries
     to the dedicated Student/Calc Genie Space (GENIE_CALC_SPACE_ID).
     """
-    force_fallback = fallback_data.is_mock_fallback(request)
-    
     prompt = req.prompt.strip()
     target_space_id = None
     
@@ -44,7 +42,7 @@ async def query_genie(req: QueryRequest, request: Request, current_user: UserSes
     response = await genie_client.ask_genie(
         prompt=prompt,
         conversation_id=req.conversation_id,
-        force_fallback=force_fallback,
+        force_fallback=False,
         space_id_override=target_space_id
     )
     return response

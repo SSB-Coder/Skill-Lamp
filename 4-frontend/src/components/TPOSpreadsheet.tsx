@@ -244,7 +244,7 @@ export const TPOSpreadsheet: React.FC<TPOSpreadsheetProps> = ({
       {/* Grid Stats Bar */}
       <div className="px-4 py-2 bg-[#0B0F19] border-b border-[#1E293B] flex items-center justify-between text-xs text-[#94A3B8]">
         <div>
-          Showing <span className="text-white font-semibold">{displayedStudents.length}</span> candidate records (workspace.campus_intelligence_gold)
+          Showing <span className="text-white font-semibold">{displayedStudents.length}</span> candidate records
         </div>
         <div className="flex items-center space-x-4 text-[11px] text-[#94A3B8]">
           <span>

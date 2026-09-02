@@ -1,6 +1,6 @@
 import React from 'react';
 import { TargetCompany } from '../api/types';
-import { Compass, Sparkles, CheckCircle2, XCircle, ArrowRight } from 'lucide-react';
+import { Compass, CheckCircle2, XCircle, ArrowRight } from 'lucide-react';
 
 interface ReverseRoadmapProps {
   companies: TargetCompany[];
@@ -85,7 +85,7 @@ export const ReverseRoadmap: React.FC<ReverseRoadmapProps> = ({
         <div className="md:col-span-2">
           <div className="text-[10px] uppercase text-[#64748B] mb-1">Prerequisite Stack</div>
           <div className="flex flex-wrap gap-1">
-            {current.required_skills.map((skill) => {
+            {current.required_skills.map((skill: string) => {
               const isMissing = current.missing_skills.includes(skill);
               return (
                 <span
@@ -117,8 +117,7 @@ export const ReverseRoadmap: React.FC<ReverseRoadmapProps> = ({
             onClick={() => onApplySkillBridge(current.missing_skills)}
             className="flex items-center space-x-1.5 px-3.5 py-1.5 rounded bg-[#0284C7] hover:bg-[#0369A1] text-white text-xs font-semibold transition-colors duration-150 shadow-sm"
           >
-            <Sparkles className="w-3.5 h-3.5 text-[#FDE047]" />
-            <span>Calculate Skill Returns with Genie</span>
+            <span>Calculate Skill Returns</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </button>
         </div>

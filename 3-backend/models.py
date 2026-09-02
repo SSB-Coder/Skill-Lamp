@@ -128,7 +128,7 @@ class QueryResponse(BaseModel):
 
 class WhatIfRequest(BaseModel):
     student_id: str = Field(..., pattern=r"^USN_\d{4}_\d{3}$")
-    added_skills: List[str] = Field(..., min_length=1, max_length=10)
+    added_skills: List[str] = Field(default_factory=list, min_length=0, max_length=10)
 
 
 class MetricSnapshot(BaseModel):

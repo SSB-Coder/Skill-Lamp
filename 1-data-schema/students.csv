@@ -1,5 +1,5 @@
 student_id,full_name,email,branch,cgpa,graduation_year,active_backlogs,gender
-USN_2025_001,Dr. S. K. Murthy (TPO),tpo@rvce.edu.in,CSE,9.85,2025,0,Male
+USN_2025_001,Aarav Sharma,aarav.cse21_1@rvce.edu.in,CSE,9.85,2025,0,Male
 USN_2025_002,Ankit Verma,ankit.cse21_2@rvce.edu.in,CSE,8.34,2025,1,Male
 USN_2025_003,Bhavna Pillai,bhavna.cse21_3@rvce.edu.in,CSE,8.11,2025,0,Female
 USN_2025_004,Gaurav Sharma,gaurav.cse21_4@rvce.edu.in,CSE,7.27,2025,1,Male

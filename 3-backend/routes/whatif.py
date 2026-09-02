@@ -87,12 +87,11 @@ async def simulate_whatif(req: WhatIfRequest, request: Request,current_user: Use
     )
 
     # 4. Fetch raw cohort statistics from Genie / Unity Catalog
-    force_fallback = fallback_data.is_mock_fallback(request)
     cohort_stats, sql_trace, governance_metadata = await genie_client.get_cohort_stats(
         student_branch=student["branch"],
         student_cgpa=student["cgpa"],
         added_skills=req.added_skills,
-        force_fallback=force_fallback,
+        force_fallback=False,
     )
 
     # 5. Deterministic Python Mathematical Calculation (Zero LLM Arithmetic)

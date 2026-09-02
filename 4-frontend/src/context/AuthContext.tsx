@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { UserSession, UserRole } from '../api/types';
 import { login as apiLogin } from '../api/client';
-import { MOCK_STUDENT_PRIYA } from '../api/mockData';
 
 interface AuthContextType {
   user: UserSession | null;
@@ -52,38 +51,19 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setUser(null);
   };
 
-  const switchPersona = (targetRole?: UserRole) => {
+  const switchPersona = async (targetRole?: UserRole) => {
     setIsSwitching(true);
-    setTimeout(() => {
+    try {
       const nextRole: UserRole = targetRole || (user?.role === 'TPO' ? 'STUDENT' : 'TPO');
-      let nextSession: UserSession;
-
-      if (nextRole === 'TPO') {
-        nextSession = {
-          role: 'TPO',
-          name: 'TPO Placement Office',
-          email: 'tpo@rvce.edu.in',
-          token: 'demo-token-tpo-98421'
-        };
-      } else {
-        nextSession = {
-          role: 'STUDENT',
-          name: MOCK_STUDENT_PRIYA.name,
-          email: MOCK_STUDENT_PRIYA.email,
-          token: 'demo-token-student-042',
-          student_id: MOCK_STUDENT_PRIYA.usn,
-          usn: MOCK_STUDENT_PRIYA.usn,
-          branch: MOCK_STUDENT_PRIYA.branch,
-          cgpa: MOCK_STUDENT_PRIYA.cgpa,
-          active_backlogs: MOCK_STUDENT_PRIYA.active_backlogs,
-          readiness_score: MOCK_STUDENT_PRIYA.readiness_score
-        };
-      }
-
-      sessionStorage.setItem(SESSION_KEY, JSON.stringify(nextSession));
-      setUser(nextSession);
+      const email = nextRole === 'TPO' ? 'tpo@rvce.edu.in' : 'priya.ise21@rvce.edu.in';
+      const session = await apiLogin(email, 'password123');
+      sessionStorage.setItem(SESSION_KEY, JSON.stringify(session));
+      setUser(session);
+    } catch {
+      logout();
+    } finally {
       setIsSwitching(false);
-    }, 450); // ~0.5s smooth transition
+    }
   };
 
   return (

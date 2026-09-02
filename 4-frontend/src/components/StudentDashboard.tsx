@@ -14,9 +14,7 @@ import { SQLTraceDrawer } from './SQLTraceDrawer';
 import { SidebarCopilot } from './SidebarCopilot';
 import {
   Lock,
-  GraduationCap,
-  Sparkles,
-  Zap
+  GraduationCap
 } from 'lucide-react';
 
 export const StudentDashboard: React.FC = () => {
@@ -41,9 +39,9 @@ export const StudentDashboard: React.FC = () => {
         setSelectedTargetCompany(p.target_companies_available[0]);
       }
       // Run initial baseline calculation
-      runCalculation(p.usn, []);
-    } catch {
-      // Fallback handled in client
+      await runCalculation(p.usn, []);
+    } catch (err) {
+      console.error('Error loading student profile:', err);
     } finally {
       setIsLoadingProfile(false);
     }
@@ -92,22 +90,12 @@ export const StudentDashboard: React.FC = () => {
     runCalculation(profile.usn, [], selectedTargetCompany?.name);
   };
 
-  const handleQuickAddTopROI = () => {
-    if (!profile) return;
-    const topSkill = profile.top_roi_recommendation.skill;
-    if (!addedSkills.includes(topSkill)) {
-      const nextAdded = [...addedSkills, topSkill];
-      setAddedSkills(nextAdded);
-      runCalculation(profile.usn, nextAdded, selectedTargetCompany?.name);
-    }
-  };
-
   if (isLoadingProfile || !profile || !calculationResult) {
     return (
       <div className="flex-1 h-[calc(100vh-4rem)] flex items-center justify-center bg-[#0B0F19] text-[#94A3B8] font-mono">
         <div className="flex items-center space-x-2">
-          <span className="w-2 h-2 rounded-full bg-[#A855F7] animate-ping" />
-          <span>Connecting to Databricks Placement Intelligence...</span>
+          <span className="w-2 h-2 rounded-full bg-[#0284C7] animate-ping" />
+          <span>Loading placement intelligence...</span>
         </div>
       </div>
     );
@@ -153,45 +141,7 @@ export const StudentDashboard: React.FC = () => {
           </div>
         </div>
 
-        {/* 2. Top ROI Hero Recommendation Banner */}
-        <div className="p-3.5 rounded-lg bg-[#151D2C] border border-[#38BDF8]/30 flex flex-wrap items-center justify-between gap-3 shadow-sm">
-          <div className="flex items-center space-x-3">
-            <div className="p-2 rounded bg-[#0B0F19] border border-[#38BDF8]/40 text-[#38BDF8]">
-              <Zap className="w-4 h-4" />
-            </div>
-            <div>
-              <div className="flex items-center space-x-2">
-                <span className="text-xs font-bold text-[#38BDF8] tracking-wide uppercase font-mono">
-                  Top ROI Recommendation
-                </span>
-                <span className="text-xs font-mono font-bold text-[#FBBF24]">
-                  +{profile.top_roi_recommendation.marginal_ctc_lpa.toFixed(2)} LPA Expected Gain
-                </span>
-              </div>
-              <p className="text-xs text-[#CBD5E1] mt-0.5">
-                {profile.top_roi_recommendation.rationale}
-              </p>
-            </div>
-          </div>
 
-          <button
-            type="button"
-            onClick={handleQuickAddTopROI}
-            disabled={addedSkills.includes(profile.top_roi_recommendation.skill)}
-            className={`flex items-center space-x-1.5 px-3.5 py-1.5 rounded text-xs font-semibold transition-colors shadow-sm ${
-              addedSkills.includes(profile.top_roi_recommendation.skill)
-                ? 'bg-[#0B0F19] border border-[#1E293B] text-[#64748B] cursor-not-allowed'
-                : 'bg-[#0284C7] hover:bg-[#0369A1] text-white'
-            }`}
-          >
-            <Sparkles className="w-3.5 h-3.5 text-[#FDE047]" />
-            <span>
-              {addedSkills.includes(profile.top_roi_recommendation.skill)
-                ? `Calculated (${profile.top_roi_recommendation.skill})`
-                : `Calculate ${profile.top_roi_recommendation.skill} Gain`}
-            </span>
-          </button>
-        </div>
 
         {/* 3. Hero Placement & Compensation Calculation Cards */}
         <HeroDeltaCards
@@ -238,7 +188,7 @@ export const StudentDashboard: React.FC = () => {
         />
       </div>
 
-      {/* Right: Dedicated Genie Career Advisor Chatbot */}
+      {/* Right: Dedicated Genie Career Advisor Copilot */}
       <div className="w-[360px] lg:w-[410px] shrink-0 h-full border-l border-[#1E293B] bg-[#151D2C] flex flex-col">
         <SidebarCopilot
           onFilterSync={() => {}}

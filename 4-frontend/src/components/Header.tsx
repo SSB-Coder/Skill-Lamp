@@ -2,9 +2,6 @@ import React from 'react';
 import { useAuth } from '../context/AuthContext';
 import {
   LogOut,
-  Sparkles,
-  Users,
-  Clock,
   Building2,
   GraduationCap
 } from 'lucide-react';
@@ -24,16 +21,21 @@ export const LampIcon: React.FC<{ className?: string; size?: number; color?: str
   />
 );
 
-interface HeaderProps {
-  activeTab?: string;
-  onTabChange?: (tab: string) => void;
-}
-
-export const Header: React.FC<HeaderProps> = ({
-  activeTab = 'explorer',
-  onTabChange
-}) => {
+export const Header: React.FC = () => {
   const { user, role, logout } = useAuth();
+
+  const initials = user?.name
+    ? user.name
+        .split(' ')
+        .map((n: string) => n[0])
+        .filter(Boolean)
+        .slice(0, 2)
+        .join('')
+        .toUpperCase()
+    : role === 'TPO'
+    ? 'TP'
+    : 'PN';
+  const displayName = user?.name || (role === 'TPO' ? 'Dr. S. K. Murthy (TPO)' : 'Priya Nair');
 
   return (
     <header className="h-16 bg-[#0B0F19] border-b border-[#1E293B] px-5 flex items-center justify-between select-none z-30 sticky top-0 shadow-sm">
@@ -62,68 +64,6 @@ export const Header: React.FC<HeaderProps> = ({
             </span>
           </div>
         </div>
-
-        {/* Navigation Tabs */}
-        {onTabChange && (
-          <nav className="hidden md:flex items-center space-x-1 bg-[#151D2C] p-1 rounded-lg border border-[#1E293B]">
-            {role === 'TPO' ? (
-              <>
-                <button
-                  onClick={() => onTabChange('explorer')}
-                  className={`flex items-center space-x-2 px-3 py-1.5 rounded-md text-xs font-medium transition-all ${
-                    activeTab === 'explorer'
-                      ? 'bg-[#0284C7] text-white shadow-sm'
-                      : 'text-[#94A3B8] hover:text-white hover:bg-[#1E293B]'
-                  }`}
-                >
-                  <Users className="w-3.5 h-3.5" />
-                  <span>Candidate Directory</span>
-                </button>
-
-                <button
-                  onClick={() => onTabChange('genie')}
-                  className={`flex items-center space-x-2 px-3 py-1.5 rounded-md text-xs font-medium transition-all ${
-                    activeTab === 'genie'
-                      ? 'bg-[#482868] text-white shadow-sm'
-                      : 'text-[#94A3B8] hover:text-white hover:bg-[#1E293B]'
-                  }`}
-                >
-                  <Sparkles className="w-3.5 h-3.5 text-[#D8B4FE]" />
-                  <span>Databricks Genie Space</span>
-                  <span className="px-1.5 py-0.2 rounded text-[9px] font-bold bg-[#A855F7]/30 text-[#E9D5FF] border border-[#A855F7]/40">
-                    AI
-                  </span>
-                </button>
-              </>
-            ) : (
-              <>
-                <button
-                  onClick={() => onTabChange('genie')}
-                  className={`flex items-center space-x-2 px-3 py-1.5 rounded-md text-xs font-medium transition-all ${
-                    activeTab === 'genie'
-                      ? 'bg-[#482868] text-white shadow-sm'
-                      : 'text-[#94A3B8] hover:text-white hover:bg-[#1E293B]'
-                  }`}
-                >
-                  <Sparkles className="w-3.5 h-3.5 text-[#D8B4FE]" />
-                  <span>Genie Career Advisor</span>
-                </button>
-
-                <button
-                  onClick={() => onTabChange('whatif')}
-                  className={`flex items-center space-x-2 px-3 py-1.5 rounded-md text-xs font-medium transition-all ${
-                    activeTab === 'whatif'
-                      ? 'bg-[#0284C7] text-white shadow-sm'
-                      : 'text-[#94A3B8] hover:text-white hover:bg-[#1E293B]'
-                  }`}
-                >
-                  <Clock className="w-3.5 h-3.5" />
-                  <span>What-If Time Machine</span>
-                </button>
-              </>
-            )}
-          </nav>
-        )}
       </div>
 
       {/* Right: User Profile & Secure Logout */}
@@ -138,7 +78,7 @@ export const Header: React.FC<HeaderProps> = ({
           ) : (
             <>
               <GraduationCap className="w-3.5 h-3.5 text-[#FBBF24]" />
-              <span>Student: Priya Nair (USN_2025_042)</span>
+              <span>Student: {user?.name || 'Priya Nair'} ({user?.student_id || 'USN_2025_042'})</span>
             </>
           )}
         </div>
@@ -149,10 +89,10 @@ export const Header: React.FC<HeaderProps> = ({
             className="w-8 h-8 rounded-full bg-[#1E293B] border border-[#334155] flex items-center justify-center font-bold text-xs text-[#38BDF8]"
             title={user?.email || (role === 'TPO' ? 'tpo@rvce.edu.in' : 'priya.ise21@rvce.edu.in')}
           >
-            {role === 'TPO' ? 'TP' : 'PN'}
+            {initials}
           </div>
           <span className="hidden xl:inline text-xs font-medium text-[#CBD5E1]">
-            {role === 'TPO' ? 'Dr. Murthy (TPO)' : 'Priya Nair'}
+            {displayName}
           </span>
           <button
             onClick={logout}

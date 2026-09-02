@@ -97,6 +97,7 @@ export interface GenieQueryRequest {
   query: string;
   persona: UserRole;
   student_id?: string;
+  conversation_id?: string;
 }
 
 export interface GenieQueryResponse {

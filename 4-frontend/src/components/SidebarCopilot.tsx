@@ -6,12 +6,12 @@ import {
   JDMatchResponse,
   GenieQueryResponse
 } from '../api/types';
+import { ALL_SKILLS } from '../api/constants';
 import { LampIcon } from './Header';
 import { SQLTraceDrawer } from './SQLTraceDrawer';
 import {
   Send,
   FileText,
-  Sparkles,
   X,
   ChevronDown,
   ChevronRight,
@@ -44,6 +44,7 @@ interface SidebarCopilotProps {
   onFilterSync?: (matchedIds: string[] | null) => void;
   activeStudentId?: string;
   activeStudentProfile?: StudentProfileResponse | null;
+  onSkillSelect?: (skills: string[]) => void;
 }
 
 // ---------------------------------------------------------------------------
@@ -215,7 +216,9 @@ export const GenieMarkdown: React.FC<{ text: string }> = ({ text }) => {
 
 export const SidebarCopilot: React.FC<SidebarCopilotProps> = ({
   onFilterSync,
-  activeStudentId
+  activeStudentId,
+  activeStudentProfile,
+  onSkillSelect
 }) => {
   const { role, user } = useAuth();
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -239,16 +242,19 @@ export const SidebarCopilot: React.FC<SidebarCopilotProps> = ({
         }
       ]);
     } else {
+      const studentName = activeStudentProfile?.name || user?.name || 'Priya Nair';
+      const studentBranch = activeStudentProfile?.branch || user?.branch || 'ISE';
+      const studentCgpa = activeStudentProfile?.cgpa ? activeStudentProfile.cgpa.toFixed(2) : (user?.cgpa ? user.cgpa.toFixed(2) : '8.12');
       setMessages([
         {
           id: 'welcome-student',
           sender: 'genie',
-          text: `Hello ${user?.name || 'Priya'}. I am your dedicated Genie Career Advisor with private access to your academic profile (${user?.branch || 'ISE'}, CGPA ${user?.cgpa || '8.12'}). Ask me about company eligibility, prerequisite skill gaps, or cohort ROI trends.`,
+          text: `Hello ${studentName}. I am your dedicated Genie Career Advisor with private access to your academic profile (${studentBranch}, CGPA ${studentCgpa}). Ask me about company eligibility, prerequisite skill gaps, or cohort ROI trends.`,
           timestamp: 'Just now'
         }
       ]);
     }
-  }, [role, user]);
+  }, [role, user, activeStudentProfile]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -307,6 +313,22 @@ export const SidebarCopilot: React.FC<SidebarCopilotProps> = ({
       // Dual-Sync filter update
       if (resp.matched_student_ids && onFilterSync) {
         onFilterSync(resp.matched_student_ids);
+      }
+
+      // Skill auto-sync to What-If simulator if student asked about skills
+      if (role === 'STUDENT' && onSkillSelect) {
+        const textUpper = textToSend.toUpperCase();
+        const detectedSkills = ALL_SKILLS.filter(
+          (s) =>
+            textUpper.includes(s.id) ||
+            textUpper.includes(s.label.toUpperCase()) ||
+            (s.id === 'DATABRICKS_DE' && textUpper.includes('DATABRICKS')) ||
+            (s.id === 'PYSPARK' && textUpper.includes('SPARK'))
+        ).map((s) => s.id);
+
+        if (detectedSkills.length > 0) {
+          onSkillSelect(detectedSkills);
+        }
       }
     } catch {
       setMessages((prev) => [
@@ -389,36 +411,6 @@ Requirements:
 
   return (
     <aside className="w-[380px] shrink-0 h-[calc(100vh-3.5rem)] bg-app-panel border-r border-app-border flex flex-col select-none overflow-hidden">
-      {/* Sidebar Header */}
-      <div className="p-3.5 border-b border-app-border bg-app-panel flex items-center justify-between">
-        <div className="flex items-center space-x-2.5">
-          <div className="p-1.5 rounded bg-app-bg border border-app-border">
-            <LampIcon size={16} color="#0284C7" />
-          </div>
-          <div>
-            <div className="text-xs font-semibold text-app-text flex items-center space-x-1.5">
-              <span>{role === 'TPO' ? 'Genie AI Copilot' : 'Genie Career Advisor'}</span>
-            </div>
-            <div className="flex items-center space-x-1 text-[10px] text-app-muted">
-              <span className="w-1.5 h-1.5 rounded-full bg-app-success inline-block"></span>
-              <span>Unity Catalog Connected</span>
-            </div>
-          </div>
-        </div>
-
-        {/* TPO Action: Recruiter JD Quick Matcher */}
-        {role === 'TPO' && (
-          <button
-            onClick={() => setIsJDModalOpen(true)}
-            className="flex items-center space-x-1 px-2.5 py-1 rounded bg-app-action hover:bg-app-actionHover text-white text-[11px] font-medium transition-colors duration-150"
-            title="Paste raw recruiter job description to auto-extract criteria and filter candidates"
-          >
-            <FileText className="w-3.5 h-3.5" />
-            <span>Paste JD</span>
-          </button>
-        )}
-      </div>
-
       {/* Quick Prompt Chips */}
       <div className="p-2.5 bg-app-bg/60 border-b border-app-border overflow-x-auto">
         <div className="text-[10px] font-medium uppercase tracking-wider text-app-muted mb-1.5 flex items-center justify-between">
@@ -626,7 +618,6 @@ Requirements:
                   disabled={!jdText.trim() || isMatchingJD}
                   className="px-3 py-1.5 rounded bg-app-action hover:bg-app-actionHover text-white text-xs font-medium disabled:opacity-50 flex items-center space-x-1.5"
                 >
-                  <Sparkles className="w-3.5 h-3.5" />
                   <span>{isMatchingJD ? 'Extracting Constraints...' : 'Extract & Match Cohort'}</span>
                 </button>
               </div>
