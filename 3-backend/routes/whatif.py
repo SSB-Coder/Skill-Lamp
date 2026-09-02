@@ -1,26 +1,33 @@
 from typing import List, Dict, Any
-from fastapi import APIRouter, HTTPException, Request, status
+from fastapi import APIRouter, HTTPException, Request, status, Depends
 from models import (
     WhatIfRequest,
     WhatIfResponse,
     CompanyItem,
     TierDistribution,
+    UserSession,
 )
 from genie_client import genie_client
 from probability import calculate_simulation
 import fallback_data
+from routes.auth import require_student
 
 router = APIRouter(prefix="/api", tags=["Time Machine What-If Simulator"])
 
 
 @router.post("/whatif", response_model=WhatIfResponse)
-async def simulate_whatif(req: WhatIfRequest, request: Request):
+async def simulate_whatif(req: WhatIfRequest, request: Request,current_user: UserSession = Depends(require_student)):
     """
     Simulates career trajectory when adding 1 to 10 skills.
     Fetches raw cohort counts from Genie/Unity Catalog, executes exact probability
     and expected compensation math via Python engine, checks synergy multiplier,
     and returns delta analytics with SQL lineage trace.
     """
+    if req.student_id != current_user.student_id:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="You can only simulate your own profile."
+        )
     student = next((s for s in fallback_data.STUDENTS_DB if s["student_id"] == req.student_id), None)
     if not student:
         # Fallback to demo student if USN not in default 50

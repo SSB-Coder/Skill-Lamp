@@ -8,7 +8,7 @@ class Settings(BaseSettings):
     GENIE_SPACE_ID: Optional[str] = None
     USE_MOCK_FALLBACK: bool = False
     
-    JWT_SECRET: str = "skill-lamp-databricks-app-enterprise-key-2024"
+    JWT_SECRET: str
     JWT_ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 1440
 

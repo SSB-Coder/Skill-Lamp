@@ -14,3 +14,5 @@ env:
     valueFrom: secret
   - name: USE_MOCK_FALLBACK
     value: "false"
+  - name: JWT_SECRET
+    valueFrom: secret

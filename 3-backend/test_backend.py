@@ -102,11 +102,15 @@ class TestSkillLampBackend(unittest.TestCase):
         self.assertIn("readiness_score", profile)
 
     def test_match_jd(self):
+        login_res = client.post("/api/auth/login", json={"email": "tpo@rvce.edu.in", "password": "admin"})
+        token = login_res.json()["token"]
+        headers = {"Authorization": f"Bearer {token}"}
+
         jd_text = (
             "Looking for Senior Data Engineer with strong experience in Databricks DE, "
             "PySpark, and SQL. Candidates must have minimum CGPA 8.0 and no active backlogs."
         )
-        response = client.post("/api/match-jd", json={"raw_jd_text": jd_text})
+        response = client.post("/api/match-jd", json={"raw_jd_text": jd_text}, headers=headers)
         self.assertEqual(response.status_code, 200)
         data = response.json()
         self.assertIn("extracted_criteria", data)
@@ -115,8 +119,12 @@ class TestSkillLampBackend(unittest.TestCase):
         self.assertIn("SELECT", data["sql_query"])
 
     def test_query_genie(self):
+        login_res = client.post("/api/auth/login", json={"email": "tpo@rvce.edu.in", "password": "admin"})
+        token = login_res.json()["token"]
+        headers = {"Authorization": f"Bearer {token}", "X-Mock-Fallback": "true"}
+
         payload = {"prompt": "Show all students eligible for Databricks"}
-        response = client.post("/api/query", json=payload, headers={"X-Mock-Fallback": "true"})
+        response = client.post("/api/query", json=payload, headers=headers)
         self.assertEqual(response.status_code, 200)
         data = response.json()
         self.assertEqual(data["status"], "SUCCESS")
@@ -125,11 +133,15 @@ class TestSkillLampBackend(unittest.TestCase):
         self.assertGreater(len(data["rows"]), 0)
 
     def test_whatif_hero_simulation(self):
+        login_res = client.post("/api/auth/login", json={"email": "USN_2024_001@rvce.edu.in", "password": "student"})
+        token = login_res.json()["token"]
+        headers = {"Authorization": f"Bearer {token}", "X-Mock-Fallback": "true"}
+
         payload = {
             "student_id": "USN_2024_001",
             "added_skills": ["DATABRICKS_DE"]
         }
-        response = client.post("/api/whatif", json=payload, headers={"X-Mock-Fallback": "true"})
+        response = client.post("/api/whatif", json=payload, headers=headers)
         self.assertEqual(response.status_code, 200)
         data = response.json()
         
@@ -171,11 +183,15 @@ class TestSkillLampBackend(unittest.TestCase):
         self.assertEqual(base.placement_probability_pct, 42.9)
 
     def test_invalid_usn_validation(self):
+        login_res = client.post("/api/auth/login", json={"email": "USN_2024_001@rvce.edu.in", "password": "student"})
+        token = login_res.json()["token"]
+        headers = {"Authorization": f"Bearer {token}"}
+
         payload = {
             "student_id": "INVALID_USN",
             "added_skills": ["Python"]
         }
-        response = client.post("/api/whatif", json=payload)
+        response = client.post("/api/whatif", json=payload, headers=headers)
         self.assertEqual(response.status_code, 422)
 
     def test_spa_root_serve(self):

@@ -1,13 +1,14 @@
 import time
-from fastapi import APIRouter, Request
-from models import MatchJDRequest, MatchJDResponse
+from fastapi import APIRouter, Request, Depends
+from models import MatchJDRequest, MatchJDResponse, UserSession
+from routes.auth import require_tpo
 import fallback_data
 
 router = APIRouter(prefix="/api", tags=["Recruiter JD Matcher"])
 
 
 @router.post("/match-jd", response_model=MatchJDResponse)
-async def match_jd(req: MatchJDRequest, request: Request):
+async def match_jd(req: MatchJDRequest,request: Request,current_user: UserSession = Depends(require_tpo)):
     """
     Parses recruiter Job Description text, extracts required skills, CGPA cutoff,
     and branch filters, and executes governed matching query over candidate pool.
