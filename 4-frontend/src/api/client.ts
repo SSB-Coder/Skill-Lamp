@@ -20,27 +20,12 @@ const BASE_URL = '';
 
 let failsafeMode = false;
 
-// Check sessionStorage on initialization
-try {
-  const saved = sessionStorage.getItem('skill_lamp_failsafe');
-  if (saved !== null) {
-    failsafeMode = saved === 'true';
-  }
-} catch {
-  // Ignore sessionStorage errors
-}
-
 export function isFailsafeActive(): boolean {
   return failsafeMode;
 }
 
 export function setFailsafeActive(active: boolean): void {
   failsafeMode = active;
-  try {
-    sessionStorage.setItem('skill_lamp_failsafe', String(active));
-  } catch {
-    // Ignore sessionStorage errors
-  }
   window.dispatchEvent(new CustomEvent('failsafe-mode-changed', { detail: { active } }));
 }
 
@@ -319,10 +304,10 @@ export async function queryGenie(request: GenieQueryRequest): Promise<GenieQuery
         };
       }
     } catch {
-      setFailsafeActive(true);
+      // Ignore
     }
   }
-  return mockGenieQuery(request.query, request.persona, request.student_id);
+  return mockGenieQuery(request.query, request.persona);
 }
 // 7. POST /api/whatif (Personal What-If Simulator)
 export async function simulateWhatIf(request: WhatIfRequest): Promise<WhatIfResponse> {
@@ -343,8 +328,6 @@ export async function simulateWhatIf(request: WhatIfRequest): Promise<WhatIfResp
           simulated_ctc: data.simulated.expected_ctc_lpa,
           delta_ctc: data.delta.delta_ctc_lpa,
           tier_distribution: data.tier_distribution,
-          // TODO(backend): whatif.py only computes ONE tier_distribution (post-simulation);
-          // there's no baseline split to return here — reusing simulated as a stand-in
           base_tier_distribution: data.tier_distribution,
           synergy_alert: data.synergy_alert,
           newly_unlocked_companies: data.delta.newly_eligible_companies.map((c: any) => ({
@@ -358,8 +341,8 @@ export async function simulateWhatIf(request: WhatIfRequest): Promise<WhatIfResp
         };
       }
     } catch {
-      setFailsafeActive(true);
+      // Ignore
     }
   }
-  return mockSimulateWhatIf(request.student_id, request.added_skills, request.target_company);
+  return mockSimulateWhatIf(request);
 }

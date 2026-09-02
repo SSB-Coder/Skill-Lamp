@@ -92,7 +92,7 @@ class DatabricksGenieClient:
                 answer_text = att.text.content
             if att.query and att.query.query:
                 sql_query = att.query.query
-                query_attachment_id = att.id
+                query_attachment_id = getattr(att, "attachment_id", getattr(att, "id", None))
 
         columns: List[str] = []
         rows: List[List[Any]] = []
