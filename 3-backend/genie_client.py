@@ -114,6 +114,20 @@ class DatabricksGenieClient:
             except Exception as e:
                 logger.warning(f"Fetched Genie message but not the result rows: {e}")
 
+        # If Genie calculated placement rates or metrics in SQL rows, summarize them clearly
+        if rows and columns and len(rows) > 0:
+            first_row = rows[0]
+            col_map = {str(col).lower(): str(first_row[i]) for i, col in enumerate(columns) if i < len(first_row)}
+            stat_lines = []
+            for k, v in col_map.items():
+                if any(term in k for term in ["rate", "pct", "uplift", "prob", "ctc", "with_skill", "without_skill"]):
+                    label = k.replace("_", " ").title()
+                    unit = "%" if ("pct" in k or "rate" in k or "prob" in k or "uplift" in k) and not v.endswith("%") else (" LPA" if "ctc" in k and not v.endswith("LPA") else "")
+                    stat_lines.append(f"• **{label}:** {v}{unit}")
+            if stat_lines and (not any(str(v) in answer_text for v in col_map.values()) or answer_text.strip().endswith("?")):
+                summary_block = "### 📊 Live Cohort Analytics (Databricks Serverless Photon)\n" + "\n".join(stat_lines)
+                answer_text = f"{summary_block}\n\n{answer_text}" if answer_text else summary_block
+
         if not answer_text:
             answer_text = f'Genie returned {len(rows)} row(s) in {exec_ms}ms for: "{prompt}"'
 

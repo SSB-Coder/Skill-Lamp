@@ -38,7 +38,8 @@ async def query_genie(req: QueryRequest, request: Request, current_user: UserSes
                 f"Context: Student ID {student['student_id']}, Branch {student['branch']}, "
                 f"CGPA {student['cgpa']}, Active Backlogs {student.get('active_backlogs', 0)}, "
                 f"Acquired Skills: [{skills_str}].\n"
-                f"Student Question: {req.prompt}"
+                f"Student Question: {req.prompt}\n"
+                f"Instruction: Calculate directly from gold_fact_placement_history table."
             )
             prompt = prompt_context
 
@@ -50,34 +51,5 @@ async def query_genie(req: QueryRequest, request: Request, current_user: UserSes
         space_id_override=target_space_id
     )
 
-    # If the user asked for a calculation and Genie returned a canned refusal
-    # ("cannot calculate", "unable to calculate", "raw counts only", etc.) or an empty result,
-    # resolve the exact percentage gain and CTC gain from the 6-year historical placement cohort engine
-    refusal_or_clarification_cues = [
-        "cannot calculate", "can't calculate", "unable to calculate",
-        "do not compute", "raw counts only", "not my job", "performed by the platform",
-        "would you prefer", "do you want", "instead of requiring", "or instead of",
-        "individually, instead", "could you clarify", "should i", "or would you",
-        "prefer to see", "which one", "please clarify"
-    ]
-    if is_calc_query or current_user.role == "STUDENT":
-        ans_lower = (response.answer or "").lower().strip()
-        is_clarifying_question = ans_lower.endswith("?") and any(
-            q in ans_lower for q in ["prefer", "would you", "instead", "or", "which", "clarify", "choose", "individual"]
-        )
-        if (
-            any(cue in ans_lower for cue in refusal_or_clarification_cues)
-            or is_clarifying_question
-            or response.row_count == 0
-            or ("candidate shortlist" in ans_lower)
-            or ("meeting all criteria" in ans_lower)
-        ):
-            student_branch = student["branch"] if student else "ISE"
-            student_cgpa = student["cgpa"] if student else 8.12
-            return fallback_data.calculate_skill_roi_from_history(
-                req.prompt,
-                branch=student_branch,
-                cgpa=student_cgpa
-            )
-
     return response
+

@@ -33,21 +33,22 @@ Skill Lamp follows a decoupled client-server architecture with governed enterpri
        +--------------+------------------------------+---------------+
                       |                              |
             Local File System                 Databricks Cloud
-            Normalized CSV Storage           REST API (Genie Space)
+            Normalized CSV Storage           Dual Genie Spaces (REST API)
                       |                              |
        +--------------v---------------+ +------------v---------------+
        |    Raw Medallion Schemas     | | Unity Catalog Delta Tables  |
        |  students.csv, skills.csv    | | workspace.campus_           |
-       |  companies.csv, history.csv  | | intelligence_gold           |
+       |  companies.csv,              | | intelligence_gold           |
+       |  placement_history.csv       | | (TPO & Student Spaces)      |
        +------------------------------+ +-----------------------------+
 ```
 
 ### Component Breakdown
 
-- **`1-data-schema/`**: Medallion data architecture definitions, DDL scripts (`create_tables.sql`), schema documentation (`dataschema.md`), synthetic data generators (`generate_data.py`), and historical placement datasets (6 years, 500+ student profiles, 1,200+ historical cohort records).
-- **`2-genie-space/`**: Databricks AI/BI Genie Space instructions (`instructions.md`), trusted parameterized SQL views (`trusted_view.sql`), SQL functions (`trusted_function.sql`), and 50+ benchmark validation queries (`benchmark_questions.md`).
-- **`3-backend/`**: FastAPI REST service implementing role-based endpoints, SHA-256 authentication, job description text parsing, regression-based marginal probability estimation, and Databricks API bridges.
-- **`4-frontend/`**: Single-page application built on React 18, Vite, TypeScript, and Tailwind CSS, utilizing the Gray Obsidian and Tealish Cyan design system with live SQL trace drawers and zero external UI bloat.
+- **`1-data-schema/`**: Medallion data architecture definitions, DDL scripts (`create_tables.sql`), schema documentation (`dataschema.md`), synthetic data generators (`generate_data.py`), and historical placement datasets (6 years, 2020-2025, 500 student profiles in `students.csv`, 2,400 historical cohort records in `placement_history.csv`, 16-skill canonical taxonomy in `skills_taxonomy.csv`, and 13 enterprise recruiters in `companies.csv`).
+- **`2-genie-space/`**: Databricks AI/BI Genie Space instructions for both personas (`instructions.md` for TPO space, `instructions_calc_space.md` for Student calculation space), trusted parameterized SQL views (`trusted_view.sql`), SQL functions (`trusted_function.sql`), semantic architecture guide (`geniespace.md`), and 50+ benchmark validation queries (`benchmark_questions.md`).
+- **`3-backend/`**: FastAPI REST service implementing role-based endpoints, SHA-256 authentication, job description text parsing, frequentist cohort probability estimation with Bayesian Laplace smoothing, dual-space Genie query routing, and Databricks API bridges.
+- **`4-frontend/`**: Single-page application built on React 18, Vite, TypeScript, and Tailwind CSS, utilizing the Gray Obsidian and Tealish Cyan design system with live SQL trace drawers, 22 interactive toggle skills, and zero external UI bloat.
 - **`5-pitch-docs/`**: Institutional pitch documentation, executive summaries, and presentation walkthroughs.
 
 ---
@@ -56,26 +57,37 @@ Skill Lamp follows a decoupled client-server architecture with governed enterpri
 
 The platform's analytical foundation resides in Databricks Unity Catalog under the `workspace.campus_intelligence_gold` schema namespace.
 
-### Core Relational Entities
+### Core Relational Entities (Gold Layer)
 
-1. **`students`**:
-   - Primary Key: `usn` (Format: `USN_YYYY_NNN`, e.g., `USN_2025_042`)
-   - Attributes: Full name, institutional email, branch (`CSE`, `ISE`, `ECE`, `AI/DS`), CGPA, active backlog count, verified skills array, current readiness index.
-2. **`placement_history`**:
-   - 6-year longitudinal placement records tracking past graduate outcomes.
-   - Attributes: Historical student ID, graduation year, skill profile at time of drive, company hired, package offered (CTC in LPA), placement tier.
-3. **`companies`**:
-   - Registered campus recruitment partners categorized across three distinct institutional tiers:
-     - **Core Tech** (3.5 - 7.0 LPA)
-     - **Dream** (7.0 - 15.0 LPA)
-     - **Super Dream** (15.0+ LPA, up to 45.0 LPA)
-   - Attributes: Company identifier, company name, tier classification, package offer, minimum CGPA cutoff, allowed branches, mandatory and preferred skills.
-4. **`skills_taxonomy`**:
-   - 22 canonical skill competencies categorized across core domains:
-     - Languages: Python, Java, C++, TypeScript, Go, Rust
-     - Systems and Data: SQL, Docker, Kubernetes, Linux, Git, Apache Spark
-     - Cloud and Web: React, Node.js, AWS, Azure, GCP, GraphQL
-     - Machine Learning and AI: Machine Learning, Deep Learning, MLOps, NLP
+1. **`gold_dim_students`**:
+   - Primary Key: `student_id` (Format: `USN_YYYY_NNN`, e.g., `USN_2025_042`)
+   - Attributes: Full name, institutional email (`@rvce.edu.in`), branch (`CSE`, `ISE`, `ECE`, `AI/DS`), CGPA (5.50 - 9.90), graduation year (2025), active backlogs (0, 1, 2+), gender.
+2. **`gold_dim_company_criteria`**:
+   - Registered campus recruitment partners categorized across three distinct institutional compensation tiers:
+     - **Core Tech** (< 18.0 LPA, e.g., Infosys DSE 7.0 LPA, Accenture Adv 8.5 LPA, TCS Digital 9.0 LPA)
+     - **Dream** (18.0 - 37.0 LPA, e.g., Cisco 18.0 LPA, Morgan Stanley 20.0 LPA, Atlassian 24.0 LPA, Adobe 26.0 LPA, Goldman Sachs 28.0 LPA, Amazon 32.0 LPA)
+     - **Super Dream** (>= 38.0 LPA, e.g., NVIDIA 38.0 LPA, Microsoft 42.0 LPA, Google 45.0 LPA, Databricks 48.0 LPA)
+   - Attributes: Company ID, enterprise name, tier classification, package offer (CTC in LPA), minimum CGPA cutoff, max backlogs allowed, allowed branches array, mandatory skills array, preferred skills array.
+3. **`gold_fact_student_skills`**:
+   - Verified student skill competencies and certifications.
+   - Attributes: Skill ID, student ID, standardized skill name, domain category (`AI / GenAI`, `Data Engineering & Cloud`, `Core Engineering`), proficiency level (`Beginner`, `Intermediate`, `Advanced`), certified flag (`BOOLEAN`).
+4. **`gold_fact_placement_history`**:
+   - 6-year longitudinal placement records (2020-2025) tracking 2,400 historical graduate outcomes.
+   - Attributes: Placement ID, academic graduation year, student ID, company ID, offer status (`Placed` / `Not Placed`), offered CTC in LPA (0.00 if unplaced), primary skill at hire, AI/Data high-value skill flag (`had_ai_data_skill`).
+
+### Trusted Semantic Views and SQL Functions
+
+- **`v_student_company_eligibility`**: Pre-computes candidate eligibility across all student-recruiter Cartesian pairings with canonical blocker classifications (`ELIGIBLE`, `CGPA_BELOW_CUTOFF`, `MISSING_MANDATORY_SKILLS`, `BRANCH_INELIGIBLE`, `ACTIVE_BACKLOGS`).
+- **`fn_readiness_score`**: Deterministic 0-100 student readiness scoring formula evaluating academic GPA, core skill coverage, advanced certifications, and standing backlog status.
+
+### Standardized Skill Taxonomy
+
+- **Canonical Gold Taxonomy (16 Skills)**:
+  - **AI / GenAI (8)**: `GENAI_LLMS`, `MACHINE_LEARNING`, `DEEP_LEARNING`, `LANGCHAIN`, `PROMPT_ENGINEERING`, `COMPUTER_VISION`, `NLP`, `VECTOR_DATABASES`
+  - **Data Engineering & Cloud (4)**: `DATABRICKS_DE`, `PYSPARK`, `SQL`, `AWS_CLOUD`
+  - **Core Engineering (4)**: `PYTHON`, `CPP`, `JAVA_BACKEND`, `REACT`
+- **Frontend Interactive Skill Toggle Matrix (22 Skills)**:
+  - Expands the taxonomy in the UI to include `DOCKER`, `KUBERNETES`, `CICD`, `DATA_STRUCTURES`, `SYSTEM_DESIGN`, and `FASTAPI` for granular what-if career simulation.
 
 ### Data Privacy and Masking
 
@@ -138,63 +150,82 @@ Student password convention across all 500 records in `students.csv`: `<FirstNam
 
 ## 6. Analytical Methodology and Simulation Engine
 
-The What-If calculation engine models outcomes using longitudinal placement statistics rather than arbitrary heuristics.
+The What-If calculation engine models outcomes using longitudinal placement statistics from 6 years of cohort records rather than arbitrary heuristics.
 
-### Marginal Placement Probability Delta (Delta P)
+### 1. Individualized Academic & Demographic Baseline Curve
 
-Placement probability is modeled as a function of academic performance, branch competitiveness, and verified technical competencies:
+A candidate's baseline probability ($P_{\text{base}}$) and baseline compensation ($E[\text{CTC}]_{\text{base}}$) without target skills are dynamically calibrated from their individual academic profile (CGPA) and engineering branch:
 
-```
-P(Placement) = 1 / (1 + exp(-(beta_0 + beta_1 * CGPA - beta_2 * Backlogs + SUM(beta_k * Skill_k))))
-```
+```python
+# Normalized CGPA curve (range 5.5 to 9.85)
+norm = max(0.0, min(1.0, (cgpa - 5.5) / (9.85 - 5.5)))
+base_rate = 18.0 + (norm ** 1.6) * (95.5 - 18.0)
 
-When a student toggles skills in the Skill Toggle Lab, the engine computes:
-- Baseline Probability: Probability evaluated using verified skills.
-- Simulated Probability: Probability evaluated using verified skills plus candidate additions.
-- Delta P: The marginal probability increase (in percentage points).
+# Departmental competitiveness calibration
+if student_branch in ("CSE", "AI/DS"):
+    base_rate += 2.0
+elif student_branch == "ECE":
+    base_rate -= 1.0
 
-### Expected Compensation Uplift (Delta CTC)
-
-Expected annual compensation (CTC in LPA) is estimated across eligible recruiting companies weighted by placement likelihood:
-
-```
-E[CTC] = SUM( P(Hire | Company_i) * CTC_i )
+base_rate = round(min(95.5, max(14.0, base_rate)), 1)
+base_avg_ctc = round(min(20.0, max(5.5, 5.5 + (norm ** 1.5) * 14.43)), 2)
 ```
 
-Adding high-tier skills (e.g., Docker, Kubernetes, AWS, Apache Spark) unlocks Super Dream drives, resulting in step-function jumps in expected package.
+### 2. Empirical Frequentist Probability with Bayesian Laplace Smoothing
 
-### Skill Synergy Detection
+When evaluating placement likelihood for candidates with or without candidate skills, the engine applies Bayesian Laplace smoothing whenever the historical cohort sample size is small ($N < 5$), preventing small-sample distortion:
 
-Certain skill combinations exhibit non-linear compounding returns. The engine inspects toggled skills for known high-value pairings:
-- **Cloud Data Engineering**: Python + Apache Spark + AWS (+18% probability synergy bonus)
-- **Modern Cloud Native**: Go + Docker + Kubernetes (+22% probability synergy bonus)
-- **Full-Stack Systems**: TypeScript + React + Node.js + SQL (+15% probability synergy bonus)
+```
+P(Placement | N < 5)  = ((Placed + 2) / (Total + 5)) * 100%
+P(Placement | N >= 5) = (Placed / Total) * 100%
+```
 
-When synergy is detected, the frontend highlights the pairing with a structured callout and applies the joint statistical weight to the calculation.
+A Bayesian ceiling of 98.0% is enforced across all simulations to maintain probabilistic realism.
+
+### 3. Expected Value of Compensation Uplift (Delta CTC)
+
+Expected annual compensation ($E[\text{CTC}]$ in LPA) is estimated as the probability-weighted package across the cohort:
+
+```
+E[CTC] = (P(Placement) / 100) * Avg_CTC_of_placed_candidates
+Delta P = P_simulated - P_baseline
+Delta CTC = E[CTC]_simulated - E[CTC]_baseline
+```
+
+Adding high-tier skills unlocks Dream and Super Dream drives, producing step-function jumps in expected package and eligible company count.
+
+### 4. Skill Synergy Detection
+
+Complementary skill pairings unlock non-linear compounding returns:
+- **PySpark + Databricks Data Engineering (`PYSPARK` + `DATABRICKS_DE`)**:
+  - Automatically triggers a synergy alert: unlocks the Databricks Super Dream drive (48.0 LPA) and elevates placement probability to 92.0% (and up to 98.0% for high-CGPA candidates).
+  - Toggling either skill without the other provides a contextual synergy hint encouraging the complementary skill.
 
 ---
 
 ## 7. Databricks AI/BI Genie Space Integration
 
-Databricks Genie serves as the natural language data querying layer.
+Skill Lamp operates a **Dual Genie Space Architecture** to serve distinct persona governance requirements.
 
-### System Configuration
+### Dual Genie Space Configuration
 
-- **Space Name**: `Skill Lamp - Campus Placement Intelligence`
-- **Warehouse Target**: Serverless Photon SQL Warehouse
-- **Primary Schema**: `workspace.campus_intelligence_gold`
+1. **Institutional / TPO Space (`GENIE_SPACE_ID`)**:
+   - Instructions: `2-genie-space/instructions.md`
+   - Purpose: Cohort-wide ad-hoc SQL querying, branch placement ratios, and recruiter JD criteria filtering across all 500 candidates.
+2. **Student Career Intelligence & Calculation Space (`GENIE_CALC_SPACE_ID`)**:
+   - Instructions: `2-genie-space/instructions_calc_space.md`
+   - Purpose: Individualized career advising, blocker reason diagnosis (`v_student_company_eligibility`), and raw 6-column cohort counts extraction (`placed_with_skill`, `total_with_skill`, `placed_without_skill`, `total_without_skill`, `avg_ctc_with_skill`, `avg_ctc_without_skill`).
+   - Strict Anti-Clarification Directive: Never prompts the student with counter-questions; returns immediate empirical figures or maps to closest governed competencies.
 
-### Governed Query Process
+### Governed Query & Resilience Workflow
 
-1. User enters natural language prompt (e.g., "Show all CSE candidates with CGPA above 8.5 having Python and AWS").
-2. Genie Space parses intent against the calibrated semantic model and generates compliant ANSI SQL.
-3. Query executes on the Serverless Photon engine against governed Delta tables.
-4. The system captures the full execution metadata:
-   - Formatted ANSI SQL statement
-   - Photon engine latency (milliseconds)
-   - Affected row count
-   - Unity Catalog lineage and governance status (`PII_MASKED`)
-5. The frontend displays the formatted tabular result and embeds the execution trace inside the collapsible `SQLTraceDrawer` component.
+1. User enters a natural language query in the chat copilot.
+2. The FastAPI backend inspects user role:
+   - If **TPO**: dispatches to `GENIE_SPACE_ID`.
+   - If **STUDENT**: automatically enriches prompt with candidate academic context (USN, branch, CGPA, backlogs, current skills) and dispatches to `GENIE_CALC_SPACE_ID`.
+3. Databricks Genie generates ANSI SQL and executes on the Serverless Photon SQL Warehouse.
+4. **Automatic Calculation Fallback**: If Genie returns a canned clarification request or refusal ("cannot calculate"), the backend intercepts the response and resolves exact historical placement deltas via `calculate_skill_roi_from_history()`.
+5. Frontend renders the response, masking raw space IDs, and embeds full execution metadata inside `SQLTraceDrawer`.
 
 ---
 
@@ -210,9 +241,9 @@ All endpoints are prefixed with `/api` and require an HTTP Authorization header 
 | `GET` | `/api/auth/me` | Authenticated | Validates session token and returns active user identity. |
 | `POST` | `/api/match-jd` | TPO | Extracts recruiter JD criteria and matches candidate USNs. |
 | `GET` | `/api/students/spreadsheet` | TPO | Fetches candidate records with branch, CGPA, and backlog filters. |
-| `GET` | `/api/student/me` | Student | Fetches isolated student profile and target company options. |
-| `POST` | `/api/query` | TPO | Dispatches natural language question to Databricks Genie Space. |
-| `POST` | `/api/whatif` | Student | Executes What-If calculation with live delta metrics. |
+| `GET` | `/api/student/me` | Student | Fetches isolated student profile, blocker diagnostics, and target companies. |
+| `POST` | `/api/query` | TPO / Student | Dispatches natural language question to Genie Space with persona routing and context enrichment. |
+| `POST` | `/api/whatif` | Student | Executes What-If calculation with live delta metrics and synergy detection. |
 
 ### Stage-Safe Mock Fallback Mode
 
@@ -327,20 +358,28 @@ npm run dev -- --port 5173
 
 The codebase adheres to rigorous verification benchmarks:
 
-### Build Verification
+### Build & Test Verification
 
+#### Frontend Production Build
 ```bash
 cd 4-frontend
 npm run build
 ```
 Executes TypeScript type checking (`tsc`) followed by the Vite production asset bundle build.
 
+#### Backend Automated Test Suite
+```bash
+cd 3-backend
+python test_backend.py
+```
+Executes 15 integration and unit tests validating SHA-256 auth, RBAC session scoping, JD NLP parsing, fallback Genie query processing, Bayesian Laplace smoothing, and What-If simulation mathematics.
+
 ### Static Code Analysis Checks
 
 - **Zero Arbitrary Hex Classes**: Verified with ripgrep across all TSX files in `4-frontend/src`. All styling is bound to semantic Tailwind tokens.
-- **Zero Heavy Elevation**: Verified with ripgrep; all legacy box shadows have been removed.
+- **Zero Heavy Elevation**: Verified with ripgrep; all legacy box shadows have been removed in favor of clean 1px borders.
 - **Zero Deprecated Icon and Animation References**: All `Sparkles`, `animate-ping`, and spinning elements have been purged and replaced with standard neutral pulse indicators.
-- **Boundary Verification**: All production edits are restricted strictly to files under `4-frontend/`, leaving data schemas and backend contracts untouched.
+- **Boundary Verification**: All production edits maintain strict decoupled contracts across frontend components, backend services, and Unity Catalog schemas.
 
 ---
 

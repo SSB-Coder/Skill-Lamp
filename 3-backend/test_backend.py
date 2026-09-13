@@ -118,7 +118,7 @@ class TestSkillLampBackend(unittest.TestCase):
         self.assertGreater(data["match_count"], 0)
         self.assertIn("SELECT", data["sql_query"])
 
-    def test_query_genie(self):
+    def test_query_genie_fallback_offline_notice(self):
         login_res = client.post("/api/auth/login", json={"email": "tpo@rvce.edu.in", "password": "TpoPlacement@2025"})
         token = login_res.json()["token"]
         headers = {"Authorization": f"Bearer {token}", "X-Mock-Fallback": "true"}
@@ -127,10 +127,10 @@ class TestSkillLampBackend(unittest.TestCase):
         response = client.post("/api/query", json=payload, headers=headers)
         self.assertEqual(response.status_code, 200)
         data = response.json()
-        self.assertEqual(data["status"], "SUCCESS")
-        self.assertIn("columns", data)
-        self.assertIn("rows", data)
-        self.assertGreater(len(data["rows"]), 0)
+        self.assertEqual(data["status"], "ERROR")
+        self.assertEqual(data["error_message"], "Databricks Server Offline")
+        self.assertIn("Offline", data["answer"])
+        self.assertEqual(data["row_count"], 0)
 
     def test_whatif_hero_simulation(self):
         login_res = client.post("/api/auth/login", json={"email": "priya.ise21@rvce.edu.in", "password": "Priya@RVCE2025"})
