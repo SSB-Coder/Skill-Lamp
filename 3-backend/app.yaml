@@ -12,6 +12,8 @@ env:
     valueFrom: secret
   - name: GENIE_SPACE_ID
     valueFrom: secret
+  - name: GENIE_CALC_SPACE_ID
+    valueFrom: secret
   - name: USE_MOCK_FALLBACK
     value: "false"
   - name: JWT_SECRET
